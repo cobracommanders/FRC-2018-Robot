@@ -5,6 +5,8 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
+
+/*randy's text*/
 package team498.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
@@ -26,6 +28,7 @@ import team498.robot.subsystems.ExampleSubsystem;
 //Micah
 //Was
 //Here
+//katy test
 public class Robot extends TimedRobot {
 	public static final ExampleSubsystem kExampleSubsystem
 			= new ExampleSubsystem();
