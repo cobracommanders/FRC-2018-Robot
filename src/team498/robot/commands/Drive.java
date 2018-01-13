@@ -9,14 +9,18 @@ package team498.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import team498.robot.Robot;
+import team498.robot.subsystems.Drivetrain;
 
 /**
  * An example command.  You can replace me with your own command.
  */
-public class ExampleCommand extends Command {
-	public ExampleCommand() {
-		// Use requires() here to declare subsystem dependencies
-		requires(Robot.kExampleSubsystem);
+public class Drive extends Command {
+		
+	private Drivetrain drivetrain;
+	
+	public Drive() {
+		// Required Subsystems
+		requires(this.drivetrain = Drivetrain.getDrivetrain());
 	}
 
 	// Called just before this Command runs the first time
@@ -27,6 +31,9 @@ public class ExampleCommand extends Command {
 	// Called repeatedly when this Command is scheduled to run
 	@Override
 	protected void execute() {
+		
+		this.drivetrain.drive(1, 0);
+		
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
