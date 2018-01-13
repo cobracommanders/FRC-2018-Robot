@@ -27,20 +27,20 @@ public class Controller {
 		joystick = new Joystick(port);
 
 		// buttons
-		buttonA = new JoystickButton(joystick, 1);
-		buttonB = new JoystickButton(joystick, 0);
-		buttonX = new JoystickButton(joystick, 0);
-		buttonY = new JoystickButton(joystick, 0);
-		buttonLeftBumper = new JoystickButton(joystick, 0);
-		buttonRightBumper = new JoystickButton(joystick, 0);
+		buttonA = new JoystickButton(joystick, ButtonMap.A);
+		buttonB = new JoystickButton(joystick, ButtonMap.B);
+		buttonX = new JoystickButton(joystick, ButtonMap.X);
+		buttonY = new JoystickButton(joystick, ButtonMap.Y);
+		buttonLeftBumper = new JoystickButton(joystick, ButtonMap.LeftBumper);
+		buttonRightBumper = new JoystickButton(joystick, ButtonMap.RightBumper);
 
 		// Axes
-		axisLeftX = new JoystickAxis(joystick, 0, 0);
-		axisLeftY = new JoystickAxis(joystick, 0, 0);
-		axisRightX = new JoystickAxis(joystick, 0, 0);
-		axisRightY = new JoystickAxis(joystick, 0, 0);
-		axisLeftTrigger = new JoystickAxis(joystick, 0, 0);
-		axisRightTrigger = new JoystickAxis(joystick, 0, 0);
+		axisLeftX = new JoystickAxis(joystick, ButtonMap.LeftXAxis, 0);
+		axisLeftY = new JoystickAxis(joystick, ButtonMap.LeftYAxis, 0);
+		axisRightX = new JoystickAxis(joystick, ButtonMap.RightXAxis, 0);
+		axisRightY = new JoystickAxis(joystick, ButtonMap.RightYAxis, 0);
+		axisLeftTrigger = new JoystickAxis(joystick, ButtonMap.LeftTrigger, 0);
+		axisRightTrigger = new JoystickAxis(joystick, ButtonMap.RightBumper, 0);
 	}
 
 	public void setRumble(double value) {

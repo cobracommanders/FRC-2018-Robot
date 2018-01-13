@@ -17,7 +17,9 @@ public class Operator {
 	private Controller controller = new Controller(0);
 	
 	private Operator() {
-		controller.buttonA.whileHeld(new Rumble(this.controller));
+		//controller.buttonA.whileHeld(new Rumble(this.controller));
+		
+		controller.buttonA.toggleWhenActive(new Rumble(this.controller));
 	}
 }
 

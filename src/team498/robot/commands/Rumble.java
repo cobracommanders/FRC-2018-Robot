@@ -29,6 +29,7 @@ public class Rumble extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
+    	this.controller.setRumble(0);
     }
 
     // Called when another command which requires one or more of the same
