@@ -5,6 +5,8 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
+
+/*randy's text*/
 package team498.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
@@ -22,6 +24,8 @@ import team498.robot.subsystems.ExampleSubsystem;
  * creating this project, you must also update the build.properties file in the
  * project.
  */
+
+//katy test
 public class Robot extends TimedRobot {
 	public static final ExampleSubsystem kExampleSubsystem
 			= new ExampleSubsystem();
