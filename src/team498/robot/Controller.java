@@ -40,7 +40,7 @@ public class Controller {
 		axisRightX = new JoystickAxis(joystick, ButtonMap.RightXAxis, 0);
 		axisRightY = new JoystickAxis(joystick, ButtonMap.RightYAxis, 0);
 		axisLeftTrigger = new JoystickAxis(joystick, ButtonMap.LeftTrigger, 0);
-		axisRightTrigger = new JoystickAxis(joystick, ButtonMap.RightBumper, 0);
+		axisRightTrigger = new JoystickAxis(joystick, ButtonMap.RightTrigger, 0);
 	}
 
 	public void setRumble(double value) {
