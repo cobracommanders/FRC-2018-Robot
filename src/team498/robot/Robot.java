@@ -5,8 +5,6 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-
-/*randy's text*/
 package team498.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
@@ -22,14 +20,9 @@ import team498.robot.subsystems.Drivetrain;
  * creating this project, you must also update the build.properties file in the
  * project.
  */
-
-//Micah
-//Was
-//Here
-//katy test
 public class Robot extends TimedRobot {
 			
-	private Operator operator = new Operator();
+	private Operator operator = Operator.getOperator();
 	
 	// Subsystems
     private Drivetrain drivetrain = Drivetrain.getDrivetrain();

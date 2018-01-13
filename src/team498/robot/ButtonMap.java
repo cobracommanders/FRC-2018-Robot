@@ -23,11 +23,5 @@ public class ButtonMap {
   public static final int RightYAxis = 5;
   public static final int RightTrigger = 3;
   public static final int LeftTrigger = 2;
-  
-  public int index;
- 
-  ButtonMap(int channel) {
-    index = channel;
-  }
 }
  
