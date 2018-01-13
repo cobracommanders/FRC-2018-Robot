@@ -8,6 +8,7 @@
 package team498.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
+import team498.robot.Operator;
 import team498.robot.Robot;
 import team498.robot.subsystems.Drivetrain;
 
@@ -17,8 +18,10 @@ import team498.robot.subsystems.Drivetrain;
 public class Drive extends Command {
 		
 	private Drivetrain drivetrain;
+	private Operator operator = Operator.getOperator();
 	
 	public Drive() {
+		super("Drive");
 		// Required Subsystems
 		requires(this.drivetrain = Drivetrain.getDrivetrain());
 	}
@@ -33,7 +36,10 @@ public class Drive extends Command {
 	protected void execute() {
 		
 		this.drivetrain.drive(1, 0);
-		
+		double move = operator.controller.axisRightTrigger.getAxisValue() - operator.controller.axisLeftTrigger.getAxisValue();
+        double rotate = operator.controller.axisLeftX.getAxisValue();
+        
+        this.drivetrain.drive(move, rotate);
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
