@@ -35,7 +35,7 @@ public class Drive extends Command {
 	@Override
 	protected void execute() {
 		
-		this.drivetrain.drive(1, 0);
+		//this.drivetrain.drive(1, 0);
 		double move = operator.controller.axisRightTrigger.getAxisValue() - operator.controller.axisLeftTrigger.getAxisValue();
         double rotate = operator.controller.axisLeftX.getAxisValue();
         
@@ -51,11 +51,13 @@ public class Drive extends Command {
 	// Called once after isFinished returns true
 	@Override
 	protected void end() {
+		drivetrain.drive(0, 0);
 	}
 
 	// Called when another command which requires one or more of the same
 	// subsystems is scheduled to run
 	@Override
 	protected void interrupted() {
+		end();
 	}
 }
