@@ -29,6 +29,8 @@ import team498.robot.subsystems.Drivetrain;
 //katy test
 public class Robot extends TimedRobot {
 			
+	private Operator operator = new Operator();
+	
 	// Subsystems
     private Drivetrain drivetrain = Drivetrain.getDrivetrain();
 	
