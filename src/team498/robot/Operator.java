@@ -16,7 +16,7 @@ import team498.robot.commands.Rumble;
 public class Operator {
 	private Controller controller = new Controller(0);
 	
-	private Operator() {
+	public Operator() {
 		controller.buttonA.whileHeld(new Rumble(this.controller));
 	}
 }
