@@ -29,7 +29,8 @@ public class ReverseForever extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return button.get();
+    	System.out.println("button value: " + button.get());
+    	return button.get();
     }
 
     // Called once after isFinished returns true

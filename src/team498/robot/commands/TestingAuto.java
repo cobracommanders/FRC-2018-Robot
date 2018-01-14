@@ -11,6 +11,7 @@ public class TestingAuto extends CommandGroup {
     	addSequential(new ReverseForever()); //reverses forever (until button is held down);
     	addSequential(new ReverseHalfPercent()); //reverses using half the power (until button is not pressed);
     	addSequential(new Stop());
+    	
         // Add Commands here:
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());
