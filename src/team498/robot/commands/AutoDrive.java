@@ -14,6 +14,7 @@ public class AutoDrive extends Command {
 	private double move;
 	private double rotate;
 	private boolean watchButton;
+	private boolean areWeDone = false;
 	
 	
     public AutoDrive(double move, double rotate, boolean watchButton) {
@@ -37,18 +38,19 @@ public class AutoDrive extends Command {
     			this.drivetrain.drive(move, rotate);
     		} else {
     			end();
+    			areWeDone = true;
     		}
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return areWeDone;
     }
 
     // Called once after isFinished returns true
     protected void end() {
     		this.drivetrain.drive(0, 0);
-    	
+    		
     }
 
     // Called when another command which requires one or more of the same
