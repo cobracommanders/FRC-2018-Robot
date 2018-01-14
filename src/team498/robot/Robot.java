@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import team498.robot.commands.auto.TestingAuto;
 import team498.robot.subsystems.Drivetrain;
 
 /**
@@ -64,6 +65,8 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void autonomousInit() {
+		TestingAuto auto = new TestingAuto(); //randy's auto
+		auto.start(); //starts auto
 	}
 
 	/**
