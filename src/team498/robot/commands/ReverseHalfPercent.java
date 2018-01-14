@@ -1,19 +1,19 @@
 package team498.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
-import team498.robot.subsystems.Button;
+import team498.robot.subsystems.BumperButton;
 import team498.robot.subsystems.Drivetrain;
 import edu.wpi.first.wpilibj.DigitalInput;
 
 public class ReverseHalfPercent extends Command {
 	private Drivetrain drivetrain;
-	private Button button;
+	private BumperButton button;
 	
     public ReverseHalfPercent() {
     	super("ReverseHalfPercent");
     	
     	requires(this.drivetrain = Drivetrain.getDrivetrain());
-    	requires(this.button = Button.getButton());
+    	requires(this.button = BumperButton.getButton());
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     }

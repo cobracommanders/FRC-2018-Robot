@@ -3,15 +3,15 @@ package team498.robot.subsystems;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.DigitalInput;
 
-public class Button extends Subsystem {
+public class BumperButton extends Subsystem {
 	
-	private static Button button = null;
+	private static BumperButton instance = null;
 
-	public static Button getButton() {
-        button = button == null ? new Button() : button;
-        return button;
+	public static BumperButton getButton() {
+        instance = instance == null ? new BumperButton() : instance;
+        return instance;
     }
-	private DigitalInput theButton = new DigitalInput(0);
+	private DigitalInput button = new DigitalInput(0);
 	
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
