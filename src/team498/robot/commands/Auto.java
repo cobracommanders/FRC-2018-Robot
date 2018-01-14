@@ -10,6 +10,7 @@ public class Auto extends CommandGroup{
 		addSequential(new AutoDrive(0, 0, false), 2);
 		addSequential(new AutoDrive(1, -1, false), 3);
 		addSequential(new AutoDrive(-1, 0, true));
+		addSequential(new AutoDrive(0, 0, false), 1);
 		addSequential(new AutoDrive(-.5, 0, true));
 		
 	}
