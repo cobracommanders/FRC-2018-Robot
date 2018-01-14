@@ -24,11 +24,12 @@ public class ReverseHalfPercent extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	drivetrain.drive(-.4, 0);
+    	drivetrain.drive(-.6, 0);
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
+    	System.out.println("button value pt 2: " + button.get());
         return !button.get();
     }
 
