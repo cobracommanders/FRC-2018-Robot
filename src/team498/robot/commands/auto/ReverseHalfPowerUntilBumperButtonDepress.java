@@ -1,16 +1,16 @@
-package team498.robot.commands;
+package team498.robot.commands.auto;
 
 import edu.wpi.first.wpilibj.command.Command;
 import team498.robot.subsystems.BumperButton;
 import team498.robot.subsystems.Drivetrain;
 import edu.wpi.first.wpilibj.DigitalInput;
 
-public class ReverseHalfPercent extends Command {
+public class ReverseHalfPowerUntilBumperButtonDepress extends Command {
 	private Drivetrain drivetrain;
 	private BumperButton button;
 	
-    public ReverseHalfPercent() {
-    	super("ReverseHalfPercent");
+    public ReverseHalfPowerUntilBumperButtonDepress() {
+    	super("ReverseHalfPowerUntilBumperButtonDepress");
     	
     	requires(this.drivetrain = Drivetrain.getDrivetrain());
     	requires(this.button = BumperButton.getButton());
@@ -24,13 +24,14 @@ public class ReverseHalfPercent extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	drivetrain.drive(-.6, 0);
+    	drivetrain.drive(-.6, 0); //drives 60% in reverse
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	System.out.println("button value pt 2: " + button.get());
-        return !button.get();
+    	//System.out.println("button value pt 2: " + button.get());
+    	
+        return !button.get(); //When bumper button gets depressed, this command stops
     }
 
     // Called once after isFinished returns true

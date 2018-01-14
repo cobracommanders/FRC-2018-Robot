@@ -1,4 +1,4 @@
-package team498.robot.commands;
+package team498.robot.commands.auto;
 
 import edu.wpi.first.wpilibj.command.Command;
 import team498.robot.subsystems.Drivetrain;
@@ -10,9 +10,9 @@ public class DriveStraight extends Command {
 	private Drivetrain drivetrain;
 	
     public DriveStraight() {
-    	super("DriveStraight");
+    	super("DriveStraight"); //names
     	
-    	requires(this.drivetrain = Drivetrain.getDrivetrain());
+    	requires(this.drivetrain = Drivetrain.getDrivetrain()); //requires the subsystem needed for this command.
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     }
@@ -23,12 +23,12 @@ public class DriveStraight extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	drivetrain.drive(.8, 0);
+    	drivetrain.drive(.8, 0); //drives forward 
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return false; //stops when command time expires
     }
 
     // Called once after isFinished returns true

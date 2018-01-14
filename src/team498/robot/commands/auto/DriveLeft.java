@@ -1,4 +1,4 @@
-package team498.robot.commands;
+package team498.robot.commands.auto;
 
 import edu.wpi.first.wpilibj.command.Command;
 import team498.robot.subsystems.Drivetrain;
@@ -23,12 +23,12 @@ public class DriveLeft extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	drivetrain.drive(0, -.8);
+    	drivetrain.drive(0, -.8); //negative rotate value equals left turn. So it drives left.
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return false; //stops when command time expires
     }
 
     // Called once after isFinished returns true

@@ -1,16 +1,16 @@
-package team498.robot.commands;
+package team498.robot.commands.auto;
 
 import edu.wpi.first.wpilibj.command.Command;
 import team498.robot.subsystems.BumperButton;
 import team498.robot.subsystems.Drivetrain;
 import edu.wpi.first.wpilibj.DigitalInput;
 
-public class ReverseForever extends Command {
+public class ReverseUntilBumperButtonPress extends Command {
 	private Drivetrain drivetrain;
 	private BumperButton button;
 
-    public ReverseForever() {
-    	super("ReverseForever");
+    public ReverseUntilBumperButtonPress() {
+    	super("ReverseUntilBumperButtonPress");
     	
     	requires(this.drivetrain = Drivetrain.getDrivetrain());
     	requires(this.button = BumperButton.getButton());
@@ -24,13 +24,14 @@ public class ReverseForever extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	drivetrain.drive(-.8, 0);
+    	drivetrain.drive(-.8, 0); //drive in reverse
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	System.out.println("button value: " + button.get());
-    	return button.get();
+    	//System.out.println("button value: " + button.get());
+    	
+    	return button.get(); //when bumper button is pressed, that's when this command stops
     }
 
     // Called once after isFinished returns true
