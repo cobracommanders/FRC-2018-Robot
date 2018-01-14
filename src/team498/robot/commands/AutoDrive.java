@@ -33,7 +33,7 @@ public class AutoDrive extends Command {
     		if (watchButton == true) {
     			System.out.println("Switch = " + Sensors.getSensors().limitSwitch.get());
     		}
-    		if (watchButton == false || Sensors.getSensors().limitSwitch.get() == false){
+    		if (watchButton == false || Sensors.getSensors().limitSwitch.get() == true){
     			this.drivetrain.drive(move, rotate);
     		} else {
     			end();
