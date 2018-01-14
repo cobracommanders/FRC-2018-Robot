@@ -21,7 +21,7 @@ public class BumperButton extends Subsystem {
         //setDefaultCommand(new MySpecialCommand());
     }
     public boolean get() {
-    	return button.get();
+    	return !button.get();
     }
 }
 
