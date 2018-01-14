@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import team498.robot.commands.Auto;
 import team498.robot.subsystems.Drivetrain;
 
 /**
@@ -26,6 +27,9 @@ public class Robot extends TimedRobot {
 	
 	// Subsystems
     private Drivetrain drivetrain = Drivetrain.getDrivetrain();
+    
+    
+    private Auto auto = new Auto();
 	
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -64,6 +68,7 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void autonomousInit() {
+		this.auto.start();
 	}
 
 	/**
@@ -76,6 +81,7 @@ public class Robot extends TimedRobot {
 
 	@Override
 	public void teleopInit() {
+		this.auto.cancel();
 	}
 
 	/**
