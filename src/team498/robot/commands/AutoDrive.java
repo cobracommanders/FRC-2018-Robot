@@ -3,6 +3,7 @@ package team498.robot.commands;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.command.Command;
 import team498.robot.subsystems.Drivetrain;
+import team498.robot.subsystems.Sensors;
 
 /**
  *
@@ -13,16 +14,13 @@ public class AutoDrive extends Command {
 	private double move;
 	private double rotate;
 	private boolean watchButton;
-	private DigitalInput limitSwitch;
+	
 	
     public AutoDrive(double move, double rotate, boolean watchButton) {
     		requires(this.drivetrain = Drivetrain.getDrivetrain());
     		this.move = move;
     		this.rotate = rotate;
     		this.watchButton = watchButton;
-    		
-    		this.limitSwitch =  new DigitalInput(0);
-    		
     }
 
     // Called just before this Command runs the first time
@@ -32,7 +30,8 @@ public class AutoDrive extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    		if (limitSwitch.get() == false){
+    	
+    		if (watchButton == false || Sensors.getSensors().limitSwitch.get() == false){
     			this.drivetrain.drive(move, rotate);
     		} else {
     			end();
