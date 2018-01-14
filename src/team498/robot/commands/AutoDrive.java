@@ -30,7 +30,9 @@ public class AutoDrive extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	
+    		if (watchButton == true) {
+    			System.out.println("Switch = " + Sensors.getSensors().limitSwitch.get());
+    		}
     		if (watchButton == false || Sensors.getSensors().limitSwitch.get() == false){
     			this.drivetrain.drive(move, rotate);
     		} else {
