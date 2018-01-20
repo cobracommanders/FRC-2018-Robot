@@ -37,6 +37,8 @@ public class Controller {
 		buttonY = new JoystickButton(joystick, Mappings.ButtonY);
 		leftBumper = new JoystickButton(joystick, Mappings.LeftBumper);
 		rightBumper = new JoystickButton(joystick, Mappings.RightBumper);
+		buttonLeftBumper = new JoystickButton(joystick, Mappings.LeftBumper);
+		buttonRightBumper = new JoystickButton(joystick, Mappings.RightBumper);
 
 		// Axes
 		axisLeftX = new JoystickAxis(joystick, Mappings.LeftXAxis, 0);
@@ -76,6 +78,8 @@ public class Controller {
 		SmartDashboard.putBoolean(Dashboard.IsButtonYPressed, buttonY.get());
 		SmartDashboard.putBoolean(Dashboard.IsLeftBumperPressed, leftBumper.get());
 		SmartDashboard.putBoolean(Dashboard.IsRightBumperPressed, rightBumper.get());
+		SmartDashboard.putBoolean(Dashboard.IsLeftBumperPressed, buttonLeftBumper.get());
+		SmartDashboard.putBoolean(Dashboard.IsRightBumperPressed, buttonRightBumper.get());
 		SmartDashboard.putNumber(Dashboard.LeftTriggerValue, axisLeftTrigger.getAxisValue());
 		SmartDashboard.putNumber(Dashboard.RightTriggerValue, axisRightTrigger.getAxisValue());
 	}
