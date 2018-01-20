@@ -13,12 +13,22 @@ public class DynamicAutoRecorder implements ButtonListener {
 	private RecordingThread thread;
 	private Timer timer;
 
-	public DynamicAutoRecorder() {
+	private static DynamicAutoRecorder dar;
+
+	public static DynamicAutoRecorder getAutoRecorder() {
+		return dar = dar == null ? new DynamicAutoRecorder() : dar;
+	}
+
+	private DynamicAutoRecorder() {
 		thread = new RecordingThread();
 	}
-	
-	public DynamicCommand CreateDynamic(String filename) {
-		
+
+	public DynamicCommand CreateDynamic(String filename) throws IOException {
+		FileReader fr = new FileReader(filename);
+		BufferedReader br = new BufferedReader(fr);
+		String mega = "";
+		mega = br.readLine();
+		return new DynamicCommand(mega);
 	}
 
 	public void StartRecording() {
@@ -38,7 +48,7 @@ public class DynamicAutoRecorder implements ButtonListener {
 
 		BufferedWriter bw = new BufferedWriter(fw);
 		bw.write(megaLog);
-		
+
 		bw.close();
 	}
 

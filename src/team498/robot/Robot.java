@@ -7,9 +7,12 @@
 
 package team498.robot;
 
+import java.io.IOException;
+
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -28,10 +31,11 @@ import team498.robot.dynamicAuto.*;
 public class Robot extends TimedRobot {
 
 	private Operator operator = Operator.getOperator();
-	private DynamicAutoRecorder autoRec;
+	private DynamicAutoRecorder dar;
 	// Subsystems
 	private Drivetrain drivetrain = Drivetrain.getDrivetrain();
 	private Vision vision = Vision.getVision();
+	
 
 	private Auto auto = new Auto();
 	
@@ -74,6 +78,17 @@ public class Robot extends TimedRobot {
 	@Override
 	public void autonomousInit() {
 		this.auto.start();
+		DynamicCommand dc = null;
+		if(dar != null) {
+			try {
+				dc = dar.CreateDynamic("test.txt");
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		if (dc != null) {
+			auto.addSequential(dc, 15);
+		}
 	}
 
 	/**
@@ -87,6 +102,18 @@ public class Robot extends TimedRobot {
 	@Override
 	public void teleopInit() {
 		this.auto.cancel();
+		dar = DynamicAutoRecorder.getAutoRecorder();
+		Timer timer = new Timer();
+		dar.StartRecording();
+		timer.start();
+		while(timer.get() < 15) {
+		}
+		try {
+			dar.StopRecording("test.txt");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	/**
