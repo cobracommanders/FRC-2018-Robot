@@ -13,8 +13,9 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import team498.robot.commands.auto.TestingAuto;
+import team498.robot.commands.Auto;
 import team498.robot.subsystems.Drivetrain;
+import team498.robot.subsystems.Vision;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -27,8 +28,12 @@ public class Robot extends TimedRobot {
 			
 	private Operator operator = Operator.getOperator();
 	
+	private Vision vision = Vision.getVision();
+	
 	// Subsystems
-    private Drivetrain drivetrain = Drivetrain.getDrivetrain();
+  private Drivetrain drivetrain = Drivetrain.getDrivetrain();
+        
+  private auto = new Auto();
 	
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -36,7 +41,7 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void robotInit() {
-		UsbCamera camera0 = CameraServer.getInstance().startAutomaticCapture("cam0", 0); //camera works! BABYYYYY
+		vision.getCamera();
 	}
 
 	/**
@@ -67,8 +72,7 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void autonomousInit() {
-		TestingAuto auto = new TestingAuto(); //randy's auto
-		auto.start(); //starts auto
+		this.auto.start();
 	}
 
 	/**
@@ -81,6 +85,7 @@ public class Robot extends TimedRobot {
 
 	@Override
 	public void teleopInit() {
+		this.auto.cancel();
 	}
 
 	/**
