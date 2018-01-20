@@ -7,8 +7,6 @@
 
 package team498.robot;
 
-import edu.wpi.cscore.UsbCamera;
-import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -41,6 +39,7 @@ public class Robot extends TimedRobot {
 	@Override
 	public void robotInit() {
 		vision.startCapture();
+		
 	}
 
 	/**
@@ -101,5 +100,10 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void testPeriodic() {
+	}
+	
+	public void updateDashboard() {
+		operator.updateDashboard();
+		//TODO add other subsystems 
 	}
 }
