@@ -7,7 +7,10 @@
 
 package team498.robot;
 
+import java.util.*;
+
 import team498.robot.commands.Rumble;
+import team498.robot.dynamicAuto.*;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -15,6 +18,18 @@ import team498.robot.commands.Rumble;
  */
 public class Operator {
 	public Controller controller = new Controller(0);
+	
+	private List<ButtonListener> listeners = new ArrayList<ButtonListener>();
+	
+	public void addListener(ButtonListener toAdd) {
+		listeners.add(toAdd);
+	}
+	
+	public void ButtonChange() {
+		for (ButtonListener bl : listeners) {
+			bl.buttonChange();
+		}
+	}
 	
 	private static Operator operator = null;
 	

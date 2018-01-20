@@ -15,6 +15,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import team498.robot.commands.auto.TestingAuto;
 import team498.robot.subsystems.Drivetrain;
+import team498.robot.dynamicAuto.*;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -26,6 +27,7 @@ import team498.robot.subsystems.Drivetrain;
 public class Robot extends TimedRobot {
 			
 	private Operator operator = Operator.getOperator();
+	private DynamicAutoRecorder autoRec;
 	
 	// Subsystems
     private Drivetrain drivetrain = Drivetrain.getDrivetrain();
@@ -37,6 +39,9 @@ public class Robot extends TimedRobot {
 	@Override
 	public void robotInit() {
 		UsbCamera camera0 = CameraServer.getInstance().startAutomaticCapture("cam0", 0); //camera works! BABYYYYY
+		
+		autoRec = new DynamicAutoRecorder();
+		autoRec.buttonChange();
 	}
 
 	/**
