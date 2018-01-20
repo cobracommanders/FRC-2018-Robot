@@ -15,10 +15,12 @@ public class Vision extends Subsystem {
 	}
 	
 	private UsbCamera camera;
-
+	private int width = 480;
+	private int height = 360;
+	
 	public void startCapture() { 
 		camera = CameraServer.getInstance().startAutomaticCapture("camera", Mappings.CameraDevice);
-		camera.setResolution(480, 360);
+		camera.setResolution(width, height);
 	}
 	
     public void initDefaultCommand() {
