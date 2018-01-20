@@ -13,7 +13,7 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import team498.robot.commands.auto.TestingAuto;
+import team498.robot.commands.Auto;
 import team498.robot.subsystems.Drivetrain;
 import team498.robot.dynamicAuto.*;
 
@@ -25,12 +25,14 @@ import team498.robot.dynamicAuto.*;
  * project.
  */
 public class Robot extends TimedRobot {
-			
+
 	private Operator operator = Operator.getOperator();
 	private DynamicAutoRecorder autoRec;
-	
 	// Subsystems
-    private Drivetrain drivetrain = Drivetrain.getDrivetrain();
+	private Drivetrain drivetrain = Drivetrain.getDrivetrain();
+	private Vision vision = Vision.getVision();
+
+	private Auto auto = new Auto();
 	
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -38,10 +40,7 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void robotInit() {
-		UsbCamera camera0 = CameraServer.getInstance().startAutomaticCapture("cam0", 0); //camera works! BABYYYYY
-		
-		autoRec = new DynamicAutoRecorder();
-		autoRec.buttonChange();
+		vision.startCapture();
 	}
 
 	/**
@@ -66,14 +65,14 @@ public class Robot extends TimedRobot {
 	 * LabVIEW Dashboard, remove all of the chooser code and uncomment the
 	 * getString code to get the auto name from the text box below the Gyro
 	 *
-	 * <p>You can add additional auto modes by adding additional commands to the
+	 * <p>
+	 * You can add additional auto modes by adding additional commands to the
 	 * chooser code above (like the commented example) or additional comparisons
 	 * to the switch structure below with additional strings & commands.
 	 */
 	@Override
 	public void autonomousInit() {
-		TestingAuto auto = new TestingAuto(); //randy's auto
-		auto.start(); //starts auto
+		this.auto.start();
 	}
 
 	/**
@@ -86,6 +85,7 @@ public class Robot extends TimedRobot {
 
 	@Override
 	public void teleopInit() {
+		this.auto.cancel();
 	}
 
 	/**

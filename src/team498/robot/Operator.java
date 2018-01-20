@@ -17,7 +17,7 @@ import team498.robot.dynamicAuto.*;
  * interface to the commands and command groups that allow control of the robot.
  */
 public class Operator {
-	public Controller controller = new Controller(0);
+	public Controller controller = new Controller(Mappings.ControllerPort);
 	
 	private List<ButtonListener> listeners = new ArrayList<ButtonListener>();
 	
