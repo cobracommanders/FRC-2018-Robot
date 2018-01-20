@@ -35,6 +35,15 @@ public class Drive extends Command {
 
 	}
 
+
+	//makes the robot drive straight using soem compensation from the gyro.
+	public double AngleComp() {
+		if (operator.controller.axisRightTrigger.getAxisValue() >= 0.2)
+			return -gyro.getAngle() / 10;
+		else
+			return 0;
+	}
+	
 	// Called repeatedly when this Command is scheduled to run
 	@Override
 	protected void execute() {
@@ -44,14 +53,11 @@ public class Drive extends Command {
 				- operator.controller.axisLeftTrigger.getAxisValue();
 		double rotate = operator.controller.axisLeftX.getAxisValue();
 
-		double angle = gyro.getAngle();
-		double angleRatio = -angle / 9;
-		System.out.println(angle + " " + angleRatio);
-		if (Math.abs(rotate) > 0.05) {
+		if (Math.abs(rotate) > 0.01) {
 			gyro.resetAngle();
 			this.drivetrain.drive(move, rotate);
 		} else
-			this.drivetrain.drive(move, (Math.abs(move) / move) * angleRatio);
+			this.drivetrain.drive(move, AngleComp());
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
