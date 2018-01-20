@@ -7,15 +7,18 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class Vision extends Subsystem {
 	private UsbCamera camera;
+	private static Vision vision = null;
    
-	public void vision() { 
+	public void getCamera() { 
 		camera = CameraServer.getInstance().startAutomaticCapture("cam0", 0); //camera works! BABYYYYY
 	}
 	
     public void initDefaultCommand() {
-        
-    		
-    		
+    	
     }
+    public static Vision getVision() {
+		vision = vision == null ? new Vision() : vision;
+		return vision;
+	}
 }
 

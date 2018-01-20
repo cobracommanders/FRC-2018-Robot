@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import team498.robot.commands.Auto;
 import team498.robot.subsystems.Drivetrain;
+import team498.robot.subsystems.Vision;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -24,6 +25,8 @@ import team498.robot.subsystems.Drivetrain;
 public class Robot extends TimedRobot {
 			
 	private Operator operator = Operator.getOperator();
+	
+	private Vision vision = Vision.getVision();
 	
 	// Subsystems
     private Drivetrain drivetrain = Drivetrain.getDrivetrain();
@@ -37,7 +40,7 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void robotInit() {
-		
+		vision.getCamera();
 	}
 
 	/**
