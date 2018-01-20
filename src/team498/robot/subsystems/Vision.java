@@ -18,6 +18,7 @@ public class Vision extends Subsystem {
 
 	public void startCapture() { 
 		camera = CameraServer.getInstance().startAutomaticCapture("camera", Mappings.CameraDevice);
+		camera.setResolution(480, 360);
 	}
 	
     public void initDefaultCommand() {
