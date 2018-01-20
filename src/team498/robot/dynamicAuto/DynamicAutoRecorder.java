@@ -1,7 +1,6 @@
 package team498.robot.dynamicAuto;
 
-import java.io.FileNotFoundException;
-import java.io.PrintWriter;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,6 +16,10 @@ public class DynamicAutoRecorder implements ButtonListener {
 	public DynamicAutoRecorder() {
 		thread = new RecordingThread();
 	}
+	
+	public DynamicCommand CreateDynamic(String filename) {
+		
+	}
 
 	public void StartRecording() {
 		buttonChanges = new ArrayList<String>();
@@ -24,18 +27,19 @@ public class DynamicAutoRecorder implements ButtonListener {
 		thread.AddListener(this);
 		thread.start();
 	}
-	
-	public void StopRecording(String filename) throws FileNotFoundException {
+
+	public void StopRecording(String filename) throws IOException {
 		thread.interrupt();
 		megaLog = "";
-		for(String s : buttonChanges) {
+		for (String s : buttonChanges) {
 			megaLog += s + ";";
 		}
-		try {
-			PrintWriter write = new PrintWriter(filename);
-		} catch (FileNotFoundException e) {
-			throw e;
-		}
+		FileWriter fw = new FileWriter(filename);
+
+		BufferedWriter bw = new BufferedWriter(fw);
+		bw.write(megaLog);
+		
+		bw.close();
 	}
 
 	@Override

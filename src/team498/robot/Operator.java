@@ -18,28 +18,27 @@ import team498.robot.dynamicAuto.*;
  */
 public class Operator {
 	public Controller controller = new Controller(Mappings.ControllerPort);
-	
+
 	private List<ButtonListener> listeners = new ArrayList<ButtonListener>();
-	
+
 	public void addListener(ButtonListener toAdd) {
 		listeners.add(toAdd);
 	}
-	
+
 	public void ButtonChange() {
 		for (ButtonListener bl : listeners) {
-			bl.buttonChange();
+			bl.buttonChange(null);
 		}
 	}
-	
+
 	private static Operator operator = null;
-	
+
 	public Operator() {
 		controller.buttonA.whileHeld(new Rumble(this.controller));
 	}
-	
-	public static Operator getOperator() {
-        operator = operator == null ? new Operator() : operator;
-        return operator;
-    }
-}
 
+	public static Operator getOperator() {
+		operator = operator == null ? new Operator() : operator;
+		return operator;
+	}
+}

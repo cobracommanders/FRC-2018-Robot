@@ -11,16 +11,21 @@ public class RecordingThread extends Thread {
 
 	Operator operator = Operator.getOperator();
 
+	//Buttons
 	private final int a = 0;
 	private final int b = 1;
 	private final int x = 2;
 	private final int y = 3;
+	//Bumpers
 	private final int lb = 4;
 	private final int rb = 5;
+	//Start and Back
 	private final int back = 6;
 	private final int start = 7;
+	//Joystick Buttons
 	private final int ljp = 8;
 	private final int rjp = 9;
+	//Triggers
 	private final int lt = 0;
 	private final int rt = 1;
 	private final int ljx = 2;

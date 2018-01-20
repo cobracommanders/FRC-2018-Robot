@@ -15,6 +15,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import team498.robot.commands.Auto;
 import team498.robot.subsystems.Drivetrain;
+import team498.robot.subsystems.Vision;
 import team498.robot.dynamicAuto.*;
 
 /**
