@@ -13,8 +13,11 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import team498.robot.commands.auto.DriveLeft;
+import team498.robot.commands.auto.DriveRight;
 import team498.robot.commands.auto.TestingAuto;
 import team498.robot.subsystems.Drivetrain;
+import edu.wpi.first.wpilibj.DriverStation;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -26,6 +29,7 @@ import team498.robot.subsystems.Drivetrain;
 public class Robot extends TimedRobot {
 			
 	private Operator operator = Operator.getOperator();
+	private static DriverStation ds;
 	
 	// Subsystems
     private Drivetrain drivetrain = Drivetrain.getDrivetrain();
@@ -67,8 +71,17 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void autonomousInit() {
-		TestingAuto auto = new TestingAuto(); //randy's auto
-		auto.start(); //starts auto
+		//TestingAuto auto = new TestingAuto(); //randy's auto
+		DriveLeft driveL = new DriveLeft();
+		DriveRight driveR = new DriveRight();
+		//auto.start(); //starts auto
+		String gameData;
+		gameData = ds.getGameSpecificMessage();
+		if(gameData.charAt(0) == 'L') {
+			driveL.start();
+		} else {
+			driveR.start();
+		}
 	}
 
 	/**
