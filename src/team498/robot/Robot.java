@@ -7,6 +7,8 @@
 
 package team498.robot;
 
+import edu.wpi.cscore.UsbCamera;
+import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -29,10 +31,9 @@ public class Robot extends TimedRobot {
 	private Vision vision = Vision.getVision();
 	
 	// Subsystems
-    private Drivetrain drivetrain = Drivetrain.getDrivetrain();
-    
-    
-    private Auto auto = new Auto();
+  private Drivetrain drivetrain = Drivetrain.getDrivetrain();
+        
+  private auto = new Auto();
 	
 	/**
 	 * This function is run when the robot is first started up and should be
