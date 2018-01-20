@@ -34,18 +34,13 @@ public class Robot extends TimedRobot {
 
 	private Auto auto = new Auto();
 	
-	// Subsystems
-  private Drivetrain drivetrain = Drivetrain.getDrivetrain();
-        
-  private auto = new Auto();
-	
 	/**
 	 * This function is run when the robot is first started up and should be
 	 * used for any initialization code.
 	 */
 	@Override
 	public void robotInit() {
-		vision.getCamera();
+		vision.startCapture();
 	}
 
 	/**
