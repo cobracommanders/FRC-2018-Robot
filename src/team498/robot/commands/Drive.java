@@ -47,11 +47,11 @@ public class Drive extends Command {
 		double angle = gyro.getAngle();
 		double angleRatio = -angle / 90;
 		System.out.println(angle + " " + angleRatio);
-		if (rotate == 0) {
+		if (Math.abs(rotate) > 0.05) {
 			gyro.resetAngle();
 			this.drivetrain.drive(move, rotate);
 		} else
-			this.drivetrain.drive(move, angleRatio);
+			this.drivetrain.drive(move, (Math.abs(move) / move) * angleRatio);
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
