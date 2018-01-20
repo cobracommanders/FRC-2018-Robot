@@ -37,8 +37,8 @@ public class Robot extends TimedRobot {
 	private Drivetrain drivetrain = Drivetrain.getDrivetrain();
 	
 	// Stuff
-	private double move = 0.8;
-	private double rotate = -0.8;
+	private double move = -0.8;
+	private double rotate = 0.8;
 
 	/**
 	 * This function is run when the robot is first started up and should be
