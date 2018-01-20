@@ -76,12 +76,11 @@ public class Robot extends TimedRobot {
 
 	public void autonomousInit() {
 		// TestingAuto auto = new TestingAuto(); //randy's auto
-		DriveLeft driveL = new DriveLeft();
-		DriveRight driveR = new DriveRight();
+		/*RotateLeft driveL = new RotateLeft();
+		RotateRight driveR = new RotateRight();
 		DriveStraight driveStraight = new DriveStraight();
-		DriveReverse driveReverse = new DriveReverse();
-		Stop stop = new Stop();
-		DriveManualControl driveManual = new DriveManualControl(move, rotate);
+		Stop stop = new Stop();*/
+		
 		// auto.start(); //starts auto
 		String gameData;
 		gameData = ds.getGameSpecificMessage(); // gets game messgae on driver
@@ -93,11 +92,12 @@ public class Robot extends TimedRobot {
 		} else {
 			stop.start();
 		}*/
-		if (gameData.charAt(1) == 'L') { //if scale is left, move forward
+		
+		/*if (gameData.charAt(1) == 'L') { //if scale is left, move forward
 			driveStraight.start();
 		} else if (gameData.charAt(1) == 'R') { //if scale is right, move backwards
 			driveReverse.start();
-		}
+		}*/
 	}
 
 	/**

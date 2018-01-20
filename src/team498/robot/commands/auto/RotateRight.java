@@ -6,13 +6,13 @@ import team498.robot.subsystems.Drivetrain;
 /**
  *
  */
-public class DriveReverse extends Command {
+public class RotateRight extends Command {
 	private Drivetrain drivetrain;
-	
-    public DriveReverse() {
-    	super("DriveReverse"); //names
+
+    public RotateRight() {
+    	super("DriveRight");
     	
-    	requires(this.drivetrain = Drivetrain.getDrivetrain()); //requires the subsystem needed for this command.
+    	requires(this.drivetrain = Drivetrain.getDrivetrain());
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     }
@@ -23,7 +23,7 @@ public class DriveReverse extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	drivetrain.drive(-.8, 0); //drives backward 
+    	drivetrain.drive(0, .8); //positive rotate value equals right turn. So it drives riht.
     }
 
     // Make this return true when this Command no longer needs to run execute()
