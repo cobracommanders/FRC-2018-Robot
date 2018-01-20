@@ -14,7 +14,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import team498.robot.commands.auto.*;
+import team498.robot.commands.auto.group.*;
 import team498.robot.subsystems.*;
 import edu.wpi.first.wpilibj.DriverStation;
 
@@ -87,7 +87,7 @@ public class Robot extends TimedRobot {
 		
 		// Start autonomous command
 		String gameData;
-		gameData = ds.getGameSpecificMessage(); //not doing anything with gamespecific message yet
+		gameData = ds.getGameSpecificMessage(); //not doing anything with game specific message yet
 		
         if (autonomousCommand != null) {
         	autonomousCommand.start();
@@ -151,9 +151,17 @@ public class Robot extends TimedRobot {
 	private void addAutonomousChoices() {
 
         // Add available autonomous commands with the SmartDashboard
-        chooser.addDefault("None", null);
+        // chooser.addDefault("None", null);
+        //TODO add actual commands to command groups
+        chooser.addDefault("AutoLeft_LeftSwitch", new AutoStartLeft_LeftSwitch());
+        chooser.addObject("AutoLeft_LeftScale", new  AutoStartLeft_LeftScale());
+        chooser.addObject("AutoLeft_RightSwitch", new AutoStartLeft_RightSwitch());
+        chooser.addObject("AutoLeft_RightScale", new  AutoStartLeft_RightScale());
+        chooser.addObject("AutoRight_LeftSwitch", new AutoStartRight_LeftSwitch());
+        chooser.addObject("AutoRight_LeftScale", new  AutoStartRight_LeftScale());
+        chooser.addObject("AutoRight_RightSwitch", new AutoStartRight_RightSwitch());
+        chooser.addObject("AutoRight_RightScale", new  AutoStartRight_RightScale());
         //chooser.addObject("AutoCrossLine", new AutoCrossLine());
-        // TODO: Add autonomous modes
         SmartDashboard.putData("AutonomousChooser", chooser);
        // SmartDashboard.putData(Dashboard.AutonomousChooser, chooser);
     }
