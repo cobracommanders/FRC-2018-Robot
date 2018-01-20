@@ -15,8 +15,10 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import team498.robot.commands.auto.Stop;
 import team498.robot.commands.auto.DriveManualControl;
+import team498.robot.commands.auto.DriveReverse;
 import team498.robot.commands.auto.DriveLeft;
 import team498.robot.commands.auto.DriveRight;
+import team498.robot.commands.auto.DriveStraight;
 import team498.robot.commands.auto.TestingAuto;
 import team498.robot.subsystems.Drivetrain;
 import edu.wpi.first.wpilibj.DriverStation;
@@ -37,8 +39,8 @@ public class Robot extends TimedRobot {
 	private Drivetrain drivetrain = Drivetrain.getDrivetrain();
 	
 	// Stuff
-	private double move = -0.8;
-	private double rotate = 0.8;
+	private double move;
+	private double rotate;
 
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -82,6 +84,8 @@ public class Robot extends TimedRobot {
 		// TestingAuto auto = new TestingAuto(); //randy's auto
 		DriveLeft driveL = new DriveLeft();
 		DriveRight driveR = new DriveRight();
+		DriveStraight driveStraight = new DriveStraight();
+		DriveReverse driveReverse = new DriveReverse();
 		Stop stop = new Stop();
 		DriveManualControl driveManual = new DriveManualControl(move, rotate);
 		// auto.start(); //starts auto
@@ -95,8 +99,10 @@ public class Robot extends TimedRobot {
 		} else {
 			stop.start();
 		}*/
-		if (gameData.charAt(1) == 'L') {
-			driveManual.start();
+		if (gameData.charAt(1) == 'L') { //if scale is left, move forward
+			driveStraight.start();
+		} else if (gameData.charAt(1) == 'R') { //if scale is right, move backwards
+			driveReverse.start();
 		}
 	}
 
