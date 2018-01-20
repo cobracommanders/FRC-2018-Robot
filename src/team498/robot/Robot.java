@@ -29,7 +29,7 @@ import edu.wpi.first.wpilibj.DriverStation;
 public class Robot extends TimedRobot {
 			
 	private Operator operator = Operator.getOperator();
-	private static DriverStation ds;
+	private DriverStation ds = DriverStation.getInstance();
 	
 	// Subsystems
     private Drivetrain drivetrain = Drivetrain.getDrivetrain();
