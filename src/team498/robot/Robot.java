@@ -10,6 +10,7 @@ package team498.robot;
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -36,6 +37,10 @@ public class Robot extends TimedRobot {
 	private double move;
 	private double rotate;
 
+	// Autonomous Selections
+	SendableChooser<Command> chooser = new SendableChooser<>();
+	Command autonomousCommand;
+	
 	/**
 	 * This function is run when the robot is first started up and should be
 	 * used for any initialization code.
@@ -43,6 +48,7 @@ public class Robot extends TimedRobot {
 	@Override
 	public void robotInit() {
 		UsbCamera camera0 = CameraServer.getInstance().startAutomaticCapture("cam0", 0);
+		
 	}
 
 	/**
@@ -75,6 +81,16 @@ public class Robot extends TimedRobot {
 	@Override
 
 	public void autonomousInit() {
+		// get selected command
+		autonomousCommand = chooser.getSelected();
+		
+		// Start autonomous command
+        if (autonomousCommand != null)
+            autonomousCommand.start();
+        
+        String gameData;
+		gameData = ds.getGameSpecificMessage();
+    }
 		// TestingAuto auto = new TestingAuto(); //randy's auto
 		/*RotateLeft driveL = new RotateLeft();
 		RotateRight driveR = new RotateRight();
@@ -82,8 +98,7 @@ public class Robot extends TimedRobot {
 		Stop stop = new Stop();*/
 		
 		// auto.start(); //starts auto
-		String gameData;
-		gameData = ds.getGameSpecificMessage(); // gets game messgae on driver
+		 // gets game messgae on driver
 												// station
 		/*if (gameData.charAt(0) == 'L') {
 			driveL.start();
@@ -98,7 +113,6 @@ public class Robot extends TimedRobot {
 		} else if (gameData.charAt(1) == 'R') { //if scale is right, move backwards
 			driveReverse.start();
 		}*/
-	}
 
 	/**
 	 * This function is called periodically during autonomous.
@@ -110,7 +124,9 @@ public class Robot extends TimedRobot {
 
 	@Override
 	public void teleopInit() {
-	}
+		if (autonomousCommand != null)
+            autonomousCommand.cancel();
+    }
 
 	/**
 	 * This function is called periodically during operator control.
@@ -126,4 +142,23 @@ public class Robot extends TimedRobot {
 	@Override
 	public void testPeriodic() {
 	}
+	
+	private void addAutonomousChoices() {
+
+        // Add available autonomous commands with the SmartDashboard
+        chooser.addDefault("None", null);
+        //chooser.addObject("AutoCrossLine", new AutoCrossLine());
+        // TODO: Add autonomous modes
+        
+       // SmartDashboard.putData(Dashboard.AutonomousChooser, chooser);
+    }
+	
+	private void updateDashboard() {
+
+        /*operator.updateDashboard();
+        drivetrain.updateDashboard();
+        vision.updateDashboard();
+        gyro.updateDashboard();*/
+
+    }
 }
