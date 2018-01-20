@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import team498.robot.commands.auto.Stop;
 import team498.robot.commands.auto.DriveLeft;
 import team498.robot.commands.auto.DriveRight;
 import team498.robot.commands.auto.TestingAuto;
@@ -74,13 +75,16 @@ public class Robot extends TimedRobot {
 		//TestingAuto auto = new TestingAuto(); //randy's auto
 		DriveLeft driveL = new DriveLeft();
 		DriveRight driveR = new DriveRight();
+		Stop stop = new Stop();
 		//auto.start(); //starts auto
 		String gameData;
 		gameData = ds.getGameSpecificMessage();
 		if(gameData.charAt(0) == 'L') {
 			driveL.start();
-		} else {
+		} else if (gameData.charAt(0) == 'R') {
 			driveR.start();
+		} else {
+			stop.start();
 		}
 	}
 
