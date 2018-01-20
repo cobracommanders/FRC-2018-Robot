@@ -13,14 +13,8 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import team498.robot.commands.auto.Stop;
-import team498.robot.commands.auto.DriveManualControl;
-import team498.robot.commands.auto.DriveReverse;
-import team498.robot.commands.auto.DriveLeft;
-import team498.robot.commands.auto.DriveRight;
-import team498.robot.commands.auto.DriveStraight;
-import team498.robot.commands.auto.TestingAuto;
-import team498.robot.subsystems.Drivetrain;
+import team498.robot.commands.auto.*;
+import team498.robot.subsystems.*;
 import edu.wpi.first.wpilibj.DriverStation;
 
 /**
