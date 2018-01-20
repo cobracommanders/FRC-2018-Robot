@@ -14,6 +14,7 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import team498.robot.commands.auto.Stop;
+import team498.robot.commands.auto.DriveManualControl;
 import team498.robot.commands.auto.DriveLeft;
 import team498.robot.commands.auto.DriveRight;
 import team498.robot.commands.auto.TestingAuto;
@@ -34,6 +35,10 @@ public class Robot extends TimedRobot {
 
 	// Subsystems
 	private Drivetrain drivetrain = Drivetrain.getDrivetrain();
+	
+	// Stuff
+	private double move = 0.8;
+	private double rotate = -0.8;
 
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -78,18 +83,20 @@ public class Robot extends TimedRobot {
 		DriveLeft driveL = new DriveLeft();
 		DriveRight driveR = new DriveRight();
 		Stop stop = new Stop();
+		DriveManualControl driveManual = new DriveManualControl(move, rotate);
 		// auto.start(); //starts auto
 		String gameData;
 		gameData = ds.getGameSpecificMessage(); // gets game messgae on driver
 												// station
-		if (gameData.charAt(0) == 'L') {
+		/*if (gameData.charAt(0) == 'L') {
 			driveL.start();
 		} else if (gameData.charAt(0) == 'R') {
 			driveR.start();
-		} else if (gameData.charAt(1) == 'L') {
-			
 		} else {
 			stop.start();
+		}*/
+		if (gameData.charAt(1) == 'L') {
+			driveManual.start();
 		}
 	}
 
