@@ -38,8 +38,6 @@ public class Operator {
 		}
 	}
 
-	private static Operator operator = null;
-
 	public Operator() {
 		controller.buttonA.whileHeld(new Rumble(this.controller));
 	}
