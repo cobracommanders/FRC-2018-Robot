@@ -45,7 +45,7 @@ public class Drive extends Command {
 		double rotate = operator.controller.axisLeftX.getAxisValue();
 
 		double angle = gyro.getAngle();
-		double angleRatio = 90 / angle;
+		double angleRatio = -angle / 90;
 		System.out.println(angle + " " + angleRatio);
 		if (rotate == 0) {
 			gyro.resetAngle();
