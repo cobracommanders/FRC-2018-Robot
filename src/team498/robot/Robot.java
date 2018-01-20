@@ -49,6 +49,7 @@ public class Robot extends TimedRobot {
 	public void robotInit() {
 		UsbCamera camera0 = CameraServer.getInstance().startAutomaticCapture("cam0", 0);
 		
+		addAutonomousChoices();
 	}
 
 	/**
@@ -85,11 +86,15 @@ public class Robot extends TimedRobot {
 		autonomousCommand = chooser.getSelected();
 		
 		// Start autonomous command
-        if (autonomousCommand != null)
-            autonomousCommand.start();
+		String gameData;
+		gameData = ds.getGameSpecificMessage(); //not doing anything with gamespecific message yet
+		
+        if (autonomousCommand != null) {
+        	autonomousCommand.start();
+        }
+            
         
-        String gameData;
-		gameData = ds.getGameSpecificMessage();
+        
     }
 		// TestingAuto auto = new TestingAuto(); //randy's auto
 		/*RotateLeft driveL = new RotateLeft();
@@ -149,12 +154,12 @@ public class Robot extends TimedRobot {
         chooser.addDefault("None", null);
         //chooser.addObject("AutoCrossLine", new AutoCrossLine());
         // TODO: Add autonomous modes
-        
+        SmartDashboard.putData("AutonomousChooser", chooser);
        // SmartDashboard.putData(Dashboard.AutonomousChooser, chooser);
     }
 	
 	private void updateDashboard() {
-
+		
         /*operator.updateDashboard();
         drivetrain.updateDashboard();
         vision.updateDashboard();
