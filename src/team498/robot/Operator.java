@@ -14,17 +14,21 @@ import team498.robot.commands.Rumble;
  * interface to the commands and command groups that allow control of the robot.
  */
 public class Operator {
-	public Controller controller = new Controller(Mappings.ControllerPort);
-	
+
 	private static Operator operator = null;
+	public static Operator getOperator() {
+        operator = operator == null ? new Operator() : operator;
+        return operator;
+    }
+	
+	public Controller controller = new Controller(Mappings.ControllerPort);
 	
 	public Operator() {
 		controller.buttonA.whileHeld(new Rumble(this.controller));
 	}
 	
-	public static Operator getOperator() {
-        operator = operator == null ? new Operator() : operator;
-        return operator;
-    }
+	public void updateDashboard() {
+		controller.updateDashboard();
+	}
 }
 
