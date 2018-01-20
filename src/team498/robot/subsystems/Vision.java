@@ -15,8 +15,8 @@ public class Vision extends Subsystem {
 	}
 	
 	private UsbCamera camera;
-	private int width = 300;
-	private int height = 200;
+	private int width = 150;
+	private int height = 100;
 	
 	public void startCapture() { 
 		camera = CameraServer.getInstance().startAutomaticCapture("camera", Mappings.CameraDevice);
