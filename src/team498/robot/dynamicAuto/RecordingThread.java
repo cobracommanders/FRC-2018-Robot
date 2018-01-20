@@ -60,9 +60,9 @@ public class RecordingThread extends Thread {
 				buttonChange("x" + (!buttons[x] ? "1" : "0"));
 			if (buttons[y] != operator.controller.buttonY.get())
 				buttonChange("y" + (!buttons[y] ? "1" : "0"));
-			if (buttons[lb] != operator.controller.buttonLeftBumper.get())
+			if (buttons[lb] != operator.controller.leftBumper.get())
 				buttonChange("lb" + (!buttons[lb] ? "1" : "0"));
-			if (buttons[rb] != operator.controller.buttonRightBumper.get())
+			if (buttons[rb] != operator.controller.rightBumper.get())
 				buttonChange("rb" + (!buttons[rb] ? "1" : "0"));
 			if (buttons[ljp] != operator.controller.buttonLeftJoystick.get())
 				buttonChange("ljp" + (!buttons[ljp] ? "1" : "0"));
@@ -101,8 +101,8 @@ public class RecordingThread extends Thread {
 		buttons[b] = operator.controller.buttonB.get();
 		buttons[x] = operator.controller.buttonX.get();
 		buttons[y] = operator.controller.buttonY.get();
-		buttons[lb] = operator.controller.buttonLeftBumper.get();
-		buttons[rb] = operator.controller.buttonRightBumper.get();
+		buttons[lb] = operator.controller.leftBumper.get();
+		buttons[rb] = operator.controller.rightBumper.get();
 		buttons[ljp] = operator.controller.buttonLeftJoystick.get();
 		buttons[rjp] = operator.controller.buttonRightJoystick.get();
 		buttons[back] = operator.controller.buttonBack.get();
