@@ -14,6 +14,7 @@ import team498.robot.commands.Rumble;
  * interface to the commands and command groups that allow control of the robot.
  */
 public class Operator {
+
 	private static Operator operator = null;
 	public static Operator getOperator() {
         operator = operator == null ? new Operator() : operator;
