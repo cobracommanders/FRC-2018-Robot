@@ -22,32 +22,29 @@ public class Controller {
 	public JoystickAxis axisRightTrigger;
 
 	public Controller(int port) {
-
 		// controller
 		joystick = new Joystick(port);
 
 		// buttons
-		buttonA = new JoystickButton(joystick, 1);
-		buttonB = new JoystickButton(joystick, 0);
-		buttonX = new JoystickButton(joystick, 0);
-		buttonY = new JoystickButton(joystick, 0);
-		buttonLeftBumper = new JoystickButton(joystick, 0);
-		buttonRightBumper = new JoystickButton(joystick, 0);
+		buttonA = new JoystickButton(joystick, Mappings.ButtonA);
+		buttonB = new JoystickButton(joystick, Mappings.ButtonB);
+		buttonX = new JoystickButton(joystick, Mappings.ButtonX);
+		buttonY = new JoystickButton(joystick, Mappings.ButtonY);
+		buttonLeftBumper = new JoystickButton(joystick, Mappings.LeftBumper);
+		buttonRightBumper = new JoystickButton(joystick, Mappings.RightBumper);
 
 		// Axes
-		axisLeftX = new JoystickAxis(joystick, ButtonMap.LeftXAxis, 0);
-		axisLeftY = new JoystickAxis(joystick, ButtonMap.LeftYAxis, 0);
-		axisRightX = new JoystickAxis(joystick, ButtonMap.RightXAxis, 0);
-		axisRightY = new JoystickAxis(joystick, ButtonMap.RightYAxis, 0);
-		axisLeftTrigger = new JoystickAxis(joystick, ButtonMap.LeftTrigger, 0);
-		axisRightTrigger = new JoystickAxis(joystick, ButtonMap.RightTrigger, 0);
+		axisLeftX = new JoystickAxis(joystick, Mappings.LeftXAxis, 0);
+		axisLeftY = new JoystickAxis(joystick, Mappings.LeftYAxis, 0);
+		axisRightX = new JoystickAxis(joystick, Mappings.RightXAxis, 0);
+		axisRightY = new JoystickAxis(joystick, Mappings.RightYAxis, 0);
+		axisLeftTrigger = new JoystickAxis(joystick, Mappings.LeftTrigger, 0);
+		axisRightTrigger = new JoystickAxis(joystick, Mappings.RightTrigger, 0);
 	}
 
 	public void setRumble(double value) {
-		// RUMBLE!!!!
 		joystick.setRumble(RumbleType.kLeftRumble, value);
 		joystick.setRumble(RumbleType.kRightRumble, value);
-
 	}
 
 	public class JoystickAxis {
@@ -59,7 +56,6 @@ public class Controller {
 			this.axis = axis;
 			this.joystick = joystick;
 			this.tolerance = tolerance;
-
 		}
 
 		public double getAxisValue() {
