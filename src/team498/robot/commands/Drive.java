@@ -11,35 +11,46 @@ import edu.wpi.first.wpilibj.command.Command;
 import team498.robot.Operator;
 import team498.robot.Robot;
 import team498.robot.subsystems.Drivetrain;
+import team498.robot.subsystems.Gyro;
 
 /**
- * An example command.  You can replace me with your own command.
+ * An example command. You can replace me with your own command.
  */
 public class Drive extends Command {
-		
+
 	private Drivetrain drivetrain;
+	private Gyro gyro;
 	private Operator operator = Operator.getOperator();
-	
+
 	public Drive() {
 		super("Drive");
 		// Required Subsystems
 		requires(this.drivetrain = Drivetrain.getDrivetrain());
+		requires(this.gyro = Gyro.getGyro());
 	}
 
 	// Called just before this Command runs the first time
 	@Override
 	protected void initialize() {
+
 	}
 
 	// Called repeatedly when this Command is scheduled to run
 	@Override
 	protected void execute() {
-		
-		//this.drivetrain.drive(1, 0);
-		double move = operator.controller.axisRightTrigger.getAxisValue() - operator.controller.axisLeftTrigger.getAxisValue();
-        double rotate = operator.controller.axisLeftX.getAxisValue();
-        
-        this.drivetrain.drive(move, rotate);
+
+		// this.drivetrain.drive(1, 0);
+		double move = operator.controller.axisRightTrigger.getAxisValue()
+				- operator.controller.axisLeftTrigger.getAxisValue();
+		double rotate = operator.controller.axisLeftX.getAxisValue();
+
+		double angle = gyro.getAngle();
+		double angleRatio = -90 / angle;
+		if (rotate == 0) {
+			gyro.resetAngle();
+			this.drivetrain.drive(move, rotate);
+		} else
+			this.drivetrain.drive(move, angleRatio);
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
