@@ -28,20 +28,20 @@ import edu.wpi.first.wpilibj.DriverStation;
  * project.
  */
 public class Robot extends TimedRobot {
-			
+
 	private Operator operator = Operator.getOperator();
 	private DriverStation ds = DriverStation.getInstance();
-	
+
 	// Subsystems
-    private Drivetrain drivetrain = Drivetrain.getDrivetrain();
-	
+	private Drivetrain drivetrain = Drivetrain.getDrivetrain();
+
 	/**
 	 * This function is run when the robot is first started up and should be
 	 * used for any initialization code.
 	 */
 	@Override
 	public void robotInit() {
-		UsbCamera camera0 = CameraServer.getInstance().startAutomaticCapture("cam0", 0); //camera works! BABYYYYY
+		UsbCamera camera0 = CameraServer.getInstance().startAutomaticCapture("cam0", 0);
 	}
 
 	/**
@@ -66,23 +66,28 @@ public class Robot extends TimedRobot {
 	 * LabVIEW Dashboard, remove all of the chooser code and uncomment the
 	 * getString code to get the auto name from the text box below the Gyro
 	 *
-	 * <p>You can add additional auto modes by adding additional commands to the
+	 * <p>
+	 * You can add additional auto modes by adding additional commands to the
 	 * chooser code above (like the commented example) or additional comparisons
 	 * to the switch structure below with additional strings & commands.
 	 */
 	@Override
+
 	public void autonomousInit() {
-		//TestingAuto auto = new TestingAuto(); //randy's auto
+		// TestingAuto auto = new TestingAuto(); //randy's auto
 		DriveLeft driveL = new DriveLeft();
 		DriveRight driveR = new DriveRight();
 		Stop stop = new Stop();
-		//auto.start(); //starts auto
+		// auto.start(); //starts auto
 		String gameData;
-		gameData = ds.getGameSpecificMessage();
-		if(gameData.charAt(0) == 'L') {
+		gameData = ds.getGameSpecificMessage(); // gets game messgae on driver
+												// station
+		if (gameData.charAt(0) == 'L') {
 			driveL.start();
 		} else if (gameData.charAt(0) == 'R') {
 			driveR.start();
+		} else if (gameData.charAt(1) == 'L') {
+			
 		} else {
 			stop.start();
 		}
