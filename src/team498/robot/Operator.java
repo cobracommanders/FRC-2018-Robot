@@ -17,6 +17,13 @@ import team498.robot.dynamicAuto.*;
  * interface to the commands and command groups that allow control of the robot.
  */
 public class Operator {
+
+	private static Operator operator = null;
+	public static Operator getOperator() {
+        operator = operator == null ? new Operator() : operator;
+        return operator;
+    }
+	
 	public Controller controller = new Controller(Mappings.ControllerPort);
 
 	private List<ButtonListener> listeners = new ArrayList<ButtonListener>();
@@ -36,9 +43,8 @@ public class Operator {
 	public Operator() {
 		controller.buttonA.whileHeld(new Rumble(this.controller));
 	}
-
-	public static Operator getOperator() {
-		operator = operator == null ? new Operator() : operator;
-		return operator;
+	
+	public void updateDashboard() {
+		controller.updateDashboard();
 	}
 }

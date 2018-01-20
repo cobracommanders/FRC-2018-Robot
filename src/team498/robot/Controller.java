@@ -3,6 +3,7 @@ package team498.robot;
 import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Controller {
 	private Joystick joystick;
@@ -34,8 +35,8 @@ public class Controller {
 		buttonB = new JoystickButton(joystick, Mappings.ButtonB);
 		buttonX = new JoystickButton(joystick, Mappings.ButtonX);
 		buttonY = new JoystickButton(joystick, Mappings.ButtonY);
-		buttonLeftBumper = new JoystickButton(joystick, Mappings.LeftBumper);
-		buttonRightBumper = new JoystickButton(joystick, Mappings.RightBumper);
+		leftBumper = new JoystickButton(joystick, Mappings.LeftBumper);
+		rightBumper = new JoystickButton(joystick, Mappings.RightBumper);
 
 		// Axes
 		axisLeftX = new JoystickAxis(joystick, Mappings.LeftXAxis, 0);
@@ -66,5 +67,16 @@ public class Controller {
 			return Helpers.normalize(joystick.getRawAxis(axis), tolerance);
 		}
 
+	}
+
+	public void updateDashboard() {
+		SmartDashboard.putBoolean(Dashboard.IsButtonAPressed, buttonA.get());
+		SmartDashboard.putBoolean(Dashboard.IsButtonBPressed, buttonB.get());
+		SmartDashboard.putBoolean(Dashboard.IsButtonXPressed, buttonX.get());
+		SmartDashboard.putBoolean(Dashboard.IsButtonYPressed, buttonY.get());
+		SmartDashboard.putBoolean(Dashboard.IsLeftBumperPressed, leftBumper.get());
+		SmartDashboard.putBoolean(Dashboard.IsRightBumperPressed, rightBumper.get());
+		SmartDashboard.putNumber(Dashboard.LeftTriggerValue, axisLeftTrigger.getAxisValue());
+		SmartDashboard.putNumber(Dashboard.RightTriggerValue, axisRightTrigger.getAxisValue());
 	}
 }
