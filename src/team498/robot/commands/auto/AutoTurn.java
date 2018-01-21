@@ -56,6 +56,7 @@ public class AutoTurn extends Command {
     	System.out.println("Execute: " + rampController.get());
     	System.out.println("Input: "  + pidSource.pidGet());
     	System.out.println("Output: " + pidOutput.getOutput());
+    	System.out.println("GetSetpoint: " + rampController.getSetpoint());
     	driveTrain.drive(0, rampController.get());
     	
     	updateDashboard();
@@ -81,7 +82,6 @@ public class AutoTurn extends Command {
     public void pidTurn(double targetAngle, double rotate) {
     	
     	rampController.setSetpoint(targetAngle);
-    	
     	
     }
 	public void updateDashboard() {
