@@ -5,6 +5,8 @@ import edu.wpi.first.wpilibj.PIDOutput;
 import edu.wpi.first.wpilibj.PIDSource;
 import edu.wpi.first.wpilibj.PIDSourceType;
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import team498.robot.Dashboard;
 import team498.robot.subsystems.Drivetrain;
 import team498.robot.subsystems.Gyro;
 
@@ -39,7 +41,7 @@ public class AutoTurn extends Command {
 			}
 		};
 		
-	    private PIDController rampController = new PIDController(1,0,0,pidSource,pidOutput);
+	    private PIDController rampController = new PIDController(0.9,0,0,pidSource,pidOutput);
 	    
 	private static Drivetrain driveTrain = null;
     private Gyro gyro = null;
@@ -64,6 +66,7 @@ public class AutoTurn extends Command {
     protected void execute() {
     	driveTrain.drive(0, rampController.get());
     	rampController.setSetpoint(targetAngle);
+    	updateDashboard();
     	
     }
 
@@ -89,4 +92,8 @@ public class AutoTurn extends Command {
     	
     	
     }
+	public void updateDashboard() {
+		SmartDashboard.putNumber(Dashboard.PIDOutput, rampController.get());
+		SmartDashboard.putNumber(Dashboard.IsPIDOnTarget, rampController.get());
+	}
 }
