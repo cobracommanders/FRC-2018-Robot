@@ -39,7 +39,7 @@ public class AutoTurn extends Command {
 			}
 		};
 		
-	    private PIDController rampController = new PIDController(0.2,0,0,pidSource,pidOutput);
+	    private PIDController rampController = new PIDController(1,0,0,pidSource,pidOutput);
 	    
 	private static Drivetrain driveTrain = null;
     private Gyro gyro = null;
