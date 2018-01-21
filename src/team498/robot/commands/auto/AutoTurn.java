@@ -54,6 +54,10 @@ public class AutoTurn extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	rampController.setContinuous(true);
+    	rampController.setInputRange(-180, 180);
+    	rampController.setOutputRange(-1, 1);
+    	rampController.enable();
     }
 
     // Called repeatedly when this Command is scheduled to run
