@@ -28,8 +28,8 @@ private double moveValue = 0;
      * Provides singleton access to the drivetrain subsystem
      * @return Drivetrain instance
      */
-    private PIDSource pidSource = new PIDSource() {
-		
+    //private PIDSource pidSource = new PIDSource() {
+/*		
 		@Override
 		public void setPIDSourceType(PIDSourceType pidSource) {
 			// TODO Auto-generated method stub
@@ -57,7 +57,7 @@ private double moveValue = 0;
 	};
 	
     private PIDController rampController = new PIDController(0.2,0,0,pidSource,pidOutput);
-    
+    */
     
     public static Drivetrain getDrivetrain() {
         drivetrain = drivetrain == null ? new Drivetrain() : drivetrain;
@@ -67,10 +67,10 @@ private double moveValue = 0;
     
 	public Drivetrain(){
     	super("Drivetrain");
-    	rampController.setContinuous(true);
+    	/*rampController.setContinuous(true);
     	rampController.setInputRange(-1, 1);
     	rampController.setOutputRange(-1, 1);
-    	rampController.enable();
+    	rampController.enable();*/
     	
     }
 	
@@ -95,11 +95,11 @@ private double moveValue = 0;
         drive.arcadeDrive(move, rotate);
 */        
     }
-    public void pidDrive(double move, double rotate) {
+   /* public void pidDrive(double move, double rotate) {
     	
-    	rampController.setSetpoint(move);
+    	//rampController.setSetpoint(move);
     	
     	
-    }
+    }*/
 	
 }
