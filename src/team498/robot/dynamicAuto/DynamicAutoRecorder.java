@@ -13,7 +13,7 @@ import edu.wpi.first.wpilibj.Timer;
 public class DynamicAutoRecorder implements ButtonListener {
 	private List<String> buttonChanges;
 	private String megaLog;
-	private RecordingThread thread;
+	public RecordingThread thread;
 	private Timer timer;
 
 	private static DynamicAutoRecorder dar;

@@ -53,7 +53,6 @@ public class Robot extends TimedRobot {
 	@Override
 	public void autonomousInit() {
 		updateDashboard();
-		this.auto.start();
 		DynamicCommand dc = null;
 		if(dar != null) {
 			try {
@@ -65,6 +64,7 @@ public class Robot extends TimedRobot {
 		if (dc != null) {
 			auto.addSequential(dc, 15);
 		}
+		this.auto.start();
 	}
 
 	@Override
@@ -94,6 +94,7 @@ public class Robot extends TimedRobot {
 	@Override
 	public void teleopPeriodic() {
 		updateDashboard();
+		System.out.println(dar.thread.isAlive());
 		Scheduler.getInstance().run();
 	}
 
