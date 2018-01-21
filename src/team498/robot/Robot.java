@@ -25,6 +25,7 @@ import team498.robot.dynamicAuto.*;
 public class Robot extends TimedRobot {
 
 	private Operator operator = Operator.getOperator();
+	private final String autoTest = "/home/lvuser/frc/dynamicauto/test.txt";
 	private DynamicAutoRecorder dar;
 	// Subsystems
 	private Drivetrain drivetrain = Drivetrain.getDrivetrain();
@@ -56,7 +57,7 @@ public class Robot extends TimedRobot {
 		DynamicCommand dc = null;
 		if(dar != null) {
 			try {
-				dc = dar.CreateDynamic("test.txt");
+				dc = dar.CreateDynamic(autoTest);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -83,7 +84,7 @@ public class Robot extends TimedRobot {
 		while(timer.get() < 15) {
 		}
 		try {
-			dar.StopRecording("test.txt");
+			dar.StopRecording(autoTest);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

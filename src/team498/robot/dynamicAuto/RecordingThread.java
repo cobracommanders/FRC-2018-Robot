@@ -117,6 +117,7 @@ public class RecordingThread extends Thread {
 
 	public void buttonChange(String changed) {
 		this.changed = changed;
+		System.out.println(changed);
 		for (ButtonListener bl : listeners)
 			bl.buttonChange(changed);
 	}

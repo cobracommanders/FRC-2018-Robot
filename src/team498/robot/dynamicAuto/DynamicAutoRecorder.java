@@ -1,11 +1,14 @@
 package team498.robot.dynamicAuto;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import edu.wpi.first.wpilibj.Timer;
-import team498.robot.*;
 
 public class DynamicAutoRecorder implements ButtonListener {
 	private List<String> buttonChanges;
