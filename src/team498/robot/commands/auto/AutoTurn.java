@@ -56,22 +56,28 @@ public class AutoTurn extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	rampController.setContinuous(true);
+    	rampController.setContinuous(false);
+    	System.out.println("SetContinuousPassed");
     	rampController.setInputRange(-180, 180);
     	rampController.setOutputRange(-1, 1);
+    	rampController.setSetpoint(targetAngle);
+    	rampController.setAbsoluteTolerance(1);
     	rampController.enable();
+    	
+    	System.out.println("endInitialize");
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	System.out.println("Execute: " + rampController.get());
     	driveTrain.drive(0, rampController.get());
-    	rampController.setSetpoint(targetAngle);
-    	updateDashboard();
     	
+    	updateDashboard();
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
+    	System.out.println("isFinished()" + rampController.onTarget());
         return rampController.onTarget();
     }
 
