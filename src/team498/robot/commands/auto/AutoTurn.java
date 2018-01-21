@@ -1,11 +1,14 @@
 package team498.robot.commands.auto;
 
 import edu.wpi.first.wpilibj.PIDController;
+import edu.wpi.first.wpilibj.PIDInterface;
 import edu.wpi.first.wpilibj.PIDOutput;
 import edu.wpi.first.wpilibj.PIDSource;
 import edu.wpi.first.wpilibj.PIDSourceType;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import pidTypes.AutoTurnOutput;
+import pidTypes.AutoTurnSource;
 import team498.robot.Dashboard;
 import team498.robot.subsystems.Drivetrain;
 import team498.robot.subsystems.Gyro;
@@ -14,34 +17,13 @@ import team498.robot.subsystems.Gyro;
  *
  */
 public class AutoTurn extends Command {
-	 private PIDSource pidSource = new PIDSource() {
-			
-			@Override
-			public void setPIDSourceType(PIDSourceType pidSource) {
-				// TODO Auto-generated method stub
-			}
-			
-			@Override
-			public double pidGet() {
-				// TODO Auto-generated method stub
-				return gyro.getAngle();
-			}
-			
-			@Override
-			public PIDSourceType getPIDSourceType() {
-				// TODO Auto-generated method stub
-				return null;
-			}
-		};
-		private PIDOutput pidOutput = new PIDOutput() {
-			
-			@Override
-			public void pidWrite(double output) {
-				// TODO Auto-generated method stub
-			}
-		};
+	
 		
-	    private PIDController rampController = new PIDController(0.9,0,0,pidSource,pidOutput);
+		
+		
+	private AutoTurnSource pidSource = new AutoTurnSource();
+	private AutoTurnOutput pidOutput = new AutoTurnOutput();
+	private PIDController rampController;
 	    
 	private static Drivetrain driveTrain = null;
     private Gyro gyro = null;
@@ -56,6 +38,7 @@ public class AutoTurn extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	rampController = new PIDController(0.6, 0, 0, pidSource, pidOutput);
     	rampController.enable();
     	rampController.setContinuous(false);
     	System.out.println("SetContinuousPassed");
@@ -71,6 +54,8 @@ public class AutoTurn extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	System.out.println("Execute: " + rampController.get());
+    	System.out.println("Input: "  + pidSource.pidGet());
+    	System.out.println("Output: " + pidOutput.getOutput());
     	driveTrain.drive(0, rampController.get());
     	
     	updateDashboard();
