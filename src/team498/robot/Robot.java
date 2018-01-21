@@ -8,10 +8,12 @@
 package team498.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
+
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import team498.robot.commands.Auto;
+import team498.robot.commands.auto.TestingAuto;
 import team498.robot.subsystems.Drivetrain;
 import team498.robot.subsystems.Gyro;
 import team498.robot.subsystems.Vision;
@@ -26,6 +28,7 @@ public class Robot extends TimedRobot {
 	private Gyro gyro = Gyro.getGyro();
 
 	private Auto auto = new Auto();
+	private TestingAuto testAuto = new TestingAuto();
 	
 	@Override
 	public void robotInit() {
@@ -46,7 +49,8 @@ public class Robot extends TimedRobot {
 	@Override
 	public void autonomousInit() {
 		updateDashboard();
-		this.auto.start();
+		//this.auto.start();
+		this.testAuto.start();
 	}
 
 	@Override
