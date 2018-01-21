@@ -56,13 +56,14 @@ public class AutoTurn extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	rampController.enable();
     	rampController.setContinuous(false);
     	System.out.println("SetContinuousPassed");
     	rampController.setInputRange(-180, 180);
-    	rampController.setOutputRange(-1, 1);
+    	rampController.setOutputRange(-1000, 1000);
     	rampController.setSetpoint(targetAngle);
     	rampController.setAbsoluteTolerance(1);
-    	rampController.enable();
+    	
     	
     	System.out.println("endInitialize");
     }
@@ -83,7 +84,7 @@ public class AutoTurn extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	rampController.disable();
+    	//rampController.disable();
     
     }
 
