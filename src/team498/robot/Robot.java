@@ -32,6 +32,8 @@ public class Robot extends TimedRobot {
 	private Vision vision = Vision.getVision();
 	private Gyro gyro = Gyro.getGyro();
 
+	private Timer timer;
+	
 	private Auto auto = new Auto();
 	
 	@Override
@@ -78,23 +80,17 @@ public class Robot extends TimedRobot {
 		updateDashboard();
 		this.auto.cancel();
 		dar = DynamicAutoRecorder.getAutoRecorder();
-		Timer timer = new Timer();
-		dar.StartRecording();
+		timer = new Timer();
 		timer.start();
-		while(timer.get() < 15) {
-		}
-		try {
-			dar.StopRecording(autoTest);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 	}
 
 	@Override
 	public void teleopPeriodic() {
 		updateDashboard();
-		System.out.println(dar.thread.isAlive());
+		System.out.println(5);
+		if(timer.get() < 15) {
+			dar.buttonRec.detect();
+		}
 		Scheduler.getInstance().run();
 	}
 

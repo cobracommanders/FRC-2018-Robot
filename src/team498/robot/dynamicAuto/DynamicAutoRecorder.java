@@ -13,7 +13,7 @@ import edu.wpi.first.wpilibj.Timer;
 public class DynamicAutoRecorder implements ButtonListener {
 	private List<String> buttonChanges;
 	private String megaLog;
-	public RecordingThread thread;
+	public ButtonRecorder buttonRec;
 	private Timer timer;
 
 	private static DynamicAutoRecorder dar;
@@ -23,7 +23,7 @@ public class DynamicAutoRecorder implements ButtonListener {
 	}
 
 	private DynamicAutoRecorder() {
-		thread = new RecordingThread();
+		buttonRec = new ButtonRecorder();
 	}
 
 	public DynamicCommand CreateDynamic(String filename) throws IOException {
@@ -34,15 +34,14 @@ public class DynamicAutoRecorder implements ButtonListener {
 		return new DynamicCommand(mega);
 	}
 
+	
 	public void StartRecording() {
 		buttonChanges = new ArrayList<String>();
-		thread = new RecordingThread();
-		thread.AddListener(this);
-		thread.start();
+		buttonRec = new ButtonRecorder();
+		buttonRec.AddListener(this);             
 	}
 
 	public void StopRecording(String filename) throws IOException {
-		thread.interrupt();
 		megaLog = "";
 		for (String s : buttonChanges) {
 			megaLog += s + ";";
@@ -54,6 +53,8 @@ public class DynamicAutoRecorder implements ButtonListener {
 
 		bw.close();
 	}
+	
+	//
 
 	@Override
 	public void buttonChange(String changed) {
