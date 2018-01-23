@@ -9,18 +9,27 @@ import team498.robot.subsystems.Drivetrain;
  * 
  */
 public class PidAutoTurnSubsystem extends PIDSubsystem {
-
+	
+	private static PidAutoTurnSubsystem pidAutoTurnSubsystem = null;
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
 	Gyro gyro = Gyro.getGyro();
 	Drivetrain drivetrain = Drivetrain.getDrivetrain();
 
     public PidAutoTurnSubsystem() {
-		super("PidAutoTurnSubsystem", .6, 0.0, 0);
+		super("PidAutoTurnSubsystem", 0.6, 0.0, 0);
 		setAbsoluteTolerance(1);
 		getPIDController().setContinuous(false);
+		setInputRange(0, 360);
+		setOutputRange(-0.8, 0.8);
+		
 		// TODO Auto-generated constructor stub
 	}
+    
+    public static PidAutoTurnSubsystem getPidAutoTurnSubsystem() {
+    	pidAutoTurnSubsystem = pidAutoTurnSubsystem == null ? new PidAutoTurnSubsystem() : pidAutoTurnSubsystem;
+    	return pidAutoTurnSubsystem;
+    }
 
 	public void initDefaultCommand() {
         // Set the default command for a subsystem here.

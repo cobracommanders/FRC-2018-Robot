@@ -52,7 +52,7 @@ public class Robot extends TimedRobot {
 	public void autonomousInit() {
 		updateDashboard();
 		//this.auto.start();
-		this.testAuto.start();
+		this.testAuto.start(); //randy pid currently on
 	}
 
 	@Override
