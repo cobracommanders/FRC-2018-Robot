@@ -14,5 +14,8 @@ public class Dashboard {
 	public static final String LeftTriggerValue = "LeftTriggerValue";
 	
 	public static final String GyroAngle = "GyroAngle";
+	
+	public static final String PIDOutput = "PIDOutput";
+	public static final String IsPIDOnTarget = "IsPIDOnTarget";
 
 }
