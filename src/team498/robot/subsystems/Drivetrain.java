@@ -7,23 +7,26 @@
 
 package team498.robot.subsystems;
 
-import edu.wpi.first.wpilibj.PIDController;
+//import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import team498.robot.commands.Drive;
 
-import edu.wpi.first.wpilibj.PIDOutput;
-import edu.wpi.first.wpilibj.PIDSource;
-import edu.wpi.first.wpilibj.PIDSourceType;
+//import edu.wpi.first.wpilibj.PIDOutput;
+//import edu.wpi.first.wpilibj.PIDSource;
+//import edu.wpi.first.wpilibj.PIDSourceType;
 
 
 public class Drivetrain extends Subsystem {	
 	
-private double moveValue = 0;
+	private double moveValue = 0;
+	
+	private Victor victor0 = new Victor(0);
+	private Victor victor1 = new Victor(1);
 
     private static Drivetrain drivetrain = null;
-    private Gyro gyro = null;
+    //private Gyro gyro = null;
     /**
      * Provides singleton access to the drivetrain subsystem
      * @return Drivetrain instance
@@ -63,7 +66,7 @@ private double moveValue = 0;
         drivetrain = drivetrain == null ? new Drivetrain() : drivetrain;
         return drivetrain;
     }
-    private DifferentialDrive drive = new DifferentialDrive(new Victor(1),new Victor(0));
+    private DifferentialDrive drive = new DifferentialDrive(victor1, victor0);
     
 	public Drivetrain(){
     	super("Drivetrain");
@@ -94,6 +97,11 @@ private double moveValue = 0;
         // Apply motor power based on aracade inputs
         drive.arcadeDrive(move, rotate);
 */        
+    }
+    
+    public void pidWrite(double output) {
+    	this.victor0.pidWrite(output);
+    	this.victor1.pidWrite(output);
     }
    /* public void pidDrive(double move, double rotate) {
     	
