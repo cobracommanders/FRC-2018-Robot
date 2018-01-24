@@ -26,18 +26,6 @@ public class Operator {
 	
 	public Controller controller = new Controller(Mappings.ControllerPort);
 
-	private List<ButtonListener> listeners = new ArrayList<ButtonListener>();
-
-	public void addListener(ButtonListener toAdd) {
-		listeners.add(toAdd);
-	}
-
-	public void ButtonChange() {
-		for (ButtonListener bl : listeners) {
-			bl.buttonChange(null);
-		}
-	}
-
 	public Operator() {
 		controller.buttonA.whileHeld(new Rumble(this.controller));
 	}

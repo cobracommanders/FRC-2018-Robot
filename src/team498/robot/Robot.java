@@ -25,7 +25,7 @@ import team498.robot.dynamicAuto.*;
 public class Robot extends TimedRobot {
 
 	private Operator operator = Operator.getOperator();
-	private final String autoTest = "/home/lvuser/frc/dynamicauto/test.txt";
+	private final String autoTest = "/home/lvuser/frc/dynamicauto/test2.txt";
 	private DynamicAutoRecorder dar;
 	// Subsystems
 	private Drivetrain drivetrain = Drivetrain.getDrivetrain();
@@ -39,6 +39,7 @@ public class Robot extends TimedRobot {
 	@Override
 	public void robotInit() {
 		vision.startCapture();
+		dar = DynamicAutoRecorder.getAutoRecorder();
 		updateDashboard();
 	}
 
@@ -87,7 +88,6 @@ public class Robot extends TimedRobot {
 	@Override
 	public void teleopPeriodic() {
 		updateDashboard();
-		System.out.println(5);
 		if(timer.get() < 15) {
 			dar.buttonRec.detect();
 		}
