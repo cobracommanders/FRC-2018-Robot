@@ -31,6 +31,7 @@ public class DynamicAutoRecorder implements ButtonListener {
 		BufferedReader br = new BufferedReader(fr);
 		String mega = "";
 		mega = br.readLine();
+		System.out.println(mega);
 		return new DynamicCommand(mega);
 	}
 
@@ -64,5 +65,6 @@ public class DynamicAutoRecorder implements ButtonListener {
 		String button = changed.substring(0, changed.length() - 2);
 		log = String.format("{0}_{1}_{2}", timer.get(), button, define);
 		buttonChanges.add(log);
+		System.out.println(log);
 	}
 }

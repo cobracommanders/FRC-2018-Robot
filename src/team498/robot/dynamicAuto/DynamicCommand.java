@@ -1,5 +1,7 @@
 package team498.robot.dynamicAuto;
 
+import java.util.regex.Pattern;
+
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import team498.robot.dynamicAuto.dynamic;
@@ -10,7 +12,7 @@ public class DynamicCommand extends Command {
 	private String formatter;
 	private Drivetrain drivetrain;
 	private Timer timer;
-	
+
 	private double leftTMove = 0;
 	private double rightTMove = 0;
 	private double rotate = 0;
@@ -28,16 +30,26 @@ public class DynamicCommand extends Command {
 
 	@Override
 	protected void initialize() {
-		String[] a = formatter.split(";");
+		System.out.println(formatter);
+		String[] a = formatter.split(Pattern.quote(";"));
+		System.out.println("================");
+		for (String s : a) {
+			System.out.println(s);
+		}
+		System.out.println("================");
 		String[] b;
 		commands = new dynamic[a.length];
-		dynamic d = new dynamic();
 		for (int i = 0; i < a.length; i++) {
+			commands[i] = new dynamic();
 			b = a[i].split("_");
+			for (String s : b) {
+				System.out.println(s);
+			}
 
-			d.timeStamp = Double.parseDouble(b[0]);
+			commands[i].timeStamp = Double.parseDouble(b[0]);
+			System.out.println("TIMESTAMP SHIT " + commands[i].timeStamp + " " + b[0]);
 
-			d.button = b[1];
+			commands[i].button = b[1];
 			switch (b[1]) {
 			case "rt":
 			case "lt":
@@ -45,15 +57,15 @@ public class DynamicCommand extends Command {
 			case "ljy":
 			case "rjx":
 			case "rjy":
-				d.isAxis = true;
-				d.axisVal = Double.parseDouble(b[2]);
+				commands[i].isAxis = true;
+				commands[i].axisVal = Double.parseDouble(b[2]);
 				break;
 			default:
-				d.isAxis = false;
-				d.buttonVal = b[2] == "1" ? true : false;
+				commands[i].isAxis = false;
+				commands[i].buttonVal = b[2] == "1" ? true : false;
 				break;
 			}
-			commands[i] = d;
+			System.out.println("i = " + i);
 		}
 		timer = new Timer();
 		timer.start();
@@ -62,23 +74,29 @@ public class DynamicCommand extends Command {
 
 	@Override
 	protected void execute() {
-		if (phase == commands.length)
+		System.out.println(phase + " " + commands[phase].timeStamp);
+		if (phase >= commands.length) {
+			phase = -1;
 			end();
-		if (commands[phase].timeStamp < timer.get()) {
-			phase++;
-		} else {
-			switch(commands[phase].button) {
-			case "rt":
-				rightTMove = commands[phase].axisVal;
-				break;
-			case "lt":
-				leftTMove = commands[phase].axisVal;
-				break;
-			case "ljx":
-				rotate = commands[phase].axisVal;
-				break;
-			default:
-				
+		}
+		if (phase != -1) {
+			if (commands[phase].timeStamp < timer.get()) {
+				System.out.println("Next Command " + timer.get());
+				phase++;
+			} else {
+				switch (commands[phase].button) {
+				case "rt":
+					rightTMove = commands[phase].axisVal;
+					break;
+				case "lt":
+					leftTMove = commands[phase].axisVal;
+					break;
+				case "ljx":
+					rotate = commands[phase].axisVal;
+					break;
+				default:
+
+				}
 			}
 		}
 		drivetrain.drive(rightTMove - leftTMove, rotate);
