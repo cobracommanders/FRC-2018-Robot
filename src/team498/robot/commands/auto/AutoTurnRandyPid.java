@@ -31,7 +31,10 @@ public class AutoTurnRandyPid extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	System.out.println("Executing!"); //TODO DELETE THIS LINE IF WORKS
+    	System.out.println("What's the setpoint? It is: " + pidAutoTurnSubsystem.getSetpoint());
+    	System.out.println("Position? It is: " + pidAutoTurnSubsystem.getPosition());
+    	System.out.println("Is it on the target? It is: " + pidAutoTurnSubsystem.onTarget());
+    	pidAutoTurnSubsystem.enable();
     	//drivetrain.drive(0, pidAutoTurnSubsystem.getSetpoint());
     }
 

@@ -9,12 +9,12 @@ package team498.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
-import team498.robot.commands.Auto;
+//import team498.robot.commands.Auto;
 import team498.robot.commands.auto.TestingAuto;
 //import team498.robot.subsystems.Drivetrain;
 import team498.robot.subsystems.Gyro;
 import team498.robot.subsystems.Vision;
-import team498.robot.subsystems.DigitBoard;
+//import team498.robot.subsystems.DigitBoard;
 
 public class Robot extends TimedRobot {
 
@@ -25,15 +25,15 @@ public class Robot extends TimedRobot {
 	//private Drivetrain drivetrain = Drivetrain.getDrivetrain();
 	private Vision vision = Vision.getVision();
 	private Gyro gyro = Gyro.getGyro();
-	private DigitBoard digitBoard = DigitBoard.getDigitBoard();
+	//private DigitBoard digitBoard = DigitBoard.getDigitBoard();
 
-	private Auto auto = new Auto();
+	//private Auto auto = new Auto();
 	private TestingAuto testAuto = new TestingAuto();
 	
 	
 	@Override
 	public void robotInit() {
-		digitBoard.displayVoltageDigitBoard();
+		//digitBoard.displayVoltageDigitBoard();
 		vision.startCapture();
 		updateDashboard();
 	}
@@ -64,7 +64,7 @@ public class Robot extends TimedRobot {
 	@Override
 	public void teleopInit() {
 		updateDashboard();
-		this.auto.cancel();
+		this.testAuto.cancel();
 	}
 
 	@Override
