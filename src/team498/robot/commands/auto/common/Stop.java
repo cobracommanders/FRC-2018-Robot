@@ -1,16 +1,13 @@
-package team498.robot.commands.auto;
+package team498.robot.commands.auto.common;
 
 import edu.wpi.first.wpilibj.command.Command;
 import team498.robot.subsystems.Drivetrain;
 
-/**
- *
- */
-public class RotateRight extends Command {
+public class Stop extends Command {
 	private Drivetrain drivetrain;
 
-    public RotateRight() {
-    	super("DriveRight");
+    public Stop() {
+    	super("Stop");
     	
     	requires(this.drivetrain = Drivetrain.getDrivetrain());
         // Use requires() here to declare subsystem dependencies
@@ -23,7 +20,7 @@ public class RotateRight extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	drivetrain.drive(0, .8); //positive rotate value equals right turn. So it drives riht.
+    	drivetrain.drive(0, 0); //no drive
     }
 
     // Make this return true when this Command no longer needs to run execute()

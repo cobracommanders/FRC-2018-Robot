@@ -1,13 +1,13 @@
-package team498.robot.commands.auto.group;
+package team498.robot.commands.auto;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
  *
  */
-public class AutoStartLeft_RightScale extends CommandGroup {
+public class StartRightPlaceRightScaleStrategy extends CommandGroup {
 
-    public AutoStartLeft_RightScale() {
+    public StartRightPlaceRightScaleStrategy() {
         // Add Commands here:
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());

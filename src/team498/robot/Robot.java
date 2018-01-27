@@ -12,7 +12,14 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import team498.robot.commands.auto.group.*;
+import team498.robot.commands.auto.StartLeftPlaceLeftScaleStrategy;
+import team498.robot.commands.auto.StartLeftPlaceLeftSwitchStrategy;
+import team498.robot.commands.auto.StartLeftPlaceRightScaleStrategy;
+import team498.robot.commands.auto.StartLeftPlaceRightSwitchStrategy;
+import team498.robot.commands.auto.StartRightPlaceLeftScaleStrategy;
+import team498.robot.commands.auto.StartRightPlaceLeftSwitchStrategy;
+import team498.robot.commands.auto.StartRightPlaceRightScaleStrategy;
+import team498.robot.commands.auto.StartRightPlaceRightSwitchStrategy;
 import team498.robot.subsystems.*;
 import edu.wpi.first.wpilibj.DriverStation;
 import team498.robot.subsystems.Drivetrain;
@@ -103,14 +110,14 @@ public class Robot extends TimedRobot {
 		// Add available autonomous commands with the SmartDashboard
 		// chooser.addDefault("None", null);
 		// TODO add actual commands to command groups
-		chooser.addDefault("AutoLeft_LeftSwitch", new AutoStartLeft_LeftSwitch());
-		chooser.addObject("AutoLeft_LeftScale", new AutoStartLeft_LeftScale());
-		chooser.addObject("AutoLeft_RightSwitch", new AutoStartLeft_RightSwitch());
-		chooser.addObject("AutoLeft_RightScale", new AutoStartLeft_RightScale());
-		chooser.addObject("AutoRight_LeftSwitch", new AutoStartRight_LeftSwitch());
-		chooser.addObject("AutoRight_LeftScale", new AutoStartRight_LeftScale());
-		chooser.addObject("AutoRight_RightSwitch", new AutoStartRight_RightSwitch());
-		chooser.addObject("AutoRight_RightScale", new AutoStartRight_RightScale());
+		chooser.addDefault("Start Left Place Left Switch", new StartLeftPlaceLeftSwitchStrategy());
+		chooser.addObject("Start Left Place Left Scale", new StartLeftPlaceLeftScaleStrategy());
+		chooser.addObject("Start Left Place Right Switch", new StartLeftPlaceRightSwitchStrategy());
+		chooser.addObject("Start Left Place Right Scale", new StartLeftPlaceRightScaleStrategy());
+		chooser.addObject("Start Right Place Left Switch", new StartRightPlaceLeftSwitchStrategy());
+		chooser.addObject("Start Right Place Left Scale", new StartRightPlaceLeftScaleStrategy());
+		chooser.addObject("Start Right Place Right Switch", new StartRightPlaceRightSwitchStrategy());
+		chooser.addObject("Start Right Place Right Scale", new StartRightPlaceRightScaleStrategy());
 		// chooser.addObject("AutoCrossLine", new AutoCrossLine());
 		SmartDashboard.putData("AutonomousChooser", chooser);
 		// SmartDashboard.putData(Dashboard.AutonomousChooser, chooser);
