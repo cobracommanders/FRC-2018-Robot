@@ -14,11 +14,14 @@ import team498.robot.commands.auto.TestingAuto;
 //import team498.robot.subsystems.Drivetrain;
 import team498.robot.subsystems.Gyro;
 import team498.robot.subsystems.Vision;
+import team498.robot.commands.auto.AutoTurnRandyPid;
+import team498.robot.subsystems.PidAutoTurnSubsystem;
 //import team498.robot.subsystems.DigitBoard;
 
 public class Robot extends TimedRobot {
 
 	private Operator operator = Operator.getOperator();
+	private PidAutoTurnSubsystem pidAutoTurnSubsystem = PidAutoTurnSubsystem.getPidAutoTurnSubsystem();
 
 	// Subsystems
 	
@@ -78,6 +81,7 @@ public class Robot extends TimedRobot {
 	}
 	
 	public void updateDashboard() {
+		pidAutoTurnSubsystem.updateDashboard();
 		operator.updateDashboard();
 		gyro.updateDashboard();
 		//TODO add other subsystems 
