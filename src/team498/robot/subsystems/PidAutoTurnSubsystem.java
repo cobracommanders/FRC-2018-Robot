@@ -20,7 +20,7 @@ public class PidAutoTurnSubsystem extends PIDSubsystem {
 	Drivetrain drivetrain = Drivetrain.getDrivetrain();
 
     public PidAutoTurnSubsystem() {
-		super("PidAutoTurnSubsystem", 0.6, 0.0, 0); //the PID values are here!
+		super("PidAutoTurnSubsystem", 0.09, 0.05, 0.01); //the PID values are here! TODO CHANGE VALUES FOR OPTIMALNESS
 		setAbsoluteTolerance(1);
 		getPIDController().setContinuous(false);
 		setInputRange(0, 360);

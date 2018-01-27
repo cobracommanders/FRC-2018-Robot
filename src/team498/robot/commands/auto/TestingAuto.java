@@ -11,6 +11,7 @@ public class TestingAuto extends CommandGroup {
     	addSequential(new ReverseUntilBumperButtonPress()); //reverses forever (until button is held down);
     	addSequential(new ReverseHalfPowerUntilBumperButtonDepress()); //reverses using half the power (until button is not pressed);
     	addSequential(new Stop()); //stops robot*/
+    	addSequential(new ResetGyro());
     	addSequential(new AutoTurnRandyPid(90)); //woo randy pid
     	addSequential(new Stop());
         // Add Commands here:
