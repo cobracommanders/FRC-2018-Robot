@@ -35,7 +35,7 @@ public class Drivetrain extends Subsystem {
 	
 	public void initDefaultCommand() {
 		// Set the default command for a subsystem here.
-		setDefaultCommand(new RampDrive());
+		setDefaultCommand(new RampDrive()); //uses rampdrive
 	}
 	
     public void drive(double move, double rotate) {

@@ -21,7 +21,7 @@ public class Robot extends TimedRobot {
 	private Operator operator = Operator.getOperator();
 
 	// Subsystems
-	private Drivetrain drivetrain = Drivetrain.getDrivetrain();
+	//private Drivetrain drivetrain = Drivetrain.getDrivetrain();
 	private Vision vision = Vision.getVision();
 	private Gyro gyro = Gyro.getGyro();
 
