@@ -14,22 +14,21 @@ public class Gyro extends Subsystem {
 	private ADIS16448_IMU sensor = new ADIS16448_IMU();
 	
 	public double getAngle() {
-		return sensor.getAngle();
-	
+		return sensor.getAngle();	
 	}
 	
 	public double getAngleX() {
-		return sensor.getAngle();
+		return sensor.getAngleX();
 	
 	}
 	
 	public double getAngleY() {
-		return sensor.getAngle();
+		return sensor.getAngleY();
 	
 	}
 	
 	public double getAngleZ() {
-		return sensor.getAngle();
+		return sensor.getAngleZ();
 	
 	}
 	
