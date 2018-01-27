@@ -7,7 +7,35 @@ import team498.robot.subsystems.Gyro;
 import team498.robot.subsystems.Drivetrain;
 
 /**
- * 
+ * PID Training Notes:
+ * PID(0.01 ,0.1 ,0.04 )
+ * Trial 1: overshoots then returns to 68.
+ * Trial 2: goes to 120 then stops
+ * Trial 3:
+ * PID( .01,0 ,.1 )
+ * Trial 1: goes to 20 degrees at max motor then goes down very fast ends at 60 degrees
+ * Trial 2:
+ * Trial 3: 
+ * PID( .02,0 ,.06 )
+ * Trial 1:
+ * Trial 2:
+ * Trial 3: 
+ * PID( .02,0 ,.06 )
+ * Trial 1: goes to 87
+ * Trial 2: goes to 90
+ * Trial 3: 
+ * PID( .02,0 ,.04 )
+ * Trial 1: 92
+ * Trial 2: 94
+ * Trial 3: 
+ * PID( , , .02)
+ * Trial 1:
+ * Trial 2:
+ * Trial 3: 
+ * PID( , , )
+ * Trial 1:
+ * Trial 2:
+ * Trial 3:
  */
 public class PidAutoTurnSubsystem extends PIDSubsystem {
 
@@ -20,7 +48,7 @@ public class PidAutoTurnSubsystem extends PIDSubsystem {
 	Drivetrain drivetrain = Drivetrain.getDrivetrain();
 
     public PidAutoTurnSubsystem() {
-		super("PidAutoTurnSubsystem", 0.01, 0.1, 0.04); //the PID values are here! TODO CHANGE VALUES FOR OPTIMALNESS
+		super("PidAutoTurnSubsystem", 0.02, 0, 0.02); //the PID values are here! TODO CHANGE VALUES FOR OPTIMALNESS
 		setAbsoluteTolerance(1);
 		getPIDController().setContinuous(false);
 		setInputRange(-180, 180);
@@ -48,7 +76,7 @@ public class PidAutoTurnSubsystem extends PIDSubsystem {
 	protected double returnPIDInput() {
 		// TODO Auto-generated method stub
 		//return 0;
-		return gyro.getAngleZ();
+		return gyro.getAngleZ(); //this is what jack changed
 	}
 
 	@Override
