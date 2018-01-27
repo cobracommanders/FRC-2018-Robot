@@ -1,6 +1,7 @@
 package team498.robot.commands.auto;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
+import team498.robot.commands.AutoDrive;
 
 public class TestingAuto extends CommandGroup {
 

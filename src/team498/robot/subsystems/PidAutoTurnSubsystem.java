@@ -4,6 +4,9 @@ import edu.wpi.first.wpilibj.command.PIDSubsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 //import edu.wpi.first.wpilibj.command.Subsystem;
 import team498.robot.subsystems.Gyro;
+import team498.robot.ConstantAccelerationCalculator;
+import team498.robot.Prefs;
+import team498.robot.commands.RampDrive;
 import team498.robot.subsystems.Drivetrain;
 
 /**
@@ -29,7 +32,7 @@ import team498.robot.subsystems.Drivetrain;
  * Trial 2: 94
  * Trial 3: 
  * PID( , , .02)
- * Trial 1:
+ * Trial 1: 97
  * Trial 2:
  * Trial 3: 
  * PID( , , )
@@ -38,33 +41,32 @@ import team498.robot.subsystems.Drivetrain;
  * Trial 3:
  */
 public class PidAutoTurnSubsystem extends PIDSubsystem {
-
-	double theOutput = 0;
 	
 	private static PidAutoTurnSubsystem pidAutoTurnSubsystem = null;
-    // Put methods for controlling this subsystem
-    // here. Call these from Commands.
-	Gyro gyro = Gyro.getGyro();
-	Drivetrain drivetrain = Drivetrain.getDrivetrain();
-
-    public PidAutoTurnSubsystem() {
-		super("PidAutoTurnSubsystem", 0.02, 0, 0.02); //the PID values are here! TODO CHANGE VALUES FOR OPTIMALNESS
-		setAbsoluteTolerance(1);
-		getPIDController().setContinuous(false);
-		setInputRange(-180, 180);
-		setOutputRange(-0.8, 0.8);
-		
-		// TODO Auto-generated constructor stubs
-	}
-    
     public static PidAutoTurnSubsystem getPidAutoTurnSubsystem() {
     	pidAutoTurnSubsystem = pidAutoTurnSubsystem == null ? new PidAutoTurnSubsystem() : pidAutoTurnSubsystem;
     	return pidAutoTurnSubsystem;
-    }
+    }    
+
+	static Prefs prefs = Prefs.getPrefs();
+	
+	private double theOutput = 0; 
+	private ConstantAccelerationCalculator ramp = new ConstantAccelerationCalculator(prefs.getRamp_C());	
+	private Gyro gyro = Gyro.getGyro();
+	private Drivetrain drivetrain = Drivetrain.getDrivetrain();
+
+    public PidAutoTurnSubsystem() {
+		super("PidAutoTurnSubsystem", prefs.getPID_P(), prefs.getPID_I(), prefs.getPID_D()); //the PID values are here! TODO CHANGE VALUES FOR OPTIMALNESS
+		
+		System.out.println("Prefs - P: " + prefs.getPID_P() + " I: " + prefs.getPID_I() + " D: " + prefs.getPID_D() + " C: " + prefs.getRamp_C());
+		
+		setAbsoluteTolerance(1);
+		getPIDController().setContinuous(false);
+		setInputRange(-180, 180);
+		setOutputRange(-0.5, 0.5);
+	}
 
 	public void initDefaultCommand() {
-        // Set the default command for a subsystem here.
-        //setDefaultCommand(new MySpecialCommand());
     }
 	
 	public void updateDashboard() {
@@ -74,16 +76,16 @@ public class PidAutoTurnSubsystem extends PIDSubsystem {
 
 	@Override
 	protected double returnPIDInput() {
-		// TODO Auto-generated method stub
-		//return 0;
-		return gyro.getAngleZ(); //this is what jack changed
+		return gyro.getAngleZ();
 	}
 
 	@Override
 	protected void usePIDOutput(double output) {
-		// TODO Auto-generated method stub
-		drivetrain.pidWrite(output);
-		System.out.println("Values for Jack: " + output); //jack added this
+		//drivetrain.rampDrive(0, output);
+		drivetrain.pidWrite(ramp.getNextDataPoint(output));
+		System.out.println("Prefes - P: " + prefs.getPID_P() + " I: " + prefs.getPID_I() + " D: " + prefs.getPID_D() + " C: " + prefs.getRamp_C());
+		System.out.println("Values for Jack: " + output);
+		System.out.println("Ramp Drive Value: " + ramp.getNextDataPoint(output));
 		output = theOutput;
 	}
 }
