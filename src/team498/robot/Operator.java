@@ -7,8 +7,7 @@
 
 package team498.robot;
 
-import team498.robot.commands.LaunchCatapult;
-import team498.robot.commands.Rumble;
+import team498.robot.commands.*;
 
 
 /**
@@ -27,7 +26,7 @@ public class Operator {
 	
 	public Operator() {
 		controller.buttonA.whileHeld(new Rumble(this.controller));
-		controller.buttonY.whileHeld(new LaunchCatapult());
+		controller.buttonY.whenPressed(new LaunchCatapult("LaunchCatapult", 5)); //where we call time
 	}
 	
 	public void updateDashboard() {

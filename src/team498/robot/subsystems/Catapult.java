@@ -20,7 +20,7 @@ public class Catapult extends Subsystem {
 	}
 	
 	public void launchCatapult() {
-		catapult.set(Value.kForward);
+		catapult.set(Value.kReverse);
 	}
 	
 	public void resetCatapult() {
