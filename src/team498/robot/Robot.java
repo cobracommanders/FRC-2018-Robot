@@ -12,17 +12,8 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import team498.robot.commands.auto.StartLeftPlaceLeftScaleStrategy;
-import team498.robot.commands.auto.StartLeftPlaceLeftSwitchStrategy;
-import team498.robot.commands.auto.StartLeftPlaceRightScaleStrategy;
-import team498.robot.commands.auto.StartLeftPlaceRightSwitchStrategy;
-import team498.robot.commands.auto.StartRightPlaceLeftScaleStrategy;
-import team498.robot.commands.auto.StartRightPlaceLeftSwitchStrategy;
-import team498.robot.commands.auto.StartRightPlaceRightScaleStrategy;
-import team498.robot.commands.auto.StartRightPlaceRightSwitchStrategy;
-import team498.robot.subsystems.*;
+import team498.robot.commands.auto.*;
 import edu.wpi.first.wpilibj.DriverStation;
-import team498.robot.subsystems.Drivetrain;
 import team498.robot.subsystems.Gyro;
 import team498.robot.subsystems.Vision;
 
@@ -33,7 +24,7 @@ public class Robot extends TimedRobot {
 	private DriverStation ds = DriverStation.getInstance();
 
 	// Subsystems
-	private Drivetrain drivetrain = Drivetrain.getDrivetrain();
+	//private Drivetrain drivetrain = Drivetrain.getDrivetrain();
 	private Vision vision = Vision.getVision();
 	private Gyro gyro = Gyro.getGyro();
 
