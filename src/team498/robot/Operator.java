@@ -7,7 +7,9 @@
 
 package team498.robot;
 
+import team498.robot.commands.LaunchCatapult;
 import team498.robot.commands.Rumble;
+
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -25,6 +27,7 @@ public class Operator {
 	
 	public Operator() {
 		controller.buttonA.whileHeld(new Rumble(this.controller));
+		controller.buttonY.whileHeld(new LaunchCatapult());
 	}
 	
 	public void updateDashboard() {
