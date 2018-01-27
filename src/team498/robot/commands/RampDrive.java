@@ -1,6 +1,7 @@
 package team498.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import team498.robot.ConstantAccelerationCalculator;
 import team498.robot.Operator;
 import team498.robot.subsystems.Drivetrain;
@@ -30,10 +31,14 @@ public class RampDrive extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	moveAcceleration.updateDashboard();
+    	turnAcceleration.updateDashboard();
     	
         double move = moveAcceleration.getNextDataPoint(operator.controller.axisRightTrigger.getAxisValue() - operator.controller.axisLeftTrigger.getAxisValue());
         double rotate = turnAcceleration.getNextDataPoint(operator.controller.axisLeftX.getAxisValue());
         this.drivetrain.drive(move, rotate);
+        
+        SmartDashboard.putNumber("move value", move);
+        SmartDashboard.putNumber("rotate value", rotate);
     }
 
     // Make this return true when this Command no longer needs to run execute()
