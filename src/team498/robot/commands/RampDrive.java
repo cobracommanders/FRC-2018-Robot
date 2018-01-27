@@ -19,7 +19,7 @@ public class RampDrive extends Command {
 	private double tN = 0;
 	private double tN1 = 0;
 	private double tN2 = 0;
-	private double c = 0.000002;
+	private double c = 0.000002; //change acceleration
 	private double FtN = 0;
 	private double FtN1 = 0;
 	private double FtN2 = 0;
