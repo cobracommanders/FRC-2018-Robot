@@ -15,7 +15,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import team498.robot.commands.auto.group.*;
 import team498.robot.subsystems.*;
 import edu.wpi.first.wpilibj.DriverStation;
-import team498.robot.commands.Auto;
 import team498.robot.subsystems.Drivetrain;
 import team498.robot.subsystems.Gyro;
 import team498.robot.subsystems.Vision;
