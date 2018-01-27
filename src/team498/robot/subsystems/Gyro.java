@@ -38,9 +38,9 @@ public class Gyro extends Subsystem {
 	
 	public void updateDashboard() {
 		SmartDashboard.putNumber(Dashboard.GyroAngle, sensor.getAngle());
-		SmartDashboard.putNumber(Dashboard.GyroAngleX, sensor.getAngleX());
+		/*SmartDashboard.putNumber(Dashboard.GyroAngleX, sensor.getAngleX());
 		SmartDashboard.putNumber(Dashboard.GyroAngleY, sensor.getAngleY());
-		SmartDashboard.putNumber(Dashboard.GyroAngleZ, sensor.getAngleZ());
+		SmartDashboard.putNumber(Dashboard.GyroAngleZ, sensor.getAngleZ());*/
 	}
 	
     public void initDefaultCommand() {
