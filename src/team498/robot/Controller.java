@@ -3,6 +3,7 @@ package team498.robot;
 import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Controller {
 	private Joystick joystick;
@@ -11,8 +12,8 @@ public class Controller {
 	public JoystickButton buttonB;
 	public JoystickButton buttonX;
 	public JoystickButton buttonY;
-	public JoystickButton buttonLeftBumper;
-	public JoystickButton buttonRightBumper;
+	public JoystickButton leftBumper;
+	public JoystickButton rightBumper;
 
 	public JoystickAxis axisLeftX;
 	public JoystickAxis axisRightX;
@@ -22,32 +23,29 @@ public class Controller {
 	public JoystickAxis axisRightTrigger;
 
 	public Controller(int port) {
-
 		// controller
 		joystick = new Joystick(port);
 
 		// buttons
-		buttonA = new JoystickButton(joystick, 1);
-		buttonB = new JoystickButton(joystick, 0);
-		buttonX = new JoystickButton(joystick, 0);
-		buttonY = new JoystickButton(joystick, 0);
-		buttonLeftBumper = new JoystickButton(joystick, 0);
-		buttonRightBumper = new JoystickButton(joystick, 0);
+		buttonA = new JoystickButton(joystick, Mappings.ButtonA);
+		buttonB = new JoystickButton(joystick, Mappings.ButtonB);
+		buttonX = new JoystickButton(joystick, Mappings.ButtonX);
+		buttonY = new JoystickButton(joystick, Mappings.ButtonY);
+		leftBumper = new JoystickButton(joystick, Mappings.LeftBumper);
+		rightBumper = new JoystickButton(joystick, Mappings.RightBumper);
 
 		// Axes
-		axisLeftX = new JoystickAxis(joystick, ButtonMap.LeftXAxis, 0);
-		axisLeftY = new JoystickAxis(joystick, ButtonMap.LeftYAxis, 0);
-		axisRightX = new JoystickAxis(joystick, ButtonMap.RightXAxis, 0);
-		axisRightY = new JoystickAxis(joystick, ButtonMap.RightYAxis, 0);
-		axisLeftTrigger = new JoystickAxis(joystick, ButtonMap.LeftTrigger, 0);
-		axisRightTrigger = new JoystickAxis(joystick, ButtonMap.RightTrigger, 0);
+		axisLeftX = new JoystickAxis(joystick, Mappings.LeftXAxis, 0);
+		axisLeftY = new JoystickAxis(joystick, Mappings.LeftYAxis, 0);
+		axisRightX = new JoystickAxis(joystick, Mappings.RightXAxis, 0);
+		axisRightY = new JoystickAxis(joystick, Mappings.RightYAxis, 0);
+		axisLeftTrigger = new JoystickAxis(joystick, Mappings.LeftTrigger, 0);
+		axisRightTrigger = new JoystickAxis(joystick, Mappings.RightTrigger, 0);
 	}
 
 	public void setRumble(double value) {
-		// RUMBLE!!!!
 		joystick.setRumble(RumbleType.kLeftRumble, value);
 		joystick.setRumble(RumbleType.kRightRumble, value);
-
 	}
 
 	public class JoystickAxis {
@@ -59,12 +57,22 @@ public class Controller {
 			this.axis = axis;
 			this.joystick = joystick;
 			this.tolerance = tolerance;
-
 		}
 
 		public double getAxisValue() {
 			return Helpers.normalize(joystick.getRawAxis(axis), tolerance);
 		}
 
+	}
+
+	public void updateDashboard() {
+		SmartDashboard.putBoolean(Dashboard.IsButtonAPressed, buttonA.get());
+		SmartDashboard.putBoolean(Dashboard.IsButtonBPressed, buttonB.get());
+		SmartDashboard.putBoolean(Dashboard.IsButtonXPressed, buttonX.get());
+		SmartDashboard.putBoolean(Dashboard.IsButtonYPressed, buttonY.get());
+		SmartDashboard.putBoolean(Dashboard.IsLeftBumperPressed, leftBumper.get());
+		SmartDashboard.putBoolean(Dashboard.IsRightBumperPressed, rightBumper.get());
+		SmartDashboard.putNumber(Dashboard.LeftTriggerValue, axisLeftTrigger.getAxisValue());
+		SmartDashboard.putNumber(Dashboard.RightTriggerValue, axisRightTrigger.getAxisValue());
 	}
 }
