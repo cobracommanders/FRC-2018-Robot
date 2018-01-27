@@ -32,7 +32,7 @@ public class RampDrive extends Command {
     	moveAcceleration.print();
     	
         double move = moveAcceleration.getNextDataPoint(operator.controller.axisRightTrigger.getAxisValue() - operator.controller.axisLeftTrigger.getAxisValue());
-        double rotate = moveAcceleration.getNextDataPoint(operator.controller.axisLeftX.getAxisValue());
+        double rotate = turnAcceleration.getNextDataPoint(operator.controller.axisLeftX.getAxisValue());
         this.drivetrain.drive(move, rotate);
     }
 
