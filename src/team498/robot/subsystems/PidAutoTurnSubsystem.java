@@ -23,7 +23,7 @@ public class PidAutoTurnSubsystem extends PIDSubsystem {
 		super("PidAutoTurnSubsystem", 0.01, 0.1, 0.04); //the PID values are here! TODO CHANGE VALUES FOR OPTIMALNESS
 		setAbsoluteTolerance(1);
 		getPIDController().setContinuous(false);
-		setInputRange(0, 360);
+		setInputRange(-180, 180);
 		setOutputRange(-0.8, 0.8);
 		
 		// TODO Auto-generated constructor stubs
@@ -48,7 +48,7 @@ public class PidAutoTurnSubsystem extends PIDSubsystem {
 	protected double returnPIDInput() {
 		// TODO Auto-generated method stub
 		//return 0;
-		return gyro.getAngle();
+		return gyro.getAngleZ();
 	}
 
 	@Override
