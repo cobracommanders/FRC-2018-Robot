@@ -19,6 +19,7 @@ import team498.robot.subsystems.Vision;
 public class Robot extends TimedRobot {
 
 	private Operator operator = Operator.getOperator();
+	
 
 	// Subsystems
 	//private Drivetrain drivetrain = Drivetrain.getDrivetrain();

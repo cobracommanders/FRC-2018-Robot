@@ -2,6 +2,8 @@ package team498.robot;
 
 import java.util.Date;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 public class ConstantAccelerationCalculator {
 	
 	private double lastValue = 0;
@@ -64,13 +66,15 @@ public class ConstantAccelerationCalculator {
 		
 	}
 	
-	public void print() {
-		System.out.println("FtN: " + FtN);
-		System.out.println("FtN1: " + FtN1);
-		System.out.println("FtN2: " + FtN2);
-		System.out.println("tN: " + Math.round((tN * 1000)/1000));
-		System.out.println("tN1: " + Math.round((tN1 * 1000)/1000));
-		System.out.println("tN2: " + Math.round((tN2 * 1000)/1000));
+	public void updateDashboard() {
+		SmartDashboard.putNumber("c (constant acceleration value): ", c);
+		SmartDashboard.putNumber("Difference between two points", (FtN1 - FtN2));
+		SmartDashboard.putNumber("FtN: ", FtN);
+		SmartDashboard.putNumber("FtN1: " , FtN1);
+		SmartDashboard.putNumber("FtN2: " , FtN2);
+		SmartDashboard.putNumber("tN: " , Math.round((tN * 1000)/1000));
+		SmartDashboard.putNumber("tN1: " , Math.round((tN1 * 1000)/1000));
+		SmartDashboard.putNumber("tN2: " , Math.round((tN2 * 1000)/1000));
 	}
 	
 }

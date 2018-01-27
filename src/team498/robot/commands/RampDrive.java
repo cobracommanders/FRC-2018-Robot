@@ -12,8 +12,8 @@ import java.util.Date;
 public class RampDrive extends Command {
 	private Drivetrain drivetrain;
 	private Operator operator = Operator.getOperator();
-	private ConstantAccelerationCalculator moveAcceleration = new ConstantAccelerationCalculator(0.2);
-	private ConstantAccelerationCalculator turnAcceleration = new ConstantAccelerationCalculator(0.2);
+	private ConstantAccelerationCalculator moveAcceleration = new ConstantAccelerationCalculator(0.000005);
+	private ConstantAccelerationCalculator turnAcceleration = new ConstantAccelerationCalculator(0.000005);
 	
     public RampDrive() {
     	super("RampDrive");
@@ -29,7 +29,7 @@ public class RampDrive extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	moveAcceleration.print();
+    	moveAcceleration.updateDashboard();
     	
         double move = moveAcceleration.getNextDataPoint(operator.controller.axisRightTrigger.getAxisValue() - operator.controller.axisLeftTrigger.getAxisValue());
         double rotate = turnAcceleration.getNextDataPoint(operator.controller.axisLeftX.getAxisValue());
