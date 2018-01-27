@@ -64,12 +64,13 @@ public class ConstantAccelerationCalculator {
 		
 	}
 	
-	public void enable() {
-		
-	}
-	
-	public void disable() {
-		
+	public void print() {
+		System.out.println("FtN: " + FtN);
+		System.out.println("FtN1: " + FtN1);
+		System.out.println("FtN2: " + FtN2);
+		System.out.println("tN: " + Math.round((tN * 1000)/1000));
+		System.out.println("tN1: " + Math.round((tN1 * 1000)/1000));
+		System.out.println("tN2: " + Math.round((tN2 * 1000)/1000));
 	}
 	
 }

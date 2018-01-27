@@ -29,6 +29,8 @@ public class RampDrive extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	moveAcceleration.print();
+    	
         double move = moveAcceleration.getNextDataPoint(operator.controller.axisRightTrigger.getAxisValue() - operator.controller.axisLeftTrigger.getAxisValue());
         double rotate = moveAcceleration.getNextDataPoint(operator.controller.axisLeftX.getAxisValue());
         this.drivetrain.drive(move, rotate);
