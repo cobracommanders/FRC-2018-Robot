@@ -90,7 +90,9 @@ public class Robot extends TimedRobot {
 		gameData = ds.getGameSpecificMessage(); //not doing anything with game specific message yet
 		
         if (autonomousCommand != null) {
-        	autonomousCommand.start();
+        	if (gameData.charAt(0) == 'L') {
+        		autonomousCommand.start();
+        	}
         }
             
         
