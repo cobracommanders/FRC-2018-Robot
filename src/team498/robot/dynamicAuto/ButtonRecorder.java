@@ -1,115 +1,118 @@
 package team498.robot.dynamicAuto;
 
-import java.time.Clock;
 import java.util.*;
 
-import edu.wpi.first.wpilibj.Timer;
 import team498.robot.Operator;
-import team498.robot.dynamicAuto.*;
 
 public class ButtonRecorder {
 
 	Operator operator = Operator.getOperator();
 
-	// Buttons
-	private final int a = 0;
-	private final int b = 1;
-	private final int x = 2;
-	private final int y = 3;
-	// Bumpers
-	private final int lb = 4;
-	private final int rb = 5;
-	// Start and Back
-	private final int back = 6;
-	private final int start = 7;
-	// Joystick Buttons
-	private final int ljp = 8;
-	private final int rjp = 9;
-	// Triggers
-	private final int lt = 0;
-	private final int rt = 1;
-	private final int ljx = 2;
-	private final int ljy = 3;
-	private final int rjx = 4;
-	private final int rjy = 5;
+	boolean a;
+	boolean b;
+	boolean x;
+	boolean y;
+	boolean rb;
+	boolean lb;
+	boolean ljp;
+	boolean rjp;
+	boolean back;
+	boolean start;
 
-	boolean[] buttons = new boolean[10];
-	double[] axes = new double[6];
+	double lt;
+	double rt;
+	double ljx;
+	double ljy;
+	double rjx;
+	double rjy;
+
 	String changed = "";
 	private final double flux = 0.05; // TODO: Change, this is axis fluctuations
 
-	List<ButtonListener> listeners = new ArrayList<ButtonListener>();
-
-	public void detect() {
-		_setValues();
+	public List<String> detect() {
+		
+		List<String> tags = new ArrayList<String>();
 
 		// Detects a change in button state
-		if (buttons[a] != operator.controller.buttonA.get())
-			buttonChange("a" + (!buttons[a] ? "1" : "0"));
-		if (buttons[b] != operator.controller.buttonB.get())
-			buttonChange("b" + (!buttons[b] ? "1" : "0"));
-		if (buttons[x] != operator.controller.buttonX.get())
-			buttonChange("x" + (!buttons[x] ? "1" : "0"));
-		if (buttons[y] != operator.controller.buttonY.get())
-			buttonChange("y" + (!buttons[y] ? "1" : "0"));
-		if (buttons[lb] != operator.controller.leftBumper.get())
-			buttonChange("lb" + (!buttons[lb] ? "1" : "0"));
-		if (buttons[rb] != operator.controller.rightBumper.get())
-			buttonChange("rb" + (!buttons[rb] ? "1" : "0"));
-		if (buttons[ljp] != operator.controller.buttonLeftJoystick.get())
-			buttonChange("ljp" + (!buttons[ljp] ? "1" : "0"));
-		if (buttons[rjp] != operator.controller.buttonRightJoystick.get())
-			buttonChange("rjp" + (!buttons[rjp] ? "1" : "0"));
-		if (buttons[back] != operator.controller.buttonBack.get())
-			buttonChange("back" + (!buttons[back] ? "1" : "0"));
-		if (buttons[start] != operator.controller.buttonStart.get())
-			buttonChange("start" + (!buttons[start] ? "1" : "0"));
+		if (a != operator.controller.buttonA.get())
+			tags.add(buttonChange("a", !a));
+		if (b != operator.controller.buttonB.get())
+			tags.add(buttonChange("b", !b));
+		if (x != operator.controller.buttonX.get())
+			tags.add(buttonChange("x", !x));
+		if (y != operator.controller.buttonY.get())
+			tags.add(buttonChange("y", !y));
+		if (lb != operator.controller.leftBumper.get())
+			tags.add(buttonChange("lb", !lb));
+		if (rb != operator.controller.rightBumper.get())
+			tags.add(buttonChange("rb", !rb));
+		if (ljp != operator.controller.buttonLeftJoystick.get())
+			tags.add(buttonChange("ljp", !ljp));
+		if (rjp != operator.controller.buttonRightJoystick.get())
+			tags.add(buttonChange("rjp", !rjp));
+		if (back != operator.controller.buttonBack.get())
+			tags.add(buttonChange("back", !back));
+		if (start != operator.controller.buttonStart.get())
+			tags.add(buttonChange("start", !start));
 
 		// Detects a change in axis state that is more than the axis flux
-		if (Math.abs(axes[lt] - operator.controller.axisLeftTrigger.getAxisValue()) > flux)
-			buttonChange("lt" + (axes[lt] - operator.controller.axisLeftTrigger.getAxisValue()));
-		if (Math.abs(axes[rt] - operator.controller.axisRightTrigger.getAxisValue()) > flux)
-			buttonChange("rt" + (axes[rt] - operator.controller.axisRightTrigger.getAxisValue()));
-		if (Math.abs(axes[ljx] - operator.controller.axisLeftX.getAxisValue()) > flux)
-			buttonChange("ljx" + (axes[ljx] - operator.controller.axisLeftX.getAxisValue()));
-		if (Math.abs(axes[ljy] - operator.controller.axisLeftY.getAxisValue()) > flux)
-			buttonChange("ljy" + (axes[ljy] - operator.controller.axisLeftY.getAxisValue()));
-		if (Math.abs(axes[rjx] - operator.controller.axisRightX.getAxisValue()) > flux)
-			buttonChange("rjx" + (axes[rjx] - operator.controller.axisRightX.getAxisValue()));
-		if (Math.abs(axes[rjy] - operator.controller.axisRightY.getAxisValue()) > flux)
-			buttonChange("rjy" + (axes[rjy] - operator.controller.axisRightY.getAxisValue()));
+		if (Math.abs(lt - operator.controller.axisLeftTrigger.getAxisValue()) > flux)
+			tags.add(buttonChange("lt", operator.controller.axisLeftTrigger.getAxisValue()));
+		if (Math.abs(rt - operator.controller.axisRightTrigger.getAxisValue()) > flux)
+			tags.add(buttonChange("rt", operator.controller.axisRightTrigger.getAxisValue()));
+		if (Math.abs(ljx - operator.controller.axisLeftX.getAxisValue()) > flux)
+			tags.add(buttonChange("ljx", operator.controller.axisLeftX.getAxisValue()));
+		if (Math.abs(ljy - operator.controller.axisLeftY.getAxisValue()) > flux)
+			tags.add(buttonChange("ljy", operator.controller.axisLeftY.getAxisValue()));
+		if (Math.abs(rjx - operator.controller.axisRightX.getAxisValue()) > flux)
+			tags.add(buttonChange("rjx", operator.controller.axisRightX.getAxisValue()));
+		if (Math.abs(rjy - operator.controller.axisRightY.getAxisValue()) > flux)
+			tags.add(buttonChange("rjy", operator.controller.axisRightY.getAxisValue()));
+
+		System.out.println("Detecting " + tags.size());
 
 		// Updates values
 		_setValues();
-	}
-
-	public void AddListener(ButtonListener bl) {
-		listeners.add(bl);
+		return tags;
 	}
 
 	private void _setValues() {
-		buttons[a] = operator.controller.buttonA.get();
-		buttons[b] = operator.controller.buttonB.get();
-		buttons[x] = operator.controller.buttonX.get();
-		buttons[y] = operator.controller.buttonY.get();
-		buttons[lb] = operator.controller.leftBumper.get();
-		buttons[rb] = operator.controller.rightBumper.get();
-		buttons[ljp] = operator.controller.buttonLeftJoystick.get();
-		buttons[rjp] = operator.controller.buttonRightJoystick.get();
-		buttons[back] = operator.controller.buttonBack.get();
-		buttons[start] = operator.controller.buttonStart.get();
-		axes[lt] = operator.controller.axisLeftTrigger.getAxisValue();
-		axes[rt] = operator.controller.axisRightTrigger.getAxisValue();
-		axes[ljx] = operator.controller.axisLeftX.getAxisValue();
-		axes[ljy] = operator.controller.axisLeftY.getAxisValue();
-		axes[rjx] = operator.controller.axisRightX.getAxisValue();
-		axes[rjy] = operator.controller.axisRightY.getAxisValue();
+		a = operator.controller.buttonA.get();
+		b = operator.controller.buttonB.get();
+		x = operator.controller.buttonX.get();
+		y = operator.controller.buttonY.get();
+		lb = operator.controller.leftBumper.get();
+		rb = operator.controller.rightBumper.get();
+		ljp = operator.controller.buttonLeftJoystick.get();
+		rjp = operator.controller.buttonRightJoystick.get();
+		back = operator.controller.buttonBack.get();
+		start = operator.controller.buttonStart.get();
+		lt = operator.controller.axisLeftTrigger.getAxisValue();
+		rt = operator.controller.axisRightTrigger.getAxisValue();
+		ljx = operator.controller.axisLeftX.getAxisValue();
+		ljy = operator.controller.axisLeftY.getAxisValue();
+		rjx = operator.controller.axisRightX.getAxisValue();
+		rjy = operator.controller.axisRightY.getAxisValue();
 	}
 
 	public void buttonChange(String changed) {
 		this.changed = changed;
 		System.out.println(changed);
-		for (ButtonListener bl : listeners) 
-			bl.buttonChange(changed);
+	}
+
+	public String buttonChange(String button, boolean value) {
+		String tag = "";
+		tag += button;
+		tag += "^";
+		tag += (value ? "1" : "0");
+		return tag;
+	}
+
+	public String buttonChange(String button, double value) {
+		String tag = "";
+		tag += button;
+		tag += "^";
+		tag += value;
+		return tag;
 	}
 }

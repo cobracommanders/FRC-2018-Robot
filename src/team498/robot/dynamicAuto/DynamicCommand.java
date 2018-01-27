@@ -9,113 +9,112 @@ import team498.robot.subsystems.*;
 
 public class DynamicCommand extends Command {
 
-	private String formatter;
-	private Drivetrain drivetrain;
-	private Timer timer;
+    private String formatter;
+    private Drivetrain drivetrain;
+    private Timer timer;
 
-	private double leftTMove = 0;
-	private double rightTMove = 0;
-	private double rotate = 0;
+    private double leftTMove = 0;
+    private double rightTMove = 0;
+    private double rotate = 0;
 
-	private dynamic[] commands;
+    private final byte comp_timeStamp = 0;
+    private final byte comp_button = 1;
+    private final byte comp_value = 2;
 
-	private byte phase;
+    private dynamic[] commands;
 
-	public DynamicCommand(String formatter) {
-		super("DynamicCommand");
+    private byte phase;
 
-		this.formatter = formatter;
-		requires(this.drivetrain = Drivetrain.getDrivetrain());
-	}
+    public DynamicCommand(String formatter) {
+        super("DynamicCommand");
 
-	@Override
-	protected void initialize() {
-		System.out.println(formatter);
-		String[] a = formatter.split(Pattern.quote(";"));
-		System.out.println("================");
-		for (String s : a) {
-			System.out.println(s);
-		}
-		System.out.println("================");
-		String[] b;
-		commands = new dynamic[a.length];
-		for (int i = 0; i < a.length; i++) {
-			commands[i] = new dynamic();
-			b = a[i].split("_");
-			for (String s : b) {
-				System.out.println(s);
-			}
+        this.formatter = formatter;
+        requires(this.drivetrain = Drivetrain.getDrivetrain());
+    }
 
-			commands[i].timeStamp = Double.parseDouble(b[0]);
-			System.out.println("TIMESTAMP SHIT " + commands[i].timeStamp + " " + b[0]);
+    @Override
+    protected void initialize() {
+        System.out.println(formatter);
+        String[] commandStrings = formatter.split(Pattern.quote(";"));
+        commands = new dynamic[commandStrings.length];
+        for (int i = 0; i < commandStrings.length; i++) {
+            commands[i] = ParseCommand(commandStrings[i]);
+        }
+        timer = new Timer();
+        timer.start();
+        phase = 0;
+    }
 
-			commands[i].button = b[1];
-			switch (b[1]) {
-			case "rt":
-			case "lt":
-			case "ljx":
-			case "ljy":
-			case "rjx":
-			case "rjy":
-				commands[i].isAxis = true;
-				commands[i].axisVal = Double.parseDouble(b[2]);
-				break;
-			default:
-				commands[i].isAxis = false;
-				commands[i].buttonVal = b[2] == "1" ? true : false;
-				break;
-			}
-			System.out.println("i = " + i);
-		}
-		timer = new Timer();
-		timer.start();
-		phase = 0;
-	}
+    //
 
-	@Override
-	protected void execute() {
-		System.out.println(phase + " " + commands[phase].timeStamp);
-		if (phase >= commands.length) {
-			phase = -1;
-			end();
-		}
-		if (phase != -1) {
-			if (commands[phase].timeStamp < timer.get()) {
-				System.out.println("Next Command " + timer.get());
-				phase++;
-			} else {
-				switch (commands[phase].button) {
-				case "rt":
-					rightTMove = commands[phase].axisVal;
-					break;
-				case "lt":
-					leftTMove = commands[phase].axisVal;
-					break;
-				case "ljx":
-					rotate = commands[phase].axisVal;
-					break;
-				default:
+    public dynamic ParseCommand(String command) {
+        String[] components;
+        components = command.split(Pattern.quote("_"));
 
-				}
-			}
-		}
-		drivetrain.drive(rightTMove - leftTMove, rotate);
-	}
+        double timeStamp = Double.parseDouble(components[comp_timeStamp]);
 
-	@Override
-	protected void end() {
+        String button = components[comp_button];
+        double axisVal = 0;
+        boolean buttonVal = false;
+        switch (components[comp_button]) {
+            case "rt":
+            case "lt":
+            case "ljx":
+            case "ljy":
+            case "rjx":
+            case "rjy":
+                axisVal = Double.parseDouble(components[comp_value]);
+                break;
+            default:
+                buttonVal = components[comp_value] == "1" ? true : false;
+                break;
+        }
 
-	}
+        return new dynamic(timeStamp, button, axisVal, buttonVal);
+    }
 
-	@Override
-	protected void interrupted() {
+    @Override
+    protected void execute() {
+        if (commands.length >= phase) {
+            phase = -1;
+            end();
+        }
+        if (phase != -1) {
+            if (commands[phase].timeStamp > timer.get()) {
 
-	}
+                switch (commands[phase].button) {
+                    case "rt":
+                        rightTMove = commands[phase].axisVal;
+                        break;
+                    case "lt":
+                        leftTMove = commands[phase].axisVal;
+                        break;
+                    case "ljx":
+                        rotate = commands[phase].axisVal;
+                    default:
+                        System.out.println(commands[phase].button);
+                }
+            }
+            else
+                phase++;
+        }
+        drivetrain.drive(rightTMove - leftTMove, rotate);
+    }
 
-	@Override
-	protected boolean isFinished() {
-		// TODO Auto-generated method stub
-		return false;
-	}
+    @Override
+    protected void end() {
+
+    }
+
+    @Override
+    protected void interrupted() {
+
+    }
+
+    @Override
+    protected boolean isFinished() {
+        // TODO Auto-generated method stub
+        return false;
+    }
 
 }

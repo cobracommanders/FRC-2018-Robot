@@ -7,10 +7,11 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 
 import edu.wpi.first.wpilibj.Timer;
 
-public class DynamicAutoRecorder implements ButtonListener {
+public class DynamicAutoRecorder {
 	private List<String> buttonChanges;
 	private String megaLog;
 	public ButtonRecorder buttonRec;
@@ -31,7 +32,9 @@ public class DynamicAutoRecorder implements ButtonListener {
 		BufferedReader br = new BufferedReader(fr);
 		String mega = "";
 		mega = br.readLine();
+		br.close();
 		System.out.println(mega);
+		if(mega==null) throw new NullPointerException("You f*cked the formatter again");
 		return new DynamicCommand(mega);
 	}
 
@@ -39,14 +42,19 @@ public class DynamicAutoRecorder implements ButtonListener {
 	public void StartRecording() {
 		buttonChanges = new ArrayList<String>();
 		buttonRec = new ButtonRecorder();
-		buttonRec.AddListener(this);             
+		timer = new Timer();
+		timer.start();
 	}
 
 	public void StopRecording(String filename) throws IOException {
+		System.out.println("Stopped recording");
+		timer.stop();
 		megaLog = "";
-		for (String s : buttonChanges) {
-			megaLog += s + ";";
+		for (int i = 0; i < buttonChanges.size();i++) {
+			System.out.println(buttonChanges.get(i));
+			megaLog += buttonChanges.get(i) + ";";
 		}
+		System.out.println(megaLog);
 		FileWriter fw = new FileWriter(filename);
 
 		BufferedWriter bw = new BufferedWriter(fw);
@@ -54,16 +62,14 @@ public class DynamicAutoRecorder implements ButtonListener {
 
 		bw.close();
 	}
-	
-	//
 
-	@Override
 	public void buttonChange(String changed) {
 		String log;
-		char[] changedChars = changed.toCharArray();
-		char define = changedChars[changedChars.length - 1];
-		String button = changed.substring(0, changed.length() - 2);
-		log = String.format("{0}_{1}_{2}", timer.get(), button, define);
+		String[] comps = changed.split(Pattern.quote("^"));
+		String button = comps[0];
+		String value = comps[1];
+		System.out.println("Timer = " + timer);
+		log = String.format("%s_%s_%s", timer.get(), button, value);
 		buttonChanges.add(log);
 		System.out.println(log);
 	}
