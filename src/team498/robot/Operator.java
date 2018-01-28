@@ -7,6 +7,7 @@
 
 package team498.robot;
 
+import team498.robot.commands.ResetGyro;
 import team498.robot.commands.Rumble;
 
 /**
@@ -25,6 +26,7 @@ public class Operator {
 	
 	public Operator() {
 		controller.buttonA.whileHeld(new Rumble(this.controller));
+		controller.buttonX.whenPressed(new ResetGyro());
 	}
 	
 	public void updateDashboard() {
