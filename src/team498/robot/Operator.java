@@ -9,7 +9,6 @@ package team498.robot;
 
 import team498.robot.commands.ResetGyro;
 import team498.robot.commands.Rumble;
-import team498.robot.subsystems.*;
 
 /**
  * This class is the glue that binds the controls on the physical operator

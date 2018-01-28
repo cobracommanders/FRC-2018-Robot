@@ -6,8 +6,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class ConstantAccelerationCalculator {
 	
-	private double lastValue = 0;
-	private long lastTime = -1;
+	/*private double lastValue = 0;
+	private long lastTime = -1;*/
 	//private double m_RC;
 	private double tN = 0;
 	private double tN1 = 0;
@@ -31,8 +31,6 @@ public class ConstantAccelerationCalculator {
 			} else if (tN2 == 0) {
 				//nothing
 			} else {
-				double a = (tN-tN1) * ((c * (tN - tN2)));
-				double b = ((FtN1 - FtN2)/(tN1 - tN2)) + FtN1;
 				if(FtN1 < targetValue) {
 					FtN = (tN-tN1) * ((c * (tN - tN2)) + ((FtN1 - FtN2)/(tN1 - tN2))) + FtN1;
 					if(FtN > targetValue) {

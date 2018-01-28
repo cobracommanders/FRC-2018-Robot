@@ -10,8 +10,6 @@ package team498.robot.subsystems;
 import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import team498.robot.commands.Drive;
 import team498.robot.commands.RampDrive;
 
 

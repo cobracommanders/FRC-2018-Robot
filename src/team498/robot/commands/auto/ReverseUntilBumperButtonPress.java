@@ -3,7 +3,6 @@ package team498.robot.commands.auto;
 import edu.wpi.first.wpilibj.command.Command;
 import team498.robot.subsystems.BumperButton;
 import team498.robot.subsystems.Drivetrain;
-import edu.wpi.first.wpilibj.DigitalInput;
 
 public class ReverseUntilBumperButtonPress extends Command {
 	private Drivetrain drivetrain;

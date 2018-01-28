@@ -5,7 +5,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import team498.robot.ConstantAccelerationCalculator;
 import team498.robot.Operator;
 import team498.robot.subsystems.Drivetrain;
-import java.util.Date;
 
 /**
  *
@@ -31,7 +30,7 @@ public class RampDrive extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	moveAcceleration.updateDashboard();
-    	turnAcceleration.updateDashboard();
+    	//turnAcceleration.updateDashboard();
     	
         double move = moveAcceleration.getNextDataPoint(operator.controller.axisRightTrigger.getAxisValue() - operator.controller.axisLeftTrigger.getAxisValue());
         double rotate = turnAcceleration.getNextDataPoint(operator.controller.axisLeftX.getAxisValue());
