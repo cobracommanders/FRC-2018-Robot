@@ -56,6 +56,7 @@ public class PidAutoTurnSubsystem extends PIDSubsystem {
 	private Drivetrain drivetrain = Drivetrain.getDrivetrain();
 
     public PidAutoTurnSubsystem() {
+    	//Sets P, I, and D values based on preferences set in driver-station.
 		super("PidAutoTurnSubsystem", prefs.getPID_P(), prefs.getPID_I(), prefs.getPID_D()); //the PID values are here! TODO CHANGE VALUES FOR OPTIMALNESS
 		
 		System.out.println("Prefs - P: " + prefs.getPID_P() + " I: " + prefs.getPID_I() + " D: " + prefs.getPID_D() + " C: " + prefs.getRamp_C());
@@ -72,10 +73,12 @@ public class PidAutoTurnSubsystem extends PIDSubsystem {
 	public void updateDashboard() {
 		SmartDashboard.putNumber("output values (PID)", theOutput);
 		SmartDashboard.putNumber("Angle for PID", pidAutoTurnSubsystem.getPosition()); //same as returning the pid input
+		System.out.println("Test4");
 	}
 
 	@Override
 	protected double returnPIDInput() {
+		System.out.println("Test5");
 		return gyro.getAngleZ();
 	}
 
@@ -87,6 +90,7 @@ public class PidAutoTurnSubsystem extends PIDSubsystem {
 		System.out.println("Values for Jack: " + output);
 		System.out.println("Ramp Drive Value: " + ramp.getNextDataPoint(output));
 		output = theOutput;
+		System.out.println("Test6");
 	}
 }
 
