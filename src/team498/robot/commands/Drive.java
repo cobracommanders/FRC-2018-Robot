@@ -9,7 +9,6 @@ package team498.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import team498.robot.Operator;
-import team498.robot.Robot;
 import team498.robot.subsystems.Drivetrain;
 import team498.robot.subsystems.Gyro;
 
