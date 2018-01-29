@@ -1,10 +1,6 @@
 package team498.robot.dynamicAuto;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
@@ -12,65 +8,70 @@ import java.util.regex.Pattern;
 import edu.wpi.first.wpilibj.Timer;
 
 public class DynamicAutoRecorder {
-	private List<String> buttonChanges;
-	private String megaLog;
-	public ButtonRecorder buttonRec;
-	private Timer timer;
+    private List<String> buttonChanges;
+    private String megaLog;
+    public ButtonRecorder buttonRec;
+    private Timer timer;
 
-	private static DynamicAutoRecorder dar;
+    private static DynamicAutoRecorder dar;
 
-	public static DynamicAutoRecorder getAutoRecorder() {
-		return dar = dar == null ? new DynamicAutoRecorder() : dar;
-	}
+    public static DynamicAutoRecorder getAutoRecorder() {
+        return dar = dar == null ? new DynamicAutoRecorder() : dar;
+    }
 
-	private DynamicAutoRecorder() {
-		buttonRec = new ButtonRecorder();
-	}
+    private DynamicAutoRecorder() {
+        buttonRec = new ButtonRecorder();
+    }
 
-	public DynamicCommand CreateDynamic(String filename) throws IOException {
-		FileReader fr = new FileReader(filename);
-		BufferedReader br = new BufferedReader(fr);
-		String mega = "";
-		mega = br.readLine();
-		br.close();
-		System.out.println(mega);
-		if(mega==null) throw new NullPointerException("You f*cked the formatter again");
-		return new DynamicCommand(mega);
-	}
+    public DynamicCommand CreateDynamic(String filename) throws IOException {
+        FileReader fr = new FileReader(filename);
+        BufferedReader br = new BufferedReader(fr);
+        String mega = "";
+        mega = br.readLine();
+        br.close();
+        System.out.println(mega);
+        if (mega == null) throw new NullPointerException("You f*cked the formatter again");
+        return new DynamicCommand(mega);
+    }
 
-	
-	public void StartRecording() {
-		buttonChanges = new ArrayList<String>();
-		buttonRec = new ButtonRecorder();
-		timer = new Timer();
-		timer.start();
-	}
+    public void StartRecording() {
+        buttonChanges = new ArrayList<>();
+        buttonRec = new ButtonRecorder();
+        timer = new Timer();
+        timer.start();
+    }
 
-	public void StopRecording(String filename) throws IOException {
-		System.out.println("Stopped recording");
-		timer.stop();
-		megaLog = "";
-		for (int i = 0; i < buttonChanges.size();i++) {
-			System.out.println(buttonChanges.get(i));
-			megaLog += buttonChanges.get(i) + ";";
-		}
-		System.out.println(megaLog);
-		FileWriter fw = new FileWriter(filename);
+    public void StopRecording(String filename) throws IOException {
+        try {
+            File file = new File(filename);
+            System.out.println(file.delete());
+        } catch (Exception e) {
+			System.out.println(String.format("============\nFailed to delete %s; \n%s\n============", e.toString(), e.getMessage()));
+        }
+        System.out.println("Stopped recording");
+        timer.stop();
+        megaLog = "";
+        for (int i = 0; i < buttonChanges.size(); i++) {
+            System.out.println(buttonChanges.get(i));
+            megaLog += buttonChanges.get(i) + ";";
+        }
+        System.out.println(megaLog);
+        FileWriter fw = new FileWriter(filename);
 
-		BufferedWriter bw = new BufferedWriter(fw);
-		bw.write(megaLog);
+        BufferedWriter bw = new BufferedWriter(fw);
+        bw.write(megaLog);
 
-		bw.close();
-	}
+        bw.close();
+    }
 
-	public void buttonChange(String changed) {
-		String log;
-		String[] comps = changed.split(Pattern.quote("^"));
-		String button = comps[0];
-		String value = comps[1];
-		System.out.println("Timer = " + timer);
-		log = String.format("%s_%s_%s", timer.get(), button, value);
-		buttonChanges.add(log);
-		System.out.println(log);
-	}
+        public void buttonChange(String changed) {
+        String log;
+        String[] comps = changed.split(Pattern.quote("^"));
+        String button = comps[0];
+        String value = comps[1];
+        System.out.println("Timer = " + timer);
+        log = String.format("%s_%s_%s", timer.get(), button, value);
+        buttonChanges.add(log);
+        System.out.println(log);
+    }
 }
