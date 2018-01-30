@@ -23,7 +23,11 @@ public class RampDrive extends Command {
 
     protected void initialize() {
     }
-
+    
+    public void angleComp() {
+    	
+    }
+    
     protected void execute() {
     	
         double move = moveAcceleration.getNextDataPoint(operator.controller.axisRightTrigger.getAxisValue() - operator.controller.axisLeftTrigger.getAxisValue());

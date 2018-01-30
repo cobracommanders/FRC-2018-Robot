@@ -20,6 +20,7 @@ public class Drive extends Command {
 	private Drivetrain drivetrain;
 	private Gyro gyro;
 	private Operator operator = Operator.getOperator();
+	
 
 	public Drive() {
 		super("Drive");
@@ -31,32 +32,43 @@ public class Drive extends Command {
 	// Called just before this Command runs the first time
 	@Override
 	protected void initialize() {
-
+		
 	}
 
 
-	//makes the robot drive straight using soem compensation from the gyro.
+	//makes the robot drive straight using some compensation from the gyro.
 	public double AngleComp() {
-		if (operator.controller.axisRightTrigger.getAxisValue() >= 0.2)
-			return -gyro.getAngle() / 10;
+		/*if (operator.controller.axisRightTrigger.getAxisValue() >= 0.2)
+			return -gyro.getAngleZ() / 10;
 		else
 			return 0;
+	}*/
+		if (operator.controller.axisRightTrigger.getAxisValue() >= 0.2 || operator.controller.axisLeftTrigger.getAxisValue() >= 0.2) {
+			return -gyro.getAngleZ() / 10;
+		} else {
+			return 0;
+		}
 	}
-	
 	// Called repeatedly when this Command is scheduled to run
 	@Override
 	protected void execute() {
-
-		// this.drivetrain.drive(1, 0);
-		double move = operator.controller.axisRightTrigger.getAxisValue()
-				- operator.controller.axisLeftTrigger.getAxisValue();
+		
+		//forward is right trigger, backwards is left trigger
+		double move = operator.controller.axisRightTrigger.getAxisValue() - operator.controller.axisLeftTrigger.getAxisValue();
+		//move is left joystick
 		double rotate = operator.controller.axisLeftX.getAxisValue();
-
-		if (Math.abs(rotate) > 0.01) {
-			gyro.resetAngle();
-			this.drivetrain.drive(move, rotate);
-		} else
-			this.drivetrain.drive(move, AngleComp());
+		
+		if (Math.abs(move) > 0.01) {
+			drivetrain.drive(move, AngleComp());
+		} else {
+			drivetrain.drive(move, rotate);
+		}
+		/*if (Math.abs(rotate) > 0.01) { 
+			gyro.reset();
+			drivetrain.drive(move, rotate);
+		} else {
+			drivetrain.drive(move, AngleComp());
+		}*/
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
