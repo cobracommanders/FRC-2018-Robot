@@ -8,8 +8,8 @@
 package team498.robot.subsystems;
 
 import edu.wpi.first.wpilibj.Encoder;
-import edu.wpi.first.wpilibj.SpeedControllerGroup;
-import edu.wpi.first.wpilibj.Victor;
+import edu.wpi.first.wpilibj.Spark;
+//import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -35,10 +35,12 @@ public class Drivetrain extends Subsystem {
 		return drivetrain;
 	}
 	
-	//update the channels in the Mappings.java
-	private SpeedControllerGroup leftGroup = new SpeedControllerGroup(new Victor(Mappings.FrontLeftMotorChannel), new Victor(Mappings.BackLeftMotorChannel));
-	private SpeedControllerGroup rightGroup = new SpeedControllerGroup(new Victor(Mappings.FrontRightMotorChannel), new Victor(Mappings.BackRightMotorChannel));
-	private DifferentialDrive drive = new DifferentialDrive(leftGroup, rightGroup);
+	//TODO update the channels in the Mappings.java
+	//private SpeedControllerGroup leftGroup = new SpeedControllerGroup(new Spark(Mappings.FrontLeftMotorChannel), new Spark(Mappings.BackLeftMotorChannel));
+	//private SpeedControllerGroup rightGroup = new SpeedControllerGroup(new Spark(Mappings.FrontRightMotorChannel), new Spark(Mappings.BackRightMotorChannel));
+	//private DifferentialDrive drive = new DifferentialDrive(leftGroup, rightGroup);
+	
+	private DifferentialDrive drive = new DifferentialDrive(new Spark(Mappings.FrontLeftMotorChannel), new Spark(Mappings.FrontRightMotorChannel));
 
 	public Encoder leftEncoder = new Encoder(Mappings.LeftEncoderDigitalSource1, Mappings.LeftEncoderDigitalSource2);
 	public Encoder rightEncoder = new Encoder(Mappings.RightEncoderDigitalSource1, Mappings.RightEncoderDigitalSource2);
