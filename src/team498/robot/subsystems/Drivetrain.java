@@ -7,11 +7,11 @@
 
 package team498.robot.subsystems;
 
+import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import team498.robot.commands.Drive;
-import team498.robot.commands.RampDrive;
 
 
 public class Drivetrain extends Subsystem {	
@@ -27,7 +27,7 @@ public class Drivetrain extends Subsystem {
         return drivetrain;
     }
 
-    private DifferentialDrive drive = new DifferentialDrive(new Victor(1),new Victor(0));
+    private DifferentialDrive drive = new DifferentialDrive(new Spark(2),new Spark(0));
     
 	public Drivetrain(){
     	super("Drivetrain");
