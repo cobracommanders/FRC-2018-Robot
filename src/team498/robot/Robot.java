@@ -58,12 +58,12 @@ public class Robot extends TimedRobot {
 
 	@Override
 	public void disabledInit() {
-		addAutonomousChoices();
+		//addAutonomousChoices();
 	}
 
 	@Override
 	public void disabledPeriodic() {
-		addAutonomousChoices();
+		//addAutonomousChoices();
 		updateDashboard();
 		Scheduler.getInstance().run();
 	}
@@ -160,12 +160,12 @@ public class Robot extends TimedRobot {
 		}
 
 		updateDashboard();
-		addAutonomousChoices();
+		//addAutonomousChoices();
 	}
 
 	@Override
 	public void autonomousPeriodic() {
-		addAutonomousChoices();
+		//addAutonomousChoices();
 		updateDashboard();
 		Scheduler.getInstance().run();
 	}
@@ -174,13 +174,13 @@ public class Robot extends TimedRobot {
 	public void teleopInit() {
 		autoCommand.cancel();
 
-		addAutonomousChoices();
+		//addAutonomousChoices();
 		updateDashboard();
 	}
 
 	@Override
 	public void teleopPeriodic() {
-		addAutonomousChoices();
+		//addAutonomousChoices();
 		updateDashboard();
 		Scheduler.getInstance().run();
 	}
