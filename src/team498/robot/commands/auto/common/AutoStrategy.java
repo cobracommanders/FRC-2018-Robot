@@ -1,4 +1,4 @@
-package team498.robot;
+package team498.robot.commands.auto.common;
 
 public enum AutoStrategy {
 	//LeftSwitch, LeftScale, RightSwitch, RightScale;
