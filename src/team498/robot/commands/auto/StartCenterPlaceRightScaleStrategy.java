@@ -5,10 +5,10 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 /**
  *
  */
-public class StartLeftPlaceLeftScaleStrategy extends CommandGroup {
+public class StartCenterPlaceRightScaleStrategy extends CommandGroup {
 
-    public StartLeftPlaceLeftScaleStrategy() {
-    	System.out.println("Start Left, Left Scale Strategy!");
+    public StartCenterPlaceRightScaleStrategy() {
+    	System.out.println("Start Center, Right Scale Strategy!");
         // Add Commands here:
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());

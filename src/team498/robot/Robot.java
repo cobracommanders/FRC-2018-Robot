@@ -17,6 +17,10 @@ import team498.robot.commands.auto.AutoStrategy;
 import team498.robot.commands.auto.GameData;
 import team498.robot.commands.auto.RobotStartPosition;
 import team498.robot.commands.auto.ScalePosition;
+import team498.robot.commands.auto.StartCenterPlaceLeftScaleStrategy;
+import team498.robot.commands.auto.StartCenterPlaceLeftSwitchStrategy;
+import team498.robot.commands.auto.StartCenterPlaceRightScaleStrategy;
+import team498.robot.commands.auto.StartCenterPlaceRightSwitchStrategy;
 import team498.robot.commands.auto.StartLeftPlaceLeftScaleStrategy;
 import team498.robot.commands.auto.StartLeftPlaceLeftSwitchStrategy;
 import team498.robot.commands.auto.StartLeftPlaceRightScaleStrategy;
@@ -98,6 +102,12 @@ public class Robot extends TimedRobot {
 					autoCommand = new StartRightPlaceLeftSwitchStrategy();
 					autoCommand.start(); //run right left switch
 				}
+			} else if (autonomousPosition == RobotStartPosition.Center) { //check if robot is Center
+				if (autonomousStrategy == AutoStrategy.Switch) { //check if Strategy is switch
+					System.out.println("Running Center, Left Switch"); //debug line
+					autoCommand = new StartCenterPlaceLeftSwitchStrategy();
+					autoCommand.start(); //run center left switch
+				}
 			} else {
 				System.out.println("Error, no auto for Left Switch for either position??");
 			}
@@ -117,6 +127,12 @@ public class Robot extends TimedRobot {
 					autoCommand = new StartRightPlaceRightSwitchStrategy();
 					autoCommand.start(); //run right right switch
 				}
+			} else if (autonomousPosition == RobotStartPosition.Center) { //check if robot is Center
+				if (autonomousStrategy == AutoStrategy.Switch) { //check if strategy is switch
+					System.out.println("Running Center, Right Switch"); //debug line
+					autoCommand = new StartCenterPlaceRightSwitchStrategy();
+					autoCommand.start(); //run center right switch
+				}
 			} else {
 				System.out.println("Error, no auto for Right Switch for either position??");
 			}
@@ -135,6 +151,12 @@ public class Robot extends TimedRobot {
 					System.out.println("Running Right, Left Scale"); //debug line
 					autoCommand = new StartRightPlaceLeftScaleStrategy();
 					autoCommand.start(); //run right left scale
+				}
+			} else if (autonomousPosition == RobotStartPosition.Center) { //check if robot is Center
+				if (autonomousStrategy == AutoStrategy.Scale) { //check if Strategy is scale
+					System.out.println("Running Center, Left Scale"); //debug line
+					autoCommand = new StartCenterPlaceLeftScaleStrategy();
+					autoCommand.start(); //run center left scale
 				}
 			} else {
 				System.out.println("Error, no auto for Left Scale for either position??");
@@ -156,10 +178,18 @@ public class Robot extends TimedRobot {
 					autoCommand = new StartRightPlaceRightScaleStrategy();
 					autoCommand.start(); //run right right scale
 				}
+			} else if (autonomousPosition == RobotStartPosition.Center) { //check if robot is Center
+				if (autonomousStrategy == AutoStrategy.Scale) { //check if strategy is scale
+					System.out.println("Running Center, Right Scale"); //debug line
+					autoCommand = new StartCenterPlaceRightScaleStrategy();
+					autoCommand.start(); //run center right scale
+				}
 			} else {
 				System.out.println("Error, no auto for Right Scale for either position??");
 			}
-		} else {
+		} 
+		
+		else {
 			System.out.println("Error. Invalid combination of auto options"); //shouldn't run
 		}
 
@@ -198,6 +228,7 @@ public class Robot extends TimedRobot {
 
 		chooserPosition.addDefault("Robot in: Left", RobotStartPosition.Left);
 		chooserPosition.addObject("Robot in: Right", RobotStartPosition.Right);
+		chooserPosition.addObject("Robot in: Center", RobotStartPosition.Center);
 
 		chooserStrategy.addDefault("Going for: Switch", AutoStrategy.Switch);
 		chooserStrategy.addObject("Going for: Scale", AutoStrategy.Scale);
