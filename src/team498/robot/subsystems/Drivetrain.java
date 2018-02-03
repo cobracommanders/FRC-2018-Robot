@@ -7,38 +7,87 @@
 
 package team498.robot.subsystems;
 
+//import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import team498.robot.commands.RampDrive;
 
+//import edu.wpi.first.wpilibj.PIDOutput;
+//import edu.wpi.first.wpilibj.PIDSource;
+//import edu.wpi.first.wpilibj.PIDSourceType;
+
 
 public class Drivetrain extends Subsystem {	
+	
+	private double moveValue = 0;
+	
+	private Victor victor0 = new Victor(0);
+	private Victor victor1 = new Victor(1);
 
     private static Drivetrain drivetrain = null;
-
+    //private Gyro gyro = null;
     /**
      * Provides singleton access to the drivetrain subsystem
      * @return Drivetrain instance
      */
+    //private PIDSource pidSource = new PIDSource() {
+/*		
+		@Override
+		public void setPIDSourceType(PIDSourceType pidSource) {
+			// TODO Auto-generated method stub
+		}
+		
+		@Override
+		public double pidGet() {
+			// TODO Auto-generated method stub
+			return 0;
+		}
+		
+		@Override
+		public PIDSourceType getPIDSourceType() {
+			// TODO Auto-generated method stub
+			return null;
+		}
+	};
+	private PIDOutput pidOutput = new PIDOutput() {
+		
+		@Override
+		public void pidWrite(double output) {
+			// TODO Auto-generated method stub
+			
+		}
+	};
+	
+    private PIDController rampController = new PIDController(0.2,0,0,pidSource,pidOutput);
+    */
+    
     public static Drivetrain getDrivetrain() {
         drivetrain = drivetrain == null ? new Drivetrain() : drivetrain;
         return drivetrain;
     }
-
-    private DifferentialDrive drive = new DifferentialDrive(new Victor(1),new Victor(0));
+    private DifferentialDrive drive = new DifferentialDrive(victor1, victor0);
     
 	public Drivetrain(){
     	super("Drivetrain");
+    	/*rampController.setContinuous(true);
+    	rampController.setInputRange(-1, 1);
+    	rampController.setOutputRange(-1, 1);
+    	rampController.enable();*/
+    	
     }
 	
+
 	public void initDefaultCommand() {
 		// Set the default command for a subsystem here.
 		setDefaultCommand(new RampDrive()); //uses rampdrive
 	}
+	public double getMoveValue() {
+		return moveValue;
+	}
 	
     public void drive(double move, double rotate) {
-
+    	
     	drive.arcadeDrive(move, rotate);
     	
 /*        // Temporarily remmber the last values for the dashboard
@@ -50,4 +99,15 @@ public class Drivetrain extends Subsystem {
 */        
     }
     
+    public void pidWrite(double output) {
+    	this.victor0.pidWrite(output);
+    	this.victor1.pidWrite(output);
+    }
+   /* public void pidDrive(double move, double rotate) {
+    	
+    	//rampController.setSetpoint(move);
+    	
+    	
+    }*/
+	
 }

@@ -4,7 +4,7 @@
 /* must be accompanied by the FIRST BSD license file in the root directory of */
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
-
+//Test
 package team498.robot;
 
 import edu.wpi.first.wpilibj.DriverStation;
@@ -13,6 +13,10 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import team498.robot.commands.auto.AutoStrategy;
+import team498.robot.commands.auto.GameData;
+import team498.robot.commands.auto.RobotStartPosition;
+import team498.robot.commands.auto.ScalePosition;
 import team498.robot.commands.auto.StartLeftPlaceLeftScaleStrategy;
 import team498.robot.commands.auto.StartLeftPlaceLeftSwitchStrategy;
 import team498.robot.commands.auto.StartLeftPlaceRightScaleStrategy;
@@ -21,11 +25,7 @@ import team498.robot.commands.auto.StartRightPlaceLeftScaleStrategy;
 import team498.robot.commands.auto.StartRightPlaceLeftSwitchStrategy;
 import team498.robot.commands.auto.StartRightPlaceRightScaleStrategy;
 import team498.robot.commands.auto.StartRightPlaceRightSwitchStrategy;
-import team498.robot.commands.auto.common.AutoStrategy;
-import team498.robot.commands.auto.common.GameData;
-import team498.robot.commands.auto.common.RobotStartPosition;
-import team498.robot.commands.auto.common.ScalePosition;
-import team498.robot.commands.auto.common.SwitchPosition;
+import team498.robot.commands.auto.SwitchPosition;
 import team498.robot.subsystems.Gyro;
 //import team498.robot.subsystems.Vision;
 
@@ -40,6 +40,7 @@ public class Robot extends TimedRobot {
 	// private Drivetrain drivetrain = Drivetrain.getDrivetrain();
 	//private Vision vision = Vision.getVision();
 	private Gyro gyro = Gyro.getGyro();
+	//private DigitBoard digitBoard = DigitBoard.getDigitBoard();
 
 	// Autonomous Selections
 	SendableChooser<RobotStartPosition> chooserPosition = new SendableChooser<>();

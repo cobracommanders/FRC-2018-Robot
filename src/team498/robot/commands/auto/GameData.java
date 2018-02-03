@@ -1,4 +1,4 @@
-package team498.robot.commands.auto.common;
+package team498.robot.commands.auto;
 
 public class GameData {
 	private String gameData;
