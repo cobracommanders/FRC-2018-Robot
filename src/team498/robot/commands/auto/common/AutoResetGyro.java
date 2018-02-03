@@ -1,4 +1,4 @@
-package team498.robot.commands;
+package team498.robot.commands.auto.common;
 
 import edu.wpi.first.wpilibj.command.Command;
 import team498.robot.subsystems.*;
@@ -6,10 +6,10 @@ import team498.robot.subsystems.*;
 /**
  *
  */
-public class ResetGyro extends Command {
+public class AutoResetGyro extends Command {
 	private Gyro gyro;
 	
-    public ResetGyro() {
+    public AutoResetGyro() {
     	super("ResetGyro");
     	
     	requires(this.gyro = Gyro.getGyro());

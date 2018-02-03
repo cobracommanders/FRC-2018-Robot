@@ -1,4 +1,4 @@
-package team498.robot.commands.auto;
+package team498.robot.commands.auto.common;
 
 import edu.wpi.first.wpilibj.command.Command;
 import team498.robot.subsystems.PidAutoTurnSubsystem;
@@ -7,14 +7,14 @@ import team498.robot.subsystems.PidAutoTurnSubsystem;
 /**
  *
  */
-public class AutoTurnRandyPid extends Command {
+public class AutoTurn extends Command {
 	private PidAutoTurnSubsystem pidAutoTurnSubsystem;
 	//private Drivetrain drivetrain;
 	
 	private double targetAngle = 0;
 
-    public AutoTurnRandyPid(double targetAngle) {
-    	super("AutoTurnRandyPid");
+    public AutoTurn(double targetAngle) {
+    	super("AutoTurn");
     	
     	requires(this.pidAutoTurnSubsystem = PidAutoTurnSubsystem.getPidAutoTurnSubsystem());
     	//requires(this.drivetrain = Drivetrain.getDrivetrain());

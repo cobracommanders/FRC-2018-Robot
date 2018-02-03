@@ -3,10 +3,10 @@ package team498.robot.commands.auto.common;
 import edu.wpi.first.wpilibj.command.Command;
 import team498.robot.subsystems.Drivetrain;
 
-public class Stop extends Command {
+public class AutoStop extends Command {
 	private Drivetrain drivetrain;
 
-    public Stop() {
+    public AutoStop() {
     	super("Stop");
     	
     	requires(this.drivetrain = Drivetrain.getDrivetrain());
