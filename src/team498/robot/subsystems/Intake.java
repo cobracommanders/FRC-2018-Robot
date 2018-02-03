@@ -6,6 +6,7 @@ import team498.robot.Mappings;
 import team498.robot.commands.ManualIntake;
 
 public class Intake extends Subsystem {
+	
 	private static Intake intake = null;
 	public static Intake getIntake() {
 		intake = intake == null ? new Intake() : intake;
@@ -18,6 +19,7 @@ public class Intake extends Subsystem {
     public void initDefaultCommand() {
     	setDefaultCommand(new ManualIntake());
     }
+    
     public void set(double leftPower, double rightPower) {
     	intakeLeft.set(leftPower);
     	intakeRight.set(rightPower);
