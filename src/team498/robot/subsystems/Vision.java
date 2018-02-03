@@ -8,6 +8,9 @@ import team498.robot.Mappings;
 
 public class Vision extends Subsystem {
 	
+	public static final int Width = 150;
+	public static final int Height = 100;
+	
 	private static Vision vision = null;
 	public static Vision getVision() {
 		vision = vision == null ? new Vision() : vision;
@@ -15,12 +18,10 @@ public class Vision extends Subsystem {
 	}
 	
 	private UsbCamera camera;
-	private int width = 150;
-	private int height = 100;
 
 	public void startCapture() { 
 		camera = CameraServer.getInstance().startAutomaticCapture("camera", Mappings.CameraDevice);
-		camera.setResolution(width, height);
+		camera.setResolution(Width, Height);
 	}
 	
     public void initDefaultCommand() {
