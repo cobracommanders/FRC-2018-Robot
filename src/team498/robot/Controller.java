@@ -75,5 +75,8 @@ public class Controller {
 		SmartDashboard.putNumber(Dashboard.LeftTriggerValue, axisLeftTrigger.getAxisValue());
 		SmartDashboard.putNumber(Dashboard.RightTriggerValue, axisRightTrigger.getAxisValue());
 		SmartDashboard.putNumber(Dashboard.AxisLeftXValue, axisLeftX.getAxisValue());
+		SmartDashboard.putNumber(Dashboard.AxisLeftYValue, axisLeftY.getAxisValue());
+		SmartDashboard.putNumber(Dashboard.AxisRightXValue, axisRightX.getAxisValue());
+		SmartDashboard.putNumber(Dashboard.AxisRightYValue, axisRightY.getAxisValue());
 	}
 }
