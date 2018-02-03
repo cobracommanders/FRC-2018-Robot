@@ -198,11 +198,16 @@ public class Robot extends TimedRobot {
 		chooserStrategy.addObject("Going for: Scale", AutoStrategy.Scale);
 		// chooser.addDefault("None", null);
 		// chooser.addObject("AutoCrossLine", new AutoCrossLine());
-		SmartDashboard.putData("Autonomous Position", chooserPosition);
-		SmartDashboard.putData("Autonomous Strategy", chooserStrategy);
+		/*SmartDashboard.putData("Autonomous Position", chooserPosition);
+		SmartDashboard.putData("Autonomous Strategy", chooserStrategy);*/
 	}
 
 	public void updateDashboard() {
+				
+		SmartDashboard.putData("Autonomous Position", chooserPosition);
+		SmartDashboard.putData("Autonomous Strategy", chooserStrategy);
+		SmartDashboard.putString("Position Choice", autonomousPosition != null ? autonomousPosition.toString() : "");
+		SmartDashboard.putString("Strategy Choice", autonomousStrategy != null ? autonomousStrategy.toString() : "");
 		operator.updateDashboard();
 		gyro.updateDashboard();
 		// TODO add other subsystems
