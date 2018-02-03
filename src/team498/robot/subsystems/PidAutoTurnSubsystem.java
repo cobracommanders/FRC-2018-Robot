@@ -26,7 +26,6 @@ public class PidAutoTurnSubsystem extends PIDSubsystem {
 		setInputRange(-180, 180);
 		setOutputRange(-0.8, 0.8);
 		
-		// TODO Auto-generated constructor stubs
 	}
     
     public static PidAutoTurnSubsystem getPidAutoTurnSubsystem() {
