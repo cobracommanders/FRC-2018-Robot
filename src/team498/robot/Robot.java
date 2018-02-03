@@ -32,6 +32,7 @@ import team498.robot.subsystems.Vision;
 public class Robot extends TimedRobot {
 
 	private Operator operator = Operator.getOperator();
+	
 
 	private DriverStation ds = DriverStation.getInstance();
 
@@ -182,9 +183,11 @@ public class Robot extends TimedRobot {
 
 	@Override
 	public void teleopPeriodic() {
-		//addAutonomousChoices();
+		
 		updateDashboard();
 		Scheduler.getInstance().run();
+		
+		
 	}
 
 	@Override

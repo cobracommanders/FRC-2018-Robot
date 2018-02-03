@@ -5,6 +5,7 @@ import team498.robot.Dashboard;
 
 
 public class Gyro extends Subsystem {
+	
 	private static Gyro gyro = null;
 	public static Gyro getGyro() {
 		gyro = gyro == null ? new Gyro() : gyro;

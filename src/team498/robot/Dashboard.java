@@ -10,6 +10,8 @@ public class Dashboard {
 	public static final String IsButtonBackPressed = "IsButtonBackPressed";
 	public static final String IsButtonStartPressed = "IsButtonStartPressed";
 	
+	public static final String AxisLeftXValue = "AxisLeftXValue";
+	
 	public static final String RightTriggerValue = "RightTriggerValue";
 	public static final String LeftTriggerValue = "LeftTriggerValue";
 	
