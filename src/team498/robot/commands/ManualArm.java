@@ -5,13 +5,10 @@ import team498.robot.Operator;
 import team498.robot.subsystems.Arm;
 import team498.robot.subsystems.Intake;
 
-/**
- *
- */
 public class ManualArm extends Command {
 	
-	private Arm arm;
 	private Operator operator = Operator.getOperator();
+	private Arm arm;	
 	
     public ManualArm() {
     	super("ManualArm");

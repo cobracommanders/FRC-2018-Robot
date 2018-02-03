@@ -6,9 +6,6 @@ import team498.robot.Mappings;
 import team498.robot.commands.ManualArm;
 import team498.robot.commands.ManualIntake;
 
-/**
- *
- */
 public class Arm extends Subsystem {
 	
 	private static Arm arm = null;
@@ -22,6 +19,7 @@ public class Arm extends Subsystem {
     public void initDefaultCommand() {
     	setDefaultCommand(new ManualArm());
     }
+    
     public void set(double power) {
     	motor.set(power);
     }
