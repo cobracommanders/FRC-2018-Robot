@@ -169,13 +169,13 @@ public class Robot extends TimedRobot {
 
 	private void addAutonomousChoices() {
 
-		chooserPosition.addObject("Robot Left", RobotStartPosition.Left);
+		chooserPosition.addDefault("Robot Left", RobotStartPosition.Left);
 		chooserPosition.addObject("Robot Right", RobotStartPosition.Right);
 		
-		chooserStrategy.addObject("Left Switch", AutoStrategy.LeftSwitch);
+		chooserStrategy.addDefault("Left Switch", AutoStrategy.LeftSwitch);
 		chooserStrategy.addObject("Right Switch", AutoStrategy.RightSwitch);
 		chooserStrategy.addObject("Left Scale", AutoStrategy.LeftScale);
-		chooserStrategy.addDefault("Right Scale", AutoStrategy.RightScale);
+		chooserStrategy.addObject("Right Scale", AutoStrategy.RightScale);
 		// chooser.addDefault("None", null);
 		// chooser.addObject("AutoCrossLine", new AutoCrossLine());
 		SmartDashboard.putData("Autonomous Position", chooserPosition);
