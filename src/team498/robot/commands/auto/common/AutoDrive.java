@@ -3,15 +3,14 @@ package team498.robot.commands.auto.common;
 import edu.wpi.first.wpilibj.command.Command;
 import team498.robot.subsystems.Drivetrain;
 
-/**
- *
- */
 public class AutoDrive extends Command {
+	
 	private Drivetrain drivetrain;
 	private double moveValue;
 	
     public AutoDrive(double moveValue) {
-    	super("AutoDrive"); 
+    	super("AutoDrive");
+    	
     	requires(this.drivetrain = Drivetrain.getDrivetrain());
     	
     	this.moveValue = moveValue;
