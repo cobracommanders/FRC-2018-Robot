@@ -1,4 +1,4 @@
-package team498.robot.commands;
+package team498.robot.commands.auto.common;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 

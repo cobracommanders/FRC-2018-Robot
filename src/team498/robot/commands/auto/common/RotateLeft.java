@@ -1,4 +1,4 @@
-package team498.robot.commands.auto;
+package team498.robot.commands.auto.common;
 
 import edu.wpi.first.wpilibj.command.Command;
 import team498.robot.subsystems.Drivetrain;
@@ -6,10 +6,10 @@ import team498.robot.subsystems.Drivetrain;
 /**
  *
  */
-public class DriveLeft extends Command {
+public class RotateLeft extends Command {
 	private Drivetrain drivetrain;
 
-    public DriveLeft() {
+    public RotateLeft() {
     	super("DriveLeft");
     	
     	requires(this.drivetrain = Drivetrain.getDrivetrain());

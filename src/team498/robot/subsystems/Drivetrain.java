@@ -11,7 +11,7 @@ package team498.robot.subsystems;
 import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
-import team498.robot.commands.Drive;
+import team498.robot.commands.RampDrive;
 
 //import edu.wpi.first.wpilibj.PIDOutput;
 //import edu.wpi.first.wpilibj.PIDSource;
@@ -80,7 +80,7 @@ public class Drivetrain extends Subsystem {
 
 	public void initDefaultCommand() {
 		// Set the default command for a subsystem here.
-		setDefaultCommand(new Drive());
+		setDefaultCommand(new RampDrive()); //uses rampdrive
 	}
 	public double getMoveValue() {
 		return moveValue;
