@@ -16,6 +16,10 @@ public class RampDrive extends Command {
 	private Gyro gyro;
 	private ConstantAccelerationCalculator moveAcceleration = new ConstantAccelerationCalculator(0.0005);
 	private ConstantAccelerationCalculator turnAcceleration = new ConstantAccelerationCalculator(0.0005);
+	private boolean turning = false;
+	private boolean oldTurning = false;
+	private double comp = 0.0;
+	private double oldComp = 0.0;
 
 	public RampDrive() {
 		super("RampDrive");
@@ -25,15 +29,16 @@ public class RampDrive extends Command {
 	}
 
 	protected void initialize() {
+		gyro.reset();
 	}
 
 	public double AngleComp() {
-		if (Math.abs(operator.controller.axisLeftX.getAxisValue()) > 0.1) {
-			gyro.reset();
-			return 0;
-		}
-		
-		return gyro.getAngleZ() / 45; //Should make to go between -1 and 1, unless it goes past 45 without correcting which is a problem
+		int degreeRange = 3; // The higher this number, the less it'll try to correct
+		double angle = 0.0;
+		oldTurning = turning;
+		if (Math.abs(operator.controller.axisLeftX.getAxisValue()) > 0.1) turning = true; else turning = false;
+		if (oldTurning != turning) gyro.reset();
+		return !turning ? -gyro.getAngleZ() / degreeRange : 0;
 	}
 
 	protected void execute() {
@@ -41,12 +46,14 @@ public class RampDrive extends Command {
 		double move = moveAcceleration.getNextDataPoint(operator.controller.axisRightTrigger.getAxisValue()
 				- operator.controller.axisLeftTrigger.getAxisValue());
 		double rotate = turnAcceleration.getNextDataPoint(operator.controller.axisLeftX.getAxisValue());
-		double comp = AngleComp();
+		oldComp = comp;
+		comp = AngleComp();
+		if(Math.abs(comp - oldComp) > 0.1) gyro.reset();
 		System.out.println(comp);
-		this.drivetrain.drive(move, rotate);
+		this.drivetrain.drive(move, turning ? rotate : comp);
 
 		SmartDashboard.putNumber("move value", move);
-		SmartDashboard.putNumber("rotate value", rotate + comp);
+		SmartDashboard.putNumber("rotate value", turning ? rotate : comp);
 	}
 
 	protected boolean isFinished() {
