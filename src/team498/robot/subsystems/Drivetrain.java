@@ -7,47 +7,70 @@
 
 package team498.robot.subsystems;
 
+import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import team498.robot.Dashboard;
+import team498.robot.Mappings;
 import team498.robot.commands.RampDrive;
 
+public class Drivetrain extends Subsystem {
+	private static final double WheelDiameter = 0.1524; // 6 inch wheels. This was converted to meters
+	private static final double PulsePerRevolution = 2048; // all switches on the encoder are off
+	private static final double WheelCircumference = WheelDiameter * Math.PI;
+	private static final double MetersPerPulse = WheelCircumference / PulsePerRevolution;
 
-public class Drivetrain extends Subsystem {	
+	private static Drivetrain drivetrain = null;
 
-    private static Drivetrain drivetrain = null;
-
-    /**
-     * Provides singleton access to the drivetrain subsystem
-     * @return Drivetrain instance
-     */
-    public static Drivetrain getDrivetrain() {
-        drivetrain = drivetrain == null ? new Drivetrain() : drivetrain;
-        return drivetrain;
-    }
-
-    private DifferentialDrive drive = new DifferentialDrive(new Victor(1),new Victor(0));
-    
-	public Drivetrain(){
-    	super("Drivetrain");
-    }
-	
-	public void initDefaultCommand() {
-		// Set the default command for a subsystem here.
-		setDefaultCommand(new RampDrive()); //uses rampdrive
+	/**
+	 * Provides singleton access to the drivetrain subsystem
+	 * 
+	 * @return Drivetrain instance
+	 */
+	public static Drivetrain getDrivetrain() {
+		drivetrain = drivetrain == null ? new Drivetrain() : drivetrain;
+		return drivetrain;
 	}
 	
-    public void drive(double move, double rotate) {
+	//update the channels in the Mappings.java
+	private SpeedControllerGroup leftGroup = new SpeedControllerGroup(new Victor(Mappings.FrontLeftMotorChannel), new Victor(Mappings.BackLeftMotorChannel));
+	private SpeedControllerGroup rightGroup = new SpeedControllerGroup(new Victor(Mappings.FrontRightMotorChannel), new Victor(Mappings.BackRightMotorChannel));
+	private DifferentialDrive drive = new DifferentialDrive(leftGroup, rightGroup);
 
-    	drive.arcadeDrive(move, rotate);
-    	
-/*        // Temporarily remmber the last values for the dashboard
-        currentMove = move;
-        currentRotate = rotate;
+	public Encoder leftEncoder = new Encoder(Mappings.LeftEncoderDigitalSource1, Mappings.LeftEncoderDigitalSource2);
+	public Encoder rightEncoder = new Encoder(Mappings.RightEncoderDigitalSource1, Mappings.RightEncoderDigitalSource2);
 
-        // Apply motor power based on aracade inputs
-        drive.arcadeDrive(move, rotate);
-*/        
-    }
-    
+	public Drivetrain() {
+		super("Drivetrain");
+		leftEncoder.setDistancePerPulse(MetersPerPulse);
+		rightEncoder.setDistancePerPulse(MetersPerPulse);
+		resetEncoders();
+	}
+
+	public void initDefaultCommand() {
+		// Set the default command for a subsystem here.
+		setDefaultCommand(new RampDrive()); // uses rampdrive
+	}
+
+	public void drive(double move, double rotate) {
+		drive.arcadeDrive(move, rotate);
+	}
+	
+	public double getDistance() {
+		//averages the encoders distance 
+		return (leftEncoder.getDistance() + rightEncoder.getDistance()) / 2;
+	}
+	
+	public void resetEncoders() {
+		leftEncoder.reset();
+		rightEncoder.reset();
+	}
+	
+	public void updateDashboard() {
+		SmartDashboard.putNumber(Dashboard.DistanceTraveled, getDistance());
+	}
+
 }
