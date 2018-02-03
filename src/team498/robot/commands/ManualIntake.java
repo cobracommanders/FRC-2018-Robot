@@ -16,11 +16,11 @@ public class ManualIntake extends Command {
 	private double rightPower = 0;
 	private boolean intakeIn = true;
 
-	private boolean aPressed = false;
-	private boolean bPressed = false;
-	private boolean xPressed = false;
-	private boolean yPressed = false;
-
+	
+	boolean leftBumperPressed = false;
+	boolean intakeOn = true;
+	
+	
 	public ManualIntake() {
 		super("ManualIntake");
 		requires(this.intake = Intake.getIntake());
@@ -32,39 +32,14 @@ public class ManualIntake extends Command {
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-		if (operator.controller.buttonA.get() && !aPressed) {
-			leftPower += 0.02;
-			aPressed = true;
+/*		if(operator.controller.leftBumper.get() && !leftBumperPressed) {
+			intakeOn = !intakeOn;
+			leftBumperPressed = true;
 		}
-		if (!operator.controller.buttonA.get() && aPressed) {
-			aPressed = false;
-		}
-
-		if (operator.controller.buttonB.get() && !bPressed) {
-			leftPower -= 0.02;
-			bPressed = true;
-		}
-		if (!operator.controller.buttonB.get() && bPressed) {
-			bPressed = false;
-		}
-
-		if (operator.controller.buttonX.get() && !xPressed) {
-			rightPower += 0.02;
-			xPressed = true;
-		}
-		if (!operator.controller.buttonX.get() && xPressed) {
-			xPressed = false;
-		}
-
-		if (operator.controller.buttonY.get() && !yPressed) {
-			rightPower -= 0.02;
-			yPressed = true;
-		}
-		if (!operator.controller.buttonY.get() && yPressed) {
-			yPressed = false;
-		}
-
-		this.intake.set(leftPower, rightPower);
+		if(!operator.controller.leftBumper.get() && leftBumperPressed) {
+			leftBumperPressed = false;
+		}*/
+			this.intake.set(operator.controller.axisRightY.getAxisValue());
 		SmartDashboard.putNumber(Dashboard.IntakeLeftPower, leftPower);
 		SmartDashboard.putNumber(Dashboard.IntakeRightPower, rightPower);
 	}

@@ -20,9 +20,9 @@ public class Intake extends Subsystem {
     	setDefaultCommand(new ManualIntake());
     }
     
-    public void set(double leftPower, double rightPower) {
-    	intakeLeft.set(leftPower);
-    	intakeRight.set(rightPower);
+    public void set(double power) {
+    	intakeLeft.set(power);
+    	intakeRight.set(-power);
     }
 }
 
