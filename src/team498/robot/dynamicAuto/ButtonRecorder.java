@@ -30,7 +30,7 @@ public class ButtonRecorder {
 	private final double flux = 0.05; // TODO: Change, this is axis fluctuations
 
 	public List<String> detect() {
-		
+
 		List<String> tags = new ArrayList<String>();
 
 		// Detects a change in button state

@@ -6,36 +6,36 @@ import team498.robot.subsystems.Drivetrain;
 public class Stop extends Command {
 	private Drivetrain drivetrain;
 
-    public Stop() {
-    	super("Stop");
-    	
-    	requires(this.drivetrain = Drivetrain.getDrivetrain());
-        // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
-    }
+	public Stop() {
+		super("Stop");
 
-    // Called just before this Command runs the first time
-    protected void initialize() {
-    }
+		requires(this.drivetrain = Drivetrain.getDrivetrain());
+		// Use requires() here to declare subsystem dependencies
+		// eg. requires(chassis);
+	}
 
-    // Called repeatedly when this Command is scheduled to run
-    protected void execute() {
-    	drivetrain.drive(0, 0); //no drive
-    }
+	// Called just before this Command runs the first time
+	protected void initialize() {
+	}
 
-    // Make this return true when this Command no longer needs to run execute()
-    protected boolean isFinished() {
-        return false; //stops when command time expires
-    }
+	// Called repeatedly when this Command is scheduled to run
+	protected void execute() {
+		drivetrain.drive(0, 0); // no drive
+	}
 
-    // Called once after isFinished returns true
-    protected void end() {
-    	drivetrain.drive(0, 0);
-    }
+	// Make this return true when this Command no longer needs to run execute()
+	protected boolean isFinished() {
+		return false; // stops when command time expires
+	}
 
-    // Called when another command which requires one or more of the same
-    // subsystems is scheduled to run
-    protected void interrupted() {
-    	end();
-    }
+	// Called once after isFinished returns true
+	protected void end() {
+		drivetrain.drive(0, 0);
+	}
+
+	// Called when another command which requires one or more of the same
+	// subsystems is scheduled to run
+	protected void interrupted() {
+		end();
+	}
 }

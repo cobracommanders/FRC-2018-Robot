@@ -14,7 +14,6 @@ import team498.robot.commands.ResetGyro;
 import team498.robot.commands.Rumble;
 import team498.robot.dynamicAuto.*;
 
-
 /**
  * This class is the glue that binds the controls on the physical operator
  * interface to the commands and command groups that allow control of the robot.
@@ -22,19 +21,20 @@ import team498.robot.dynamicAuto.*;
 public class Operator {
 
 	private static Operator operator = null;
+
 	public static Operator getOperator() {
-        operator = operator == null ? new Operator() : operator;
-        return operator;
-    }
-	
+		operator = operator == null ? new Operator() : operator;
+		return operator;
+	}
+
 	public Controller controller = new Controller(Mappings.ControllerPort);
 
 	public Operator() {
 		controller.buttonA.whileHeld(new Rumble(this.controller));
 		controller.buttonX.whenPressed(new ResetGyro());
-		controller.buttonY.whenPressed(new LaunchCatapult("LaunchCatapult", 5)); //where we call time
+		controller.buttonY.whenPressed(new LaunchCatapult("LaunchCatapult", 5)); // where we call time
 	}
-	
+
 	public void updateDashboard() {
 		controller.updateDashboard();
 	}

@@ -37,10 +37,10 @@ public class Controller {
 		buttonY = new JoystickButton(joystick, Mappings.ButtonY);
 		leftBumper = new JoystickButton(joystick, Mappings.LeftBumper);
 		rightBumper = new JoystickButton(joystick, Mappings.RightBumper);
-	    buttonLeftJoystick = new JoystickButton(joystick, Mappings.LeftJoyPress);
-	    buttonRightJoystick = new JoystickButton(joystick, Mappings.RightJoyPress);
-	    buttonBack = new JoystickButton(joystick, Mappings.ButtonBack);
-	    buttonStart = new JoystickButton(joystick, Mappings.ButtonStart);
+		buttonLeftJoystick = new JoystickButton(joystick, Mappings.LeftJoyPress);
+		buttonRightJoystick = new JoystickButton(joystick, Mappings.RightJoyPress);
+		buttonBack = new JoystickButton(joystick, Mappings.ButtonBack);
+		buttonStart = new JoystickButton(joystick, Mappings.ButtonStart);
 
 		// Axes
 		axisLeftX = new JoystickAxis(joystick, Mappings.LeftXAxis, 0);

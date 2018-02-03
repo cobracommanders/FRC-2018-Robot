@@ -23,104 +23,103 @@ import team498.robot.dynamicAuto.*;
 
 public class Robot extends TimedRobot {
 
-    private Operator operator = Operator.getOperator();
-    private final String dynamicDirectory = "/home/lvuser/frc/dynamicauto/";
-    private final String fileName = "test6.txt";
-    private DynamicAutoRecorder dar;
-    // Subsystems
-    private Drivetrain drivetrain = Drivetrain.getDrivetrain();
-    private Vision vision = Vision.getVision();
-    private Gyro gyro = Gyro.getGyro();
+	private Operator operator = Operator.getOperator();
+	private final String dynamicDirectory = "/home/lvuser/frc/dynamicauto/";
+	private final String fileName = "test6.txt";
+	private DynamicAutoRecorder dar;
+	// Subsystems
+	private Drivetrain drivetrain = Drivetrain.getDrivetrain();
+	private Vision vision = Vision.getVision();
+	private Gyro gyro = Gyro.getGyro();
 
-    private boolean recorded = false;
+	private boolean recorded = false;
 
-    private Timer timer;
+	private Timer timer;
 
-    private Auto auto = new Auto();
+	private Auto auto = new Auto();
 
-    @Override
-    public void robotInit() {
-        //vision.startCapture();
-        dar = DynamicAutoRecorder.getAutoRecorder();
-        updateDashboard();
-    }
+	@Override
+	public void robotInit() {
+		// vision.startCapture();
+		dar = DynamicAutoRecorder.getAutoRecorder();
+		updateDashboard();
+	}
 
-    @Override
-    public void disabledInit() {
-    }
-    
-    @Override
-    public void disabledPeriodic() {
-        updateDashboard();
-        Scheduler.getInstance().run();
-    }
+	@Override
+	public void disabledInit() {
+	}
 
-    @Override
-    public void autonomousInit() {
-        updateDashboard();
-        DynamicCommand dc = null;
-        if (dar != null) {
-            try {
-                dc = dar.CreateDynamic(dynamicDirectory + fileName);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        if (dc != null) {
-            auto.addSequential(dc, 15);
-        }
-        this.auto.start();
-    }
+	@Override
+	public void disabledPeriodic() {
+		updateDashboard();
+		Scheduler.getInstance().run();
+	}
 
-    @Override
-    public void autonomousPeriodic() {
-        updateDashboard();
-        Scheduler.getInstance().run();
-    }
+	@Override
+	public void autonomousInit() {
+		updateDashboard();
+		DynamicCommand dc = null;
+		if (dar != null) {
+			try {
+				dc = dar.CreateDynamic(dynamicDirectory + fileName);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		if (dc != null) {
+			auto.addSequential(dc, 15);
+		}
+		this.auto.start();
+	}
 
-    @Override
-    public void teleopInit() {
-        updateDashboard();
-        this.auto.cancel();
-        dar = DynamicAutoRecorder.getAutoRecorder();
-        dar.StartRecording();
-        timer = new Timer();
-        timer.start();
-    }
+	@Override
+	public void autonomousPeriodic() {
+		updateDashboard();
+		Scheduler.getInstance().run();
+	}
 
-    @Override
-    public void teleopPeriodic() {
-        updateDashboard();
-        List<String> tags;
-        try {
-            if (timer.get() < 15) {
-                tags = dar.buttonRec.detect();
-                System.out.println("After Detect " + tags.size());
+	@Override
+	public void teleopInit() {
+		updateDashboard();
+		this.auto.cancel();
+		dar = DynamicAutoRecorder.getAutoRecorder();
+		dar.StartRecording();
+		timer = new Timer();
+		timer.start();
+	}
 
-                for (int i = 0; i < tags.size(); i++) {
-                    System.out.println(tags.get(i));
-                    dar.buttonChange(tags.get(i));
-                }
-                System.out.println("Detecting...");
-            } else if (!recorded) {
-                recorded = true;
-                dar.StopRecording(dynamicDirectory, fileName);
-            }
-        } catch (Exception e) {
-            System.out.println("Error: " + e.toString());
-            e.printStackTrace();
-        }
-        Scheduler.getInstance().run();
-    }
+	@Override
+	public void teleopPeriodic() {
+		updateDashboard();
+		List<String> tags;
+		try {
+			if (timer.get() < 15) {
+				tags = dar.buttonRec.detect();
+				System.out.println("After Detect " + tags.size());
 
+				for (int i = 0; i < tags.size(); i++) {
+					System.out.println(tags.get(i));
+					dar.buttonChange(tags.get(i));
+				}
+				System.out.println("Detecting...");
+			} else if (!recorded) {
+				recorded = true;
+				dar.StopRecording(dynamicDirectory, fileName);
+			}
+		} catch (Exception e) {
+			System.out.println("Error: " + e.toString());
+			e.printStackTrace();
+		}
+		Scheduler.getInstance().run();
+	}
 
-    @Override
-    public void testPeriodic() {
-    }
+	@Override
+	public void testPeriodic() {
+	}
 
-    void updateDashboard() {
-        operator.updateDashboard();
-        gyro.updateDashboard();
-        //TODO add other subsystems
-    }
+	void updateDashboard() {
+		operator.updateDashboard();
+		gyro.updateDashboard();
+		// TODO add other subsystems
+	}
 }

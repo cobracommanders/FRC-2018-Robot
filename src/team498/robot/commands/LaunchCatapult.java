@@ -11,11 +11,11 @@ public class LaunchCatapult extends TimedCommand {
 	public LaunchCatapult(String LaunchCatapult, double time) {
 		super("LaunchCatapult", time);
 		requires(this.catapult = Catapult.getInstance());
-		
+
 	}
 
 	protected void initialize() {
-		
+
 	}
 
 	protected void execute() {
