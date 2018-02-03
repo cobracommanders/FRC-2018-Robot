@@ -202,8 +202,9 @@ public class Robot extends TimedRobot {
 
 	@Override
 	public void teleopInit() {
-		autoCommand.cancel();
-
+		if (autoCommand != null) {
+			autoCommand.cancel();
+		}
 		updateDashboard();
 	}
 
@@ -231,6 +232,9 @@ public class Robot extends TimedRobot {
 	}
 
 	public void updateDashboard() {
+		
+		/*SmartDashboard.putData(chooserPosition);
+		SmartDashboard.putData(chooserStrategy);*/
 		
 		SmartDashboard.putData("Autonomous Position", chooserPosition);
 		SmartDashboard.putData("Autonomous Strategy", chooserStrategy);
