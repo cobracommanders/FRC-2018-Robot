@@ -30,9 +30,9 @@ public class GameData {
 	}
 	
 	public SwitchPosition getEnemySwitchPosition() {
-		if (gameData.charAt(3) == 'L') {
+		if (gameData.charAt(2) == 'L') {
 			return SwitchPosition.Right;
-		} else if (gameData.charAt(3) == 'R') {
+		} else if (gameData.charAt(2) == 'R') {
 			return SwitchPosition.Left;
 		} else {
 			System.out.println("Error! Malformatted game data!");

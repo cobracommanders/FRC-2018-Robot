@@ -66,12 +66,10 @@ public class Robot extends TimedRobot {
 
 	@Override
 	public void disabledInit() {
-		//addAutonomousChoices();
 	}
 
 	@Override
 	public void disabledPeriodic() {
-		//addAutonomousChoices();
 		updateDashboard();
 		Scheduler.getInstance().run();
 	}
@@ -194,12 +192,10 @@ public class Robot extends TimedRobot {
 		}
 
 		updateDashboard();
-		//addAutonomousChoices();
 	}
 
 	@Override
 	public void autonomousPeriodic() {
-		//addAutonomousChoices();
 		updateDashboard();
 		Scheduler.getInstance().run();
 	}
@@ -225,21 +221,17 @@ public class Robot extends TimedRobot {
 	}
 
 	private void addAutonomousChoices() {
-
+		
 		chooserPosition.addDefault("Robot in: Left", RobotStartPosition.Left);
 		chooserPosition.addObject("Robot in: Right", RobotStartPosition.Right);
 		chooserPosition.addObject("Robot in: Center", RobotStartPosition.Center);
 
 		chooserStrategy.addDefault("Going for: Switch", AutoStrategy.Switch);
 		chooserStrategy.addObject("Going for: Scale", AutoStrategy.Scale);
-		// chooser.addDefault("None", null);
-		// chooser.addObject("AutoCrossLine", new AutoCrossLine());
-		/*SmartDashboard.putData("Autonomous Position", chooserPosition);
-		SmartDashboard.putData("Autonomous Strategy", chooserStrategy);*/
 	}
 
 	public void updateDashboard() {
-				
+		
 		SmartDashboard.putData("Autonomous Position", chooserPosition);
 		SmartDashboard.putData("Autonomous Strategy", chooserStrategy);
 		SmartDashboard.putString("Position Choice", autonomousPosition != null ? autonomousPosition.toString() : "");
