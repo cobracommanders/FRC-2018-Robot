@@ -38,7 +38,7 @@ public class Robot extends TimedRobot {
 
 	// Subsystems
 	// private Drivetrain drivetrain = Drivetrain.getDrivetrain();
-	private Vision vision = Vision.getVision();
+	//private Vision vision = Vision.getVision();
 	private Gyro gyro = Gyro.getGyro();
 
 	// Autonomous Selections
@@ -54,7 +54,7 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void robotInit() {
-		vision.startCapture();
+		//vision.startCapture();
 		updateDashboard();
 		addAutonomousChoices();
 	}
@@ -177,7 +177,6 @@ public class Robot extends TimedRobot {
 	public void teleopInit() {
 		autoCommand.cancel();
 
-		//addAutonomousChoices();
 		updateDashboard();
 	}
 
