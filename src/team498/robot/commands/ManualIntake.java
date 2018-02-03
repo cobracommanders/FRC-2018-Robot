@@ -37,7 +37,7 @@ public class ManualIntake extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	if(operator.controller.buttonA.get() && !aPressed) {
-    		leftPower += 0.01;
+    		leftPower += 0.02;
     		aPressed = true;
     	}
     	if(!operator.controller.buttonA.get() && aPressed) {
@@ -45,7 +45,7 @@ public class ManualIntake extends Command {
     	}
     	
     	if(operator.controller.buttonB.get() && !bPressed) {
-    		leftPower -= 0.01;
+    		leftPower -= 0.02;
     		bPressed = true;
     	}
     	if(!operator.controller.buttonB.get() && bPressed) {
@@ -53,7 +53,7 @@ public class ManualIntake extends Command {
     	}
     	
     	if(operator.controller.buttonX.get() && !xPressed) {
-    		rightPower += 0.01;
+    		rightPower += 0.02;
     		xPressed = true;
     	}
     	if(!operator.controller.buttonX.get() && xPressed) {
@@ -61,7 +61,7 @@ public class ManualIntake extends Command {
     	}
     	
     	if(operator.controller.buttonY.get() && !yPressed) {
-    		rightPower -= 0.01;
+    		rightPower -= 0.02;
     		yPressed = true;
     	}
     	if(!operator.controller.buttonY.get() && yPressed) {
