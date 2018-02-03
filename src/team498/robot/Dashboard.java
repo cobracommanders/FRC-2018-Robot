@@ -23,5 +23,7 @@ public class Dashboard {
 	public static final String GyroAngleY = "GyroAngleY";
 	public static final String GyroAngleZ = "GyroAngleZ";
 	
+	public static final String IntakeLeftPower = "IntakeLeftPower";
+	public static final String IntakeRightPower = "IntakeRightPower";
 
 }
