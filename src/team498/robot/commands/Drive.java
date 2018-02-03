@@ -38,13 +38,8 @@ public class Drive extends Command {
 
 	//makes the robot drive straight using some compensation from the gyro.
 	public double AngleComp() {
-		/*if (operator.controller.axisRightTrigger.getAxisValue() >= 0.2)
-			return -gyro.getAngleZ() / 10;
-		else
-			return 0;
-	}*/
 		if (operator.controller.axisRightTrigger.getAxisValue() >= 0.2 || operator.controller.axisLeftTrigger.getAxisValue() >= 0.2) {
-			return -gyro.getAngleZ() / 10;
+			return -gyro.getAngleZ() / 9;
 		} else {
 			return 0;
 		}
@@ -53,16 +48,15 @@ public class Drive extends Command {
 	@Override
 	protected void execute() {
 		
+		System.out.println("================");
 		//forward is right trigger, backwards is left trigger
 		double move = operator.controller.axisRightTrigger.getAxisValue() - operator.controller.axisLeftTrigger.getAxisValue();
 		//move is left joystick
 		double rotate = operator.controller.axisLeftX.getAxisValue();
-		
-		if (Math.abs(move) > 0.01) {
-			drivetrain.drive(move, AngleComp());
-		} else {
-			drivetrain.drive(move, rotate);
-		}
+		double comp = AngleComp();
+		System.out.println("Set values");
+		System.out.println(comp);
+		drivetrain.drive(move, rotate + comp);
 		/*if (Math.abs(rotate) > 0.01) { 
 			gyro.reset();
 			drivetrain.drive(move, rotate);
