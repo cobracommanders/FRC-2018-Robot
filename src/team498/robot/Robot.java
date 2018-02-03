@@ -30,6 +30,8 @@ import team498.robot.commands.auto.StartRightPlaceLeftSwitchStrategy;
 import team498.robot.commands.auto.StartRightPlaceRightScaleStrategy;
 import team498.robot.commands.auto.StartRightPlaceRightSwitchStrategy;
 import team498.robot.commands.auto.SwitchPosition;
+import team498.robot.commands.Auto;
+import team498.robot.subsystems.Drivetrain;
 import team498.robot.subsystems.Gyro;
 //import team498.robot.subsystems.Vision;
 
@@ -44,7 +46,7 @@ public class Robot extends TimedRobot {
 	// private Drivetrain drivetrain = Drivetrain.getDrivetrain();
 	//private Vision vision = Vision.getVision();
 	private Gyro gyro = Gyro.getGyro();
-	//private DigitBoard digitBoard = DigitBoard.getDigitBoard();
+	private Drivetrain drivetrain = Drivetrain.getDrivetrain();
 
 	// Autonomous Selections
 	SendableChooser<RobotStartPosition> chooserPosition = new SendableChooser<>();

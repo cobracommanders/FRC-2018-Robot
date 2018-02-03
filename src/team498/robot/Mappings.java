@@ -20,9 +20,9 @@ public class Mappings {
 	public static final int RightTrigger = 3;
 	public static final int LeftTrigger = 2;
 
-	public static final int CameraDevice = 0;
-	
 	public static final int CatapultForward = 2;
 	public static final int CatapultReverse = 7;
+	public static final int CameraDevice1 = 0;
+	public static final int CameraDevice2 = 1;
 
 }

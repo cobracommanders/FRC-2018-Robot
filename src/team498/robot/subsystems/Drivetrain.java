@@ -7,10 +7,12 @@
 
 package team498.robot.subsystems;
 
-//import edu.wpi.first.wpilibj.PIDController;
+import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import team498.robot.commands.Drive;
 import team498.robot.commands.RampDrive;
 
 //import edu.wpi.first.wpilibj.PIDOutput;
@@ -19,6 +21,8 @@ import team498.robot.commands.RampDrive;
 
 
 public class Drivetrain extends Subsystem {	
+	
+	private ADIS16448_IMU gyro = new ADIS16448_IMU();
 	
 	private double moveValue = 0;
 	
@@ -66,7 +70,8 @@ public class Drivetrain extends Subsystem {
         drivetrain = drivetrain == null ? new Drivetrain() : drivetrain;
         return drivetrain;
     }
-    private DifferentialDrive drive = new DifferentialDrive(victor1, victor0);
+
+    private DifferentialDrive drive = new DifferentialDrive(new Spark(2),new Spark(0));
     
 	public Drivetrain(){
     	super("Drivetrain");
