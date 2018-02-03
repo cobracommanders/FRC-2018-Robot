@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class StartRightPlaceRightSwitchStrategy extends CommandGroup {
 
     public StartRightPlaceRightSwitchStrategy() {
+    	System.out.println("Start Right, Right Switch Strategy!");
         // Add Commands here:
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());

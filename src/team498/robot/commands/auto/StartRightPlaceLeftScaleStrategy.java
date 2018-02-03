@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class StartRightPlaceLeftScaleStrategy extends CommandGroup {
 
     public StartRightPlaceLeftScaleStrategy() {
+    	System.out.println("Start Right, Left Scale Strategy!");
         // Add Commands here:
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());
