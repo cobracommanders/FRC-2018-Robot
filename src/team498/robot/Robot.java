@@ -16,6 +16,7 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import team498.robot.commands.Auto;
+import team498.robot.subsystems.Drivetrain;
 import team498.robot.subsystems.Gyro;
 import team498.robot.subsystems.Vision;
 import team498.robot.dynamicAuto.*;
@@ -39,7 +40,7 @@ public class Robot extends TimedRobot {
 
     @Override
     public void robotInit() {
-        vision.startCapture();
+        //vision.startCapture();
         dar = DynamicAutoRecorder.getAutoRecorder();
         updateDashboard();
     }
