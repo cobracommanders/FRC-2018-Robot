@@ -10,7 +10,9 @@ package team498.robot;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import team498.robot.commands.Auto;
+import team498.robot.subsystems.Arm;
 import team498.robot.subsystems.Gyro;
+import team498.robot.subsystems.Intake;
 import team498.robot.subsystems.Vision;
 
 public class Robot extends TimedRobot {
@@ -22,7 +24,8 @@ public class Robot extends TimedRobot {
 	//private Drivetrain drivetrain = Drivetrain.getDrivetrain();
 	private Vision vision = Vision.getVision();
 	private Gyro gyro = Gyro.getGyro();
-
+	private Intake intake = Intake.getIntake();
+	private Arm arm = Arm.getArm();
 	private Auto auto = new Auto();
 	
 	@Override

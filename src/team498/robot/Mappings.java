@@ -21,5 +21,8 @@ public class Mappings {
 	public static final int LeftTrigger = 2;
 
 	public static final int CameraDevice = 0;
-
+	
+	public static final int IntakeLeftPort = 3;
+	public static final int IntakeRightPort = 4;
+	public static final int ArmPort = 2;
 }
