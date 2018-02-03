@@ -8,9 +8,10 @@
 package team498.robot;
 
 import java.util.*;
-
+import team498.robot.commands.ResetGyro;
 import team498.robot.commands.Rumble;
 import team498.robot.dynamicAuto.*;
+
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -28,6 +29,8 @@ public class Operator {
 
 	public Operator() {
 		controller.buttonA.whileHeld(new Rumble(this.controller));
+		controller.buttonX.whenPressed(new ResetGyro());
+		controller.buttonY.whenPressed(new LaunchCatapult("LaunchCatapult", 5)); //where we call time
 	}
 	
 	public void updateDashboard() {

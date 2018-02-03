@@ -1,6 +1,5 @@
 package team498.robot.commands;
 
-import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.command.Command;
 import team498.robot.subsystems.Drivetrain;
 import team498.robot.subsystems.Sensors;

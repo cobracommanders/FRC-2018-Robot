@@ -82,5 +82,6 @@ public class Controller {
 		SmartDashboard.putBoolean(Dashboard.IsRightBumperPressed, rightBumper.get());
 		SmartDashboard.putNumber(Dashboard.LeftTriggerValue, axisLeftTrigger.getAxisValue());
 		SmartDashboard.putNumber(Dashboard.RightTriggerValue, axisRightTrigger.getAxisValue());
+		SmartDashboard.putNumber(Dashboard.AxisLeftXValue, axisLeftX.getAxisValue());
 	}
 }
