@@ -63,12 +63,56 @@ public class Robot extends TimedRobot {
 		String gameData;
 		gameData = ds.getGameSpecificMessage(); // not doing anything with game specific message yet
 
-		if (autonomousCommand != null) {
+		/*if (autonomousCommand != null) {
 			if (gameData.charAt(0) == 'L') {
 				autonomousCommand.start();
 			}
+		}*/
+		
+		// For Left position and switch
+		if (autonomousCommand.getName() == "Robot Start Left, Switch") {
+			if (gameData.charAt(0) == 'L') {
+				new StartLeftPlaceLeftSwitchStrategy(); //command for Left position, Left Switch
+			} else if (gameData.charAt(0) == 'R') {
+				new StartLeftPlaceRightSwitchStrategy(); //command for Left position, Right Switch
+			} else {
+				System.out.println("Error. No auto for switch, left position");
+			}
 		}
-
+		
+		//for Left position and scale
+		if (autonomousCommand.getName() == "Robot Start Left, Scale") {
+			if (gameData.charAt(1) == 'L') {
+				new StartLeftPlaceLeftScaleStrategy(); //command for Left position, Left Scale
+			} else if (gameData.charAt(1) == 'R') {
+				new StartLeftPlaceRightScaleStrategy(); //command for Left position, Right Scale
+			} else {
+				System.out.println("Error. No auto for scale, left position");
+			}
+		}
+		
+		//for Right position and switch
+		if (autonomousCommand.getName() == "Robot Start Right, Switch") {
+			if (gameData.charAt(0) == 'L') {
+				new StartRightPlaceLeftSwitchStrategy(); //command for Right position, Left Switch
+			} else if (gameData.charAt(0) == 'R') { 
+				new StartRightPlaceRightSwitchStrategy(); //command for Right position, Right Switch
+			} else {
+				System.out.println("Error. No auto for switch, right position");
+			}
+		}
+		
+		//for right position and scale
+		if (autonomousCommand.getName() == "Robot Start Right, Scale") {
+			if (gameData.charAt(1) == 'L') {
+				new StartRightPlaceLeftScaleStrategy(); //command for Right position, Left Scale
+			} else if (gameData.charAt(1) == 'R') {
+				new StartRightPlaceRightScaleStrategy(); //command for Right position, Right Scale
+			} else {
+				System.out.println("Error. No auto for scale, right position");
+			}
+		}
+		
 		updateDashboard();
 	}
 
@@ -101,14 +145,15 @@ public class Robot extends TimedRobot {
 		// Add available autonomous commands with the SmartDashboard
 		// chooser.addDefault("None", null);
 		// TODO add actual commands to command groups
-		chooser.addDefault("Start Left Place Left Switch", new StartLeftPlaceLeftSwitchStrategy());
+		/*chooser.addDefault("Start Left Place Left Switch", new StartLeftPlaceLeftSwitchStrategy());
 		chooser.addObject("Start Left Place Left Scale", new StartLeftPlaceLeftScaleStrategy());
 		chooser.addObject("Start Left Place Right Switch", new StartLeftPlaceRightSwitchStrategy());
 		chooser.addObject("Start Left Place Right Scale", new StartLeftPlaceRightScaleStrategy());
 		chooser.addObject("Start Right Place Left Switch", new StartRightPlaceLeftSwitchStrategy());
 		chooser.addObject("Start Right Place Left Scale", new StartRightPlaceLeftScaleStrategy());
 		chooser.addObject("Start Right Place Right Switch", new StartRightPlaceRightSwitchStrategy());
-		chooser.addObject("Start Right Place Right Scale", new StartRightPlaceRightScaleStrategy());
+		chooser.addObject("Start Right Place Right Scale", new StartRightPlaceRightScaleStrategy());*/
+		chooser.addDefault("Robot Starting Left", new StartLeftPlaceLeftSwitchStrategy()); //TODO change command!!
 		// chooser.addObject("AutoCrossLine", new AutoCrossLine());
 		SmartDashboard.putData("AutonomousChooser", chooser);
 		// SmartDashboard.putData(Dashboard.AutonomousChooser, chooser);
