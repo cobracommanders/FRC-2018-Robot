@@ -41,9 +41,9 @@ public class DynamicAutoRecorder {
         timer.start();
     }
 
-    public void StopRecording(String filename) throws IOException {
+    public void StopRecording(String directory, String fileName) throws IOException {
         try {
-            File file = new File(filename);
+            File file = new File(directory + fileName);
             System.out.println(file.delete());
         } catch (Exception e) {
 			System.out.println(String.format("============\nFailed to delete %s; \n%s\n============", e.toString(), e.getMessage()));
@@ -56,7 +56,9 @@ public class DynamicAutoRecorder {
             megaLog += buttonChanges.get(i) + ";";
         }
         System.out.println(megaLog);
-        FileWriter fw = new FileWriter(filename);
+        File directoryFile = new File(directory);
+        if(!directoryFile.exists()) directoryFile.mkdir();
+        FileWriter fw = new FileWriter(directory + fileName);
 
         BufferedWriter bw = new BufferedWriter(fw);
         bw.write(megaLog);

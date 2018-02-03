@@ -26,7 +26,8 @@ import team498.robot.dynamicAuto.*;
 public class Robot extends TimedRobot {
 
     private Operator operator = Operator.getOperator();
-    private final String autoTest = "/home/lvuser/frc/dynamicauto/test5.txt";
+    private final String dynamicDirectory = "/home/lvuser/frc/dynamicauto/";
+    private final String fileName = "test6.txt";
     private DynamicAutoRecorder dar;
     // Subsystems
     private Drivetrain drivetrain = Drivetrain.getDrivetrain();
@@ -62,7 +63,7 @@ public class Robot extends TimedRobot {
         DynamicCommand dc = null;
         if (dar != null) {
             try {
-                dc = dar.CreateDynamic(autoTest);
+                dc = dar.CreateDynamic(dynamicDirectory + fileName);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -105,7 +106,7 @@ public class Robot extends TimedRobot {
                 System.out.println("Detecting...");
             } else if (!recorded) {
                 recorded = true;
-                dar.StopRecording(autoTest);
+                dar.StopRecording(dynamicDirectory, fileName);
             }
         } catch (Exception e) {
             System.out.println("Error: " + e.toString());
