@@ -19,7 +19,6 @@ public class LaunchCatapult extends TimedCommand {
 	}
 
 	protected void execute() {
-		System.out.println("execute is met");
 		catapult.launchCatapult();
 	}
 
@@ -28,7 +27,6 @@ public class LaunchCatapult extends TimedCommand {
 	}
 
 	protected void end() {
-		System.out.println("end is met");
 		catapult.resetCatapult();
 	}
 
