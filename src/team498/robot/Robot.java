@@ -27,7 +27,7 @@ import team498.robot.commands.auto.common.RobotStartPosition;
 import team498.robot.commands.auto.common.ScalePosition;
 import team498.robot.commands.auto.common.SwitchPosition;
 import team498.robot.subsystems.Gyro;
-import team498.robot.subsystems.Vision;
+//import team498.robot.subsystems.Vision;
 
 public class Robot extends TimedRobot {
 
