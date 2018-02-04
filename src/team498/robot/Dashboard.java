@@ -20,6 +20,9 @@ public class Dashboard {
 	public static final String GyroAngleY = "GyroAngleY";
 	public static final String GyroAngleZ = "GyroAngleZ";
 	
-	public static final String Acceleration = "Acceleration";
+	public static final String AccelerometerX = "AccelerometerX";
+	public static final String AccelerometerY = "AccelerometerY";
+	public static final String AccelerometerZ = "AccelerometerZ";
+
 
 }

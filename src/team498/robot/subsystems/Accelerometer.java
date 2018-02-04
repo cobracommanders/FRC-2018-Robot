@@ -1,16 +1,17 @@
 package team498.robot.subsystems;
 
-import edu.wpi.first.wpilibj.AnalogAccelerometer;
+
+import edu.wpi.first.wpilibj.BuiltInAccelerometer;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import team498.robot.Dashboard;
-import team498.robot.Mappings;
+
 
 /**
  *
  */
 public class Accelerometer extends Subsystem {
-	public AnalogAccelerometer accel;
+	public BuiltInAccelerometer accel;
 	private static Accelerometer accelerometer = null;
 	public static Accelerometer getAccelerometer() {
 		accelerometer = accelerometer == null ? new Accelerometer() : accelerometer;
@@ -18,14 +19,14 @@ public class Accelerometer extends Subsystem {
 	}	
 	
 	public Accelerometer() {
-		this.accel = new AnalogAccelerometer(Mappings.AnalogInput);
-		//test this 
-		accel.setSensitivity(.018); 
-		accel.setZero(2.5);
+		accel = new BuiltInAccelerometer(); 
 	}
 	
 	public void updateDashboard() {
-		SmartDashboard.putNumber(Dashboard.Acceleration, accel.getAcceleration());
+		SmartDashboard.putNumber(Dashboard.AccelerometerX, accel.getX());
+		SmartDashboard.putNumber(Dashboard.AccelerometerY, accel.getY());
+		SmartDashboard.putNumber(Dashboard.AccelerometerZ, accel.getZ());
+		
 	}
 	
     public void initDefaultCommand() {
