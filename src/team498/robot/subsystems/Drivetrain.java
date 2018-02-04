@@ -8,11 +8,13 @@
 package team498.robot.subsystems;
 
 import edu.wpi.first.wpilibj.Spark;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import team498.robot.ConstantAccelerationCalculator;
 import team498.robot.Dashboard;
+import team498.robot.Helpers;
 import team498.robot.Prefs;
 import team498.robot.commands.Drive;
 
@@ -38,12 +40,14 @@ public class Drivetrain extends PIDSubsystem {
 	static Prefs prefs = Prefs.getPrefs();
 
 	private Spark spark0 = new Spark(0);
-	private Spark spark1 = new Spark(1);
+	private Spark spark1 = new Spark(2);
 	private ADIS16448_IMU gyro = new ADIS16448_IMU();
 	private ConstantAccelerationCalculator ramp = new ConstantAccelerationCalculator(prefs.getRamp_C());
 
 	private boolean isTurning = false;
 	private boolean wasTurning = false;
+	private boolean settled = false;
+	private Timer timer;
 
 	private DifferentialDrive drive = new DifferentialDrive(spark1, spark0);
 
@@ -51,6 +55,8 @@ public class Drivetrain extends PIDSubsystem {
 		super("Drivetrain", prefs.getPID_P(), prefs.getPID_I(), prefs.getPID_D());
 
 		gyro.reset();
+		timer = new Timer();
+		timer.start();
 
 		// Initialize PID
 		setAbsoluteTolerance(1);
@@ -65,18 +71,44 @@ public class Drivetrain extends PIDSubsystem {
 
 	public void drive(double move, double rotate) {
 
-		int degreeRange = 3; // The higher this number, the less it'll try to correct
+		SmartDashboard.putNumber("INPUT ROTATE", rotate);
+
+		int degreeRange = 3; // The higher this number, the less it'll try to
+								// correct
 		wasTurning = isTurning;
-		isTurning = (Math.abs(rotate) > 0.1);
+		isTurning = (Math.abs(rotate) > 0);
 
 		// Reset the gyro when someone applies manual turning
-		if (wasTurning != isTurning)
-			gyro.reset();
 
-		// Override rotate if we are not manually turning and apply angle correction
-		rotate = !isTurning ? -gyro.getAngleZ() / degreeRange : rotate;
-		
+		//Stop turning
+		if (!isTurning && wasTurning) {
+			gyro.reset();
+			timer.reset();
+			timer.start();
+		}
+
+		if (isTurning)
+			settled = false;
+
+		//Start turning
+		if (!isTurning && !settled && timer.get() > 0.25) {
+			settled = true;
+			gyro.reset();
+		}
+
+		SmartDashboard.putBoolean("IS TURNING", isTurning);
+
+		// Override rotate if we are not manually turning and apply angle
+		// correction
+		rotate = settled ? Helpers.rotateToTarget(gyro.getAngleZ(), 0, 0.2, 0.5) : rotate;
+
+		SmartDashboard.putNumber("OUTPUT ROTATE", rotate);
+
 		drive.arcadeDrive(move, rotate);
+	}
+
+	public void resetGyro() {
+		gyro.reset();
 	}
 
 	@Override
@@ -94,7 +126,8 @@ public class Drivetrain extends PIDSubsystem {
 		this.spark0.pidWrite(rampedOutput);
 		this.spark1.pidWrite(rampedOutput);
 
-		System.out.println("Prefs - P: " + prefs.getPID_P() + " I: " + prefs.getPID_I() + " D: " + prefs.getPID_D()	+ " C: " + prefs.getRamp_C());
+		System.out.println("Prefs - P: " + prefs.getPID_P() + " I: " + prefs.getPID_I() + " D: " + prefs.getPID_D()
+				+ " C: " + prefs.getRamp_C());
 		System.out.println("PID Output: " + output);
 		System.out.println("PID Ramped Output: " + rampedOutput);
 	}

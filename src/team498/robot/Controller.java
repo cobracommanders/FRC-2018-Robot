@@ -35,7 +35,7 @@ public class Controller {
 		rightBumper = new JoystickButton(joystick, Mappings.RightBumper);
 
 		// Axes
-		axisLeftX = new JoystickAxis(joystick, Mappings.LeftXAxis, 0);
+		axisLeftX = new JoystickAxis(joystick, Mappings.LeftXAxis, 0.15);
 		axisLeftY = new JoystickAxis(joystick, Mappings.LeftYAxis, 0);
 		axisRightX = new JoystickAxis(joystick, Mappings.RightXAxis, 0);
 		axisRightY = new JoystickAxis(joystick, Mappings.RightYAxis, 0);

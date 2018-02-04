@@ -73,6 +73,9 @@ public class Robot extends TimedRobot {
 
 	@Override
 	public void autonomousInit() {
+		
+		drivetrain.resetGyro();
+		
 		// get selected command
 		autonomousPosition = chooserPosition.getSelected();
 		autonomousStrategy = chooserStrategy.getSelected();
@@ -198,6 +201,9 @@ public class Robot extends TimedRobot {
 
 	@Override
 	public void teleopInit() {
+		
+		drivetrain.resetGyro();
+		
 		if (autoCommand != null) {
 			autoCommand.cancel();
 		}
