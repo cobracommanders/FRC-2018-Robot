@@ -10,11 +10,7 @@ package team498.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import team498.robot.Operator;
 import team498.robot.subsystems.Drivetrain;
-import team498.robot.subsystems.Gyro;
 
-/**
- * An example command. You can replace me with your own command.
- */
 public class Drive extends Command {
 
 	private Operator operator = Operator.getOperator();
