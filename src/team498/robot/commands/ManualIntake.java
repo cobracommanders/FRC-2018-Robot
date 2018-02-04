@@ -40,8 +40,8 @@ public class ManualIntake extends Command {
 			leftBumperPressed = false;
 		}*/
 		
-		double leftPower = operator.controller.axisRightTrigger.getAxisValue() - operator.controller.axisLeftTrigger.getAxisValue() + operator.controller.axisLeftX.getAxisValue();
-		double rightPower = -(operator.controller.axisRightTrigger.getAxisValue() - operator.controller.axisLeftTrigger.getAxisValue() - operator.controller.axisLeftX.getAxisValue());
+		double leftPower = operator.controller.axisLeftY.getAxisValue();
+		double rightPower = operator.controller.axisRightY.getAxisValue();
 		
 			this.intake.set(leftPower,rightPower);
 		SmartDashboard.putNumber(Dashboard.IntakeLeftPower, leftPower);
