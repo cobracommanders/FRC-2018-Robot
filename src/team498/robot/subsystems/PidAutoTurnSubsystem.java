@@ -1,4 +1,4 @@
-package team498.robot.subsystems;
+/*package team498.robot.subsystems;
 
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -9,7 +9,7 @@ import team498.robot.Prefs;
 import team498.robot.commands.RampDrive;
 import team498.robot.subsystems.Drivetrain;
 
-/**
+*//**
  * PID Training Notes:
  * PID(0.01 ,0.1 ,0.04 )
  * Trial 1: overshoots then returns to 68.
@@ -39,7 +39,7 @@ import team498.robot.subsystems.Drivetrain;
  * Trial 1:
  * Trial 2:
  * Trial 3:
- */
+ *//*
 public class PidAutoTurnSubsystem extends PIDSubsystem {
 	
 	private static PidAutoTurnSubsystem pidAutoTurnSubsystem = null;
@@ -94,3 +94,4 @@ public class PidAutoTurnSubsystem extends PIDSubsystem {
 	}
 }
 
+*/

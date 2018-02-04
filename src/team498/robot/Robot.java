@@ -30,22 +30,17 @@ import team498.robot.commands.auto.StartRightPlaceLeftSwitchStrategy;
 import team498.robot.commands.auto.StartRightPlaceRightScaleStrategy;
 import team498.robot.commands.auto.StartRightPlaceRightSwitchStrategy;
 import team498.robot.commands.auto.SwitchPosition;
-import team498.robot.commands.Auto;
 import team498.robot.subsystems.Drivetrain;
-import team498.robot.subsystems.Gyro;
 //import team498.robot.subsystems.Vision;
 
 public class Robot extends TimedRobot {
 
 	private Operator operator = Operator.getOperator();
 	
-
 	private DriverStation ds = DriverStation.getInstance();
 
 	// Subsystems
-	// private Drivetrain drivetrain = Drivetrain.getDrivetrain();
 	//private Vision vision = Vision.getVision();
-	private Gyro gyro = Gyro.getGyro();
 	private Drivetrain drivetrain = Drivetrain.getDrivetrain();
 
 	// Autonomous Selections
@@ -77,7 +72,6 @@ public class Robot extends TimedRobot {
 	}
 
 	@Override
-
 	public void autonomousInit() {
 		// get selected command
 		autonomousPosition = chooserPosition.getSelected();
@@ -211,12 +205,9 @@ public class Robot extends TimedRobot {
 	}
 
 	@Override
-	public void teleopPeriodic() {
-		
+	public void teleopPeriodic() {		
 		updateDashboard();
-		Scheduler.getInstance().run();
-		
-		
+		Scheduler.getInstance().run();		
 	}
 
 	@Override
@@ -243,7 +234,6 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putString("Position Choice", autonomousPosition != null ? autonomousPosition.toString() : "");
 		SmartDashboard.putString("Strategy Choice", autonomousStrategy != null ? autonomousStrategy.toString() : "");
 		operator.updateDashboard();
-		gyro.updateDashboard();
 		// TODO add other subsystems
 	}
 }

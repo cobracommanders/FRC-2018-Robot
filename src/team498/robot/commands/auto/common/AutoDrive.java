@@ -20,11 +20,11 @@ public class AutoDrive extends Command {
     }
 
     protected void execute() {
-    	drivetrain.drive(moveValue, 0); //drives a value
+    	drivetrain.drive(moveValue, 0);
     }
 
     protected boolean isFinished() {
-        return false; //stops when command time expires
+        return false;
     }
 
     protected void end() {
