@@ -45,8 +45,6 @@ public class DynamicCommand extends Command {
 		phase = 0;
 	}
 
-	//
-
 	public dynamic ParseCommand(String command) {
 		String[] components;
 		components = command.split(Pattern.quote("_"));
