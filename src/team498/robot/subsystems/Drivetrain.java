@@ -44,10 +44,13 @@ public class Drivetrain extends PIDSubsystem {
 	private ADIS16448_IMU gyro = new ADIS16448_IMU();
 	private ConstantAccelerationCalculator ramp = new ConstantAccelerationCalculator(prefs.getRamp_C());
 
-	private boolean isTurning = false;
-	private boolean wasTurning = false;
-	private boolean settled = false;
+	private boolean correct;
+	private boolean locked;
 	private Timer timer;
+
+	private final double delayTime = 0.3;
+	private final double threshold = 0.4;
+	private final double tolerence = 0.1;
 
 	private DifferentialDrive drive = new DifferentialDrive(spark1, spark0);
 
@@ -71,36 +74,29 @@ public class Drivetrain extends PIDSubsystem {
 
 	public void drive(double move, double rotate) {
 
-		SmartDashboard.putNumber("INPUT ROTATE", rotate);
-
-		int degreeRange = 3; // The higher this number, the less it'll try to
-								// correct
-		wasTurning = isTurning;
-		isTurning = (Math.abs(rotate) > 0);
-
-		// Reset the gyro when someone applies manual turning
-
-		//Stop turning
-		if (!isTurning && wasTurning) {
-			gyro.reset();
-			timer.reset();
-			timer.start();
+		// If driving, not turning
+		if (Math.abs(move) > 0 && rotate == 0) {
+			if (timer.get() == 0) {
+				timer.start();
+			}
+			if (timer.get() > delayTime) {
+				correct = true;
+				if (!locked) {
+					locked = true;
+					gyro.reset();
+				}
+			}
+			
+		} else {
+			correct = false;
+			locked = false;
+			if (timer.get() > 0) {
+				timer.stop();
+				timer.reset();
+			}
 		}
 
-		if (isTurning)
-			settled = false;
-
-		//Start turning
-		if (!isTurning && !settled && timer.get() > 0.25) {
-			settled = true;
-			gyro.reset();
-		}
-
-		SmartDashboard.putBoolean("IS TURNING", isTurning);
-
-		// Override rotate if we are not manually turning and apply angle
-		// correction
-		rotate = settled ? Helpers.rotateToTarget(gyro.getAngleZ(), 0, 0.2, 0.5) : rotate;
+		rotate = correct ? Helpers.rotateToTarget(gyro.getAngleZ(), 0, tolerence, threshold) : rotate;
 
 		SmartDashboard.putNumber("OUTPUT ROTATE", rotate);
 
