@@ -234,6 +234,7 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putString("Position Choice", autonomousPosition != null ? autonomousPosition.toString() : "");
 		SmartDashboard.putString("Strategy Choice", autonomousStrategy != null ? autonomousStrategy.toString() : "");
 		operator.updateDashboard();
+		drivetrain.updateDashboard();
 		// TODO add other subsystems
 	}
 }
