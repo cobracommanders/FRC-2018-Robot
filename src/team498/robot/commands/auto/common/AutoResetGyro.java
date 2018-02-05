@@ -21,10 +21,11 @@ public class AutoResetGyro extends Command {
     }
 
     protected boolean isFinished() {
-    	   return true;
+    	return true;
     }
 
     protected void end() {
+    	
     }
 
     protected void interrupted() {

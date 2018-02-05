@@ -10,6 +10,7 @@ package team498.robot;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -50,7 +51,7 @@ public class Robot extends TimedRobot {
 	SendableChooser<AutoStrategy> chooserStrategy = new SendableChooser<>();
 	RobotStartPosition autonomousPosition;
 	AutoStrategy autonomousStrategy;
-	Command autoCommand;
+	CommandGroup autoCommand;
 
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -137,6 +138,23 @@ public class Robot extends TimedRobot {
 				if (autonomousPosition == RobotStartPosition.Left) {
 					autoCommand = new StartLeftPlaceLeftScaleStrategy();
 					autoCommand.start();
+					
+					/*//WHEN AUTO IS DONE, CANCEL
+					if (autoCommand.isCompleted()) {
+						autoCommand.cancel();
+					}
+					//START LEFT SWITCH AUTO FROM LEFT SCALE
+					if (autoCommand.isCanceled() && gameData.getOurSwitchPosition() == SwitchPosition.Left) {
+						//autoCommand = new StartLeftScaleLeftSwitchStrategy();
+						//autoCommand.start();
+					} else if (autoCommand.isCanceled() && gameData.getOurSwitchPosition() == SwitchPosition.Right) {
+						//autoCommand = new StartLeftScaleRightSwitchStrategy();
+						//autoCommand.start();
+					} else {
+						System.out.println("Not moving to Switch from Left Scale");
+						System.out.println("Incorrect If/else logic?");
+					}*/
+					
 				//ROBOT ON CENTER
 				} else if (autonomousPosition == RobotStartPosition.Center) {
 					autoCommand = new StartCenterPlaceLeftScaleStrategy();
