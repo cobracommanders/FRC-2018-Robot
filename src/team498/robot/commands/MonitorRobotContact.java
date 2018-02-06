@@ -33,6 +33,7 @@ public class MonitorRobotContact extends Command {
 	protected void execute() {
 		// TODO When Accelerometer says to , rumble the correct amount in the correct
 		// places
+		System.out.println("Executed!");
 		if (Math.abs(accelerometer.getX()) > .3) {
 			rumblePower = 1;
 			timer.start();
@@ -52,6 +53,7 @@ public class MonitorRobotContact extends Command {
 
 	// Called once after isFinished returns true
 	protected void end() {
+		System.out.println("End!");
 		this.controller.setRumble(0);
 	}
 
