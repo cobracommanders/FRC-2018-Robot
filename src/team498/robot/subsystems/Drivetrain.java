@@ -7,107 +7,82 @@
 
 package team498.robot.subsystems;
 
-//import edu.wpi.first.wpilibj.PIDController;
-import edu.wpi.first.wpilibj.Victor;
+import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.Spark;
+//import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import team498.robot.Dashboard;
+import team498.robot.Mappings;
 import team498.robot.commands.RampDrive;
 
 //import edu.wpi.first.wpilibj.PIDOutput;
 //import edu.wpi.first.wpilibj.PIDSource;
 //import edu.wpi.first.wpilibj.PIDSourceType;
+public class Drivetrain extends Subsystem {
+	private static final double WheelDiameter = 0.1524; // 6 inch wheels. This was converted to meters
+	private static final double PulsePerRevolution = 2048; // all switches on the encoder are off
+	private static final double WheelCircumference = WheelDiameter * Math.PI;
+	private static final double MetersPerPulse = WheelCircumference / PulsePerRevolution;
 
+	private static Drivetrain drivetrain = null;
 
-public class Drivetrain extends Subsystem {	
+	/**
+	 * Provides singleton access to the drivetrain subsystem
+	 * 
+	 * @return Drivetrain instance
+	 */
+	public static Drivetrain getDrivetrain() {
+		drivetrain = drivetrain == null ? new Drivetrain() : drivetrain;
+		return drivetrain;
+	}
 	
-	private double moveValue = 0;
+	//TODO update the channels in the Mappings.java
+	//private SpeedControllerGroup leftGroup = new SpeedControllerGroup(new Spark(Mappings.FrontLeftMotorChannel), new Spark(Mappings.BackLeftMotorChannel));
+	//private SpeedControllerGroup rightGroup = new SpeedControllerGroup(new Spark(Mappings.FrontRightMotorChannel), new Spark(Mappings.BackRightMotorChannel));
+	//private DifferentialDrive drive = new DifferentialDrive(leftGroup, rightGroup);
 	
-	private Victor victor0 = new Victor(0);
-	private Victor victor1 = new Victor(1);
+	private DifferentialDrive drive = new DifferentialDrive(new Spark(Mappings.FrontLeftMotorChannel), new Spark(Mappings.FrontRightMotorChannel));
 
-    private static Drivetrain drivetrain = null;
-    //private Gyro gyro = null;
-    /**
-     * Provides singleton access to the drivetrain subsystem
-     * @return Drivetrain instance
-     */
-    //private PIDSource pidSource = new PIDSource() {
-/*		
-		@Override
-		public void setPIDSourceType(PIDSourceType pidSource) {
-			// TODO Auto-generated method stub
-		}
-		
-		@Override
-		public double pidGet() {
-			// TODO Auto-generated method stub
-			return 0;
-		}
-		
-		@Override
-		public PIDSourceType getPIDSourceType() {
-			// TODO Auto-generated method stub
-			return null;
-		}
-	};
-	private PIDOutput pidOutput = new PIDOutput() {
-		
-		@Override
-		public void pidWrite(double output) {
-			// TODO Auto-generated method stub
-			
-		}
-	};
-	
-    private PIDController rampController = new PIDController(0.2,0,0,pidSource,pidOutput);
-    */
-    
-    public static Drivetrain getDrivetrain() {
-        drivetrain = drivetrain == null ? new Drivetrain() : drivetrain;
-        return drivetrain;
-    }
-    private DifferentialDrive drive = new DifferentialDrive(victor1, victor0);
-    
-	public Drivetrain(){
-    	super("Drivetrain");
-    	/*rampController.setContinuous(true);
-    	rampController.setInputRange(-1, 1);
-    	rampController.setOutputRange(-1, 1);
-    	rampController.enable();*/
-    	
-    }
-	
+	public Encoder leftEncoder = new Encoder(Mappings.LeftEncoderDigitalSource1, Mappings.LeftEncoderDigitalSource2);
+	public Encoder rightEncoder = new Encoder(Mappings.RightEncoderDigitalSource1, Mappings.RightEncoderDigitalSource2);
+
+	public Drivetrain() {
+		super("Drivetrain");
+		leftEncoder.setDistancePerPulse(MetersPerPulse);
+		rightEncoder.setDistancePerPulse(MetersPerPulse);
+		resetEncoders();
+	}
 
 	public void initDefaultCommand() {
 		// Set the default command for a subsystem here.
-		setDefaultCommand(new RampDrive()); //uses rampdrive
+		setDefaultCommand(new RampDrive()); // uses rampdrive
 	}
 	public double getMoveValue() {
 		return moveValue;
 	}
-	
-    public void drive(double move, double rotate) {
-    	
-    	drive.arcadeDrive(move, rotate);
-    	
-/*        // Temporarily remmber the last values for the dashboard
-        currentMove = move;
-        currentRotate = rotate;
 
-        // Apply motor power based on aracade inputs
-        drive.arcadeDrive(move, rotate);
-*/        
-    }
-    
+	public void drive(double move, double rotate) {
+		drive.arcadeDrive(move, rotate);
+	}
+	
     public void pidWrite(double output) {
     	this.victor0.pidWrite(output);
     	this.victor1.pidWrite(output);
     }
-   /* public void pidDrive(double move, double rotate) {
-    	
-    	//rampController.setSetpoint(move);
-    	
-    	
-    }*/
+	public double getDistance() {
+		//averages the encoders distance 
+		return (leftEncoder.getDistance() + rightEncoder.getDistance()) / 2;
+	}
 	
+	public void resetEncoders() {
+		leftEncoder.reset();
+		rightEncoder.reset();
+	}
+	
+	public void updateDashboard() {
+		SmartDashboard.putNumber(Dashboard.DistanceTraveled, getDistance());
+	}
+
 }
