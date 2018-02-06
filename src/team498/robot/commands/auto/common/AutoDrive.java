@@ -6,21 +6,22 @@ import team498.robot.subsystems.Drivetrain;
 public class AutoDrive extends Command {
 	
 	private Drivetrain drivetrain;
-	private double moveValue;
+	private double distanceValue;
 	
-    public AutoDrive(double moveValue) {
+    public AutoDrive(double distanceValue) {
     	super("AutoDrive");
     	
     	requires(this.drivetrain = Drivetrain.getDrivetrain());
     	
-    	this.moveValue = moveValue;
+    	distanceValue = drivetrain.getDistance();
+    	this.distanceValue = distanceValue;
     }
 
     protected void initialize() {
     }
 
     protected void execute() {
-    	drivetrain.drive(moveValue, 0); //drives a value
+    	drivetrain.drive(distanceValue, 0); //drives towards distance
     }
 
     protected boolean isFinished() {
