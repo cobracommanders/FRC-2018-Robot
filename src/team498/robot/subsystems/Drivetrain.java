@@ -27,6 +27,9 @@ public class Drivetrain extends Subsystem {
 	private static final double MetersPerPulse = WheelCircumference / PulsePerRevolution;
 
 	private static Drivetrain drivetrain = null;
+	
+	Spark sparkFrontLeft = new Spark(Mappings.FrontLeftMotorChannel);
+	Spark sparkFrontRight = new Spark(Mappings.FrontRightMotorChannel);
 
 	/**
 	 * Provides singleton access to the drivetrain subsystem
@@ -43,7 +46,7 @@ public class Drivetrain extends Subsystem {
 	//private SpeedControllerGroup rightGroup = new SpeedControllerGroup(new Spark(Mappings.FrontRightMotorChannel), new Spark(Mappings.BackRightMotorChannel));
 	//private DifferentialDrive drive = new DifferentialDrive(leftGroup, rightGroup);
 	
-	private DifferentialDrive drive = new DifferentialDrive(new Spark(Mappings.FrontLeftMotorChannel), new Spark(Mappings.FrontRightMotorChannel));
+	private DifferentialDrive drive = new DifferentialDrive(sparkFrontLeft, sparkFrontRight);
 
 	public Encoder leftEncoder = new Encoder(Mappings.LeftEncoderDigitalSource1, Mappings.LeftEncoderDigitalSource2);
 	public Encoder rightEncoder = new Encoder(Mappings.RightEncoderDigitalSource1, Mappings.RightEncoderDigitalSource2);
@@ -59,17 +62,17 @@ public class Drivetrain extends Subsystem {
 		// Set the default command for a subsystem here.
 		setDefaultCommand(new RampDrive()); // uses rampdrive
 	}
-	public double getMoveValue() {
+	/*public double getMoveValue() {
 		return moveValue;
-	}
+	}*/
 
 	public void drive(double move, double rotate) {
 		drive.arcadeDrive(move, rotate);
 	}
 	
     public void pidWrite(double output) {
-    	this.victor0.pidWrite(output);
-    	this.victor1.pidWrite(output);
+    	sparkFrontLeft.pidWrite(output);
+    	sparkFrontRight.pidWrite(output);
     }
 	public double getDistance() {
 		//averages the encoders distance 
