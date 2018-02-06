@@ -23,8 +23,8 @@ import team498.robot.commands.RampDrive;
 public class Drivetrain extends Subsystem {
 	private static final double WheelDiameter = 0.1524; // 6 inch wheels. This was converted to meters
 	private static final double PulsePerRevolution = 2048; // all switches on the encoder are off
-	private static final double WheelCircumference = WheelDiameter * Math.PI;
-	private static final double MetersPerPulse = WheelCircumference / PulsePerRevolution;
+	private static final double WheelCircumference = WheelDiameter * Math.PI; // .4787
+	private static final double MetersPerPulse = WheelCircumference / PulsePerRevolution; // .00023378
 
 	private static Drivetrain drivetrain = null;
 	
