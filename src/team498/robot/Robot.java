@@ -10,8 +10,10 @@ package team498.robot;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import team498.robot.commands.Auto;
+import team498.robot.commands.MonitorRobotContact;
 import team498.robot.subsystems.Accelerometer;
 import team498.robot.subsystems.Gyro;
+import team498.robot.subsystems.HapticFeedback;
 import team498.robot.subsystems.Vision;
 
 public class Robot extends TimedRobot {
@@ -24,6 +26,7 @@ public class Robot extends TimedRobot {
 	private Vision vision = Vision.getVision();
 	private Gyro gyro = Gyro.getGyro();
 	private Accelerometer accelerometer = Accelerometer.getAccelerometer();
+	private HapticFeedback hapticFeedback = HapticFeedback.getHapticFeedback();
 	private Auto auto = new Auto();
 	
 	@Override
@@ -58,11 +61,11 @@ public class Robot extends TimedRobot {
 	public void teleopInit() {
 		updateDashboard();
 		this.auto.cancel();
+		
 	}
 
 	@Override
 	public void teleopPeriodic() {
-		
 		updateDashboard();
 		Scheduler.getInstance().run();
 		

@@ -1,7 +1,7 @@
 package team498.robot.commands;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.command.TimedCommand;
 import team498.robot.Controller;
 import team498.robot.subsystems.Accelerometer;
 import team498.robot.subsystems.HapticFeedback;
@@ -9,18 +9,20 @@ import team498.robot.subsystems.HapticFeedback;
 /**
  *
  */
-public class MonitorRobotContact extends TimedCommand {
+public class MonitorRobotContact extends Command {
 	private Controller controller;
 
 	public double rumblePower;
 
 	private Accelerometer accelerometer;
 	private HapticFeedback hapticFeedback;
+	
+	private Timer timer;
 
-	public MonitorRobotContact(String MonitorRobotContact, double time ) {
-		super("MonitorRobotContact", time);
+	public MonitorRobotContact() {
 		requires(this.accelerometer = Accelerometer.getAccelerometer());
 		requires(this.hapticFeedback = HapticFeedback.getHapticFeedback());
+		timer = new Timer();
 	}
 
 	// Called just before this Command runs the first time
@@ -33,13 +35,19 @@ public class MonitorRobotContact extends TimedCommand {
 		// places
 		if (Math.abs(accelerometer.getX()) > .3) {
 			rumblePower = 1;
+			timer.start();
+		}
+		
+		if(timer.get() > 1) {
+			rumblePower = 0;
+			timer.reset();
 		}
 		this.controller.setRumble(rumblePower);
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
 	protected boolean isFinished() {
-		return isTimedOut();
+		return false;
 	}
 
 	// Called once after isFinished returns true
