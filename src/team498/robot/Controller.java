@@ -6,7 +6,7 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Controller {
-	private Joystick joystick;
+	public Joystick joystick;
 
 	public JoystickButton buttonA;
 	public JoystickButton buttonB;

@@ -12,7 +12,6 @@ import java.util.*;
 import team498.robot.commands.LaunchCatapult;
 import team498.robot.commands.ResetGyro;
 import team498.robot.commands.Rumble;
-import team498.robot.dynamicAuto.*;
 
 /**
  * This class is the glue that binds the controls on the physical operator

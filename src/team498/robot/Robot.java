@@ -7,46 +7,49 @@
 
 package team498.robot;
 
-import java.io.IOException;
-import java.util.List;
-
-import edu.wpi.cscore.UsbCamera;
-import edu.wpi.first.wpilibj.CameraServer;
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import team498.robot.commands.Auto;
+import team498.robot.dynamic.JoystickInput;
+import team498.robot.dynamic.Recorder;
+import team498.robot.dynamic.TaskGroup;
+import team498.robot.dynamic.tasks.DriveBackwardTask;
+import team498.robot.dynamic.tasks.DriveForwardTask;
+import team498.robot.dynamic.tasks.DriveTask;
+import team498.robot.dynamic.tasks.RotateTask;
 import team498.robot.subsystems.Drivetrain;
 import team498.robot.subsystems.Gyro;
 import team498.robot.subsystems.Vision;
-import team498.robot.dynamicAuto.*;
 
 public class Robot extends TimedRobot {
 
 	private Operator operator = Operator.getOperator();
 	private final String dynamicDirectory = "/home/lvuser/frc/dynamicauto/";
 	private final String fileName = "test6.txt";
-	private DynamicAutoRecorder dar;
 	// Subsystems
 	private Drivetrain drivetrain = Drivetrain.getDrivetrain();
 	private Vision vision = Vision.getVision();
 	private Gyro gyro = Gyro.getGyro();
 
+	private Recorder recorder;
 	private boolean recorded = false;
 
 	private Timer timer;
 
 	private Auto auto = new Auto();
+	private TaskGroup dynamicAuto;
 
 	@Override
 	public void robotInit() {
 		// vision.startCapture();
-		dar = DynamicAutoRecorder.getAutoRecorder();
+		timer = new Timer();
 		updateDashboard();
 	}
 
 	@Override
-	public void disabledInit() {		
+	public void disabledInit() {
 		updateDashboard();
 	}
 
@@ -59,63 +62,49 @@ public class Robot extends TimedRobot {
 	@Override
 	public void autonomousInit() {
 		updateDashboard();
-		DynamicCommand dc = null;
-		if (dar != null) {
-			try {
-				dc = dar.CreateDynamic(dynamicDirectory + fileName);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-		if (dc != null) {
-			auto.addSequential(dc, 15);
-		}
-		this.auto.start();
+		dynamicAuto = recorder.Build();
+		// this.auto.start();
 	}
 
 	@Override
 	public void autonomousPeriodic() {
 		updateDashboard();
-		Scheduler.getInstance().run();
-	}
-
-	@Override
-	public void teleopInit() {
-		updateDashboard();
-		this.auto.cancel();
-		dar = DynamicAutoRecorder.getAutoRecorder();
-		dar.StartRecording();
-		timer = new Timer();
-		timer.start();
-	}
-
-	@Override
-	public void teleopPeriodic() {
-		updateDashboard();
-		List<String> tags;
 		try {
-			if (timer.get() < 15) {
-				tags = dar.buttonRec.detect();
-				System.out.println("After Detect " + tags.size());
-
-				for (int i = 0; i < tags.size(); i++) {
-					System.out.println(tags.get(i));
-					dar.buttonChange(tags.get(i));
-				}
-				System.out.println("Detecting...");
-			} else if (!recorded) {
-				recorded = true;
-				dar.StopRecording(dynamicDirectory, fileName);
-			}
+			dynamicAuto.Execute();
 		} catch (Exception e) {
-			System.out.println("Error: " + e.toString());
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		Scheduler.getInstance().run();
 	}
 
 	@Override
+	public void teleopInit() {
+		updateDashboard();
+	}
+
+	@Override
+	public void teleopPeriodic() {
+		updateDashboard();
+		Scheduler.getInstance().run();
+	}
+
+	@Override
+	public void testInit() {
+		timer.reset();
+		timer.start();
+		recorder = new Recorder();
+		Joystick joystick = operator.controller.joystick;
+		recorder.Assign("df", new JoystickInput(joystick, Mappings.RightTrigger, false), new DriveForwardTask());
+		recorder.Assign("db", new JoystickInput(joystick, Mappings.RightTrigger, false), new DriveBackwardTask());
+		recorder.Assign("r", new JoystickInput(joystick, Mappings.LeftXAxis, false), new RotateTask());
+		recorder.AddPassive(new DriveTask());
+	}
+
+	@Override
 	public void testPeriodic() {
+		if (timer.get() <= 15)
+			recorder.Read();
 	}
 
 	void updateDashboard() {
