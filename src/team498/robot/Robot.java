@@ -26,15 +26,11 @@ import team498.robot.subsystems.Vision;
 public class Robot extends TimedRobot {
 
 	private Operator operator = Operator.getOperator();
-	private final String dynamicDirectory = "/home/lvuser/frc/dynamicauto/";
-	private final String fileName = "test6.txt";
 	// Subsystems
-	private Drivetrain drivetrain = Drivetrain.getDrivetrain();
 	private Vision vision = Vision.getVision();
 	private Gyro gyro = Gyro.getGyro();
 
 	private Recorder recorder;
-	private boolean recorded = false;
 
 	private Timer timer;
 
