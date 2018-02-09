@@ -2,18 +2,20 @@ package team498.robot.dynamic;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 import edu.wpi.first.wpilibj.Timer;
 
 public class TaskGroup {
-	private HashMap<String, Task> tasks;
+	private Map<String, Task> tasks;
 	private ArrayList<Task> passives;
 	private ArrayList<InputLog> logs;
 	private ArrayList<String> keys;
 	private int index = 0;
 	private Timer timer;
 
-	public TaskGroup(HashMap<String, Task> tasks, ArrayList<Task> passives, ArrayList<InputLog> logs) {
+	public TaskGroup(Map<String, Task> tasks, ArrayList<Task> passives, ArrayList<InputLog> logs) {
+		System.out.println(logs == null);
 		this.tasks = tasks;
 		this.passives = passives;
 		this.logs = logs;
@@ -22,6 +24,9 @@ public class TaskGroup {
 	}
 
 	public void Execute() throws Exception {
+		if (logs.size() == 0) {
+			return;
+		}
 		if (timer.get() > 15)
 			return;
 		if (timer.get() == 0)

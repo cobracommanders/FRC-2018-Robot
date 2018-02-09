@@ -27,7 +27,7 @@ public class Drivetrain extends Subsystem {
 		return drivetrain;
 	}
 
-	private DifferentialDrive drive = new DifferentialDrive(new Spark(3), new Spark(4));
+	private DifferentialDrive drive = new DifferentialDrive(new Victor(3), new Victor(4));
 
 	public Drivetrain() {
 		super("Drivetrain");

@@ -68,7 +68,7 @@ public class Robot extends TimedRobot {
 		try {
 			dynamicAuto.Execute();
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
+			// TODO Auto-generated catch blockz
 			e.printStackTrace();
 		}
 		Scheduler.getInstance().run();
@@ -77,30 +77,36 @@ public class Robot extends TimedRobot {
 	@Override
 	public void teleopInit() {
 		updateDashboard();
+		timer.reset();
+		timer.start();
+		recorder = new Recorder();
+		Joystick joystick = operator.controller.joystick;
+		System.out.println("Fuck You");
+		recorder.Assign("df", new JoystickInput(joystick, Mappings.RightTrigger, false), new DriveForwardTask());
+		recorder.Assign("db", new JoystickInput(joystick, Mappings.LeftTrigger, false), new DriveBackwardTask());
+		recorder.Assign("r", new JoystickInput(joystick, Mappings.LeftXAxis, false), new RotateTask());
+		System.out.println("Fuck Me");
+		recorder.AddPassive(new DriveTask());
+		System.out.println("Fuck Us");
 	}
 
 	@Override
 	public void teleopPeriodic() {
 		updateDashboard();
+		System.out.println("TelePeriod");
+		if (timer.get() <= 15)
+			recorder.Read();
+		System.out.println("End TelePeriod");
 		Scheduler.getInstance().run();
 	}
 
 	@Override
 	public void testInit() {
-		timer.reset();
-		timer.start();
-		recorder = new Recorder();
-		Joystick joystick = operator.controller.joystick;
-		recorder.Assign("df", new JoystickInput(joystick, Mappings.RightTrigger, false), new DriveForwardTask());
-		recorder.Assign("db", new JoystickInput(joystick, Mappings.RightTrigger, false), new DriveBackwardTask());
-		recorder.Assign("r", new JoystickInput(joystick, Mappings.LeftXAxis, false), new RotateTask());
-		recorder.AddPassive(new DriveTask());
+
 	}
 
 	@Override
 	public void testPeriodic() {
-		if (timer.get() <= 15)
-			recorder.Read();
 	}
 
 	void updateDashboard() {

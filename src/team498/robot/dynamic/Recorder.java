@@ -8,6 +8,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.regex.Pattern;
 
 import edu.wpi.first.wpilibj.Timer;
@@ -23,8 +24,8 @@ import edu.wpi.first.wpilibj.Timer;
 public final class Recorder {
 
 	private static final String DIRECTORY = "/home/lvuser/frc/dynamicauto/";
-	private HashMap<String, Task> tasks;
-	private HashMap<String, JoystickInput> inputs;
+	private Map<String, Task> tasks;
+	private Map<String, JoystickInput> inputs;
 	private ArrayList<Task> passives;
 	private ArrayList<JoyState> oldStates;
 	private ArrayList<JoyState> newStates;
@@ -43,6 +44,7 @@ public final class Recorder {
 		passives = new ArrayList<Task>();
 		oldStates = newStates = new ArrayList<>();
 		timer = new Timer();
+		logs = new ArrayList<InputLog>();
 	}
 
 	/**
@@ -59,11 +61,18 @@ public final class Recorder {
 		newStates = _grabValues();
 		if (oldStates.size() == newStates.size())
 			return;
+		if (oldStates.size() == 0)
+			return;
 		for (int i = 0; i < newStates.size(); i++) {
 			JoyState newState = newStates.get(i);
 			if (newState.isBool) {
 				if (newState.boolState != oldStates.get(i).boolState) {
 					InputLog input = new InputLog(newState.name, newState.boolState, time);
+					logs.add(input);
+				}
+			} else {
+				if (newState.doubleState != oldStates.get(i).doubleState) {
+					InputLog input = new InputLog(newState.name, newState.doubleState, time);
 					logs.add(input);
 				}
 			}
@@ -142,8 +151,10 @@ public final class Recorder {
 	 *         Team 498
 	 */
 	public void Assign(String name, JoystickInput input, Task task) {
+		System.out.println(name + " was assigned");
 		tasks.put(name, task);
 		inputs.put(name, input);
+		System.out.println("Done");
 	}
 
 	/**
@@ -156,6 +167,7 @@ public final class Recorder {
 	 *         Team 498
 	 */
 	public void AddPassive(Task task) {
+		System.out.println("Passive was added");
 		passives.add(task);
 	}
 
@@ -168,7 +180,9 @@ public final class Recorder {
 	 *         Team 498
 	 */
 	public TaskGroup Build() {
+		System.out.println("Building");
 		TaskGroup tg = new TaskGroup(tasks, passives, logs);
+		System.out.println("Built");
 		return tg;
 	}
 
