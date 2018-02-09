@@ -39,10 +39,37 @@ public class ManualIntake extends Command {
 		if(!operator.controller.leftBumper.get() && leftBumperPressed) {
 			leftBumperPressed = false;
 		}*/
+		//double leftPower = operator.controller.axisLeftY.getAxisValue();
+		//double rightPower = operator.controller.axisRightY.getAxisValue();
 		
-		double leftPower = operator.controller.axisLeftY.getAxisValue();
-		double rightPower = operator.controller.axisRightY.getAxisValue();
+		//Intake In
+		if(operator.controller.buttonA.get()) {
+			leftPower = -.6;
+			rightPower = -.6;
+		}
+		//Intake out
+		else if (operator.controller.buttonB.get()) {
+			leftPower = 1;
+			rightPower = 1;
+		}
+		//Intake cube adjust intake
+		else if(operator.controller.buttonX.get()) {
+			leftPower = -.6;
+			rightPower = -.3;
+		}
+		//Also intake cube adjust intake
+		else if(operator.controller.buttonY.get()) {
+			leftPower = -.3;
+			rightPower = -.6;
+		}
+		//Intake off
+		else{
+			leftPower = 0;
+			rightPower = 0;
+		}
 		
+
+	
 			this.intake.set(leftPower,rightPower);
 		SmartDashboard.putNumber(Dashboard.IntakeLeftPower, leftPower);
 		SmartDashboard.putNumber(Dashboard.IntakeRightPower, rightPower);
