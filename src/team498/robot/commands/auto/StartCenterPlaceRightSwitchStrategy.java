@@ -1,29 +1,28 @@
 package team498.robot.commands.auto;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
+import team498.robot.commands.auto.common.AutoDrive;
+import team498.robot.commands.auto.common.AutoIntake;
+import team498.robot.commands.auto.common.AutoTurn;
 
 /**
  *
  */
 public class StartCenterPlaceRightSwitchStrategy extends CommandGroup {
 
-    public StartCenterPlaceRightSwitchStrategy() {
-    	System.out.println("Start Center, Right Switch Strategy!");
-        // Add Commands here:
-        // e.g. addSequential(new Command1());
-        //      addSequential(new Command2());
-        // these will run in order.
-
-        // To run multiple commands at the same time,
-        // use addParallel()
-        // e.g. addParallel(new Command1());
-        //      addSequential(new Command2());
-        // Command1 and Command2 will run in parallel.
-
-        // A command group will require all of the subsystems that each member
-        // would require.
-        // e.g. if Command1 requires chassis, and Command2 requires arm,
-        // a CommandGroup containing them would require both the chassis and the
-        // arm.
-    }
+	public StartCenterPlaceRightSwitchStrategy() {
+		System.out.println("Start Center, Right Switch Strategy!");
+		// drive forward 5 units on graph (81 inches)
+		addSequential(new AutoDrive(.8, 81));
+		// rotate to the right
+		addSequential(new AutoTurn(90));
+		// drives forward 2 units (32.4 inches)
+		addSequential(new AutoDrive(.8, 32.4));
+		// turns left
+		addSequential(new AutoTurn(-90));
+		// drives forward
+		addSequential(new AutoDrive(.8, 64.8));
+		// reverses intake so releases cube into switch
+		addSequential(new AutoIntake(0, -.8, -.8, false));
+	}
 }

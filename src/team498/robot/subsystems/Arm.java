@@ -25,8 +25,7 @@ public class Arm extends Subsystem {
     	setDefaultCommand(new ManualArm());
     	
     }
-    
-    
+
     public void armSet(double power) {
     	armMotor.set(power);
     }

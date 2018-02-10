@@ -34,10 +34,10 @@ import team498.robot.commands.ManualDrive;
 public class Drivetrain extends PIDSubsystem {
 	
 	//Field is 16.4592 meters across
-	private static final double WheelDiameter = 0.1524; // 6 inch wheels. This was converted to meters
+	private static final double WheelDiameter = 6; // 6 inch wheels.
 	private static final double PulsePerRevolution = 2048; // all switches on the encoder are off
 	private static final double WheelCircumference = WheelDiameter * Math.PI;
-	private static final double MetersPerPulse = WheelCircumference / PulsePerRevolution;
+	private static final double InchesPerPulse = WheelCircumference / PulsePerRevolution;
 
 	private static Drivetrain drivetrain = null;
 	public static Drivetrain getDrivetrain() {
@@ -74,8 +74,8 @@ public class Drivetrain extends PIDSubsystem {
 	public Drivetrain() {
 		super("Drivetrain", prefs.getPID_P(), prefs.getPID_I(), prefs.getPID_D());
 		
-		leftEncoder.setDistancePerPulse(MetersPerPulse);
-		rightEncoder.setDistancePerPulse(MetersPerPulse);
+		leftEncoder.setDistancePerPulse(InchesPerPulse);
+		rightEncoder.setDistancePerPulse(InchesPerPulse);
 		
 		gyro.reset();
 		correctionDelayTimer = new Timer();
