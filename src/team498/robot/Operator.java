@@ -27,7 +27,6 @@ public class Operator {
 	
 	public Operator() {
 		controller.buttonA.whileHeld(new Rumble(this.controller));
-		controller.buttonX.whenPressed(new ResetGyro());
 		//controller.buttonY.whenPressed(new LaunchCatapult("LaunchCatapult", 5)); //where we call time
 		controller.buttonY.whenPressed(new LaunchCatapult("LaunchCatapult", 5));
 	}
