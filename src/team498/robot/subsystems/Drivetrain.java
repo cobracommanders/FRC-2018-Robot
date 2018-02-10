@@ -9,6 +9,7 @@ package team498.robot.subsystems;
 
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Spark;
+import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
@@ -45,8 +46,15 @@ public class Drivetrain extends PIDSubsystem {
 
 	static Prefs prefs = Prefs.getPrefs();
 
-	private Spark spark0 = new Spark(0);
-	private Spark spark1 = new Spark(2);
+	private Spark frontLeftDrive = new Spark(Mappings.FrontLeftMotorChannel);
+	private Spark frontRightDrive = new Spark(Mappings.FrontRightMotorChannel);
+	private Spark backLeftDrive = new Spark(Mappings.BackLeftMotorChannel);
+	private Spark backRightDrive = new Spark(Mappings.BackRightMotorChannel);
+	
+	private SpeedControllerGroup leftGroup = new SpeedControllerGroup(frontLeftDrive, backLeftDrive);
+	private SpeedControllerGroup rightGroup = new SpeedControllerGroup(frontRightDrive, backRightDrive);
+	
+	
 	private ADIS16448_IMU gyro = new ADIS16448_IMU();
 	private ConstantAccelerationCalculator ramp = new ConstantAccelerationCalculator(prefs.getRamp_C());
 
@@ -57,7 +65,7 @@ public class Drivetrain extends PIDSubsystem {
 	private final double correctionGain = 0.03;
 	private final double correctionAngleTolerence = 0.0;
 
-	private DifferentialDrive drive = new DifferentialDrive(spark1, spark0);
+	private DifferentialDrive drive = new DifferentialDrive(leftGroup, rightGroup);
 	
 	public Encoder leftEncoder = new Encoder(Mappings.LeftEncoderDigitalSource1, Mappings.LeftEncoderDigitalSource2);
 	public Encoder rightEncoder = new Encoder(Mappings.RightEncoderDigitalSource1, Mappings.RightEncoderDigitalSource2);
@@ -139,8 +147,8 @@ public class Drivetrain extends PIDSubsystem {
 		double rampedOutput = ramp.getNextDataPoint(output);
 
 		// TODO: Can we use some arcade drive instead?
-		this.spark0.pidWrite(rampedOutput);
-		this.spark1.pidWrite(rampedOutput);
+		this.leftGroup.pidWrite(rampedOutput);
+		this.rightGroup.pidWrite(rampedOutput);
 
 		System.out.println("Prefs - P: " + prefs.getPID_P() + " I: " + prefs.getPID_I() + " D: " + prefs.getPID_D()
 				+ " C: " + prefs.getRamp_C());
