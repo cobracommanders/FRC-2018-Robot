@@ -7,85 +7,134 @@
 
 package team498.robot.subsystems;
 
-import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Spark;
-//import edu.wpi.first.wpilibj.SpeedControllerGroup;
-import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.command.PIDSubsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import team498.robot.ConstantAccelerationCalculator;
 import team498.robot.Dashboard;
-import team498.robot.Mappings;
-import team498.robot.commands.RampDrive;
+import team498.robot.Helpers;
+import team498.robot.Prefs;
+import team498.robot.commands.Drive;
 
-//import edu.wpi.first.wpilibj.PIDOutput;
-//import edu.wpi.first.wpilibj.PIDSource;
-//import edu.wpi.first.wpilibj.PIDSourceType;
-public class Drivetrain extends Subsystem {
-	private static final double WheelDiameter = 0.1524; // 6 inch wheels. This was converted to meters
-	private static final double PulsePerRevolution = 2048; // all switches on the encoder are off
-	private static final double WheelCircumference = WheelDiameter * Math.PI; // .4787
-	private static final double MetersPerPulse = WheelCircumference / PulsePerRevolution; // .00023378
+/**
+ * PID Training Notes: PID(0.01 ,0.1 ,0.04 ) Trial 1: overshoots then returns to
+ * 68. Trial 2: goes to 120 then stops Trial 3: PID( .01,0 ,.1 ) Trial 1: goes
+ * to 20 degrees at max motor then goes down very fast ends at 60 degrees Trial
+ * 2: Trial 3: PID( .02,0 ,.06 ) Trial 1: Trial 2: Trial 3: PID( .02,0 ,.06 )
+ * Trial 1: goes to 87 Trial 2: goes to 90 Trial 3: PID( .02,0 ,.04 ) Trial 1:
+ * 92 Trial 2: 94 Trial 3: PID( , , .02) Trial 1: 97 Trial 2: Trial 3: PID( , ,
+ * ) Trial 1: Trial 2: Trial 3:
+ */
+
+public class Drivetrain extends PIDSubsystem {
 
 	private static Drivetrain drivetrain = null;
-	
-	Spark sparkFrontLeft = new Spark(Mappings.FrontLeftMotorChannel);
-	Spark sparkFrontRight = new Spark(Mappings.FrontRightMotorChannel);
 
-	/**
-	 * Provides singleton access to the drivetrain subsystem
-	 * 
-	 * @return Drivetrain instance
-	 */
 	public static Drivetrain getDrivetrain() {
 		drivetrain = drivetrain == null ? new Drivetrain() : drivetrain;
 		return drivetrain;
 	}
-	
-	//TODO update the channels in the Mappings.java
-	//private SpeedControllerGroup leftGroup = new SpeedControllerGroup(new Spark(Mappings.FrontLeftMotorChannel), new Spark(Mappings.BackLeftMotorChannel));
-	//private SpeedControllerGroup rightGroup = new SpeedControllerGroup(new Spark(Mappings.FrontRightMotorChannel), new Spark(Mappings.BackRightMotorChannel));
-	//private DifferentialDrive drive = new DifferentialDrive(leftGroup, rightGroup);
-	
-	private DifferentialDrive drive = new DifferentialDrive(sparkFrontLeft, sparkFrontRight);
 
-	public Encoder leftEncoder = new Encoder(Mappings.LeftEncoderDigitalSource1, Mappings.LeftEncoderDigitalSource2);
-	public Encoder rightEncoder = new Encoder(Mappings.RightEncoderDigitalSource1, Mappings.RightEncoderDigitalSource2);
+	static Prefs prefs = Prefs.getPrefs();
+
+	private Spark spark0 = new Spark(0);
+	private Spark spark1 = new Spark(2);
+	private ADIS16448_IMU gyro = new ADIS16448_IMU();
+	private ConstantAccelerationCalculator ramp = new ConstantAccelerationCalculator(prefs.getRamp_C());
+
+	private boolean correct;
+	private boolean locked;
+	private Timer timer;
+
+	private final double delayTime = 0.3;
+	private final double threshold = 0.4;
+	private final double tolerence = 0.1;
+
+	private DifferentialDrive drive = new DifferentialDrive(spark1, spark0);
 
 	public Drivetrain() {
-		super("Drivetrain");
-		leftEncoder.setDistancePerPulse(MetersPerPulse);
-		rightEncoder.setDistancePerPulse(MetersPerPulse);
-		resetEncoders();
+		super("Drivetrain", prefs.getPID_P(), prefs.getPID_I(), prefs.getPID_D());
+
+		gyro.reset();
+		timer = new Timer();
+		timer.start();
+
+		// Initialize PID
+		setAbsoluteTolerance(1);
+		getPIDController().setContinuous(false);
+		setInputRange(-180, 180);
+		setOutputRange(-0.5, 0.5);
 	}
 
 	public void initDefaultCommand() {
-		// Set the default command for a subsystem here.
-		setDefaultCommand(new RampDrive()); // uses rampdrive
+		setDefaultCommand(new Drive());
 	}
-	/*public double getMoveValue() {
-		return moveValue;
-	}*/
 
 	public void drive(double move, double rotate) {
+
+		// If driving, not turning
+		if (Math.abs(move) > 0 && rotate == 0) {
+			if (timer.get() == 0) {
+				timer.start();
+			}
+			if (timer.get() > delayTime) {
+				correct = true;
+				if (!locked) {
+					locked = true;
+					gyro.reset();
+				}
+			}
+			
+		} else {
+			correct = false;
+			locked = false;
+			if (timer.get() > 0) {
+				timer.stop();
+				timer.reset();
+			}
+		}
+
+		rotate = correct ? Helpers.rotateToTarget(gyro.getAngleZ(), 0, tolerence, threshold) : rotate;
+
+		SmartDashboard.putNumber("OUTPUT ROTATE", rotate);
+
 		drive.arcadeDrive(move, rotate);
 	}
-	
-    public void pidWrite(double output) {
-    	sparkFrontLeft.pidWrite(output);
-    	sparkFrontRight.pidWrite(output);
-    }
-	public double getDistance() {
-		//averages the encoders distance 
-		return (leftEncoder.getDistance() + rightEncoder.getDistance()) / 2;
-	}
-	
-	public void resetEncoders() {
-		leftEncoder.reset();
-		rightEncoder.reset();
-	}
-	
-	public void updateDashboard() {
-		SmartDashboard.putNumber(Dashboard.DistanceTraveled, getDistance());
+
+	public void resetGyro() {
+		gyro.reset();
 	}
 
+	@Override
+	protected double returnPIDInput() {
+		return gyro.getAngleZ();
+	}
+
+	@Override
+	protected void usePIDOutput(double output) {
+
+		// Perform a ramping calculation on the PID output
+		double rampedOutput = ramp.getNextDataPoint(output);
+
+		// TODO: Can we use some arcade drive instead?
+		this.spark0.pidWrite(rampedOutput);
+		this.spark1.pidWrite(rampedOutput);
+
+		System.out.println("Prefs - P: " + prefs.getPID_P() + " I: " + prefs.getPID_I() + " D: " + prefs.getPID_D()
+				+ " C: " + prefs.getRamp_C());
+		System.out.println("PID Output: " + output);
+		System.out.println("PID Ramped Output: " + rampedOutput);
+	}
+
+	public void updateDashboard() {
+		// SmartDashboard.putNumber("Output values (PID)", pidOutput);
+		SmartDashboard.putNumber("Angle for PID", this.getPosition());
+
+		SmartDashboard.putNumber(Dashboard.GyroAngle, gyro.getAngle());
+		SmartDashboard.putNumber(Dashboard.GyroAngleX, gyro.getAngleX());
+		SmartDashboard.putNumber(Dashboard.GyroAngleY, gyro.getAngleY());
+		SmartDashboard.putNumber(Dashboard.GyroAngleZ, gyro.getAngleZ());
+	}
 }

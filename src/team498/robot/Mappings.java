@@ -32,7 +32,16 @@ public class Mappings {
 	public static final int RightEncoderDigitalSource1 = 0;
 	public static final int RightEncoderDigitalSource2 = 0;
 	
+	public static final int IntakeLeftPort = 3;
+	public static final int IntakeRightPort = 4;
+	public static final int ArmPort = 2;
+	
 	public static final int CatapultForward = 2;
 	public static final int CatapultReverse = 7;
+	
+	public static final int AnalogInput = 0;
+	
+	public static final int CameraDevice1 = 0;
+	public static final int CameraDevice2 = 1;
 
 }
