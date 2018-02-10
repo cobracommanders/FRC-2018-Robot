@@ -7,6 +7,7 @@
 
 package team498.robot.subsystems;
 
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
@@ -15,6 +16,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import team498.robot.ConstantAccelerationCalculator;
 import team498.robot.Dashboard;
 import team498.robot.Helpers;
+import team498.robot.Mappings;
 import team498.robot.Prefs;
 import team498.robot.commands.ManualDrive;
 
@@ -29,6 +31,11 @@ import team498.robot.commands.ManualDrive;
  */
 
 public class Drivetrain extends PIDSubsystem {
+	
+	private static final double WheelDiameter = 0.1524; // 6 inch wheels. This was converted to meters
+	private static final double PulsePerRevolution = 2048; // all switches on the encoder are off
+	private static final double WheelCircumference = WheelDiameter * Math.PI;
+	private static final double MetersPerPulse = WheelCircumference / PulsePerRevolution;
 
 	private static Drivetrain drivetrain = null;
 	public static Drivetrain getDrivetrain() {
@@ -43,22 +50,27 @@ public class Drivetrain extends PIDSubsystem {
 	private ADIS16448_IMU gyro = new ADIS16448_IMU();
 	private ConstantAccelerationCalculator ramp = new ConstantAccelerationCalculator(prefs.getRamp_C());
 
-	private boolean correct;
-	private boolean locked;
-	private Timer timer;
-
-	private final double delayTime = 0.3;
-	private final double threshold = 0.4;
-	private final double tolerence = 0.1;
+	private boolean applyCorrection;
+	private boolean directionLocked;
+	private Timer correctionDelayTimer;
+	private final double correctionDelayTime = 0.3;
+	private final double correctionGain = 0.03;
+	private final double correctionAngleTolerence = 0.0;
 
 	private DifferentialDrive drive = new DifferentialDrive(spark1, spark0);
+	
+	public Encoder leftEncoder = new Encoder(Mappings.LeftEncoderDigitalSource1, Mappings.LeftEncoderDigitalSource2);
+	public Encoder rightEncoder = new Encoder(Mappings.RightEncoderDigitalSource1, Mappings.RightEncoderDigitalSource2);
 
 	public Drivetrain() {
 		super("Drivetrain", prefs.getPID_P(), prefs.getPID_I(), prefs.getPID_D());
-
+		
+		leftEncoder.setDistancePerPulse(MetersPerPulse);
+		rightEncoder.setDistancePerPulse(MetersPerPulse);
+		
 		gyro.reset();
-		timer = new Timer();
-		timer.start();
+		correctionDelayTimer = new Timer();
+		correctionDelayTimer.start();
 
 		// Initialize PID
 		setAbsoluteTolerance(1);
@@ -73,37 +85,46 @@ public class Drivetrain extends PIDSubsystem {
 
 	public void drive(double move, double rotate) {
 
-		// If driving, not turning
-		if (Math.abs(move) > 0 && rotate == 0) {
-			if (timer.get() == 0) {
-				timer.start();
+		// If driving and not turning then apply correction
+		if (Math.abs(move) > 0 && rotate == 0) { 
+			if (correctionDelayTimer.get() == 0) {
+				correctionDelayTimer.start();
 			}
-			if (timer.get() > delayTime) {
-				correct = true;
-				if (!locked) {
-					locked = true;
+			if (correctionDelayTimer.get() > correctionDelayTime) {
+				applyCorrection = true;
+				if (!directionLocked) {
 					gyro.reset();
+					directionLocked = true;					
 				}
 			}
-			
+		// If manually turning then disable correction
 		} else {
-			correct = false;
-			locked = false;
-			if (timer.get() > 0) {
-				timer.stop();
-				timer.reset();
+			applyCorrection = false;
+			directionLocked = false;
+			if (correctionDelayTimer.get() > 0) {
+				correctionDelayTimer.stop();
+				correctionDelayTimer.reset();
 			}
 		}
 
-		rotate = correct ? Helpers.rotateToTarget(gyro.getAngleZ(), 0, tolerence, threshold) : rotate;
-
-		SmartDashboard.putNumber("OUTPUT ROTATE", rotate);
+		// Apply correction if needed
+		rotate = applyCorrection ? Helpers.rotateToTarget(gyro.getAngleY(), 0, correctionAngleTolerence, correctionGain) : rotate;
 
 		drive.arcadeDrive(move, rotate);
+	}
+	
+	public double getDistance() {
+		//averages the encoders distance 
+		return (leftEncoder.getDistance() + rightEncoder.getDistance()) / 2;
 	}
 
 	public void resetGyro() {
 		gyro.reset();
+	}
+	
+	public void resetEncoders() {
+		leftEncoder.reset();
+		rightEncoder.reset();
 	}
 
 	@Override
@@ -129,6 +150,8 @@ public class Drivetrain extends PIDSubsystem {
 
 	public void updateDashboard() {
 		// SmartDashboard.putNumber("Output values (PID)", pidOutput);
+		SmartDashboard.putNumber(Dashboard.DistanceTraveled, getDistance());
+		
 		SmartDashboard.putNumber("Angle for PID", this.getPosition());
 
 		SmartDashboard.putNumber(Dashboard.GyroAngle, gyro.getAngle());
