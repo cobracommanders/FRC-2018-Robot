@@ -7,16 +7,19 @@ public class AutoDrive extends Command {
 	
 	private Drivetrain drivetrain;
 	private double moveValue;
+	private double desiredDistance;
 	
-    public AutoDrive(double moveValue) {
+    public AutoDrive(double moveValue, double desiredDistance) {
     	super("AutoDrive");
     	
     	requires(this.drivetrain = Drivetrain.getDrivetrain());
     	
     	this.moveValue = moveValue;
+    	this.desiredDistance = desiredDistance;
     }
 
     protected void initialize() {
+    	drivetrain.resetEncoders();
     }
 
     protected void execute() {
@@ -24,7 +27,7 @@ public class AutoDrive extends Command {
     }
 
     protected boolean isFinished() {
-        return false;
+        return Math.abs(drivetrain.getDistance()) >= Math.abs(desiredDistance); 
     }
 
     protected void end() {
