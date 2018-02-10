@@ -35,6 +35,7 @@ public class Dashboard {
 	public static final String IntakeRightPower = "IntakeRightPower";
 	
 	public static final String ArmPower = "ArmPower";
+	public static final String ArmPosition = "ArmPosition";
 	
 	public static final String DistanceTraveled = "DistanceTraveled";
 	

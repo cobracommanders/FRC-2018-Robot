@@ -1,9 +1,12 @@
 package team498.robot.subsystems;
 
 import edu.wpi.first.wpilibj.Victor;
+import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import team498.robot.Dashboard;
 import team498.robot.Mappings;
 import team498.robot.commands.ManualArm;
 
@@ -19,14 +22,12 @@ public class Arm extends Subsystem {
 	private Victor armMotor = new Victor(Mappings.ArmPort);
 	private Victor intakeLeft = new Victor(Mappings.IntakeLeftPort);
 	private Victor intakeRight =  new Victor(Mappings.IntakeRightPort);
-
+	private AnalogPotentiometer pot = new AnalogPotentiometer(Mappings.ArmPotChannel);
 	
     public void initDefaultCommand() {
-    	setDefaultCommand(new ManualArm());
-    	
+    	setDefaultCommand(new ManualArm());    	
     }
-    
-    
+        
     public void armSet(double power) {
     	armMotor.set(power);
     }
@@ -41,6 +42,10 @@ public class Arm extends Subsystem {
     	}else {
     		lift.set(Value.kForward);
     	}
+    }
+    
+    public void updateDashboard(){
+    	SmartDashboard.putNumber(Dashboard.ArmPosition, pot.get());
     }
 }
 
