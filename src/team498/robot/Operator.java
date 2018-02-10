@@ -8,7 +8,6 @@
 package team498.robot;
 
 import team498.robot.commands.LaunchCatapult;
-import team498.robot.commands.ResetGyro;
 import team498.robot.commands.Rumble;
 
 

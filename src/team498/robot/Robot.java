@@ -31,11 +31,7 @@ import team498.robot.commands.auto.StartRightPlaceRightScaleStrategy;
 import team498.robot.commands.auto.StartRightPlaceRightSwitchStrategy;
 import team498.robot.commands.auto.SwitchPosition;
 import team498.robot.subsystems.Drivetrain;
-//import team498.robot.subsystems.Vision;
-import team498.robot.commands.Auto;
-import team498.robot.commands.MonitorRobotContact;
 import team498.robot.subsystems.Accelerometer;
-import team498.robot.subsystems.Gyro;
 import team498.robot.subsystems.HapticFeedback;
 import team498.robot.subsystems.Vision;
 
@@ -47,10 +43,8 @@ public class Robot extends TimedRobot {
 
 	// Subsystems
 	private Vision vision = Vision.getVision();
-	private Gyro gyro = Gyro.getGyro();
 	private Accelerometer accelerometer = Accelerometer.getAccelerometer();
 	private HapticFeedback hapticFeedback = HapticFeedback.getHapticFeedback();
-	private Auto auto = new Auto();
 	
 	//private Vision vision = Vision.getVision();
 	private Drivetrain drivetrain = Drivetrain.getDrivetrain();
@@ -253,7 +247,6 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putString("Strategy Choice", autonomousStrategy != null ? autonomousStrategy.toString() : "");
 		operator.updateDashboard();
 		drivetrain.updateDashboard();
-		gyro.updateDashboard();
 		accelerometer.updateDashboard();
 		//TODO add other subsystems 
 	}
