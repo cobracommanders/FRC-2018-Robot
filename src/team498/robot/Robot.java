@@ -8,7 +8,9 @@
 package team498.robot;
 
 import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -49,10 +51,12 @@ public class Robot extends TimedRobot {
 	private DriverStation ds = DriverStation.getInstance();
 
 	// Subsystems
+	@SuppressWarnings("unused")
 	private Vision vision = Vision.getVision();
 	private Accelerometer accelerometer = Accelerometer.getAccelerometer();
+	@SuppressWarnings("unused")
 	private HapticFeedback hapticFeedback = HapticFeedback.getHapticFeedback();
-	
+
 	private Drivetrain drivetrain = Drivetrain.getDrivetrain();
 
 	// Autonomous Selections
@@ -65,6 +69,7 @@ public class Robot extends TimedRobot {
 	private Recorder recorder;
 	private Timer timer;
 	private TaskGroup dynamicAuto;
+
 	@Override
 	public void robotInit() {
 		// vision.startCapture();
@@ -95,114 +100,111 @@ public class Robot extends TimedRobot {
 
 		// Left switch for either position
 		System.out.println("choosing auto modes!");
-		
-		//SWITCH 
-		if (autonomousStrategy == AutoStrategy.Switch) { 
-			//SWITCH LEFT POSITION
+
+		// SWITCH
+		if (autonomousStrategy == AutoStrategy.Switch) {
+			// SWITCH LEFT POSITION
 			if (gameData.getOurSwitchPosition() == SwitchPosition.Left) {
-				//ROBOT ON LEFT
+				// ROBOT ON LEFT
 				if (autonomousPosition == RobotStartPosition.Left) {
 					autoCommand = new StartLeftPlaceLeftSwitchStrategy();
 					autoCommand.start();
-				//ROBOT ON CENTER
+					// ROBOT ON CENTER
 				} else if (autonomousPosition == RobotStartPosition.Center) {
 					autoCommand = new StartCenterPlaceLeftSwitchStrategy();
 					autoCommand.start();
-				//ROBOT ON RIGHT
+					// ROBOT ON RIGHT
 				} else if (autonomousPosition == RobotStartPosition.Right) {
 					autoCommand = new StartRightPlaceLeftSwitchStrategy();
 					autoCommand.start();
-				//NO ROBOT POSITION
+					// NO ROBOT POSITION
 				} else {
 					System.out.println("Error: No Robot Position, for Left Switch"); // shouldn't run
 				}
-			//SWITCH RIGHT POSITION
+				// SWITCH RIGHT POSITION
 			} else if (gameData.getOurSwitchPosition() == SwitchPosition.Right) {
-				//ROBOT ON LEFT
+				// ROBOT ON LEFT
 				if (autonomousPosition == RobotStartPosition.Left) {
 					autoCommand = new StartLeftPlaceRightSwitchStrategy();
 					autoCommand.start();
-				//ROBOT ON CENTER
+					// ROBOT ON CENTER
 				} else if (autonomousPosition == RobotStartPosition.Center) {
 					autoCommand = new StartCenterPlaceRightSwitchStrategy();
 					autoCommand.start();
-				//ROBOT ON RIGHT
+					// ROBOT ON RIGHT
 				} else if (autonomousPosition == RobotStartPosition.Right) {
 					autoCommand = new StartRightPlaceRightSwitchStrategy();
 					autoCommand.start();
-				//NO ROBOT POSITION
+					// NO ROBOT POSITION
 				} else {
 					System.out.println("Error: No Robot Position, for Right Switch"); // shouldn't run
 				}
-			//NEITHER LEFT NOR RIGHT SWITCH POSITION
+				// NEITHER LEFT NOR RIGHT SWITCH POSITION
 			} else {
 				System.out.println("Error: No Switch Position"); // shouldn't run
 			}
-			
-		//SCALE
-		} else if (autonomousStrategy == AutoStrategy.Scale) { 	
-			//SCALE LEFT POSITION
+
+			// SCALE
+		} else if (autonomousStrategy == AutoStrategy.Scale) {
+			// SCALE LEFT POSITION
 			if (gameData.getOurScalePosition() == ScalePosition.Left) {
-				//ROBOT ON LEFT
+				// ROBOT ON LEFT
 				if (autonomousPosition == RobotStartPosition.Left) {
 					autoCommand = new StartLeftPlaceLeftScaleStrategy();
 					autoCommand.start();
-					
-					/*//WHEN AUTO IS DONE, CANCEL
-					if (autoCommand.isCompleted()) {
-						autoCommand.cancel();
-					}
-					//START LEFT SWITCH AUTO FROM LEFT SCALE
-					if (autoCommand.isCanceled() && gameData.getOurSwitchPosition() == SwitchPosition.Left) {
-						//autoCommand = new StartLeftScaleLeftSwitchStrategy();
-						//autoCommand.start();
-					} else if (autoCommand.isCanceled() && gameData.getOurSwitchPosition() == SwitchPosition.Right) {
-						//autoCommand = new StartLeftScaleRightSwitchStrategy();
-						//autoCommand.start();
-					} else {
-						System.out.println("Not moving to Switch from Left Scale");
-						System.out.println("Incorrect If/else logic?");
-					}*/
-					
-				//ROBOT ON CENTER
+
+					/*
+					 * //WHEN AUTO IS DONE, CANCEL if (autoCommand.isCompleted()) {
+					 * autoCommand.cancel(); } //START LEFT SWITCH AUTO FROM LEFT SCALE if
+					 * (autoCommand.isCanceled() && gameData.getOurSwitchPosition() ==
+					 * SwitchPosition.Left) { //autoCommand = new
+					 * StartLeftScaleLeftSwitchStrategy(); //autoCommand.start(); } else if
+					 * (autoCommand.isCanceled() && gameData.getOurSwitchPosition() ==
+					 * SwitchPosition.Right) { //autoCommand = new
+					 * StartLeftScaleRightSwitchStrategy(); //autoCommand.start(); } else {
+					 * System.out.println("Not moving to Switch from Left Scale");
+					 * System.out.println("Incorrect If/else logic?"); }
+					 */
+
+					// ROBOT ON CENTER
 				} else if (autonomousPosition == RobotStartPosition.Center) {
 					autoCommand = new StartCenterPlaceLeftScaleStrategy();
 					autoCommand.start();
-				//ROBOT ON RIGHT
+					// ROBOT ON RIGHT
 				} else if (autonomousPosition == RobotStartPosition.Right) {
 					autoCommand = new StartRightPlaceLeftScaleStrategy();
 					autoCommand.start();
-				//NO ROBOT POSITION
+					// NO ROBOT POSITION
 				} else {
 					System.out.println("Error: No Robot Position, for Left Scale"); // shouldn't run
-				}	
-			//SCALE RIGHT POSITION
+				}
+				// SCALE RIGHT POSITION
 			} else if (gameData.getOurScalePosition() == ScalePosition.Right) {
-				//ROBOT ON LEFT
+				// ROBOT ON LEFT
 				if (autonomousPosition == RobotStartPosition.Left) {
 					autoCommand = new StartLeftPlaceRightScaleStrategy();
 					autoCommand.start();
-				//ROBOT ON CENTER
+					// ROBOT ON CENTER
 				} else if (autonomousPosition == RobotStartPosition.Center) {
 					autoCommand = new StartCenterPlaceRightScaleStrategy();
 					autoCommand.start();
-				//ROBOT ON RIGHT
+					// ROBOT ON RIGHT
 				} else if (autonomousPosition == RobotStartPosition.Right) {
 					autoCommand = new StartRightPlaceRightScaleStrategy();
 					autoCommand.start();
-				//NO ROBOT POSITION
+					// NO ROBOT POSITION
 				} else {
 					System.out.println("Error: No Robot Position, for Right Scale");
-				}		
-			//NEITHER LEFT NOR RIGHT SCALE POSITION
+				}
+				// NEITHER LEFT NOR RIGHT SCALE POSITION
 			} else {
 				System.out.println("Error: No Scale Position"); // shouldn't run
-			}	
-		//NEITHER SWITCH NOR SCALE
+			}
+			// NEITHER SWITCH NOR SCALE
 		} else {
 			System.out.println("Error: No Auto Strategy?"); // shouldn't run
 		}
-		//END OF AUTO LOOP 
+		// END OF AUTO LOOP
 		updateDashboard();
 		dynamicAuto = recorder.Build();
 		// this.auto.start();
@@ -222,7 +224,7 @@ public class Robot extends TimedRobot {
 
 	@Override
 	public void teleopInit() {
-		//if auto is on, turn it off; else dont do anything
+		// if auto is on, turn it off; else dont do anything
 		if (autoCommand != null) {
 			autoCommand.cancel();
 		}
@@ -256,14 +258,12 @@ public class Robot extends TimedRobot {
 	public void testPeriodic() {
 	}
 
-	void updateDashboard() {
-
 	private void addAutonomousChoices() {
 
 		chooserPosition.addDefault("Robot in: Left", RobotStartPosition.Left);
 		chooserPosition.addObject("Robot in: Center", RobotStartPosition.Center);
 		chooserPosition.addObject("Robot in: Right", RobotStartPosition.Right);
-		
+
 		chooserStrategy.addDefault("Going for: Switch", AutoStrategy.Switch);
 		chooserStrategy.addObject("Going for: Scale", AutoStrategy.Scale);
 	}
@@ -282,7 +282,6 @@ public class Robot extends TimedRobot {
 		operator.updateDashboard();
 		drivetrain.updateDashboard();
 		accelerometer.updateDashboard();
-		//TODO add other subsystems 
-		gyro.updateDashboard();
+		// TODO add other subsystems
 	}
 }
