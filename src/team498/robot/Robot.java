@@ -32,6 +32,7 @@ import team498.robot.commands.auto.StartRightPlaceRightSwitchStrategy;
 import team498.robot.commands.auto.SwitchPosition;
 import team498.robot.subsystems.Drivetrain;
 import team498.robot.subsystems.Accelerometer;
+import team498.robot.subsystems.Arm;
 import team498.robot.subsystems.HapticFeedback;
 import team498.robot.subsystems.Vision;
 
@@ -45,6 +46,7 @@ public class Robot extends TimedRobot {
 	private Vision vision = Vision.getVision();
 	private Accelerometer accelerometer = Accelerometer.getAccelerometer();
 	private HapticFeedback hapticFeedback = HapticFeedback.getHapticFeedback();
+	private Arm arm = Arm.getArm();
 	
 	private Drivetrain drivetrain = Drivetrain.getDrivetrain();
 

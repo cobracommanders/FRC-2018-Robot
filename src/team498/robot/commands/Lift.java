@@ -3,16 +3,19 @@ package team498.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import team498.robot.Dashboard;
-import team498.robot.Operator;
 import team498.robot.subsystems.Arm;
 
-public class ManualArm extends Command {
-	
-	private Operator operator = Operator.getOperator();
-	private Arm arm;	
-	
-    public ManualArm() {
-    	super("ManualArm");
+/**
+ *
+ */
+public class Lift extends Command {
+	private Arm arm;
+	boolean isUp = false;
+	boolean target = true;
+
+    public Lift() {
+    	super("Lift");
+    	
     	requires(this.arm = Arm.getArm());
     }
 
@@ -22,14 +25,20 @@ public class ManualArm extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	double power = operator.controller.axisRightY.getAxisValue();
-    	this.arm.armSet(power);
-    	SmartDashboard.putNumber(Dashboard.ArmPower, power);
+    	arm.liftSet(isUp);
+    	isUp = !isUp;
+    	target = isUp;
+    	SmartDashboard.putBoolean(Dashboard.ElevatorUp,isUp);
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+    	if(target == isUp) {
+    		return true;
+    	}else{
+    		return false;
+    	}
+        
     }
 
     // Called once after isFinished returns true

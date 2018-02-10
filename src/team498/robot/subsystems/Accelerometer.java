@@ -25,7 +25,7 @@ public class Accelerometer extends Subsystem {
 	}
 
 	public void updateDashboard() {
-		System.out.println("Accelorometer Dashboard");
+		//System.out.println("Accelorometer Dashboard");
 		SmartDashboard.putNumber(Dashboard.AccelerometerX, accel.getX());
 		SmartDashboard.putNumber(Dashboard.AccelerometerY, accel.getY());
 		SmartDashboard.putNumber(Dashboard.AccelerometerZ, accel.getZ());
