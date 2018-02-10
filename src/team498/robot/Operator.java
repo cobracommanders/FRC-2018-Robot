@@ -9,7 +9,7 @@ package team498.robot;
 
 import team498.robot.commands.Lift;
 import team498.robot.commands.ManualIntake;
-import team498.robot.commands.Turbo;
+import team498.robot.commands.ToggleTurbo;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -32,7 +32,7 @@ public class Operator {
 		controller.buttonX.whenPressed(new ManualIntake(.6,.6));
 		controller.buttonB.whenPressed(new ManualIntake(-1,-1));
 		controller.buttonA.whenPressed(new ManualIntake(0,0));
-		controller.buttonY.whenPressed(new Turbo());
+		controller.buttonY.whenPressed(new ToggleTurbo());
 		
 		controller.leftBumper.whenPressed(new Lift());
 	
