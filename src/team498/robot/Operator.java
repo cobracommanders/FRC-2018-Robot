@@ -8,9 +8,6 @@
 package team498.robot;
 
 import team498.robot.commands.LaunchCatapult;
-import team498.robot.commands.Rumble;
-import team498.robot.commands.auto.common.AutoResetGyro;
-
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -27,7 +24,6 @@ public class Operator {
 	public Controller controller = new Controller(Mappings.ControllerPort);
 	
 	public Operator() {
-		controller.buttonA.whileHeld(new Rumble(this.controller));
 		//controller.buttonY.whenPressed(new LaunchCatapult("LaunchCatapult", 5)); //where we call time
 	}
 	

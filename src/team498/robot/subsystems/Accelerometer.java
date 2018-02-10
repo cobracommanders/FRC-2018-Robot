@@ -6,17 +6,15 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import team498.robot.Dashboard;
 import team498.robot.commands.MonitorRobotContact;
 
-/**
- *
- */
 public class Accelerometer extends Subsystem {
-	public BuiltInAccelerometer accel;
+		
 	private static Accelerometer accelerometer = null;
-
 	public static Accelerometer getAccelerometer() {
 		accelerometer = accelerometer == null ? new Accelerometer() : accelerometer;
 		return accelerometer;
 	}
+	
+	private BuiltInAccelerometer accel;
 
 	public Accelerometer() {
 		accel = new BuiltInAccelerometer();
@@ -32,10 +30,8 @@ public class Accelerometer extends Subsystem {
 		SmartDashboard.putNumber(Dashboard.AccelerometerY, accel.getY());
 		SmartDashboard.putNumber(Dashboard.AccelerometerZ, accel.getZ());
 		SmartDashboard.putData("Everything Accelorometer", accel);
-
 	}
 
 	public void initDefaultCommand() {
-
 	}
 }

@@ -23,6 +23,7 @@ public class Controller {
 	public JoystickAxis axisRightTrigger;
 
 	public Controller(int port) {
+		
 		// controller
 		joystick = new Joystick(port);
 
