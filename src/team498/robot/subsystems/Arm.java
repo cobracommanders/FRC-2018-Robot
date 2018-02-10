@@ -49,6 +49,7 @@ public class Arm extends Subsystem {
     }
     
     public void updateDashboard(){
+    	System.out.println(lift.get());
     	SmartDashboard.putNumber(Dashboard.ArmPosition, getPosition());
     }
 }

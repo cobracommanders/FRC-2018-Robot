@@ -12,6 +12,7 @@ public class ManualIntake extends Command {
 	private double leftPower = 0;
 	private double rightPower = 0;
 	private double targetPower = 0;
+	boolean hasChanged;
 
 	
 	public ManualIntake(double setLeftPower, double setRightPower) {
@@ -28,6 +29,16 @@ public class ManualIntake extends Command {
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
+		if(targetPower != leftPower) {
+			hasChanged = true;
+		}else {
+			hasChanged = false;
+		}
+		if(!hasChanged) {
+			targetPower = 0;
+			leftPower = 0;
+			rightPower = 0;
+		}
 			this.arm.intakeSet(leftPower,rightPower);
 			targetPower = leftPower;
 			

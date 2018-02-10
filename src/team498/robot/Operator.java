@@ -7,7 +7,7 @@
 
 package team498.robot;
 
-import team498.robot.commands.Lift;
+import team498.robot.commands.ToggleLift;
 import team498.robot.commands.ManualIntake;
 
 /**
@@ -32,7 +32,7 @@ public class Operator {
 		controller.buttonB.whenPressed(new ManualIntake(-1,-1));
 		controller.buttonA.whenPressed(new ManualIntake(0,0));
 		
-		controller.leftBumper.whenPressed(new Lift());
+		controller.leftBumper.whenPressed(new ToggleLift());
 	
 	}
 	
