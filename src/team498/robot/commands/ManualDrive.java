@@ -7,7 +7,7 @@ import team498.robot.Operator;
 import team498.robot.subsystems.Drivetrain;
 
 public class ManualDrive extends Command {
-	
+
 	private Operator operator = Operator.getOperator();
 	private Drivetrain drivetrain;
 	private ConstantAccelerationCalculator moveAcceleration = new ConstantAccelerationCalculator(0.0005);
@@ -24,7 +24,8 @@ public class ManualDrive extends Command {
 
 	protected void execute() {
 
-		double move = moveAcceleration.getNextDataPoint(operator.controller.axisRightTrigger.getAxisValue()	- operator.controller.axisLeftTrigger.getAxisValue());
+		double move = moveAcceleration.getNextDataPoint(operator.controller.axisRightTrigger.getAxisValue()
+				- operator.controller.axisLeftTrigger.getAxisValue());
 		double rotate = turnAcceleration.getNextDataPoint(operator.controller.axisLeftX.getAxisValue());
 
 		this.drivetrain.drive(move, rotate);
