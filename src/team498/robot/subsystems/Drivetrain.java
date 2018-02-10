@@ -32,6 +32,7 @@ import team498.robot.commands.ManualDrive;
 
 public class Drivetrain extends PIDSubsystem {
 	
+	//Field is 16.4592 meters across
 	private static final double WheelDiameter = 0.1524; // 6 inch wheels. This was converted to meters
 	private static final double PulsePerRevolution = 2048; // all switches on the encoder are off
 	private static final double WheelCircumference = WheelDiameter * Math.PI;
@@ -74,7 +75,6 @@ public class Drivetrain extends PIDSubsystem {
 
 		// Initialize PID
 		setAbsoluteTolerance(1);
-		getPIDController().setContinuous(false);
 		setInputRange(-180, 180);
 		setOutputRange(-0.5, 0.5);
 	}

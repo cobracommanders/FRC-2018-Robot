@@ -17,6 +17,7 @@ public class AutoTurn extends Command {
 	}
 
 	protected void initialize() {
+		drivetrain.resetGyro();
 		drivetrain.setSetpoint(targetAngle);
 		drivetrain.enable();
 	}
