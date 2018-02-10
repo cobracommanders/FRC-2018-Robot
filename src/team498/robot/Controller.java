@@ -35,12 +35,12 @@ public class Controller {
 		rightBumper = new JoystickButton(joystick, Mappings.RightBumper);
 
 		// Axes
-		axisLeftX = new JoystickAxis(joystick, Mappings.LeftXAxis, 0);
+		axisLeftX = new JoystickAxis(joystick, Mappings.LeftXAxis, 0.25);
 		axisLeftY = new JoystickAxis(joystick, Mappings.LeftYAxis, 0);
 		axisRightX = new JoystickAxis(joystick, Mappings.RightXAxis, 0);
 		axisRightY = new JoystickAxis(joystick, Mappings.RightYAxis, 0);
-		axisLeftTrigger = new JoystickAxis(joystick, Mappings.LeftTrigger, 0);
-		axisRightTrigger = new JoystickAxis(joystick, Mappings.RightTrigger, 0);
+		axisLeftTrigger = new JoystickAxis(joystick, Mappings.LeftTrigger, 0.25);
+		axisRightTrigger = new JoystickAxis(joystick, Mappings.RightTrigger, 0.25);
 	}
 
 	public void setRumble(double value) {
