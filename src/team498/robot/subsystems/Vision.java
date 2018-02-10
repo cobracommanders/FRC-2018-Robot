@@ -25,10 +25,16 @@ public class Vision extends Subsystem {
 		camera1 = CameraServer.getInstance().startAutomaticCapture("camera1", Mappings.CameraDevice1);
 		camera1.setResolution(width1, height1);
 		camera1.setFPS(30);
+		if (camera1.isConnected() == false) {
+			camera1.free();
+		}
 		
 		camera2 = CameraServer.getInstance().startAutomaticCapture("camera2", Mappings.CameraDevice2);
 		camera2.setResolution(width2, height2);
 		camera2.setFPS(30);
+		if (camera2.isConnected() == false) {
+			camera2.free();
+		}
 	}
 	
     public void initDefaultCommand() {    	

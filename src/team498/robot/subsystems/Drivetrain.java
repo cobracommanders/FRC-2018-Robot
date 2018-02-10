@@ -82,7 +82,6 @@ public class Drivetrain extends PIDSubsystem {
 
 		// Initialize PID
 		setAbsoluteTolerance(1);
-		//getPIDController().setContinuous(false);
 		setInputRange(-180, 180);
 		setOutputRange(-0.5, 0.5);
 	}

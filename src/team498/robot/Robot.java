@@ -4,7 +4,6 @@
 /* must be accompanied by the FIRST BSD license file in the root directory of */
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
-//Test
 package team498.robot;
 
 import edu.wpi.first.wpilibj.DriverStation;
@@ -59,7 +58,7 @@ public class Robot extends TimedRobot {
 
 	@Override
 	public void robotInit() {
-		//vision.startCapture();
+		vision.startCapture();
 		updateDashboard();
 		addAutonomousChoices();
 	}
