@@ -54,7 +54,6 @@ public class Drivetrain extends PIDSubsystem {
 	private SpeedControllerGroup leftGroup = new SpeedControllerGroup(frontLeftDrive, backLeftDrive);
 	private SpeedControllerGroup rightGroup = new SpeedControllerGroup(frontRightDrive, backRightDrive);
 	
-	
 	private ADIS16448_IMU gyro = new ADIS16448_IMU();
 	private ConstantAccelerationCalculator ramp = new ConstantAccelerationCalculator(prefs.getRamp_C());
 
@@ -66,6 +65,9 @@ public class Drivetrain extends PIDSubsystem {
 	private final double correctionAngleTolerence = 0.0;
 
 	private DifferentialDrive drive = new DifferentialDrive(leftGroup, rightGroup);
+	
+	private boolean turbo = false;
+	private double turboCap = 0.8;
 	
 	public Encoder leftEncoder = new Encoder(Mappings.LeftEncoderDigitalSource1, Mappings.LeftEncoderDigitalSource2);
 	public Encoder rightEncoder = new Encoder(Mappings.RightEncoderDigitalSource1, Mappings.RightEncoderDigitalSource2);
@@ -116,7 +118,7 @@ public class Drivetrain extends PIDSubsystem {
 
 		// Apply correction if needed
 		rotate = applyCorrection ? Helpers.rotateToTarget(gyro.getAngleY(), 0, correctionAngleTolerence, correctionGain) : rotate;
-
+		move *= (turbo ? 1 : turboCap);
 		drive.arcadeDrive(move, rotate);
 	}
 	
@@ -134,6 +136,10 @@ public class Drivetrain extends PIDSubsystem {
 		rightEncoder.reset();
 	}
 
+	public void toggleTurbo() {
+		turbo = !turbo;
+	}
+	
 	@Override
 	protected double returnPIDInput() {
 		return gyro.getAngleZ();
