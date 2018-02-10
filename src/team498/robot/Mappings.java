@@ -37,6 +37,6 @@ public class Mappings {
 	public static final int IntakeRightPort = 5;
 	public static final int ArmPort = 6;
 	
-	public static final int LiftForward = 2;
-	public static final int LiftReverse = 7;
+	public static final int LiftForward = 1;
+	public static final int LiftReverse = 0;
 }
