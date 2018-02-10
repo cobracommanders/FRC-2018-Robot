@@ -33,5 +33,10 @@ public class Helpers {
         }
         return value;        
     }
+    
+    public static double rotateToTarget(double currentAngle, double targetAngle, double tolerance, double gain) { 
+        double difference = normalize(currentAngle - targetAngle, tolerance);         
+        return -range((difference * gain), -1, 1);
+    }
 
 }
