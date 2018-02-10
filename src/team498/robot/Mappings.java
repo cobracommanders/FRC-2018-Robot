@@ -22,6 +22,16 @@ public class Mappings {
 
 	public static final int CameraDevice = 0;
 	
+	public static final int FrontLeftMotorChannel = 1;
+	public static final int FrontRightMotorChannel = 0;
+	public static final int BackLeftMotorChannel = 0;
+	public static final int BackRightMotorChannel = 0;
+	
+	public static final int LeftEncoderDigitalSource1 = 0;
+	public static final int LeftEncoderDigitalSource2 = 0;
+	public static final int RightEncoderDigitalSource1 = 0;
+	public static final int RightEncoderDigitalSource2 = 0;
+	
 	public static final int IntakeLeftPort = 3;
 	public static final int IntakeRightPort = 4;
 	public static final int ArmPort = 2;
