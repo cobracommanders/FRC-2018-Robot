@@ -50,13 +50,12 @@ public class Drivetrain extends PIDSubsystem {
 	private ADIS16448_IMU gyro = new ADIS16448_IMU();
 	private ConstantAccelerationCalculator ramp = new ConstantAccelerationCalculator(prefs.getRamp_C());
 
-	private boolean correct;
-	private boolean locked;
-	private Timer timer;
-
-	private final double delayTime = 0.3;
-	private final double threshold = 0.4;
-	private final double tolerence = 0.1;
+	private boolean applyCorrection;
+	private boolean directionLocked;
+	private Timer correctionDelayTimer;
+	private final double correctionDelayTime = 0.3;
+	private final double correctionGain = 0.03;
+	private final double correctionAngleTolerence = 0.0;
 
 	private DifferentialDrive drive = new DifferentialDrive(spark1, spark0);
 	
@@ -70,8 +69,8 @@ public class Drivetrain extends PIDSubsystem {
 		rightEncoder.setDistancePerPulse(MetersPerPulse);
 		
 		gyro.reset();
-		timer = new Timer();
-		timer.start();
+		correctionDelayTimer = new Timer();
+		correctionDelayTimer.start();
 
 		// Initialize PID
 		setAbsoluteTolerance(1);
@@ -86,31 +85,30 @@ public class Drivetrain extends PIDSubsystem {
 
 	public void drive(double move, double rotate) {
 
-		// If driving, not turning
-		if (Math.abs(move) > 0 && rotate == 0) {
-			if (timer.get() == 0) {
-				timer.start();
+		// If driving and not turning then apply correction
+		if (Math.abs(move) > 0 && rotate == 0) { 
+			if (correctionDelayTimer.get() == 0) {
+				correctionDelayTimer.start();
 			}
-			if (timer.get() > delayTime) {
-				correct = true;
-				if (!locked) {
-					locked = true;
+			if (correctionDelayTimer.get() > correctionDelayTime) {
+				applyCorrection = true;
+				if (!directionLocked) {
 					gyro.reset();
+					directionLocked = true;					
 				}
 			}
-			
+		// If manually turning then disable correction
 		} else {
-			correct = false;
-			locked = false;
-			if (timer.get() > 0) {
-				timer.stop();
-				timer.reset();
+			applyCorrection = false;
+			directionLocked = false;
+			if (correctionDelayTimer.get() > 0) {
+				correctionDelayTimer.stop();
+				correctionDelayTimer.reset();
 			}
 		}
 
-		rotate = correct ? Helpers.rotateToTarget(gyro.getAngleZ(), 0, tolerence, threshold) : rotate;
-
-		SmartDashboard.putNumber("OUTPUT ROTATE", rotate);
+		// Apply correction if needed
+		rotate = applyCorrection ? Helpers.rotateToTarget(gyro.getAngleY(), 0, correctionAngleTolerence, correctionGain) : rotate;
 
 		drive.arcadeDrive(move, rotate);
 	}
