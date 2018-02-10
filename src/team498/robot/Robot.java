@@ -30,7 +30,6 @@ import team498.robot.commands.auto.StartRightPlaceLeftSwitchStrategy;
 import team498.robot.commands.auto.StartRightPlaceRightScaleStrategy;
 import team498.robot.commands.auto.StartRightPlaceRightSwitchStrategy;
 import team498.robot.commands.auto.SwitchPosition;
-import team498.robot.subsystems.Gyro;
 import team498.robot.subsystems.Drivetrain;
 import team498.robot.subsystems.Accelerometer;
 import team498.robot.subsystems.HapticFeedback;
@@ -54,12 +53,8 @@ public class Robot extends TimedRobot {
 	SendableChooser<AutoStrategy> chooserStrategy = new SendableChooser<>();
 	RobotStartPosition autonomousPosition;
 	AutoStrategy autonomousStrategy;
-	Command autoCommand;
+	CommandGroup autoCommand;
 
-	/**
-	 * This function is run when the robot is first started up and should be
-	 * used for any initialization code.
-	 */
 	@Override
 	public void robotInit() {
 		//vision.startCapture();
@@ -78,7 +73,6 @@ public class Robot extends TimedRobot {
 	}
 
 	@Override
-
 	public void autonomousInit() {
 		// get selected command
 		autonomousPosition = chooserPosition.getSelected();

@@ -16,7 +16,7 @@ import team498.robot.ConstantAccelerationCalculator;
 import team498.robot.Dashboard;
 import team498.robot.Helpers;
 import team498.robot.Prefs;
-import team498.robot.commands.Drive;
+import team498.robot.commands.ManualDrive;
 
 /**
  * PID Training Notes: PID(0.01 ,0.1 ,0.04 ) Trial 1: overshoots then returns to
@@ -31,7 +31,6 @@ import team498.robot.commands.Drive;
 public class Drivetrain extends PIDSubsystem {
 
 	private static Drivetrain drivetrain = null;
-
 	public static Drivetrain getDrivetrain() {
 		drivetrain = drivetrain == null ? new Drivetrain() : drivetrain;
 		return drivetrain;
@@ -69,7 +68,7 @@ public class Drivetrain extends PIDSubsystem {
 	}
 
 	public void initDefaultCommand() {
-		setDefaultCommand(new Drive());
+		setDefaultCommand(new ManualDrive());
 	}
 
 	public void drive(double move, double rotate) {

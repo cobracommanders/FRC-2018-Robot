@@ -22,6 +22,7 @@ public class Dashboard {
 
 	public static final String PIDOutput = "PIDOutput";
 	public static final String IsPIDOnTarget = "IsPIDOnTarget";
+	
 	public static final String GyroAngleX = "GyroAngleX";
 	public static final String GyroAngleY = "GyroAngleY";
 	public static final String GyroAngleZ = "GyroAngleZ";
@@ -34,7 +35,4 @@ public class Dashboard {
 	public static final String IntakeRightPower = "IntakeRightPower";
 	
 	public static final String DistanceTraveled = "DistanceTraveled";
-
-
-
 }
