@@ -37,10 +37,11 @@ public class ManualDrive extends Command {
 		double move = moveAcceleration.getNextDataPoint(operator.controller.axisRightTrigger.getAxisValue()
 				- operator.controller.axisLeftTrigger.getAxisValue());
 		double rotate = turnAcceleration.getNextDataPoint(operator.controller.axisLeftX.getAxisValue());
+		double cap = turbo ? 1 : turboCap;
 
-		this.drivetrain.drive(move, rotate);
+		this.drivetrain.drive(move * cap, rotate);
 
-		SmartDashboard.putNumber("move value", move * (turbo ? 1 : turboCap));
+		SmartDashboard.putNumber("move value", move * cap);
 		SmartDashboard.putNumber("rotate value", rotate);
 		SmartDashboard.putBoolean("Turbo mode", turbo);
 	}
