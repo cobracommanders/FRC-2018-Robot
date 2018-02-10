@@ -48,7 +48,7 @@ public class ManualIntake extends Command {
 			rightPower = -.6;
 		}
 		//Intake out
-		else if (operator.controller.buttonB.get()) {
+		else if (operator.controller.buttonY.get()) {
 			leftPower = 1;
 			rightPower = 1;
 		}
@@ -58,7 +58,7 @@ public class ManualIntake extends Command {
 			rightPower = -.3;
 		}
 		//Also intake cube adjust intake
-		else if(operator.controller.buttonY.get()) {
+		else if(operator.controller.buttonB.get()) {
 			leftPower = -.3;
 			rightPower = -.6;
 		}
