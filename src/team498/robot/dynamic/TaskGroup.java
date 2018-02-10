@@ -14,23 +14,37 @@ public class TaskGroup {
 	private int index = 0;
 	private Timer timer;
 
+	private void _log(String s) {
+		System.out.println(s);
+	}
+
 	public TaskGroup(Map<String, Task> tasks, ArrayList<Task> passives, ArrayList<InputLog> logs) {
-		System.out.println(logs == null);
+		_log("===/TaskGroup\\===");
+		_log("Setting tasks");
 		this.tasks = tasks;
+		_log("Setting passives");
 		this.passives = passives;
+		_log("Setting logs");
 		this.logs = logs;
+		_log("Grabbing keys");
 		this.keys = new ArrayList<>(this.tasks.keySet());
+		_log("Creating timer");
 		timer = new Timer();
+		_log("===\\TaskGroup/===");
 	}
 
 	public void Execute() throws Exception {
+		_log("===/Execute\\===");
 		if (logs.size() == 0) {
+			_log("Log size was 0");
 			return;
 		}
 		if (timer.get() > 15)
 			return;
-		if (timer.get() == 0)
+		if (timer.get() == 0) {
+			_log("Started timer");
 			timer.start();
+		}
 		while (timer.get() > logs.get(index).GetTime()) {
 			InputLog log = logs.get(index);
 			Task task = tasks.get(log.name);
@@ -44,8 +58,9 @@ public class TaskGroup {
 		for (String s : keys) {
 			tasks.get(s).Execute();
 		}
-		for (int i = 0; i < passives.size(); i++) {
+		for (int i = 0; i < passives.size(); ++i) {
 			passives.get(i).Execute();
 		}
+		_log("===\\Execute/===");
 	}
 }

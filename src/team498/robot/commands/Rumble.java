@@ -28,13 +28,12 @@ public class Rumble extends Command {
 	protected void execute() {
 		System.out.println("Rumble Command!");
 		double rumblePower = 0;
-		double temporaryTime = timer.get() * 1000;
+		double temporaryTime = timer.get();
 		int currentTime = (int) temporaryTime;
-		timer.get();
-		if (currentTime % 10000 > 5000) {
-			rumblePower = (5000 - (currentTime % 5000)) / 5000.0;
+		if (currentTime % 10 > 5) {
+			rumblePower = (5 - (currentTime % 5)) / 5.0;
 		} else {
-			rumblePower = (currentTime % 5000) / 5000.0;
+			rumblePower = (currentTime % 5) / 5.0;
 		}
 
 		this.controller.setRumble(rumblePower);

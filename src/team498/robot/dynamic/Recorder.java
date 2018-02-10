@@ -32,6 +32,10 @@ public final class Recorder {
 	private ArrayList<InputLog> logs;
 	private Timer timer;
 
+	private void _log(String s) {
+		System.out.println(s);
+	}
+
 	/**
 	 * Creates a new recorder object
 	 * 
@@ -39,12 +43,20 @@ public final class Recorder {
 	 *         Team 498
 	 */
 	public Recorder() {
+		_log("===/Recorder\\===");
+		_log("Creating task map");
 		tasks = new HashMap<String, Task>();
+		_log("Creating input map");
 		inputs = new HashMap<String, JoystickInput>();
+		_log("Creating passives");
 		passives = new ArrayList<Task>();
+		_log("Creating states");
 		oldStates = newStates = new ArrayList<>();
+		_log("Creating timer");
 		timer = new Timer();
+		_log("Creating logs");
 		logs = new ArrayList<InputLog>();
+		_log("===\\Recorder/===");
 	}
 
 	/**
@@ -54,29 +66,39 @@ public final class Recorder {
 	 *         Team 498
 	 */
 	public void Read() {
-		if (timer.get() == 0)
+		_log("===/Read\\===");
+		if (timer.get() == 0) {
 			timer.start();
+			_log("Timer started");
+		}
 		double time = timer.get();
 		oldStates = newStates;
 		newStates = _grabValues();
-		if (oldStates.size() == newStates.size())
+		if (oldStates.size() == newStates.size()) {
+			_log("Sizes were different");
 			return;
-		if (oldStates.size() == 0)
+		}
+		if (oldStates.size() == 0) {
+			_log("Old states was size 0");
 			return;
+		}
 		for (int i = 0; i < newStates.size(); i++) {
 			JoyState newState = newStates.get(i);
 			if (newState.isBool) {
 				if (newState.boolState != oldStates.get(i).boolState) {
+					_log(newState.name + " changed to " + newState.boolState);
 					InputLog input = new InputLog(newState.name, newState.boolState, time);
 					logs.add(input);
 				}
 			} else {
 				if (newState.doubleState != oldStates.get(i).doubleState) {
+					_log(newState.name + " changed to " + newState.doubleState);
 					InputLog input = new InputLog(newState.name, newState.doubleState, time);
 					logs.add(input);
 				}
 			}
 		}
+		_log("===\\Read/===");
 	}
 
 	/**
@@ -151,10 +173,13 @@ public final class Recorder {
 	 *         Team 498
 	 */
 	public void Assign(String name, JoystickInput input, Task task) {
-		System.out.println(name + " was assigned");
+		_log("===/Assign\\===");
+		_log("Assigning " + name);
 		tasks.put(name, task);
+		_log("...");
 		inputs.put(name, input);
-		System.out.println("Done");
+		_log("Assigned");
+		_log("===\\Assign/===");
 	}
 
 	/**
@@ -167,8 +192,9 @@ public final class Recorder {
 	 *         Team 498
 	 */
 	public void AddPassive(Task task) {
-		System.out.println("Passive was added");
+		_log("===/Passive\\===");
 		passives.add(task);
+		_log("===\\Passive/===");
 	}
 
 	/**
@@ -180,9 +206,10 @@ public final class Recorder {
 	 *         Team 498
 	 */
 	public TaskGroup Build() {
-		System.out.println("Building");
+		_log("===/Build\\===");
+		_log((tasks == null) + " ; " + (passives == null) + " ; " + (logs == null));
 		TaskGroup tg = new TaskGroup(tasks, passives, logs);
-		System.out.println("Built");
+		_log("===\\Build/===");
 		return tg;
 	}
 
