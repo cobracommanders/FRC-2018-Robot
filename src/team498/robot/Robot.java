@@ -81,13 +81,10 @@ public class Robot extends TimedRobot {
 		timer.start();
 		recorder = new Recorder();
 		Joystick joystick = operator.controller.joystick;
-		System.out.println("Fuck You");
 		recorder.Assign("df", new JoystickInput(joystick, Mappings.RightTrigger, false), new DriveForwardTask());
 		recorder.Assign("db", new JoystickInput(joystick, Mappings.LeftTrigger, false), new DriveBackwardTask());
 		recorder.Assign("r", new JoystickInput(joystick, Mappings.LeftXAxis, false), new RotateTask());
-		System.out.println("Fuck Me");
 		recorder.AddPassive(new DriveTask());
-		System.out.println("Fuck Us");
 	}
 
 	@Override
