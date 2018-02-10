@@ -6,14 +6,15 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import team498.robot.Mappings;
 
 public class Catapult extends Subsystem {
-	DoubleSolenoid catapult;
-	private static Catapult instance;
-
+		
+	private static Catapult instance;	
 	public static Catapult getInstance() {
-		instance = instance == null ? new Catapult(Mappings.CatapultForward, Mappings.CatapultReverse) : instance;
-		return instance;
-	}
-
+       instance = instance == null ? new Catapult(Mappings.CatapultForward, Mappings.CatapultReverse) : instance;
+        return instance;
+    }
+	
+	private DoubleSolenoid catapult; 
+	
 	private Catapult(int solenoidForward, int solenoidReverse) {
 		catapult = new DoubleSolenoid(solenoidForward, solenoidReverse);
 	}
