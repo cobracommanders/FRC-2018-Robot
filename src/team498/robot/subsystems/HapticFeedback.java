@@ -4,7 +4,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import team498.robot.Controller;
 import team498.robot.Mappings;
 import team498.robot.Operator;
-import team498.robot.commands.MonitorRobotContact;
+
 
 public class HapticFeedback extends Subsystem {
 
@@ -29,6 +29,6 @@ public class HapticFeedback extends Subsystem {
 	}
 
 	public void initDefaultCommand() {
-		setDefaultCommand(new MonitorRobotContact());
+
 	}
 }

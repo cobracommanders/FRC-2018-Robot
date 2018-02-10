@@ -39,4 +39,6 @@ public class Mappings {
 	
 	public static final int CatapultForward = 2;
 	public static final int CatapultReverse = 7;
+	
+	public static final double CollisionThreshold = 0.3;
 }

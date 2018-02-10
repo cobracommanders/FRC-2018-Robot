@@ -31,9 +31,9 @@ import team498.robot.commands.auto.StartRightPlaceRightScaleStrategy;
 import team498.robot.commands.auto.StartRightPlaceRightSwitchStrategy;
 import team498.robot.commands.auto.SwitchPosition;
 import team498.robot.subsystems.Drivetrain;
-import team498.robot.subsystems.Accelerometer;
 import team498.robot.subsystems.HapticFeedback;
 import team498.robot.subsystems.Vision;
+import team498.robot.triggers.CollisionDetector;
 
 public class Robot extends TimedRobot {
 
@@ -43,10 +43,9 @@ public class Robot extends TimedRobot {
 
 	// Subsystems
 	private Vision vision = Vision.getVision();
-	private Accelerometer accelerometer = Accelerometer.getAccelerometer();
 	private HapticFeedback hapticFeedback = HapticFeedback.getHapticFeedback();
-	
 	private Drivetrain drivetrain = Drivetrain.getDrivetrain();
+	private CollisionDetector collisionDetector = new CollisionDetector();
 
 	// Autonomous Selections
 	SendableChooser<RobotStartPosition> chooserPosition = new SendableChooser<>();
@@ -242,7 +241,7 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putString("Strategy Choice", autonomousStrategy != null ? autonomousStrategy.toString() : "");
 		operator.updateDashboard();
 		drivetrain.updateDashboard();
-		accelerometer.updateDashboard();
+		collisionDetector.updateDashboard();
 		//TODO add other subsystems 
 	}
 }

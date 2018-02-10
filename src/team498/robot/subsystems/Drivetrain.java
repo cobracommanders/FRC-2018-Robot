@@ -130,7 +130,6 @@ public class Drivetrain extends PIDSubsystem {
 	public void updateDashboard() {
 		// SmartDashboard.putNumber("Output values (PID)", pidOutput);
 		SmartDashboard.putNumber("Angle for PID", this.getPosition());
-
 		SmartDashboard.putNumber(Dashboard.GyroAngle, gyro.getAngle());
 		SmartDashboard.putNumber(Dashboard.GyroAngleX, gyro.getAngleX());
 		SmartDashboard.putNumber(Dashboard.GyroAngleY, gyro.getAngleY());
