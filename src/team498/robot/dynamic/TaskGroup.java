@@ -6,7 +6,15 @@ import java.util.Map;
 
 import edu.wpi.first.wpilibj.Timer;
 
-public class TaskGroup {
+/**
+ * Behaves similar to the way CommandGroup does for Commands, except it's for
+ * tasks and you don't make it yourself, it's built by Recorder
+ * 
+ * @author Micah Neitz<br/>
+ * 		Team 498
+ *
+ */
+public final class TaskGroup {
 	private Map<String, Task> tasks;
 	private ArrayList<Task> passives;
 	private ArrayList<InputLog> logs;

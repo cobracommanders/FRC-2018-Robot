@@ -14,7 +14,8 @@ import java.util.regex.Pattern;
 import edu.wpi.first.wpilibj.Timer;
 
 /**
- * The Dynamic Autonomous recorder class created by Micah Neitz of Team 498
+ * The Dynamic Autonomous recorder class for the recording, saving, loading, and
+ * building of dynamic autonomous modes.
  * 
  * @version 1.0
  * 
@@ -247,4 +248,5 @@ public final class Recorder {
 			this.logs.add(new InputLog(elements[0], elements[1], elements[2]));
 		}
 	}
+
 }

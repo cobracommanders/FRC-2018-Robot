@@ -3,7 +3,15 @@ package team498.robot.dynamic;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
 
-public class InputLog {
+/**
+ * Logs input to prepare for string compile. Under the hood class, should never
+ * be used
+ * 
+ * @author Micah Neitz<br/>
+ * 		Team 498
+ *
+ */
+final class InputLog {
 	String name;
 	String value;
 	String time;
@@ -11,31 +19,31 @@ public class InputLog {
 	private double _time;
 	private boolean _boolValue;
 	private boolean _isButton;
-	
+
 	public String Log() {
 		return String.format(";%s_%s_%s", name, value, time);
 	}
-	
+
 	public String ToString() {
 		return Log();
 	}
-	
+
 	public double GetDouble() {
 		return _value;
 	}
-	
+
 	public boolean GetBoolean() {
 		return _boolValue;
 	}
-	
+
 	public double GetTime() {
 		return _time;
 	}
-	
+
 	public boolean IsButton() {
 		return _isButton;
 	}
-	
+
 	public InputLog(String name, double value, double time) {
 		DecimalFormat df = new DecimalFormat("#.#####");
 		df.setRoundingMode(RoundingMode.HALF_UP);
@@ -47,7 +55,7 @@ public class InputLog {
 		this._value = value;
 		this._isButton = false;
 	}
-	
+
 	public InputLog(String name, String value, String time) throws IllegalArgumentException {
 		boolean valid = true;
 		try {
@@ -56,7 +64,8 @@ public class InputLog {
 		} catch (NumberFormatException e) {
 			valid = false;
 		}
-		if(!valid) throw new IllegalArgumentException("Value or Time string was invalid!");
+		if (!valid)
+			throw new IllegalArgumentException("Value or Time string was invalid!");
 		this.name = name;
 		this.value = value;
 		this.time = time;
@@ -65,7 +74,7 @@ public class InputLog {
 		this._value = Double.parseDouble(value);
 		this._time = Double.parseDouble(time);
 	}
-	
+
 	public InputLog(String name, boolean value, double time) {
 		DecimalFormat df = new DecimalFormat("#.#####");
 		df.setRoundingMode(RoundingMode.HALF_UP);
@@ -76,9 +85,5 @@ public class InputLog {
 		this._boolValue = value;
 		this._value = 0.0;
 		this._isButton = true;
-	}
-	
-	private void _parse() {
-		
 	}
 }
