@@ -2,16 +2,13 @@ package team498.robot.commands.auto;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
-public class TestingAuto extends CommandGroup {
+/**
+ *
+ */
+public class StartCenterPlaceRightSwitchStrategy extends CommandGroup {
 
-    public TestingAuto() {
-    	addSequential(new DriveStraight(), 2); //drives straight for 2 sec
-    	addSequential(new Stop(), 2); //stop robot for 2 sec
-    	addSequential(new DriveLeft(), 3); //turn left and drive for 3 sec
-    	addSequential(new ReverseUntilBumperButtonPress()); //reverses forever (until button is held down);
-    	addSequential(new ReverseHalfPowerUntilBumperButtonDepress()); //reverses using half the power (until button is not pressed);
-    	addSequential(new Stop()); //stops robot
-    	
+    public StartCenterPlaceRightSwitchStrategy() {
+    	System.out.println("Start Center, Right Switch Strategy!");
         // Add Commands here:
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());
