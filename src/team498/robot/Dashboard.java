@@ -11,6 +11,9 @@ public class Dashboard {
 	public static final String IsButtonStartPressed = "IsButtonStartPressed";
 	
 	public static final String AxisLeftXValue = "AxisLeftXValue";
+	public static final String AxisLeftYValue = "AxisLeftYValue";
+	public static final String AxisRightXValue = "AxisRightXValue";
+	public static final String AxisRightYValue = "AxisRightYValue";
 	
 	public static final String RightTriggerValue = "RightTriggerValue";
 	public static final String LeftTriggerValue = "LeftTriggerValue";
@@ -22,6 +25,9 @@ public class Dashboard {
 	public static final String GyroAngleX = "GyroAngleX";
 	public static final String GyroAngleY = "GyroAngleY";
 	public static final String GyroAngleZ = "GyroAngleZ";
+	
+	public static final String IntakeLeftPower = "IntakeLeftPower";
+	public static final String IntakeRightPower = "IntakeRightPower";
 
 
 }

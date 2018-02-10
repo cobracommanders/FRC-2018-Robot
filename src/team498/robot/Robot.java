@@ -11,6 +11,11 @@ import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
+import team498.robot.commands.Auto;
+import team498.robot.subsystems.Arm;
+import team498.robot.subsystems.Gyro;
+import team498.robot.subsystems.Intake;
+import team498.robot.subsystems.Vision;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import team498.robot.commands.auto.AutoStrategy;
@@ -40,6 +45,13 @@ public class Robot extends TimedRobot {
 	private DriverStation ds = DriverStation.getInstance();
 
 	// Subsystems
+	//private Drivetrain drivetrain = Drivetrain.getDrivetrain();
+	private Vision vision = Vision.getVision();
+	private Gyro gyro = Gyro.getGyro();
+	private Intake intake = Intake.getIntake();
+	private Arm arm = Arm.getArm();
+	private Auto auto = new Auto();
+	
 	//private Vision vision = Vision.getVision();
 	private Drivetrain drivetrain = Drivetrain.getDrivetrain();
 
