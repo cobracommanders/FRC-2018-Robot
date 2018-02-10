@@ -4,7 +4,6 @@ import edu.wpi.first.wpilibj.BuiltInAccelerometer;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import team498.robot.Dashboard;
-import team498.robot.commands.MonitorRobotContact;
 
 public class Accelerometer extends Subsystem {
 		
