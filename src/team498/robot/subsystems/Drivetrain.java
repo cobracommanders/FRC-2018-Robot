@@ -7,6 +7,7 @@
 
 package team498.robot.subsystems;
 
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
@@ -15,6 +16,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import team498.robot.ConstantAccelerationCalculator;
 import team498.robot.Dashboard;
 import team498.robot.Helpers;
+import team498.robot.Mappings;
 import team498.robot.Prefs;
 import team498.robot.commands.ManualDrive;
 
@@ -29,6 +31,11 @@ import team498.robot.commands.ManualDrive;
  */
 
 public class Drivetrain extends PIDSubsystem {
+	
+	private static final double WheelDiameter = 0.1524; // 6 inch wheels. This was converted to meters
+	private static final double PulsePerRevolution = 2048; // all switches on the encoder are off
+	private static final double WheelCircumference = WheelDiameter * Math.PI;
+	private static final double MetersPerPulse = WheelCircumference / PulsePerRevolution;
 
 	private static Drivetrain drivetrain = null;
 	public static Drivetrain getDrivetrain() {
@@ -52,10 +59,16 @@ public class Drivetrain extends PIDSubsystem {
 	private final double tolerence = 0.1;
 
 	private DifferentialDrive drive = new DifferentialDrive(spark1, spark0);
+	
+	public Encoder leftEncoder = new Encoder(Mappings.LeftEncoderDigitalSource1, Mappings.LeftEncoderDigitalSource2);
+	public Encoder rightEncoder = new Encoder(Mappings.RightEncoderDigitalSource1, Mappings.RightEncoderDigitalSource2);
 
 	public Drivetrain() {
 		super("Drivetrain", prefs.getPID_P(), prefs.getPID_I(), prefs.getPID_D());
-
+		
+		leftEncoder.setDistancePerPulse(MetersPerPulse);
+		rightEncoder.setDistancePerPulse(MetersPerPulse);
+		
 		gyro.reset();
 		timer = new Timer();
 		timer.start();
@@ -101,9 +114,19 @@ public class Drivetrain extends PIDSubsystem {
 
 		drive.arcadeDrive(move, rotate);
 	}
+	
+	public double getDistance() {
+		//averages the encoders distance 
+		return (leftEncoder.getDistance() + rightEncoder.getDistance()) / 2;
+	}
 
 	public void resetGyro() {
 		gyro.reset();
+	}
+	
+	public void resetEncoders() {
+		leftEncoder.reset();
+		rightEncoder.reset();
 	}
 
 	@Override
@@ -129,6 +152,8 @@ public class Drivetrain extends PIDSubsystem {
 
 	public void updateDashboard() {
 		// SmartDashboard.putNumber("Output values (PID)", pidOutput);
+		SmartDashboard.putNumber(Dashboard.DistanceTraveled, getDistance());
+		
 		SmartDashboard.putNumber("Angle for PID", this.getPosition());
 
 		SmartDashboard.putNumber(Dashboard.GyroAngle, gyro.getAngle());
