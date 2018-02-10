@@ -11,10 +11,6 @@ import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
-import team498.robot.commands.Auto;
-import team498.robot.subsystems.Arm;
-import team498.robot.subsystems.Gyro;
-import team498.robot.subsystems.Intake;
 import team498.robot.subsystems.Vision;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -36,7 +32,9 @@ import team498.robot.commands.auto.StartRightPlaceRightScaleStrategy;
 import team498.robot.commands.auto.StartRightPlaceRightSwitchStrategy;
 import team498.robot.commands.auto.SwitchPosition;
 import team498.robot.subsystems.Drivetrain;
-//import team498.robot.subsystems.Vision;
+import team498.robot.subsystems.Accelerometer;
+import team498.robot.subsystems.HapticFeedback;
+import team498.robot.subsystems.Vision;
 
 public class Robot extends TimedRobot {
 
@@ -45,12 +43,9 @@ public class Robot extends TimedRobot {
 	private DriverStation ds = DriverStation.getInstance();
 
 	// Subsystems
-	//private Drivetrain drivetrain = Drivetrain.getDrivetrain();
 	private Vision vision = Vision.getVision();
-	private Gyro gyro = Gyro.getGyro();
-	private Intake intake = Intake.getIntake();
-	private Arm arm = Arm.getArm();
-	private Auto auto = new Auto();
+	private Accelerometer accelerometer = Accelerometer.getAccelerometer();
+	private HapticFeedback hapticFeedback = HapticFeedback.getHapticFeedback();
 	
 	//private Vision vision = Vision.getVision();
 	private Drivetrain drivetrain = Drivetrain.getDrivetrain();
@@ -253,6 +248,7 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putString("Strategy Choice", autonomousStrategy != null ? autonomousStrategy.toString() : "");
 		operator.updateDashboard();
 		drivetrain.updateDashboard();
-		// TODO add other subsystems
+		accelerometer.updateDashboard();
+		//TODO add other subsystems 
 	}
 }
