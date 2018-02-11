@@ -44,6 +44,7 @@ public class Robot extends TimedRobot {
 	private Vision vision = Vision.getVision();
 	private Arm arm = Arm.getArm();
 	private Accelerometer accelerometer = Accelerometer.getAccelerometer();
+	
 	private Drivetrain drivetrain = Drivetrain.getDrivetrain();
 
 	// Autonomous Selections
