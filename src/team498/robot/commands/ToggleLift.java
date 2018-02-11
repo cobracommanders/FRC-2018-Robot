@@ -22,7 +22,7 @@ public class ToggleLift extends InstantCommand {
 	// Called just before this Command runs the first time
 	protected void initialize() {
 		isUp = !isUp;
-		arm.liftSet(isUp);
+		arm.setLift(isUp);
 		SmartDashboard.putBoolean(Dashboard.ElevatorUp, isUp);
 	}
 }

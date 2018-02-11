@@ -39,7 +39,7 @@ public class ManualIntake extends Command {
 			leftPower = 0;
 			rightPower = 0;
 		}
-			this.arm.intakeSet(leftPower,rightPower);
+			this.arm.setIntake(leftPower,rightPower);
 			targetPower = leftPower;
 			
 		SmartDashboard.putNumber(Dashboard.IntakeLeftPower, leftPower);

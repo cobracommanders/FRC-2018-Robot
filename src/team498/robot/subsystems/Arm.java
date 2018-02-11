@@ -29,15 +29,15 @@ public class Arm extends Subsystem {
     	setDefaultCommand(new ManualArm());    	
     }
         
-    public void armSet(double power) {
+    public void setArm(double power) {
     	armMotor.set(power);
     }
-    public void intakeSet(double leftPower, double rightPower) {
+    public void setIntake(double leftPower, double rightPower) {
     	intakeLeft.set(leftPower);
     	intakeRight.set(rightPower);
     }
     
-    public void liftSet(boolean isUp) {
+    public void setLift(boolean isUp) {
     	if(isUp) {
     		lift.set(Value.kReverse);
     	}else {

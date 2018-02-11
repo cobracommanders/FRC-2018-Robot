@@ -24,7 +24,7 @@ public class ManualArm extends Command {
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
 		double power = operator.controller.axisRightY.getAxisValue();
-		this.arm.armSet(power * cap);
+		this.arm.setArm(power * cap);
 		SmartDashboard.putNumber(Dashboard.ArmPower, power * cap);
 	}
 
