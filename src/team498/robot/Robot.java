@@ -4,7 +4,6 @@
 /* must be accompanied by the FIRST BSD license file in the root directory of */
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
-//Test
 package team498.robot;
 
 import edu.wpi.first.wpilibj.DriverStation;
@@ -32,6 +31,7 @@ import team498.robot.commands.auto.StartRightPlaceRightSwitchStrategy;
 import team498.robot.commands.auto.SwitchPosition;
 import team498.robot.subsystems.Drivetrain;
 import team498.robot.subsystems.Accelerometer;
+import team498.robot.subsystems.Arm;
 import team498.robot.subsystems.Vision;
 
 public class Robot extends TimedRobot {
@@ -42,6 +42,7 @@ public class Robot extends TimedRobot {
 
 	// Subsystems
 	private Vision vision = Vision.getVision();
+	private Arm arm = Arm.getArm();
 	private Accelerometer accelerometer = Accelerometer.getAccelerometer();
 	
 	private Drivetrain drivetrain = Drivetrain.getDrivetrain();
@@ -55,7 +56,7 @@ public class Robot extends TimedRobot {
 
 	@Override
 	public void robotInit() {
-		//vision.startCapture();
+		vision.startCapture();
 		updateDashboard();
 		addAutonomousChoices();
 	}

@@ -9,6 +9,7 @@ package team498.robot.subsystems;
 
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Spark;
+import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
@@ -31,13 +32,14 @@ import team498.robot.commands.ManualDrive;
  */
 
 public class Drivetrain extends PIDSubsystem {
-	
+
 	private static final double WheelDiameter = 0.1524; // 6 inch wheels. This was converted to meters
 	private static final double PulsePerRevolution = 2048; // all switches on the encoder are off
 	private static final double WheelCircumference = WheelDiameter * Math.PI;
 	private static final double MetersPerPulse = WheelCircumference / PulsePerRevolution;
 
 	private static Drivetrain drivetrain = null;
+
 	public static Drivetrain getDrivetrain() {
 		drivetrain = drivetrain == null ? new Drivetrain() : drivetrain;
 		return drivetrain;
@@ -45,8 +47,14 @@ public class Drivetrain extends PIDSubsystem {
 
 	static Prefs prefs = Prefs.getPrefs();
 
-	private Spark spark0 = new Spark(0);
-	private Spark spark1 = new Spark(2);
+	private Spark frontLeftDrive = new Spark(Mappings.FrontLeftMotorChannel);
+	private Spark frontRightDrive = new Spark(Mappings.FrontRightMotorChannel);
+	private Spark backLeftDrive = new Spark(Mappings.BackLeftMotorChannel);
+	private Spark backRightDrive = new Spark(Mappings.BackRightMotorChannel);
+
+	private SpeedControllerGroup leftGroup = new SpeedControllerGroup(frontLeftDrive, backLeftDrive);
+	private SpeedControllerGroup rightGroup = new SpeedControllerGroup(frontRightDrive, backRightDrive);
+
 	private ADIS16448_IMU gyro = new ADIS16448_IMU();
 	private ConstantAccelerationCalculator ramp = new ConstantAccelerationCalculator(prefs.getRamp_C());
 
@@ -57,24 +65,27 @@ public class Drivetrain extends PIDSubsystem {
 	private final double correctionGain = 0.03;
 	private final double correctionAngleTolerence = 0.0;
 
-	private DifferentialDrive drive = new DifferentialDrive(spark1, spark0);
-	
+	private DifferentialDrive drive = new DifferentialDrive(leftGroup, rightGroup);
+
+	private boolean turbo = false;
+	private double turboCap = 0.8;
+	private double turnCap = 0.8;
+
 	public Encoder leftEncoder = new Encoder(Mappings.LeftEncoderDigitalSource1, Mappings.LeftEncoderDigitalSource2);
 	public Encoder rightEncoder = new Encoder(Mappings.RightEncoderDigitalSource1, Mappings.RightEncoderDigitalSource2);
 
 	public Drivetrain() {
 		super("Drivetrain", prefs.getPID_P(), prefs.getPID_I(), prefs.getPID_D());
-		
+
 		leftEncoder.setDistancePerPulse(MetersPerPulse);
 		rightEncoder.setDistancePerPulse(MetersPerPulse);
-		
+
 		gyro.reset();
 		correctionDelayTimer = new Timer();
 		correctionDelayTimer.start();
 
 		// Initialize PID
 		setAbsoluteTolerance(1);
-		getPIDController().setContinuous(false);
 		setInputRange(-180, 180);
 		setOutputRange(-0.5, 0.5);
 	}
@@ -86,7 +97,7 @@ public class Drivetrain extends PIDSubsystem {
 	public void drive(double move, double rotate) {
 
 		// If driving and not turning then apply correction
-		if (Math.abs(move) > 0 && rotate == 0) { 
+		if (Math.abs(move) > 0 && rotate == 0) {
 			if (correctionDelayTimer.get() == 0) {
 				correctionDelayTimer.start();
 			}
@@ -94,10 +105,10 @@ public class Drivetrain extends PIDSubsystem {
 				applyCorrection = true;
 				if (!directionLocked) {
 					gyro.reset();
-					directionLocked = true;					
+					directionLocked = true;
 				}
 			}
-		// If manually turning then disable correction
+			// If manually turning then disable correction
 		} else {
 			applyCorrection = false;
 			directionLocked = false;
@@ -108,23 +119,29 @@ public class Drivetrain extends PIDSubsystem {
 		}
 
 		// Apply correction if needed
-		rotate = applyCorrection ? Helpers.rotateToTarget(gyro.getAngleY(), 0, correctionAngleTolerence, correctionGain) : rotate;
-
+		rotate = applyCorrection ? Helpers.rotateToTarget(gyro.getAngleY(), 0, correctionAngleTolerence, correctionGain)
+				: rotate;
+		move *= (turbo ? 1 : turboCap);
+		rotate *= turnCap;
 		drive.arcadeDrive(move, rotate);
 	}
-	
+
 	public double getDistance() {
-		//averages the encoders distance 
+		// averages the encoders distance
 		return (leftEncoder.getDistance() + rightEncoder.getDistance()) / 2;
 	}
 
 	public void resetGyro() {
 		gyro.reset();
 	}
-	
+
 	public void resetEncoders() {
 		leftEncoder.reset();
 		rightEncoder.reset();
+	}
+
+	public void toggleTurbo() {
+		turbo = !turbo;
 	}
 
 	@Override
@@ -139,8 +156,8 @@ public class Drivetrain extends PIDSubsystem {
 		double rampedOutput = ramp.getNextDataPoint(output);
 
 		// TODO: Can we use some arcade drive instead?
-		this.spark0.pidWrite(rampedOutput);
-		this.spark1.pidWrite(rampedOutput);
+		this.leftGroup.pidWrite(rampedOutput);
+		this.rightGroup.pidWrite(rampedOutput);
 
 		System.out.println("Prefs - P: " + prefs.getPID_P() + " I: " + prefs.getPID_I() + " D: " + prefs.getPID_D()
 				+ " C: " + prefs.getRamp_C());
@@ -151,7 +168,7 @@ public class Drivetrain extends PIDSubsystem {
 	public void updateDashboard() {
 		// SmartDashboard.putNumber("Output values (PID)", pidOutput);
 		SmartDashboard.putNumber(Dashboard.DistanceTraveled, getDistance());
-		
+
 		SmartDashboard.putNumber("Angle for PID", this.getPosition());
 
 		SmartDashboard.putNumber(Dashboard.GyroAngle, gyro.getAngle());

@@ -5,6 +5,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import team498.robot.Dashboard;
 
+
 public class Accelerometer extends Subsystem {
 		
 	private static Accelerometer accelerometer = null;
@@ -24,7 +25,7 @@ public class Accelerometer extends Subsystem {
 	}
 
 	public void updateDashboard() {
-		System.out.println("Accelorometer Dashboard");
+		//System.out.println("Accelorometer Dashboard");
 		SmartDashboard.putNumber(Dashboard.AccelerometerX, accel.getX());
 		SmartDashboard.putNumber(Dashboard.AccelerometerY, accel.getY());
 		SmartDashboard.putNumber(Dashboard.AccelerometerZ, accel.getZ());
