@@ -31,7 +31,6 @@ public class Operator {
 		//Intake in
 		controller.buttonX.whenPressed(new ManualIntake(.6,.6));
 		controller.buttonB.whenPressed(new ManualIntake(-1,-1));
-		controller.buttonA.whenPressed(new ManualIntake(0,0));
 		controller.buttonY.whenPressed(new ToggleTurbo());
 		
 		controller.leftBumper.whenPressed(new ToggleLift());

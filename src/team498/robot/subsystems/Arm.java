@@ -2,6 +2,7 @@ package team498.robot.subsystems;
 
 import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -17,7 +18,7 @@ public class Arm extends Subsystem {
 		arm = arm == null ? new Arm() : arm;
 		return arm;
 	}
-	
+	private DigitalInput cubeIn = new DigitalInput(Mappings.LimitSwitch);
 	private DoubleSolenoid lift = new DoubleSolenoid(Mappings.LiftForward, Mappings.LiftReverse);
 	private Victor armMotor = new Victor(Mappings.ArmPort);
 	private Victor intakeLeft = new Victor(Mappings.IntakeLeftPort);
@@ -40,7 +41,7 @@ public class Arm extends Subsystem {
     	if(isUp) {
     		lift.set(Value.kReverse);
     	}else {
-    		lift.set(Value.kForward);
+    		lift.set(Value.kOff);
     	}
     }
     
@@ -50,7 +51,9 @@ public class Arm extends Subsystem {
     
     public void updateDashboard(){
     	System.out.println(lift.get());
+    	SmartDashboard.putString(Dashboard.LiftState, lift.get().toString());
     	SmartDashboard.putNumber(Dashboard.ArmPosition, getPosition());
+    	SmartDashboard.putBoolean(Dashboard.CubeIn, cubeIn.get());
     }
 }
 

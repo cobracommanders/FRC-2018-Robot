@@ -40,4 +40,6 @@ public class Dashboard {
 	public static final String DistanceTraveled = "DistanceTraveled";
 	
 	public static final String ElevatorUp = "ElevatorUp";
+	public static final String CubeIn = "CubeIn";
+	public static final String LiftState = "LiftState";
 }
