@@ -5,11 +5,14 @@ import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import team498.robot.Dashboard;
 import team498.robot.Mappings;
 import team498.robot.commands.ManualArm;
+
+
 
 public class Arm extends Subsystem {
 	
@@ -18,6 +21,11 @@ public class Arm extends Subsystem {
 		arm = arm == null ? new Arm() : arm;
 		return arm;
 	}
+	
+	private boolean isIntakeActive = true;
+	
+	private Timer timer = new Timer();
+	
 	private DigitalInput cubeIn = new DigitalInput(Mappings.LimitSwitch);
 	private DoubleSolenoid lift = new DoubleSolenoid(Mappings.LiftForward, Mappings.LiftReverse);
 	private Victor armMotor = new Victor(Mappings.ArmPort);
@@ -35,6 +43,19 @@ public class Arm extends Subsystem {
     public void setIntake(double leftPower, double rightPower) {
     	intakeLeft.set(leftPower);
     	intakeRight.set(rightPower);
+    	
+    	if (timer.get() > Mappings.IntakeFailSafeDelay) {
+    		isIntakeActive = true;
+    		timer.stop();
+    	}
+    	
+    	if(isIntakeActive) {
+    		intakeLeft.set(leftPower);
+        	intakeRight.set(rightPower);
+    	} else {
+    		intakeLeft.set(0);
+        	intakeRight.set(0);
+    	}
     }
     
     public void setLift(boolean isUp) {
@@ -47,6 +68,12 @@ public class Arm extends Subsystem {
     
     public double getPosition() {
     	return pot.get();
+    }
+    
+    public void failSafe() {
+    	timer.reset();
+    	timer.start();
+    	isIntakeActive = false;
     }
     
     public void updateDashboard(){
