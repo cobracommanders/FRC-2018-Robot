@@ -3,6 +3,7 @@ package team498.robot.subsystems;
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import team498.robot.Mappings;
 
 public class Vision extends Subsystem {
@@ -35,6 +36,8 @@ public class Vision extends Subsystem {
 		if (camera2.isConnected() == false) {
 			camera2.free();
 		}
+		
+		//SmartDashboard.putString("Camera connections", String.format("Camera 1: %s\nCamera 2: %s", camera1.isConnected(), camera2.isConnected()));
 	}
 	
     public void initDefaultCommand() {    	

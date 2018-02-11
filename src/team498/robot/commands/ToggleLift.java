@@ -13,16 +13,16 @@ public class ToggleLift extends InstantCommand {
 	boolean isUp = false;
 	boolean target = true;
 
-    public ToggleLift() {
-    	super("Lift");
-    	
-    	requires(this.arm = Arm.getArm());
-    }
+	public ToggleLift() {
+		super("Lift");
 
-    // Called just before this Command runs the first time
-    protected void initialize() {
-    	arm.liftSet(isUp);
-    	isUp = !isUp;
-    	SmartDashboard.putBoolean(Dashboard.ElevatorUp,isUp);
-    }
+		requires(this.arm = Arm.getArm());
+	}
+
+	// Called just before this Command runs the first time
+	protected void initialize() {
+		isUp = !isUp;
+		arm.setLift(isUp);
+		SmartDashboard.putBoolean(Dashboard.ElevatorUp, isUp);
+	}
 }

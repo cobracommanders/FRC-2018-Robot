@@ -40,4 +40,6 @@ public class Mappings {
 	
 	public static final int LiftForward = 1;
 	public static final int LiftReverse = 0;
+	
+	public static final int LimitSwitch = 0;
 }

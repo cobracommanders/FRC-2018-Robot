@@ -7,19 +7,19 @@ import team498.robot.Operator;
 import team498.robot.subsystems.Arm;
 
 public class ManualArm extends Command {
-	
+
 	private Operator operator = Operator.getOperator();
-	private Arm arm;	
-	
-    public ManualArm() {
-    	super("ManualArm");
-    	requires(this.arm = Arm.getArm());
-    }
+	private Arm arm;
+	private double cap = 1.0; // TODO: Change this
 
-    // Called just before this Command runs the first time
-    protected void initialize() {
-    }
+	public ManualArm() {
+		super("ManualArm");
+		requires(this.arm = Arm.getArm());
+	}
 
+	// Called just before this Command runs the first time
+	protected void initialize() {
+	}
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	double power = operator.controller.axisRightY.getAxisValue();
@@ -28,17 +28,24 @@ public class ManualArm extends Command {
     	arm.updateDashboard();
     }
 
-    // Make this return true when this Command no longer needs to run execute()
-    protected boolean isFinished() {
-        return false;
-    }
+	// Called repeatedly when this Command is scheduled to run
+	protected void execute() {
+		double power = operator.controller.axisRightY.getAxisValue();
+		this.arm.setArm(power * cap);
+		SmartDashboard.putNumber(Dashboard.ArmPower, power * cap);
+	}
 
-    // Called once after isFinished returns true
-    protected void end() {
-    }
+	// Make this return true when this Command no longer needs to run execute()
+	protected boolean isFinished() {
+		return false;
+	}
 
-    // Called when another command which requires one or more of the same
-    // subsystems is scheduled to run
-    protected void interrupted() {
-    }
+	// Called once after isFinished returns true
+	protected void end() {
+	}
+
+	// Called when another command which requires one or more of the same
+	// subsystems is scheduled to run
+	protected void interrupted() {
+	}
 }
