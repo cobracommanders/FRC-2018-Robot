@@ -26,7 +26,7 @@ public class Arm extends Subsystem {
 	private AnalogPotentiometer pot = new AnalogPotentiometer(Mappings.ArmPotChannel, 314, 0);
 	
     public void initDefaultCommand() {
-    	setDefaultCommand(new ManualArm());    	
+    	setDefaultCommand(new ManualArm(0));    	
     }
         
     public void setArm(double power) {
@@ -41,8 +41,11 @@ public class Arm extends Subsystem {
     	if(isUp) {
     		lift.set(Value.kReverse);
     	}else {
-    		lift.set(Value.kOff);
+    		lift.set(Value.kForward);
     	}
+    	SmartDashboard.putString(Dashboard.LiftState, lift.get().toString());
+    	SmartDashboard.putNumber(Dashboard.ArmPosition, getPosition());
+    	SmartDashboard.putBoolean(Dashboard.CubeIn, cubeIn.get());
     }
     
     public double getPosition() {
