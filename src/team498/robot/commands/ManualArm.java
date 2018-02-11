@@ -24,5 +24,6 @@ public class ManualArm extends InstantCommand {
 		this.arm.setArm(armPower * cap);
 
 		SmartDashboard.putNumber(Dashboard.ArmPower, armPower * cap);
+		arm.updateDashboard();
 	}
 }

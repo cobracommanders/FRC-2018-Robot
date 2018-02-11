@@ -43,9 +43,6 @@ public class Arm extends Subsystem {
     	}else {
     		lift.set(Value.kForward);
     	}
-    	SmartDashboard.putString(Dashboard.LiftState, lift.get().toString());
-    	SmartDashboard.putNumber(Dashboard.ArmPosition, getPosition());
-    	SmartDashboard.putBoolean(Dashboard.CubeIn, cubeIn.get());
     }
     
     public double getPosition() {
