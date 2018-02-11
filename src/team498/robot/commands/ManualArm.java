@@ -25,6 +25,7 @@ public class ManualArm extends Command {
     	double power = operator.controller.axisRightY.getAxisValue();
     	this.arm.armSet(power);
     	SmartDashboard.putNumber(Dashboard.ArmPower, power);
+    	arm.updateDashboard();
     }
 
     // Make this return true when this Command no longer needs to run execute()

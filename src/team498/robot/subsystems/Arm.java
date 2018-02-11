@@ -22,7 +22,7 @@ public class Arm extends Subsystem {
 	private Victor armMotor = new Victor(Mappings.ArmPort);
 	private Victor intakeLeft = new Victor(Mappings.IntakeLeftPort);
 	private Victor intakeRight =  new Victor(Mappings.IntakeRightPort);
-	private AnalogPotentiometer pot = new AnalogPotentiometer(Mappings.ArmPotChannel, 315, 0); // TODO: Set max degree based on Pot used
+	private AnalogPotentiometer pot = new AnalogPotentiometer(Mappings.ArmPotChannel, 314, 0);
 	
     public void initDefaultCommand() {
     	setDefaultCommand(new ManualArm());    	
