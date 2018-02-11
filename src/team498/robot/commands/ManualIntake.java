@@ -3,6 +3,7 @@ package team498.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import team498.robot.Dashboard;
+import team498.robot.Operator;
 import team498.robot.subsystems.Arm;
 
 public class ManualIntake extends Command {
@@ -29,7 +30,7 @@ public class ManualIntake extends Command {
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-		if(targetPower != leftPower) {
+		/*if(targetPower != leftPower) {
 			hasChanged = true;
 		}else {
 			hasChanged = false;
@@ -38,7 +39,7 @@ public class ManualIntake extends Command {
 			targetPower = 0;
 			leftPower = 0;
 			rightPower = 0;
-		}
+		}*/
 			this.arm.setIntake(leftPower,rightPower);
 			targetPower = leftPower;
 			
