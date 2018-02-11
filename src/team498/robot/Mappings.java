@@ -15,7 +15,7 @@ public class Mappings {
 
 	public static final int LeftXAxis = 0;
 	public static final int LeftYAxis = 1;
-	public static final int RightXAxis = 6;
+	public static final int RightXAxis = 4;
 	public static final int RightYAxis = 5;
 	public static final int RightTrigger = 3;
 	public static final int LeftTrigger = 2;

@@ -10,6 +10,7 @@ package team498.robot;
 import team498.robot.commands.ToggleLift;
 import team498.robot.commands.ManualArm;
 import team498.robot.commands.ManualIntake;
+import team498.robot.commands.ToggleIntake;
 import team498.robot.commands.ToggleTurbo;
 
 /**
@@ -34,26 +35,9 @@ public class Operator {
 		// //where we call time
 
 		// Intake in
-		// controller.buttonX.whenPressed(new ManualIntake(.6,.6));
-
-		//controller.buttonB.whenPressed(new ManualIntake(-1, -1));
-		
-		if (controller.buttonX.get() == true && xToggle == false) {
-			xToggle = true;
-			new ManualIntake(.6, .6);
-		} else if (controller.buttonX.get() == true && xToggle == true) {
-			xToggle = false;
-			new ManualIntake(0, 0);
-		} 
-		
-		if (controller.buttonB.get() == true && bToggle == false) {
-			bToggle = true;
-			new ManualIntake(-1, -1);
-		} else if (controller.buttonB.get() == true && bToggle == true) {
-			bToggle = false;
-			new ManualIntake(0, 0);
-		}
-		// controller.buttonA.whenPressed(new ManualIntake(0,0));
+		 controller.buttonX.whenPressed(new ToggleIntake(.6));
+		 controller.buttonB.whenPressed(new ToggleIntake(-1));
+		 
 		controller.buttonY.whenPressed(new ToggleTurbo());
 
 		controller.rightJoyPress.whenPressed(new ToggleLift());
