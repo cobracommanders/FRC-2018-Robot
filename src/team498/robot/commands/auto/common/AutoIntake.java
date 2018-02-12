@@ -33,21 +33,21 @@ public class AutoIntake extends Command {
     	//add armposition
     	if (Math.abs(armPower) > 0) {
     		targetArmPower = armPower;
-    		arm.armSet(armPower);
+    		arm.setArm(armPower);
     	} else {
-    		arm.armSet(0);
+    		arm.setArm(0);
     	}
     	//probably timer or limit switch idk
     	if (Math.abs(intakeLeftPower) > 0 || Math.abs(intakeRightPower) > 0) {
     		targetLeftIntakePower = intakeLeftPower;
     		targetRightIntakePower = intakeRightPower;
-    		arm.intakeSet(intakeLeftPower, intakeRightPower);
+    		arm.setIntake(intakeLeftPower, intakeRightPower);
     	}
     	
     	if (isLiftUp) {
-    		arm.liftSet(isLiftUp);
+    		arm.setLift(isLiftUp);
     	} else { ///if isLiftUp = false
-    		arm.liftSet(isLiftUp);
+    		arm.setLift(isLiftUp);
     	}
     }
 

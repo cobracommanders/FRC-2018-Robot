@@ -25,7 +25,7 @@ public class Lift extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	arm.liftSet(isUp);
+    	arm.setLift(isUp);
     	isUp = !isUp;
     	target = isUp;
     	SmartDashboard.putBoolean(Dashboard.ElevatorUp,isUp);
