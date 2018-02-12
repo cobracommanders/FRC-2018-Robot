@@ -15,7 +15,7 @@ public class Mappings {
 
 	public static final int LeftXAxis = 0;
 	public static final int LeftYAxis = 1;
-	public static final int RightXAxis = 6;
+	public static final int RightXAxis = 4;
 	public static final int RightYAxis = 5;
 	public static final int RightTrigger = 3;
 	public static final int LeftTrigger = 2;
@@ -36,7 +36,12 @@ public class Mappings {
 	public static final int IntakeLeftPort = 4;
 	public static final int IntakeRightPort = 5;
 	public static final int ArmPort = 6;
+	public static final int ArmPotChannel = 0;
 	
 	public static final int LiftForward = 1;
 	public static final int LiftReverse = 0;
+	
+	public static final int LimitSwitch = 0;
+	
+	public static final double IntakeFailSafeDelay = 0.5;
 }

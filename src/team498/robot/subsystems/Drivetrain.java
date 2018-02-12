@@ -40,6 +40,7 @@ public class Drivetrain extends PIDSubsystem {
 	private static final double InchesPerPulse = WheelCircumference / PulsePerRevolution;
 
 	private static Drivetrain drivetrain = null;
+
 	public static Drivetrain getDrivetrain() {
 		drivetrain = drivetrain == null ? new Drivetrain() : drivetrain;
 		return drivetrain;
@@ -51,11 +52,10 @@ public class Drivetrain extends PIDSubsystem {
 	private Spark frontRightDrive = new Spark(Mappings.FrontRightMotorChannel);
 	private Spark backLeftDrive = new Spark(Mappings.BackLeftMotorChannel);
 	private Spark backRightDrive = new Spark(Mappings.BackRightMotorChannel);
-	
+
 	private SpeedControllerGroup leftGroup = new SpeedControllerGroup(frontLeftDrive, backLeftDrive);
 	private SpeedControllerGroup rightGroup = new SpeedControllerGroup(frontRightDrive, backRightDrive);
-	
-	
+
 	private ADIS16448_IMU gyro = new ADIS16448_IMU();
 	private ConstantAccelerationCalculator ramp = new ConstantAccelerationCalculator(prefs.getRamp_C());
 
@@ -67,7 +67,11 @@ public class Drivetrain extends PIDSubsystem {
 	private final double correctionAngleTolerence = 0.0;
 
 	private DifferentialDrive drive = new DifferentialDrive(leftGroup, rightGroup);
-	
+
+	private boolean turbo = false;
+	private double turboCap = 0.8;
+	private double turnCap = 0.8;
+
 	public Encoder leftEncoder = new Encoder(Mappings.LeftEncoderDigitalSource1, Mappings.LeftEncoderDigitalSource2);
 	public Encoder rightEncoder = new Encoder(Mappings.RightEncoderDigitalSource1, Mappings.RightEncoderDigitalSource2);
 
@@ -94,7 +98,7 @@ public class Drivetrain extends PIDSubsystem {
 	public void drive(double move, double rotate) {
 
 		// If driving and not turning then apply correction
-		if (Math.abs(move) > 0 && rotate == 0) { 
+		if (Math.abs(move) > 0 && rotate == 0) {
 			if (correctionDelayTimer.get() == 0) {
 				correctionDelayTimer.start();
 			}
@@ -102,10 +106,10 @@ public class Drivetrain extends PIDSubsystem {
 				applyCorrection = true;
 				if (!directionLocked) {
 					gyro.reset();
-					directionLocked = true;					
+					directionLocked = true;
 				}
 			}
-		// If manually turning then disable correction
+			// If manually turning then disable correction
 		} else {
 			applyCorrection = false;
 			directionLocked = false;
@@ -116,23 +120,29 @@ public class Drivetrain extends PIDSubsystem {
 		}
 
 		// Apply correction if needed
-		rotate = applyCorrection ? Helpers.rotateToTarget(gyro.getAngleY(), 0, correctionAngleTolerence, correctionGain) : rotate;
-
+		rotate = applyCorrection ? Helpers.rotateToTarget(gyro.getAngleY(), 0, correctionAngleTolerence, correctionGain)
+				: rotate;
+		move *= (turbo ? 1 : turboCap);
+		rotate *= turnCap;
 		drive.arcadeDrive(move, rotate);
 	}
-	
+
 	public double getDistance() {
-		//averages the encoders distance 
+		// averages the encoders distance
 		return (leftEncoder.getDistance() + rightEncoder.getDistance()) / 2;
 	}
 
 	public void resetGyro() {
 		gyro.reset();
 	}
-	
+
 	public void resetEncoders() {
 		leftEncoder.reset();
 		rightEncoder.reset();
+	}
+
+	public void toggleTurbo() {
+		turbo = !turbo;
 	}
 
 	@Override
@@ -159,7 +169,7 @@ public class Drivetrain extends PIDSubsystem {
 	public void updateDashboard() {
 		// SmartDashboard.putNumber("Output values (PID)", pidOutput);
 		SmartDashboard.putNumber(Dashboard.DistanceTraveled, getDistance());
-		
+
 		SmartDashboard.putNumber("Angle for PID", this.getPosition());
 
 		SmartDashboard.putNumber(Dashboard.GyroAngle, gyro.getAngle());
