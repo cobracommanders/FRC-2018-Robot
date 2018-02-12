@@ -34,5 +34,12 @@ public class Dashboard {
 	public static final String IntakeLeftPower = "IntakeLeftPower";
 	public static final String IntakeRightPower = "IntakeRightPower";
 	
+	public static final String ArmPower = "ArmPower";
+	public static final String ArmPosition = "ArmPosition";
+	
 	public static final String DistanceTraveled = "DistanceTraveled";
+	
+	public static final String ElevatorUp = "ElevatorUp";
+	public static final String CubeIn = "CubeIn";
+	public static final String LiftState = "LiftState";
 }

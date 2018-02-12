@@ -4,7 +4,6 @@
 /* must be accompanied by the FIRST BSD license file in the root directory of */
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
-//Test
 package team498.robot;
 
 import edu.wpi.first.wpilibj.DriverStation;
@@ -42,6 +41,7 @@ import team498.robot.dynamic.tasks.DriveForwardTask;
 import team498.robot.dynamic.TaskGroup;
 import team498.robot.dynamic.Recorder;
 import team498.robot.dynamic.JoystickInput;
+import team498.robot.subsystems.Arm;
 import team498.robot.subsystems.Vision;
 
 public class Robot extends TimedRobot {
@@ -53,10 +53,9 @@ public class Robot extends TimedRobot {
 	// Subsystems
 	@SuppressWarnings("unused")
 	private Vision vision = Vision.getVision();
+	private Arm arm = Arm.getArm();
 	private Accelerometer accelerometer = Accelerometer.getAccelerometer();
-	@SuppressWarnings("unused")
-	private HapticFeedback hapticFeedback = HapticFeedback.getHapticFeedback();
-
+	
 	private Drivetrain drivetrain = Drivetrain.getDrivetrain();
 
 	// Autonomous Selections
@@ -72,7 +71,7 @@ public class Robot extends TimedRobot {
 
 	@Override
 	public void robotInit() {
-		// vision.startCapture();
+		vision.startCapture();
 		timer = new Timer();
 		updateDashboard();
 		addAutonomousChoices();

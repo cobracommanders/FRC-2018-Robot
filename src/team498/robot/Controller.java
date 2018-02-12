@@ -14,10 +14,10 @@ public class Controller {
 	public JoystickButton buttonY;
 	public JoystickButton leftBumper;
 	public JoystickButton rightBumper;
-	public JoystickButton buttonLeftJoystick;
-	public JoystickButton buttonRightJoystick;
 	public JoystickButton buttonBack;
 	public JoystickButton buttonStart;
+	public JoystickButton leftJoyPress;
+	public JoystickButton rightJoyPress;
 
 	public JoystickAxis axisLeftX;
 	public JoystickAxis axisRightX;
@@ -38,10 +38,10 @@ public class Controller {
 		buttonY = new JoystickButton(joystick, Mappings.ButtonY);
 		leftBumper = new JoystickButton(joystick, Mappings.LeftBumper);
 		rightBumper = new JoystickButton(joystick, Mappings.RightBumper);
-		buttonLeftJoystick = new JoystickButton(joystick, Mappings.LeftJoyPress);
-		buttonRightJoystick = new JoystickButton(joystick, Mappings.RightJoyPress);
-		buttonBack = new JoystickButton(joystick, Mappings.ButtonBack);
 		buttonStart = new JoystickButton(joystick, Mappings.ButtonStart);
+		buttonBack = new JoystickButton(joystick, Mappings.ButtonBack);
+		leftJoyPress = new JoystickButton(joystick, Mappings.LeftJoyPress);
+		rightJoyPress = new JoystickButton(joystick, Mappings.RightJoyPress);
 
 		// Axes
 		axisLeftX = new JoystickAxis(joystick, Mappings.LeftXAxis, 0.25);
