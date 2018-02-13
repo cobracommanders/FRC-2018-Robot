@@ -1,6 +1,7 @@
 package team498.robot.commands.auto;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
+import team498.robot.commands.auto.common.AutoArmPosition;
 import team498.robot.commands.auto.common.AutoDrive;
 import team498.robot.commands.auto.common.AutoIntake;
 import team498.robot.commands.auto.common.AutoTurn;
@@ -22,8 +23,9 @@ public class StartCenterPlaceRightSwitchStrategy extends CommandGroup {
 		addSequential(new AutoTurn(-90));
 		// drives forward
 		addSequential(new AutoDrive(.7, 64.8));
-		// reverses intake so releases cube into switch
-//		addSequential(new AutoIntake(0, -.4, -.4, false));
-		
+		// moves arm higher up
+		addSequential(new AutoArmPosition(45));
+		// reverses intake, releases cube into switch
+		addSequential(new AutoIntake(-.4, -.4));
 	}
 }

@@ -11,7 +11,7 @@ public class AutoArmPosition extends Command {
 	private Arm arm;
 	
 	private double armPower = .6;
-	private double targetArmPosition;
+	private double targetArmPosition; //from 0 to 315 degrees
 	private double armPosition;
 	
 	private boolean done = false;

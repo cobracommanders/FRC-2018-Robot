@@ -12,7 +12,5 @@ public class StartLeftPlaceLeftSwitchStrategy extends CommandGroup {
 
     public StartLeftPlaceLeftSwitchStrategy() {
     	System.out.println("Start Left, Left Switch Strategy!");
-
-
     }
 }

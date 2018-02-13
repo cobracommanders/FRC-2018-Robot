@@ -11,8 +11,8 @@ public class AutoLift extends Command {
 	private Arm arm;
 
 	private boolean isLiftUp;
-	
 	private boolean done = false;
+	
     public AutoLift(boolean isLiftUp) {
     	super("AutoLift");
     	
