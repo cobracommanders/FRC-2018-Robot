@@ -1,5 +1,7 @@
 package team498.robot.dynamic;
 
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -10,7 +12,7 @@ import edu.wpi.first.wpilibj.Timer;
  * tasks and you don't make it yourself, it's built by Recorder
  * 
  * @author Micah Neitz<br/>
- * 		Team 498
+ *         Team 498
  *
  */
 public final class TaskGroup {
@@ -41,9 +43,10 @@ public final class TaskGroup {
 	}
 
 	public void Execute() throws Exception {
-		_log("===/Execute\\===");
+		// _log("===/Execute\\===")
 		if (logs.size() == 0) {
 			_log("Log size was 0");
+			_log("===\\Execute/===");
 			return;
 		}
 		if (timer.get() > 15)
@@ -52,13 +55,16 @@ public final class TaskGroup {
 			_log("Started timer");
 			timer.start();
 		}
+		DecimalFormat df = new DecimalFormat("##.###");
+		df.setRoundingMode(RoundingMode.HALF_UP);
+		// _log(df.format(timer.get()) + ">" + df.format(logs.get(index).GetTime()) +
+		// "=" + (timer.get() > logs.get(index).GetTime()));
 		while (timer.get() > logs.get(index).GetTime()) {
 			InputLog log = logs.get(index);
-			Task task = tasks.get(log.name);
-			if (task.IsButton()) {
-				task.Change(log.GetBoolean());
+			if (tasks.get(log.name).IsButton()) {
+				tasks.get(log.name).Change(log.GetBoolean());
 			} else {
-				task.Change(log.GetDouble());
+				tasks.get(log.name).Change(log.GetDouble());
 			}
 			++index;
 		}
@@ -68,6 +74,6 @@ public final class TaskGroup {
 		for (int i = 0; i < passives.size(); ++i) {
 			passives.get(i).Execute();
 		}
-		_log("===\\Execute/===");
+		// _log("===\\Execute/===");
 	}
 }

@@ -20,7 +20,9 @@ import java.util.*;
  */
 public class Operator {
 
+	@SuppressWarnings("unused")
 	private boolean xToggle = false;
+	@SuppressWarnings("unused")
 	private boolean bToggle = false;
 	private static Operator operator = null;
 

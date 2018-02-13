@@ -23,4 +23,8 @@ public class DriveForwardTask extends Task {
 
 	}
 
+	@Override
+	public boolean IsButton() {
+		return false;
+	}
 }

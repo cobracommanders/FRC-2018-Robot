@@ -20,7 +20,7 @@ public abstract class Task implements ITask {
 
 	@Override
 	public void Change(double value) throws Exception {
-		throw new Exception("This isn't an axis!");
+		System.out.println("You need to override me!");
 	}
 
 	@Override

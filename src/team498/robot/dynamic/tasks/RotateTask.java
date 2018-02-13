@@ -8,6 +8,7 @@ public class RotateTask extends Task {
 
 	@Override
 	public void Change(double value) {
+		System.out.println("Setting rotate value");
 		rotate = value;
 	}
 
@@ -23,4 +24,8 @@ public class RotateTask extends Task {
 
 	}
 
+	@Override
+	public boolean IsButton() {
+		return false;
+	}
 }

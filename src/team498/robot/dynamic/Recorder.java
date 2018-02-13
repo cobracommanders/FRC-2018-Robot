@@ -75,8 +75,8 @@ public final class Recorder {
 		double time = timer.get();
 		oldStates = newStates;
 		newStates = _grabValues();
-		if (oldStates.size() == newStates.size()) {
-			_log("Sizes were different");
+		if (oldStates.size() != newStates.size()) {
+			_log(String.format("Sizes were different: %s != %s", oldStates.size(), newStates.size()));
 			return;
 		}
 		if (oldStates.size() == 0) {
@@ -86,12 +86,14 @@ public final class Recorder {
 		for (int i = 0; i < newStates.size(); i++) {
 			JoyState newState = newStates.get(i);
 			if (newState.isBool) {
+				_log("Checking bool");
 				if (newState.boolState != oldStates.get(i).boolState) {
 					_log(newState.name + " changed to " + newState.boolState);
 					InputLog input = new InputLog(newState.name, newState.boolState, time);
 					logs.add(input);
 				}
 			} else {
+				_log("Checking double");
 				if (newState.doubleState != oldStates.get(i).doubleState) {
 					_log(newState.name + " changed to " + newState.doubleState);
 					InputLog input = new InputLog(newState.name, newState.doubleState, time);
