@@ -77,6 +77,7 @@ public class Arm extends Subsystem {
     		lift.set(Value.kForward);
     	}
     }
+    
     public double getPosition() {
     	return pot.get();
     }
