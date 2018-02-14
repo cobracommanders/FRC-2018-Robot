@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class FromRightScaleToRightSwitchStrategy extends CommandGroup {
 
     public FromRightScaleToRightSwitchStrategy() {
+    	System.out.println("Going to Right Switch from Right Scale!");
         // Add Commands here:
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());

@@ -39,9 +39,11 @@ public class AutoArmPosition extends Command {
 			arm.setArm(-armPower);
 		} else{
 			arm.setArm(0);
+			done = true;
+			
 		}
 		
-		done = true;
+		
     }
 
     // Make this return true when this Command no longer needs to run execute()

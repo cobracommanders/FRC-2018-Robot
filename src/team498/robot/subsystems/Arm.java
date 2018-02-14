@@ -25,7 +25,7 @@ public class Arm extends Subsystem {
 	private Timer timer = new Timer();
 	
 	private DigitalInput cubeIn = new DigitalInput(Mappings.LimitSwitch);
-	private DoubleSolenoid lift = new DoubleSolenoid(Mappings.LiftForward, Mappings.LiftReverse);
+	//private DoubleSolenoid lift = new DoubleSolenoid(Mappings.LiftForward, Mappings.LiftReverse);
 	private Victor armMotor = new Victor(Mappings.ArmPort);
 	private Victor intakeLeft = new Victor(Mappings.IntakeLeftPort);
 	private Victor intakeRight =  new Victor(Mappings.IntakeRightPort);
@@ -72,9 +72,9 @@ public class Arm extends Subsystem {
     }
     public void setLift(boolean isUp) {
     	if(isUp) {
-    		lift.set(Value.kReverse);
+    		//lift.set(Value.kReverse);
     	}else {
-    		lift.set(Value.kForward);
+    		//lift.set(Value.kForward);
     	}
     }
     
@@ -87,7 +87,7 @@ public class Arm extends Subsystem {
     	isIntakeActive = false;
     }
     public void updateDashboard(){
-    	SmartDashboard.putString(Dashboard.LiftState, lift.get().toString());
+    	//SmartDashboard.putString(Dashboard.LiftState, lift.get().toString());
     	SmartDashboard.putNumber(Dashboard.ArmPosition, getPosition());
     	SmartDashboard.putBoolean(Dashboard.CubeIn, cubeIn.get());
     }

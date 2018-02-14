@@ -13,7 +13,7 @@ public class StartCenterPlaceRightSwitchStrategy extends CommandGroup {
 
 	public StartCenterPlaceRightSwitchStrategy() {
 		System.out.println("Start Center, Right Switch Strategy!");
-		// drive forward 5 units on graph (81 inches)
+		/*// drive forward 5 units on graph (81 inches)
 		addSequential(new AutoDrive(.7, 81));
 		// rotate to the right
 		addSequential(new AutoTurn(90));
@@ -26,6 +26,6 @@ public class StartCenterPlaceRightSwitchStrategy extends CommandGroup {
 		// moves arm higher up
 		addSequential(new AutoArmPosition(45));
 		// reverses intake, releases cube into switch
-		addSequential(new AutoIntake(-.4, -.4));
+		addSequential(new AutoIntake(-.4, -.4));*/
 	}
 }
