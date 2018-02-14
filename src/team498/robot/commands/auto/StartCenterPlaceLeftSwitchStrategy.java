@@ -13,13 +13,13 @@ public class StartCenterPlaceLeftSwitchStrategy extends CommandGroup {
 
 	public StartCenterPlaceLeftSwitchStrategy() {
 		System.out.println("Start Center, Left Switch Strategy!");
-		/*// 5 units on Katy's graph
+		// 5 units on Katy's graph
 		// drives forward
 		addSequential(new AutoDrive(.7, 81)); // 81 inches
 		// rotates to the left
 		addSequential(new AutoTurn(-90));
 		// 4 units on katy's graph
-		// drives forward
+		//drives forward
 		addSequential(new AutoDrive(.7, 64.8));
 		// rotates to the right
 		addSequential(new AutoTurn(90));
@@ -28,6 +28,8 @@ public class StartCenterPlaceLeftSwitchStrategy extends CommandGroup {
 		// moves arm higher up
 		addSequential(new AutoArmPosition(45));
 		// reverses intake, releases cube into switch
-		addSequential(new AutoIntake(-.4, -.4));*/
+		addSequential(new AutoIntake(-.4, -.4));
+		
+		
 	}
 }

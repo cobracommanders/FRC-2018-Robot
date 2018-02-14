@@ -1,6 +1,11 @@
 package team498.robot.commands.auto;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
+import team498.robot.commands.auto.common.AutoArmPosition;
+import team498.robot.commands.auto.common.AutoDrive;
+import team498.robot.commands.auto.common.AutoIntake;
+import team498.robot.commands.auto.common.AutoLift;
+import team498.robot.commands.auto.common.AutoTurn;
 
 /**
  *
@@ -9,21 +14,15 @@ public class StartRightPlaceRightScaleStrategy extends CommandGroup {
 
     public StartRightPlaceRightScaleStrategy() {
     	System.out.println("Start Right, Right Scale Strategy!");
-        // Add Commands here:
-        // e.g. addSequential(new Command1());
-        //      addSequential(new Command2());
-        // these will run in order.
-
-        // To run multiple commands at the same time,
-        // use addParallel()
-        // e.g. addParallel(new Command1());
-        //      addSequential(new Command2());
-        // Command1 and Command2 will run in parallel.
-
-        // A command group will require all of the subsystems that each member
-        // would require.
-        // e.g. if Command1 requires chassis, and Command2 requires arm,
-        // a CommandGroup containing them would require both the chassis and the
-        // arm.
+    		//drive forward 20 units 
+    		addSequential(new AutoDrive(.7, 324));
+    		//rotate 90 degrees counterclockwise 
+    		addSequential(new AutoTurn(-90));
+    		//raises tower
+    		addSequential(new AutoLift(true));
+    		//raises arm			
+    		addSequential(new AutoArmPosition(165));
+    		//releases cube into tower 
+    		addSequential(new AutoIntake(-.8, -.8));
     }
 }
