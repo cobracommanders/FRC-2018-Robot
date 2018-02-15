@@ -42,4 +42,6 @@ public class Dashboard {
 	public static final String ElevatorUp = "ElevatorUp";
 	public static final String CubeIn = "CubeIn";
 	public static final String LiftState = "LiftState";
+	public static final String PIDP = "PIDP";
+	public static final String PIDRamp = "PIDRamp";
 }

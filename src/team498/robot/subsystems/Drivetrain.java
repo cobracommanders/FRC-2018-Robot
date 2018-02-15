@@ -159,10 +159,12 @@ public class Drivetrain extends PIDSubsystem {
 		// TODO: Can we use some arcade drive instead?
 		this.leftGroup.pidWrite(rampedOutput);
 		this.rightGroup.pidWrite(rampedOutput);
-
+		
 		System.out.println("Prefs - P: " + prefs.getPID_P() + " I: " + prefs.getPID_I() + " D: " + prefs.getPID_D()
 				+ " C: " + prefs.getRamp_C());
 		System.out.println("PID Output: " + output);
+		SmartDashboard.putNumber(Dashboard.PIDOutput, output);
+		SmartDashboard.putNumber(Dashboard.PIDRamp, rampedOutput);
 		System.out.println("PID Ramped Output: " + rampedOutput);
 	}
 
@@ -171,7 +173,7 @@ public class Drivetrain extends PIDSubsystem {
 		SmartDashboard.putNumber(Dashboard.DistanceTraveled, getDistance());
 
 		SmartDashboard.putNumber("Angle for PID", this.getPosition());
-
+		SmartDashboard.putNumber(Dashboard.PIDP, prefs.getPID_P());
 		SmartDashboard.putNumber(Dashboard.GyroAngle, gyro.getAngle());
 		SmartDashboard.putNumber(Dashboard.GyroAngleX, gyro.getAngleX());
 		SmartDashboard.putNumber(Dashboard.GyroAngleY, gyro.getAngleY());
