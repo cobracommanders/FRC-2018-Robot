@@ -33,6 +33,6 @@ public class StartRightPlaceLeftScaleStrategy extends CommandGroup {
 		//releases cube into tower
 		addSequential(new AutoIntake(-.8, -.8));
 		
-		
+		//ends in same spot
 	}
 }

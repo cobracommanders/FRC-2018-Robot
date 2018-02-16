@@ -23,5 +23,7 @@ public class StartLeftPlaceLeftSwitchStrategy extends CommandGroup {
 		addSequential(new AutoArmPosition(45));
 		//place cube in switch
 		addSequential(new AutoIntake(-.4, -.4));
+		
+		//ends in same place
 	}
 }

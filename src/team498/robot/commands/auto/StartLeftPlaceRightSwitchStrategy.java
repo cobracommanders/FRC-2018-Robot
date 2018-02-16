@@ -17,16 +17,22 @@ public class StartLeftPlaceRightSwitchStrategy extends CommandGroup {
 		addSequential(new AutoDrive(.7, 243));
 		//rotate 90 degrees clockwise 
 		addSequential(new AutoTurn(90));
-		//drive forward 11.5 units 
-		addSequential(new AutoDrive(.7, 186.3));
+		//drive forward 14 units 
+		addSequential(new AutoDrive(.7, 226.8));
 		//rotate 90 degrees clockwise 
 		addSequential(new AutoTurn(90));
-		//drive forward 3 units 
-		addSequential(new AutoDrive(.7, 48.6));
+		//drive forward 5 units 
+		addSequential(new AutoDrive(.7, 81));
+		//rotate 90 degrees clockwise  
+		addSequential(new AutoTurn(90));
+		//drive forward 1 unit 
+		addSequential(new AutoDrive(.7, 16.2));
 		//raises arm
 		addSequential(new AutoArmPosition(45));
 		//releases cube in switch
 		addSequential(new AutoIntake(-.4, -.4));
+		
+		//ends in same place
 	}
 	
 }

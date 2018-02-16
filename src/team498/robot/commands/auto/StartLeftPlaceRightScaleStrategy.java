@@ -32,5 +32,7 @@ public class StartLeftPlaceRightScaleStrategy extends CommandGroup {
 		addSequential(new AutoArmPosition(165));
 		//releases cube in scale
 		addSequential(new AutoIntake(-.8, -.8));
+		
+		//ends in same place
 	}
 }
