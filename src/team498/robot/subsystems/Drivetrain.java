@@ -147,7 +147,7 @@ public class Drivetrain extends PIDSubsystem {
 
 	@Override
 	protected double returnPIDInput() {
-		return gyro.getAngleZ();
+		return gyro.getAngleX();
 	}
 
 	@Override
@@ -157,8 +157,8 @@ public class Drivetrain extends PIDSubsystem {
 		double rampedOutput = ramp.getNextDataPoint(output);
 
 		// TODO: Can we use some arcade drive instead?
-		this.leftGroup.pidWrite(rampedOutput);
-		this.rightGroup.pidWrite(rampedOutput);
+		this.leftGroup.pidWrite(-rampedOutput);
+		this.rightGroup.pidWrite(-rampedOutput);
 		
 		System.out.println("Prefs - P: " + prefs.getPID_P() + " I: " + prefs.getPID_I() + " D: " + prefs.getPID_D()
 				+ " C: " + prefs.getRamp_C());
