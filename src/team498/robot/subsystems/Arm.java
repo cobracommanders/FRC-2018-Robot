@@ -6,6 +6,8 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -27,10 +29,10 @@ public class Arm extends Subsystem {
 	private Timer timer = new Timer();
 	
 	private DigitalInput cubeIn = new DigitalInput(Mappings.LimitSwitch);
-	//private DoubleSolenoid lift = new DoubleSolenoid(Mappings.LiftForward, Mappings.LiftReverse);
-	private WPI_TalonSRX armMotor1 = new WPI_TalonSRX(Mappings.ArmPort1);
-	private WPI_TalonSRX armMotor2 = new WPI_TalonSRX(Mappings.ArmPort2);
-	private SpeedControllerGroup armMotorGroup = new SpeedControllerGroup(armMotor1, armMotor2);
+	private DoubleSolenoid lift = new DoubleSolenoid(Mappings.PCMModuleNumber, Mappings.LiftForward, Mappings.LiftReverse);
+	private WPI_TalonSRX armBottom = new WPI_TalonSRX(Mappings.ArmBottomDeviceNumber);
+	private WPI_TalonSRX armTop = new WPI_TalonSRX(Mappings.ArmTopDeviceNumber);
+	private SpeedControllerGroup armMotorGroup = new SpeedControllerGroup(armBottom, armTop);
 	private Victor intakeLeft = new Victor(Mappings.IntakeLeftPort);
 	private Victor intakeRight =  new Victor(Mappings.IntakeRightPort);
 	private AnalogPotentiometer pot = new AnalogPotentiometer(Mappings.ArmPotChannel, 314, 0);
@@ -76,9 +78,9 @@ public class Arm extends Subsystem {
     }
     public void setLift(boolean isUp) {
     	if(isUp) {
-    		//lift.set(Value.kReverse);
+    		lift.set(Value.kReverse);
     	}else {
-    		//lift.set(Value.kForward);
+    		lift.set(Value.kForward);
     	}
     }
     

@@ -42,8 +42,8 @@ public class Operator {
 
 		controller.rightJoyPress.whenPressed(new ToggleLift());
 
-		controller.leftBumper.whileHeld(new ManualArm(1));
-		controller.rightBumper.whileHeld(new ManualArm(-1));
+		controller.leftBumper.whileHeld(new ManualArm(0.6));
+		controller.rightBumper.whileHeld(new ManualArm(-0.6));
 
 	}
 
