@@ -6,6 +6,8 @@
 /*----------------------------------------------------------------------------*/
 package team498.robot;
 
+import java.io.IOException;
+
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.TimedRobot;
@@ -67,6 +69,8 @@ public class Robot extends TimedRobot {
 	private Recorder recorder;
 	private Timer timer;
 	private TaskGroup dynamicAuto;
+
+	private boolean recorded;
 
 	@Override
 	public void robotInit() {
@@ -242,6 +246,13 @@ public class Robot extends TimedRobot {
 		updateDashboard();
 		if (timer.get() <= 15)
 			recorder.Read();
+		if (recorded == false && timer.get() > 15)
+			try {
+				recorder.Save("ThisIsATest");
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		Scheduler.getInstance().run();
 	}
 

@@ -21,7 +21,6 @@ final class InputLog {
 	private boolean _isButton;
 
 	public String Log() {
-		return String.format(";%s_%s_%s", name, value, time);
 	}
 
 	public String ToString() {
@@ -50,6 +49,7 @@ final class InputLog {
 		this.name = name;
 		this.value = df.format(value);
 		this.time = df.format(value);
+		this.time = df.format(time);
 		this._time = time;
 		this._boolValue = false;
 		this._value = value;
