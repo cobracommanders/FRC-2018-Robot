@@ -21,6 +21,7 @@ final class InputLog {
 	private boolean _isButton;
 
 	public String Log() {
+		return String.format(";%s_%s_%s", name, value, time); 
 	}
 
 	public String ToString() {

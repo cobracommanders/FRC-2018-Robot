@@ -142,8 +142,9 @@ public final class Recorder {
 			throw new IOException("You haven't saved a single autonomous yet!");
 		FileReader fr = new FileReader(DIRECTORY + name + ".txt");
 		BufferedReader br = new BufferedReader(fr);
-		String text = "";
+		String text = br.readLine();
 		br.close();
+		if (text==null) throw new IOException("That file was empty");
 		_parseString(text);
 	}
 
@@ -242,6 +243,7 @@ public final class Recorder {
 
 	private void _parseString(String text) throws IllegalArgumentException {
 		this.logs = new ArrayList<>();
+		String[] logs = text.split(Pattern.quote(";"));
 		for (int i = 0; i < logs.length; i++) {
 			String[] elements = logs[i].split(Pattern.quote("_")); // seperate each element
 			this.logs.add(new InputLog(elements[0], elements[1], elements[2]));

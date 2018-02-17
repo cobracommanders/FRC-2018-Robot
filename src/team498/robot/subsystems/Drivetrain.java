@@ -33,8 +33,12 @@ import team498.robot.commands.ManualDrive;
 
 public class Drivetrain extends PIDSubsystem {
 
-	private static final double WheelDiameter = 0.1524; // 6 inch wheels. This was converted to meters
-	private static final double PulsePerRevolution = 2048; // all switches on the encoder are off
+	private static final double WheelDiameter = 0.1524; // 6 inch wheels. This
+														// was converted to
+														// meters
+	private static final double PulsePerRevolution = 2048; // all switches on
+															// the encoder are
+															// off
 	private static final double WheelCircumference = WheelDiameter * Math.PI;
 	private static final double MetersPerPulse = WheelCircumference / PulsePerRevolution;
 
@@ -61,6 +65,7 @@ public class Drivetrain extends PIDSubsystem {
 	private boolean applyCorrection;
 	private boolean directionLocked;
 	private Timer correctionDelayTimer;
+	private Timer driveTimer;
 	private final double correctionDelayTime = 0.3;
 	private final double correctionGain = 0.03;
 	private final double correctionAngleTolerence = 0.0;
@@ -83,6 +88,7 @@ public class Drivetrain extends PIDSubsystem {
 		gyro.reset();
 		correctionDelayTimer = new Timer();
 		correctionDelayTimer.start();
+		driveTimer = new Timer();
 
 		// Initialize PID
 		setAbsoluteTolerance(1);
@@ -123,6 +129,16 @@ public class Drivetrain extends PIDSubsystem {
 				: rotate;
 		move *= (turbo ? 1 : turboCap);
 		rotate *= turnCap;
+		if (move > 0.05) {
+			if (driveTimer.get() == 0)
+				driveTimer.start();
+		} else {
+			if (driveTimer.get() != 0) {
+				System.out.println(driveTimer.get());
+				driveTimer.stop();
+				driveTimer.reset();
+			}
+		}
 		drive.arcadeDrive(move, rotate);
 	}
 
