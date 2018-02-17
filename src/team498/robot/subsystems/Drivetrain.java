@@ -178,5 +178,6 @@ public class Drivetrain extends PIDSubsystem {
 		SmartDashboard.putNumber(Dashboard.GyroAngleX, gyro.getAngleX());
 		SmartDashboard.putNumber(Dashboard.GyroAngleY, gyro.getAngleY());
 		SmartDashboard.putNumber(Dashboard.GyroAngleZ, gyro.getAngleZ());
+		SmartDashboard.putNumber(Dashboard.DistanceTraveled, getDistance());
 	}
 }

@@ -1,6 +1,8 @@
 package team498.robot.commands.auto;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
+import team498.robot.commands.auto.common.AutoArmTimed;
+import team498.robot.commands.auto.common.AutoDrive;
 import team498.robot.commands.auto.common.AutoTurn;
 
 /**
@@ -10,7 +12,20 @@ public class StartCenterPlaceRightScaleStrategy extends CommandGroup {
 
     public StartCenterPlaceRightScaleStrategy() {
     	System.out.println("Start Center, Right Scale Strategy!");
-    	addSequential(new AutoTurn(90));
+    	
+    	//Autonomous PID Turn
+    	//addSequential(new AutoTurn(90));
+    	
+    	
+    
+    	addSequential(new AutoArmTimed(1, 2));
+    	
+    	
+    	//Autonomous encoder drive forward
+    	addSequential(new AutoDrive(.5, 21));
+    	
+    	
+    	
         // Add Commands here:
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());

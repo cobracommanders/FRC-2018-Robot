@@ -21,7 +21,7 @@ public class FromRightSwitchToRightScaleStrategy extends CommandGroup {
 		
 		
 		//reverse 1 units back 
-		addSequential(new AutoDrive(-.7, 16.2));
+		addSequential(new AutoDrive(-.7, -16.2));
 		//rotates right
 		addSequential(new AutoTurn(90));
 		//drives 2.5 units 
@@ -33,7 +33,7 @@ public class FromRightSwitchToRightScaleStrategy extends CommandGroup {
 		//intake cube
 		addSequential(new AutoIntake(.6, .6));
 		//reverses back 5 units
-		addSequential(new AutoDrive(-.7, 81));
+		addSequential(new AutoDrive(-.7, -81));
 		//rotates right
 		addSequential(new AutoTurn(90));
 		//drives forward 7.5 units 

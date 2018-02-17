@@ -21,7 +21,7 @@ public class FromLeftSwitchToLeftScaleStrategy extends CommandGroup {
 		
 		
 		//reveres 1 unit
-		addSequential(new AutoDrive(-.7, 16.2));
+		addSequential(new AutoDrive(-.7, -16.2));
 		//rotates left
 		addSequential(new AutoTurn(-90));
 		//drives forward 2.5 units

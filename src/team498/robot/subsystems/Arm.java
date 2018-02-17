@@ -26,7 +26,8 @@ public class Arm extends Subsystem {
 	
 	private DigitalInput cubeIn = new DigitalInput(Mappings.LimitSwitch);
 	//private DoubleSolenoid lift = new DoubleSolenoid(Mappings.LiftForward, Mappings.LiftReverse);
-	private Victor armMotor = new Victor(Mappings.ArmPort);
+	private Victor armMotor1 = new Victor(Mappings.ArmPort1);
+	private Victor armMotor2 = new Victor(Mappings.ArmPort2);
 	private Victor intakeLeft = new Victor(Mappings.IntakeLeftPort);
 	private Victor intakeRight =  new Victor(Mappings.IntakeRightPort);
 	private AnalogPotentiometer pot = new AnalogPotentiometer(Mappings.ArmPotChannel, 314, 0);
@@ -39,7 +40,8 @@ public class Arm extends Subsystem {
     }
         
     public void setArm(double power) {
-    	armMotor.set(power);
+    	armMotor1.set(power);
+    	armMotor2.set(-power);
     }
     public void setIntake(double leftPower, double rightPower) {
     	
