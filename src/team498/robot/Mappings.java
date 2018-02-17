@@ -36,6 +36,7 @@ public class Mappings {
 	public static final int IntakeLeftPort = 4;
 	public static final int IntakeRightPort = 5;
 	public static final int ArmPort1 = 6;
+	public static final int ArmPort2 = 7;
 	public static final int ArmPotChannel = 0;
 	
 	public static final int LiftForward = 1;
@@ -44,5 +45,4 @@ public class Mappings {
 	public static final int LimitSwitch = 0;
 	
 	public static final double IntakeFailSafeDelay = 0.5;
-	public static final int ArmPort2 = 7;
 }

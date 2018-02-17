@@ -5,6 +5,7 @@ import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
+import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -28,6 +29,7 @@ public class Arm extends Subsystem {
 	//private DoubleSolenoid lift = new DoubleSolenoid(Mappings.LiftForward, Mappings.LiftReverse);
 	private Victor armMotor1 = new Victor(Mappings.ArmPort1);
 	private Victor armMotor2 = new Victor(Mappings.ArmPort2);
+	private SpeedControllerGroup armMotorGroup = new SpeedControllerGroup(armMotor1, armMotor2);
 	private Victor intakeLeft = new Victor(Mappings.IntakeLeftPort);
 	private Victor intakeRight =  new Victor(Mappings.IntakeRightPort);
 	private AnalogPotentiometer pot = new AnalogPotentiometer(Mappings.ArmPotChannel, 314, 0);
@@ -40,8 +42,7 @@ public class Arm extends Subsystem {
     }
         
     public void setArm(double power) {
-    	armMotor1.set(power);
-    	armMotor2.set(-power);
+    	armMotorGroup.set(power);
     }
     public void setIntake(double leftPower, double rightPower) {
     	
