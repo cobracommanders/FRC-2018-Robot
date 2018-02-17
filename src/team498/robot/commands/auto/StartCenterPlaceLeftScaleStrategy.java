@@ -1,6 +1,7 @@
 package team498.robot.commands.auto;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
+import team498.robot.commands.auto.common.AutoDriveTimed;
 
 /**
  *
@@ -8,7 +9,15 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class StartCenterPlaceLeftScaleStrategy extends CommandGroup {
 
     public StartCenterPlaceLeftScaleStrategy() {
+
     	System.out.println("Start Center, Left Scale Strategy!");
+    	
+    	//Test auto for duel, does auto line then a quick tornado
+    	addSequential(new AutoDriveTimed(.5, 0,6));
+    	addSequential(new AutoDriveTimed(0,.5,3));
+    	
+    	
+    	
         // Add Commands here:
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());
