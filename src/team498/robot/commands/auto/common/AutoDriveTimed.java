@@ -29,6 +29,7 @@ public class AutoDriveTimed extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	timer.start();
     }
 
     // Called repeatedly when this Command is scheduled to run

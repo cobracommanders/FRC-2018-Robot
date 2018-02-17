@@ -30,6 +30,7 @@ public class AutoArmTimed extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	timer.start();
     	
     }
 
