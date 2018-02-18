@@ -15,17 +15,16 @@ public class StartRightPlaceRightSwitchStrategy extends CommandGroup {
 	public StartRightPlaceRightSwitchStrategy() {
 		System.out.println("Start Right, Right Switch Strategy!");
 		addSequential(new ToggleClamps());
-		//drive forward 10 units 
+		// drive forward 10 units
 		addSequential(new AutoDrive(.7, 162));
-		//rotate 90 degrees counterclockwise 
+		// rotate 90 degrees counterclockwise
 		addSequential(new AutoTurn(-90));
-		//drive forward 3 units 
+		// drive forward 3 units
 		addSequential(new AutoDrive(.7, 48.6));
-		//raises arm
+		// raises arm
 		addSequential(new AutoArmPosition(45));
-		//releases cube into switch 
+		// releases cube into switch
 		addSequential(new AutoIntake(-.4, -.4));
-		
-		//ends in same place
+		// ends in same place
 	}
 }

@@ -13,40 +13,40 @@ public class Lift extends Command {
 	boolean isUp = false;
 	boolean target = true;
 
-    public Lift() {
-    	super("Lift");
-    	
-    	requires(this.arm = Arm.getArm());
-    }
+	public Lift() {
+		super("Lift");
 
-    // Called just before this Command runs the first time
-    protected void initialize() {
-    }
+		requires(this.arm = Arm.getArm());
+	}
 
-    // Called repeatedly when this Command is scheduled to run
-    protected void execute() {
-    	arm.setLift(isUp);
-    	isUp = !isUp;
-    	target = isUp;
-    	SmartDashboard.putBoolean(Dashboard.ElevatorUp,isUp);
-    }
+	// Called just before this Command runs the first time
+	protected void initialize() {
+	}
 
-    // Make this return true when this Command no longer needs to run execute()
-    protected boolean isFinished() {
-    	if(target == isUp) {
-    		return true;
-    	}else{
-    		return false;
-    	}
-        
-    }
+	// Called repeatedly when this Command is scheduled to run
+	protected void execute() {
+		arm.setLift(isUp);
+		isUp = !isUp;
+		target = isUp;
+		SmartDashboard.putBoolean(Dashboard.ElevatorUp, isUp);
+	}
 
-    // Called once after isFinished returns true
-    protected void end() {
-    }
+	// Make this return true when this Command no longer needs to run execute()
+	protected boolean isFinished() {
+		if (target == isUp) {
+			return true;
+		} else {
+			return false;
+		}
 
-    // Called when another command which requires one or more of the same
-    // subsystems is scheduled to run
-    protected void interrupted() {
-    }
+	}
+
+	// Called once after isFinished returns true
+	protected void end() {
+	}
+
+	// Called when another command which requires one or more of the same
+	// subsystems is scheduled to run
+	protected void interrupted() {
+	}
 }

@@ -6,7 +6,6 @@ import team498.robot.subsystems.Arm;
 public class AutoArmPosition extends InstantCommand {
 
 	private Arm arm;
-
 	private double targetArmPosition;
 
 	public AutoArmPosition(double targetArmPosition) {

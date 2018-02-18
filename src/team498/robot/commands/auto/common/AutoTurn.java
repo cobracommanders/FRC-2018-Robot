@@ -28,8 +28,8 @@ public class AutoTurn extends Command {
 		System.out.println("Is it on the target? It is: " + drivetrain.onTarget());
 	}
 
-	protected boolean isFinished() {		
-		System.out.println("Finished? " + drivetrain.onTarget());		
+	protected boolean isFinished() {
+		System.out.println("Finished? " + drivetrain.onTarget());
 		return drivetrain.onTarget();
 	}
 

@@ -8,7 +8,7 @@ import team498.robot.subsystems.Arm;
 
 public class ManualArm extends InstantCommand {
 
-	//private Operator operator = Operator.getOperator();
+	// private Operator operator = Operator.getOperator();
 	private Arm arm;
 	private double cap = 1.0; // TODO: Change this
 	private double armPower = 0;

@@ -7,26 +7,23 @@ import team498.robot.subsystems.Arm;
  * Toggles the flipper arms on the intake
  */
 public class ToggleClamps extends InstantCommand {
-	
+
 	private Arm arm;
-	//TODO make every auto start with clamping clampybois
 	public boolean isClamped = false;
-	
-    public ToggleClamps() {
-    	super("ToggleClamps");
+
+	public ToggleClamps() {
+		super("ToggleClamps");
 		requires(this.arm = Arm.getArm());
-		
-    }
 
-    // Called once when the command executes
-    protected void initialize() {
-    	this.isClamped =!isClamped;
-    	if(isClamped){
-    		arm.setClamps(true);
-    	}else{
-    		arm.setClamps(false);
-    	}
-    	
-    }
+	}
 
+	// Called once when the command executes
+	protected void initialize() {
+		this.isClamped = !isClamped;
+		if (isClamped) {
+			arm.setClamps(true);
+		} else {
+			arm.setClamps(false);
+		}
+	}
 }

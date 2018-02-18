@@ -39,10 +39,10 @@ public class Mappings {
 	public static final int ArmTopDeviceNumber = 1;
 	public static final int ArmPotChannel = 0;
 	
-	public static final int LiftForward = 1;
-	public static final int LiftReverse = 0;
-	public static final int ClampLeft = 2;
-	public static final int ClampRight = 3;
+	public static final int LiftForward = 5;
+	public static final int LiftReverse = 4;
+	public static final int ClampLeft = 6;
+	public static final int ClampRight = 7;
 	
 	public static final int LimitSwitch = 0;
 	

@@ -6,29 +6,23 @@ import team498.robot.subsystems.Arm;
 public class AutoIntake extends Command {
 
 	private Arm arm;
-	
+	private boolean done = false;
 	private double intakeLeftPower;
 	private double intakeRightPower;
 	
-	private boolean done = false;
-
 	public AutoIntake(double intakeLeftPower, double intakeRightPower) {
 		super("AutoIntake");
-
 		requires(this.arm = Arm.getArm());
 
 		this.intakeLeftPower = intakeLeftPower;
 		this.intakeRightPower = intakeRightPower;
-
 	}
 
 	protected void initialize() {
-
 	}
 
 	protected void execute() {
 		arm.setIntake(intakeLeftPower, intakeRightPower);
-	
 		done = true;
 	}
 

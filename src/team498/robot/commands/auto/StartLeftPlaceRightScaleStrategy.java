@@ -16,25 +16,24 @@ public class StartLeftPlaceRightScaleStrategy extends CommandGroup {
 	public StartLeftPlaceRightScaleStrategy() {
 		System.out.println("Start Left, Right Scale Strategy!");
 		addSequential(new ToggleClamps());
-		//drive forward 15 units 
+		// drive forward 15 units
 		addSequential(new AutoDrive(.7, 243));
-		//rotate 90 degrees clockwise
+		// rotate 90 degrees clockwise
 		addSequential(new AutoTurn(90));
-		//drive forward 14 units
+		// drive forward 14 units
 		addSequential(new AutoDrive(.7, 226.8));
-		//rotate 90 degrees counterclockwise
+		// rotate 90 degrees counterclockwise
 		addSequential(new AutoTurn(-90));
-		//drive forward 5 units
+		// drive forward 5 units
 		addSequential(new AutoDrive(.7, 81));
-		//rotate 90 degrees counterclockwise
+		// rotate 90 degrees counterclockwise
 		addSequential(new AutoTurn(-90));
-		//raises tower
+		// raises tower
 		addSequential(new AutoLift(true));
-		//raises arm
+		// raises arm
 		addSequential(new AutoArmPosition(165));
-		//releases cube in scale
+		// releases cube in scale
 		addSequential(new AutoIntake(-.8, -.8));
-		
-		//ends in same place
+		// ends in same place
 	}
 }

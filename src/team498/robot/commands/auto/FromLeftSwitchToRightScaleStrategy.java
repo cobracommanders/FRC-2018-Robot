@@ -18,7 +18,6 @@ public class FromLeftSwitchToRightScaleStrategy extends CommandGroup {
 		// resets arm
 		addSequential(new AutoLift(false));
 		addSequential(new AutoArmPosition(0));
-
 		// reverses 1 unit
 		addSequential(new AutoDrive(-.7, -16.2));
 		// rotates left
@@ -53,6 +52,5 @@ public class FromLeftSwitchToRightScaleStrategy extends CommandGroup {
 		addSequential(new AutoIntake(-.8, -.8));
 
 		// done for now :)
-
 	}
 }

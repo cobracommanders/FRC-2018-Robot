@@ -22,20 +22,15 @@ import team498.robot.Prefs;
 import team498.robot.commands.ManualDrive;
 
 /**
- * PID Training Notes: PID(0.01 ,0.1 ,0.04 ) Trial 1: overshoots then returns to
- * 68. Trial 2: goes to 120 then stops Trial 3: PID( .01,0 ,.1 ) Trial 1: goes
- * to 20 degrees at max motor then goes down very fast ends at 60 degrees Trial
- * 2: Trial 3: PID( .02,0 ,.06 ) Trial 1: Trial 2: Trial 3: PID( .02,0 ,.06 )
- * Trial 1: goes to 87 Trial 2: goes to 90 Trial 3: PID( .02,0 ,.04 ) Trial 1:
- * 92 Trial 2: 94 Trial 3: PID( , , .02) Trial 1: 97 Trial 2: Trial 3: PID( , ,
- * ) Trial 1: Trial 2: Trial 3:
+ *
  */
-
 public class Drivetrain extends PIDSubsystem {
-	
-	//Field is 16.4592 meters across
+
+	// Field is 16.4592 meters across
 	private static final double WheelDiameter = 6; // 6 inch wheels.
-	private static final double PulsePerRevolution = 2048; // all switches on the encoder are off
+	private static final double PulsePerRevolution = 2048; // all switches on
+															// the encoder are
+															// off
 	private static final double WheelCircumference = WheelDiameter * Math.PI;
 	private static final double InchesPerPulse = WheelCircumference / PulsePerRevolution;
 
@@ -77,10 +72,10 @@ public class Drivetrain extends PIDSubsystem {
 
 	public Drivetrain() {
 		super("Drivetrain", prefs.getPID_P(), prefs.getPID_I(), prefs.getPID_D());
-		
+
 		leftEncoder.setDistancePerPulse(InchesPerPulse);
 		rightEncoder.setDistancePerPulse(InchesPerPulse);
-		
+
 		gyro.reset();
 		correctionDelayTimer = new Timer();
 		correctionDelayTimer.start();
@@ -126,23 +121,21 @@ public class Drivetrain extends PIDSubsystem {
 		rotate *= turnCap;
 		aracadeDrive(move, rotate);
 	}
-	
+
 	public void autoDrive(double move, double rotate) {
 
 		// If driving and not turning then apply correction
 		if (Math.abs(move) > 0 && rotate == 0) {
 			// Apply correction if needed
 			rotate = Helpers.rotateToTarget(gyro.getAngleX(), 0, correctionAngleTolerence, correctionGain);
-			//rotate *= turnCap;
+			// rotate *= turnCap;
 			aracadeDrive(move, rotate);
-		}
-		else
-		{
+		} else {
 			aracadeDrive(move, rotate);
 		}
 	}
-	
-	private void aracadeDrive(double move, double rotate){
+
+	private void aracadeDrive(double move, double rotate) {
 		SmartDashboard.putNumber(Dashboard.MoveValue, move);
 		SmartDashboard.putNumber(Dashboard.RotateValue, rotate);
 		drive.arcadeDrive(move, rotate);
@@ -180,8 +173,9 @@ public class Drivetrain extends PIDSubsystem {
 		// TODO: Can we use some arcade drive instead?
 		this.leftGroup.pidWrite(-rampedOutput);
 		this.rightGroup.pidWrite(-rampedOutput);
-		
-		System.out.println("Prefs - P: " + prefs.getPID_P() + " I: " + prefs.getPID_I() + " D: " + prefs.getPID_D()	+ " C: " + prefs.getRamp_C());
+
+		System.out.println("Prefs - P: " + prefs.getPID_P() + " I: " + prefs.getPID_I() + " D: " + prefs.getPID_D()
+				+ " C: " + prefs.getRamp_C());
 		System.out.println("PID Output: " + output);
 		SmartDashboard.putNumber(Dashboard.PIDOutput, output);
 		SmartDashboard.putNumber(Dashboard.PIDRamp, rampedOutput);
@@ -189,9 +183,7 @@ public class Drivetrain extends PIDSubsystem {
 	}
 
 	public void updateDashboard() {
-		// SmartDashboard.putNumber("Output values (PID)", pidOutput);
 		SmartDashboard.putNumber(Dashboard.DistanceTraveled, getDistance());
-
 		SmartDashboard.putNumber("Angle for PID", this.getPosition());
 		SmartDashboard.putNumber(Dashboard.PIDP, prefs.getPID_P());
 		SmartDashboard.putNumber(Dashboard.GyroAngle, gyro.getAngle());
@@ -199,6 +191,5 @@ public class Drivetrain extends PIDSubsystem {
 		SmartDashboard.putNumber(Dashboard.GyroAngleY, gyro.getAngleY());
 		SmartDashboard.putNumber(Dashboard.GyroAngleZ, gyro.getAngleZ());
 		SmartDashboard.putNumber(Dashboard.DistanceTraveled, getDistance());
-
 	}
 }

@@ -6,16 +6,13 @@ import team498.robot.subsystems.Drivetrain;
 /**
  * Toggles turbo mode
  * 
- * @author Micah Neitz
  */
 public class ToggleTurbo extends InstantCommand {
 
 	private Drivetrain drivetrain;
 
 	public ToggleTurbo() {
-		super();
-		// Use requires() here to declare subsystem dependencies
-		// eg. requires(chassis);
+		super("ToggleTurbo");
 		requires(drivetrain = Drivetrain.getDrivetrain());
 	}
 
@@ -23,5 +20,4 @@ public class ToggleTurbo extends InstantCommand {
 	protected void initialize() {
 		drivetrain.toggleTurbo();
 	}
-
 }

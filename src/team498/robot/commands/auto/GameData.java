@@ -2,11 +2,11 @@ package team498.robot.commands.auto;
 
 public class GameData {
 	private String gameData;
-	
+
 	public GameData(String gameData) {
 		this.gameData = gameData;
 	}
-	
+
 	public SwitchPosition getOurSwitchPosition() {
 		if (gameData.charAt(0) == 'L') {
 			return SwitchPosition.Left;
@@ -17,7 +17,7 @@ public class GameData {
 			return SwitchPosition.Left;
 		}
 	}
-	
+
 	public ScalePosition getOurScalePosition() {
 		if (gameData.charAt(1) == 'L') {
 			return ScalePosition.Left;
@@ -28,7 +28,7 @@ public class GameData {
 			return ScalePosition.Left;
 		}
 	}
-	
+
 	public SwitchPosition getEnemySwitchPosition() {
 		if (gameData.charAt(2) == 'L') {
 			return SwitchPosition.Right;
@@ -39,7 +39,7 @@ public class GameData {
 			return SwitchPosition.Right;
 		}
 	}
-	
+
 	public ScalePosition getEnemyScalePosition() {
 		if (gameData.charAt(1) == 'L') {
 			return ScalePosition.Right;

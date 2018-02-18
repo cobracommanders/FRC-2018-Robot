@@ -20,7 +20,7 @@ public class StartLeftPlaceLeftScaleStrategy extends CommandGroup {
 		addSequential(new AutoDrive(.7, 324));
 		// rotate right
 		addSequential(new AutoTurn(90));
-		//drive forward one unit 
+		// drive forward one unit
 		addSequential(new AutoDrive(.7, 16.2));
 		// raises arm
 		addSequential(new AutoArmPosition(165));
@@ -28,7 +28,6 @@ public class StartLeftPlaceLeftScaleStrategy extends CommandGroup {
 		addSequential(new AutoLift(true));
 		// releases cube into tower
 		addSequential(new AutoIntake(-.8, -.8));
-
-		//ends in same place
+		// ends in same place
 	}
 }

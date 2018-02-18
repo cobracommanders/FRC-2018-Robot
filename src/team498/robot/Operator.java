@@ -9,7 +9,6 @@ package team498.robot;
 
 import team498.robot.commands.ToggleLift;
 import team498.robot.commands.ManualArm;
-import team498.robot.commands.ManualIntake;
 import team498.robot.commands.ToggleClamps;
 import team498.robot.commands.ToggleIntake;
 import team498.robot.commands.ToggleTurbo;
@@ -20,8 +19,6 @@ import team498.robot.commands.ToggleTurbo;
  */
 public class Operator {
 
-	private boolean xToggle = false;
-	private boolean bToggle = false;
 	private static Operator operator = null;
 
 	public static Operator getOperator() {
@@ -32,21 +29,16 @@ public class Operator {
 	public Controller controller = new Controller(Mappings.ControllerPort);
 
 	public Operator() {
-		// controller.buttonY.whenPressed(new LaunchCatapult("LaunchCatapult", 5));
-		// //where we call time
-
 		// Intake in
-		 controller.buttonX.whenPressed(new ToggleIntake(.6));
-		 controller.buttonB.whenPressed(new ToggleIntake(-1));
-		 
+		controller.buttonX.whenPressed(new ToggleIntake(.6));
+		controller.buttonB.whenPressed(new ToggleIntake(-1));
+		controller.buttonA.whenPressed(new ToggleClamps());
 		controller.buttonY.whenPressed(new ToggleTurbo());
 
 		controller.rightJoyPress.whenPressed(new ToggleLift());
 
 		controller.leftBumper.whileHeld(new ManualArm(0.6));
 		controller.rightBumper.whileHeld(new ManualArm(-0.6));
-		
-		controller.buttonA.whenPressed(new ToggleClamps());
 
 	}
 

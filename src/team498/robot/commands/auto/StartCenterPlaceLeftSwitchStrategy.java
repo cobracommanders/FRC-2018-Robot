@@ -21,7 +21,7 @@ public class StartCenterPlaceLeftSwitchStrategy extends CommandGroup {
 		// rotates to the left
 		addSequential(new AutoTurn(-90));
 		// 4 units on katy's graph
-		//drives forward
+		// drives forward
 		addSequential(new AutoDrive(.7, 64.8));
 		// rotates to the right
 		addSequential(new AutoTurn(90));
@@ -31,7 +31,6 @@ public class StartCenterPlaceLeftSwitchStrategy extends CommandGroup {
 		addSequential(new AutoArmPosition(45));
 		// reverses intake, releases cube into switch
 		addSequential(new AutoIntake(-.4, -.4));
-		
-		
+
 	}
 }

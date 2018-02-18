@@ -15,11 +15,9 @@ public class ToggleLift extends InstantCommand {
 
 	public ToggleLift() {
 		super("Lift");
-
 		requires(this.arm = Arm.getArm());
 	}
 
-	// Called just before this Command runs the first time
 	protected void initialize() {
 		isUp = !isUp;
 		arm.setLift(isUp);

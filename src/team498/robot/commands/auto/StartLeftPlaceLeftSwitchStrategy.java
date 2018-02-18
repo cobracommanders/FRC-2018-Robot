@@ -15,18 +15,16 @@ public class StartLeftPlaceLeftSwitchStrategy extends CommandGroup {
 	public StartLeftPlaceLeftSwitchStrategy() {
 		System.out.println("Start Left, Left Switch Strategy!");
 		addSequential(new ToggleClamps());
-		
-		//drive forward 10 units
+		// drive forward 10 units
 		addSequential(new AutoDrive(.7, 162));
-		//rotate 90 degrees clockwise
+		// rotate 90 degrees clockwise
 		addSequential(new AutoTurn(90));
-		//drive foward 3 units 
+		// drive foward 3 units
 		addSequential(new AutoDrive(.7, 48.6));
-		//raises arm
+		// raises arm
 		addSequential(new AutoArmPosition(45));
-		//place cube in switch
+		// place cube in switch
 		addSequential(new AutoIntake(-.4, -.4));
-		
-		//ends in same place
+		// ends in same place
 	}
 }
