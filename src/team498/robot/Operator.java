@@ -10,6 +10,7 @@ package team498.robot;
 import team498.robot.commands.ToggleLift;
 import team498.robot.commands.ManualArm;
 import team498.robot.commands.ManualIntake;
+import team498.robot.commands.ToggleClamps;
 import team498.robot.commands.ToggleIntake;
 import team498.robot.commands.ToggleTurbo;
 
@@ -44,6 +45,8 @@ public class Operator {
 
 		controller.leftBumper.whileHeld(new ManualArm(0.6));
 		controller.rightBumper.whileHeld(new ManualArm(-0.6));
+		
+		controller.buttonA.whenPressed(new ToggleClamps());
 
 	}
 

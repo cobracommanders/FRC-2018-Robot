@@ -41,9 +41,14 @@ public class Mappings {
 	
 	public static final int LiftForward = 1;
 	public static final int LiftReverse = 0;
+	public static final int ClampLeftForward = 3;
+	public static final int ClampLeftBackwards = 2;
+	public static final int ClampRightForward = 5;
+	public static final int ClampRightBackwards = 4;
 	
 	public static final int LimitSwitch = 0;
 	
 	public static final double IntakeFailSafeDelay = 0.5;
 	public static final int PCMModuleNumber = 3;
+	
 }
