@@ -15,7 +15,6 @@ public class AutoDriveRamp extends Command {
 	private double moveValue;
 	private double desiredDistance;
 	private final double endPower = 0.5;
-	private final double startPower = 1;
 	private final double startRampDistance = 12;
 
 	public AutoDriveRamp(double moveValue, double desiredDistance) {
@@ -36,7 +35,7 @@ public class AutoDriveRamp extends Command {
 		if (dif > startRampDistance)
 			drivetrain.autoDrive(moveValue, 0);
 		else
-			drivetrain.autoDrive(moveValue * ((startPower - endPower) - (startPower - endPower) * (startRampDistance - dif) * (startRampDistance - dif) / (startRampDistance * startRampDistance)), 0);
+			drivetrain.autoDrive(moveValue * ((moveValue - endPower) - (moveValue - endPower) * (startRampDistance - dif) * (startRampDistance - dif) / (startRampDistance * startRampDistance)), 0);
 	}
 
 	protected boolean isFinished() {
