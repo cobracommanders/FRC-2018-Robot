@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
+import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
@@ -39,8 +40,8 @@ public class Arm extends PIDSubsystem {
 	
 	private DigitalInput cubeIn = new DigitalInput(Mappings.LimitSwitch);
 	private DoubleSolenoid lift = new DoubleSolenoid(Mappings.PCMModuleNumber, Mappings.LiftForward, Mappings.LiftReverse);
-	private DoubleSolenoid clampLeft = new DoubleSolenoid(Mappings.PCMModuleNumber, Mappings.ClampLeftForward, Mappings.ClampLeftBackwards);
-	private DoubleSolenoid clampRight = new DoubleSolenoid(Mappings.PCMModuleNumber, Mappings.ClampRightForward, Mappings.ClampRightBackwards); 
+	private Solenoid clampLeft = new Solenoid(Mappings.PCMModuleNumber, Mappings.ClampLeft);
+	private Solenoid clampRight = new Solenoid(Mappings.PCMModuleNumber, Mappings.ClampRight);
 	private WPI_TalonSRX armBottom = new WPI_TalonSRX(Mappings.ArmBottomDeviceNumber);
 	private WPI_TalonSRX armTop = new WPI_TalonSRX(Mappings.ArmTopDeviceNumber);
 	private SpeedControllerGroup armMotorGroup = new SpeedControllerGroup(armBottom, armTop);
@@ -108,11 +109,11 @@ public class Arm extends PIDSubsystem {
     }
     public void setClamps(boolean isClamped){
     	if(isClamped){
-    		clampLeft.set(Value.kForward);
-    		clampRight.set(Value.kForward);
+    		clampLeft.set(true);
+    		clampRight.set(true);
     	}else{
-    		clampLeft.set(Value.kReverse);
-    		clampRight.set(Value.kReverse);
+    		clampLeft.set(false);
+    		clampRight.set(false);
     	}
     }
     

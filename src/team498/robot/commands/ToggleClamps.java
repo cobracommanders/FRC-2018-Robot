@@ -9,7 +9,7 @@ import team498.robot.subsystems.Arm;
 public class ToggleClamps extends InstantCommand {
 	
 	private Arm arm;
-	
+	//TODO make every auto start with clamping clampybois
 	public boolean isClamped = false;
 	
     public ToggleClamps() {
