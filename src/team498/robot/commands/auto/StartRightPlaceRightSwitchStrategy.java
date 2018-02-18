@@ -1,6 +1,7 @@
 package team498.robot.commands.auto;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
+import team498.robot.commands.ToggleClamps;
 import team498.robot.commands.auto.common.AutoArmPosition;
 import team498.robot.commands.auto.common.AutoDrive;
 import team498.robot.commands.auto.common.AutoIntake;
@@ -13,6 +14,7 @@ public class StartRightPlaceRightSwitchStrategy extends CommandGroup {
 
 	public StartRightPlaceRightSwitchStrategy() {
 		System.out.println("Start Right, Right Switch Strategy!");
+		addSequential(new ToggleClamps());
 		//drive forward 10 units 
 		addSequential(new AutoDrive(.7, 162));
 		//rotate 90 degrees counterclockwise 

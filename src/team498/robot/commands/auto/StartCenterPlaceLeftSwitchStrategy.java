@@ -1,6 +1,7 @@
 package team498.robot.commands.auto;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
+import team498.robot.commands.ToggleClamps;
 import team498.robot.commands.auto.common.AutoArmPosition;
 import team498.robot.commands.auto.common.AutoDrive;
 import team498.robot.commands.auto.common.AutoIntake;
@@ -13,6 +14,7 @@ public class StartCenterPlaceLeftSwitchStrategy extends CommandGroup {
 
 	public StartCenterPlaceLeftSwitchStrategy() {
 		System.out.println("Start Center, Left Switch Strategy!");
+		addSequential(new ToggleClamps());
 		// 5 units on Katy's graph
 		// drives forward
 		addSequential(new AutoDrive(.7, 81)); // 81 inches
