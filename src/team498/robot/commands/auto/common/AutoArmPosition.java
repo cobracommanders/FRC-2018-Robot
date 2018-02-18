@@ -7,16 +7,20 @@ public class AutoArmPosition extends InstantCommand {
 
 	private Arm arm;
 
-	private double targetArmPosition;
+	private double targetArmDirection;
 
-	public AutoArmPosition(double targetArmPosition) {
+	public AutoArmPosition(double targetArmDirection) {
 		super("AutoArmPosition");
 		requires(this.arm = Arm.getArm());
-
-		this.targetArmPosition = targetArmPosition;
+		this.targetArmDirection = targetArmDirection;
 	}
 
 	protected void initialize() {
-		arm.setArmAngle(targetArmPosition);
+		if(targetArmDirection == 1){
+			arm.incrementArm();
+		}else if(targetArmDirection == 0){
+			arm.decrementArm();
+		}
+		
 	}
 }

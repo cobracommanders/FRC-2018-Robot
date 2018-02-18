@@ -115,6 +115,13 @@ public class Arm extends PIDSubsystem {
     	isIntakeActive = false;
     }
     
+    public void incrementArm(){
+    	
+    }
+    public void decrementArm(){
+    	
+    }
+    
     public void setArmAngle(double targetAngle) {
     	this.setSetpoint(targetAngle);
     }

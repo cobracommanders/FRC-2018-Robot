@@ -12,6 +12,7 @@ import team498.robot.commands.ManualArm;
 import team498.robot.commands.ManualIntake;
 import team498.robot.commands.ToggleIntake;
 import team498.robot.commands.ToggleTurbo;
+import team498.robot.commands.auto.common.AutoArmPosition;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -42,8 +43,11 @@ public class Operator {
 
 		controller.rightJoyPress.whenPressed(new ToggleLift());
 
-		controller.leftBumper.whileHeld(new ManualArm(0.6));
-		controller.rightBumper.whileHeld(new ManualArm(-0.6));
+		/*controller.leftBumper.whileHeld(new ManualArm(0.6));
+		controller.rightBumper.whileHeld(new ManualArm(-0.6));*/
+		
+		controller.leftBumper.whenPressed(new AutoArmPosition(0));
+		controller.rightBumper.whenPressed(new AutoArmPosition(1));
 
 	}
 
