@@ -28,7 +28,7 @@ public class ManualDrive extends Command {
 				- operator.controller.axisLeftTrigger.getAxisValue());
 		double rotate = turnAcceleration.getNextDataPoint(operator.controller.axisLeftX.getAxisValue());
 
-		this.drivetrain.drive(move, rotate);
+		this.drivetrain.manualDrive(move, rotate);
 
 		SmartDashboard.putNumber("move value", move);
 		SmartDashboard.putNumber("rotate value", rotate);
@@ -39,7 +39,7 @@ public class ManualDrive extends Command {
 	}
 
 	protected void end() {
-		drivetrain.drive(0, 0);
+		drivetrain.manualDrive(0, 0);
 	}
 
 	protected void interrupted() {

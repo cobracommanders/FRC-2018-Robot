@@ -95,7 +95,7 @@ public class Drivetrain extends PIDSubsystem {
 		setDefaultCommand(new ManualDrive());
 	}
 
-	public void drive(double move, double rotate) {
+	public void manualDrive(double move, double rotate) {
 
 		// If driving and not turning then apply correction
 		if (Math.abs(move) > 0 && rotate == 0) {
@@ -120,16 +120,37 @@ public class Drivetrain extends PIDSubsystem {
 		}
 
 		// Apply correction if needed
-		rotate = applyCorrection ? Helpers.rotateToTarget(gyro.getAngleY(), 0, correctionAngleTolerence, correctionGain)
+		rotate = applyCorrection ? Helpers.rotateToTarget(gyro.getAngleX(), 0, correctionAngleTolerence, correctionGain)
 				: rotate;
 		move *= (turbo ? 1 : turboCap);
 		rotate *= turnCap;
+		aracadeDrive(move, rotate);
+	}
+	
+	public void autoDrive(double move, double rotate) {
+
+		// If driving and not turning then apply correction
+		if (Math.abs(move) > 0 && rotate == 0) {
+			// Apply correction if needed
+			rotate = Helpers.rotateToTarget(gyro.getAngleX(), 0, correctionAngleTolerence, correctionGain);
+			//rotate *= turnCap;
+			aracadeDrive(move, rotate);
+		}
+		else
+		{
+			aracadeDrive(move, rotate);
+		}
+	}
+	
+	private void aracadeDrive(double move, double rotate){
+		SmartDashboard.putNumber(Dashboard.MoveValue, move);
+		SmartDashboard.putNumber(Dashboard.RotateValue, rotate);
 		drive.arcadeDrive(move, rotate);
 	}
 
 	public double getDistance() {
 		// averages the encoders distance
-		return (leftEncoder.getDistance() + rightEncoder.getDistance()) / 2;
+		return (leftEncoder.getDistance() + -rightEncoder.getDistance()) / 2;
 	}
 
 	public void resetGyro() {
@@ -160,8 +181,7 @@ public class Drivetrain extends PIDSubsystem {
 		this.leftGroup.pidWrite(-rampedOutput);
 		this.rightGroup.pidWrite(-rampedOutput);
 		
-		System.out.println("Prefs - P: " + prefs.getPID_P() + " I: " + prefs.getPID_I() + " D: " + prefs.getPID_D()
-				+ " C: " + prefs.getRamp_C());
+		System.out.println("Prefs - P: " + prefs.getPID_P() + " I: " + prefs.getPID_I() + " D: " + prefs.getPID_D()	+ " C: " + prefs.getRamp_C());
 		System.out.println("PID Output: " + output);
 		SmartDashboard.putNumber(Dashboard.PIDOutput, output);
 		SmartDashboard.putNumber(Dashboard.PIDRamp, rampedOutput);
@@ -179,5 +199,6 @@ public class Drivetrain extends PIDSubsystem {
 		SmartDashboard.putNumber(Dashboard.GyroAngleY, gyro.getAngleY());
 		SmartDashboard.putNumber(Dashboard.GyroAngleZ, gyro.getAngleZ());
 		SmartDashboard.putNumber(Dashboard.DistanceTraveled, getDistance());
+
 	}
 }

@@ -34,7 +34,7 @@ public class AutoDriveTimed extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	drivetrain.drive(movePower, turnPower);
+    	drivetrain.manualDrive(movePower, turnPower);
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -44,7 +44,7 @@ public class AutoDriveTimed extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	drivetrain.drive(0, 0);
+    	drivetrain.manualDrive(0, 0);
     }
 
     // Called when another command which requires one or more of the same

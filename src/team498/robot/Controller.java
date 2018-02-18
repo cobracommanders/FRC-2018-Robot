@@ -23,12 +23,13 @@ public class Controller {
 	public JoystickAxis axisRightY;
 	public JoystickAxis axisLeftTrigger;
 	public JoystickAxis axisRightTrigger;
+	
 
 	public Controller(int port) {
 		
 		// controller
 		joystick = new Joystick(port);
-
+		
 		// buttons
 		buttonA = new JoystickButton(joystick, Mappings.ButtonA);
 		buttonB = new JoystickButton(joystick, Mappings.ButtonB);
@@ -87,6 +88,8 @@ public class Controller {
 		SmartDashboard.putNumber(Dashboard.AxisLeftXValue, axisLeftX.getAxisValue());
 		SmartDashboard.putNumber(Dashboard.AxisLeftYValue, axisLeftY.getAxisValue());
 		SmartDashboard.putNumber(Dashboard.AxisRightXValue, axisRightX.getAxisValue());
-		SmartDashboard.putNumber(Dashboard.AxisRightYValue, axisRightY.getAxisValue());
+		SmartDashboard.putNumber(Dashboard.AxisRightYValue, axisRightY.getAxisValue());		
+		SmartDashboard.putNumber(Dashboard.JoystickPOV, joystick.getPOV());
+		
 	}
 }
