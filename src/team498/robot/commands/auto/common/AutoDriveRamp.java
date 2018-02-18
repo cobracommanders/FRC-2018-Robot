@@ -34,9 +34,9 @@ public class AutoDriveRamp extends Command {
 	protected void execute() {
 		double dif = desiredDistance - drivetrain.getDistance();
 		if (dif > startRampDistance)
-			drivetrain.drive(moveValue, 0);
+			drivetrain.autoDrive(moveValue, 0);
 		else
-			drivetrain.drive(moveValue * ((startPower - endPower) - (startPower - endPower) * (startRampDistance - dif) * (startRampDistance - dif) / (startRampDistance * startRampDistance)), 0);
+			drivetrain.autoDrive(moveValue * ((startPower - endPower) - (startPower - endPower) * (startRampDistance - dif) * (startRampDistance - dif) / (startRampDistance * startRampDistance)), 0);
 	}
 
 	protected boolean isFinished() {
@@ -44,7 +44,7 @@ public class AutoDriveRamp extends Command {
 	}
 
 	protected void end() {
-		drivetrain.drive(0, 0);
+		drivetrain.autoDrive(0, 0);
 	}
 
 	protected void interrupted() {
