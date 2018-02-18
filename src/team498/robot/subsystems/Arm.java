@@ -33,6 +33,8 @@ public class Arm extends PIDSubsystem {
 		return arm;
 	}
 	
+	private double[] armPositions = {0, 90, 180, 360};
+	
 	private boolean isIntakeActive = true;
 	
 	private Timer timer = new Timer();
@@ -49,6 +51,8 @@ public class Arm extends PIDSubsystem {
 	private double lastLeft = 0;
 	private double lastRight = 0;
 	
+	private int index = 2;
+	
 	public Arm() {
 		super("Arm", 0, 0, 0);
 		
@@ -59,6 +63,7 @@ public class Arm extends PIDSubsystem {
 		setAbsoluteTolerance(1);
 		setInputRange(armMinAngle, armMaxAngle);
 		setOutputRange(-.7, .7);
+		setSetpoint(armPositions[index]);
 		enable();
 	}
 	
@@ -116,10 +121,17 @@ public class Arm extends PIDSubsystem {
     }
     
     public void incrementArm(){
+    	if(index < armPositions.length - 1){
+    	    index++;
+    	    setArmAngle(index);
+    	}
     	
     }
     public void decrementArm(){
-    	
+    	if(index > 0){
+    		index--;
+    		setArmAngle(index);
+    	}
     }
     
     public void setArmAngle(double targetAngle) {
