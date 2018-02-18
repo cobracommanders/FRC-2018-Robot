@@ -1,6 +1,9 @@
 package team498.robot;
 
 public class Dashboard {
+	
+	public static final String JoystickPOV = "JoystickPOV";
+	
 	public static final String IsButtonAPressed = "IsButtonAPressed";  
 	public static final String IsButtonBPressed = "IsButtonBPressed";  
 	public static final String IsButtonXPressed = "IsButtonXPressed";
@@ -30,6 +33,9 @@ public class Dashboard {
 	public static final String AccelerometerX = "AccelerometerX";
 	public static final String AccelerometerY = "AccelerometerY";
 	public static final String AccelerometerZ = "AccelerometerZ";
+	
+	public static final String MoveValue = "MoveValue";
+	public static final String RotateValue = "RotateValue";
 	
 	public static final String IntakeLeftPower = "IntakeLeftPower";
 	public static final String IntakeRightPower = "IntakeRightPower";

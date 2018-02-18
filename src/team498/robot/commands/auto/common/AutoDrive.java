@@ -20,10 +20,11 @@ public class AutoDrive extends Command {
 
     protected void initialize() {
     	drivetrain.resetEncoders();
+    	drivetrain.resetGyro();
     }
 
     protected void execute() {
-    	drivetrain.drive(moveValue, 0);
+    	drivetrain.autoDrive(moveValue, 0);
     }
 
     protected boolean isFinished() {
@@ -31,7 +32,7 @@ public class AutoDrive extends Command {
     }
 
     protected void end() {
-    	drivetrain.drive(0, 0);
+    	drivetrain.manualDrive(0, 0);
     }
 
     protected void interrupted() {
