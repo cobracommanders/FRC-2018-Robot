@@ -35,6 +35,8 @@ public class Arm extends PIDSubsystem {
 	
 	private double[] armPositions = {0, 90, 180, 360};
 	
+	private double shootScaleIndex = 2;
+	
 	private boolean isIntakeActive = true;
 	
 	private Timer timer = new Timer();
@@ -103,7 +105,7 @@ public class Arm extends PIDSubsystem {
     }
     
     public void setLift(boolean isUp) {
-    	if(isUp) {
+    	if(isUp && index == shootScaleIndex) {
     		lift.set(Value.kReverse);
     	}else {
     		lift.set(Value.kForward);
