@@ -15,93 +15,75 @@ import edu.wpi.first.wpilibj.Timer;
 
 /**
  * The Dynamic Autonomous recorder class for the recording, saving, loading, and
- * building of dynamic autonomous modes.
+ * building of dynamic autonomous modes.<br/>
+ * <br/>
+ * If you would like to see changes made to this, please contact me at
+ * micah.team498@gmail.com
  * 
  * @version 1.0
  * 
  * @author Micah Neitz <br/>
  *         Team 498
+ * 
  */
 public final class Recorder {
 
 	private static final String DIRECTORY = "/home/lvuser/frc/dynamicauto/";
 	private Map<String, Task> tasks;
 	private Map<String, JoystickInput> inputs;
-	private ArrayList<Task> passives;
+	private ArrayList<PassiveTask> passives;
 	private ArrayList<JoyState> oldStates;
 	private ArrayList<JoyState> newStates;
 	private ArrayList<InputLog> logs;
 	private Timer timer;
 
-	private void _log(String s) {
-		System.out.println(s);
-	}
-
 	/**
 	 * Creates a new recorder object
-	 * 
-	 * @author Micah Neitz<br/>
-	 *         Team 498
 	 */
 	public Recorder() {
-		_log("===/Recorder\\===");
-		_log("Creating task map");
 		tasks = new HashMap<String, Task>();
-		_log("Creating input map");
 		inputs = new HashMap<String, JoystickInput>();
-		_log("Creating passives");
-		passives = new ArrayList<Task>();
-		_log("Creating states");
+		passives = new ArrayList<>();
 		oldStates = newStates = new ArrayList<>();
-		_log("Creating timer");
 		timer = new Timer();
-		_log("Creating logs");
-		logs = new ArrayList<InputLog>();
-		_log("===\\Recorder/===");
+		logs = new ArrayList<>();
 	}
 
 	/**
 	 * Needs to be run on loop while recording inputs
-	 * 
-	 * @author Micah Neitz<br/>
-	 *         Team 498
 	 */
 	public void Read() {
-		_log("===/Read\\===");
+		// Start the timer if it hasnt been started yet
 		if (timer.get() == 0) {
 			timer.start();
-			_log("Timer started");
 		}
+		// Gets the timestamp
 		double time = timer.get();
+		// Keeps old states and grabs the new ones so we can see if they've changed
 		oldStates = newStates;
 		newStates = _grabValues();
-		if (oldStates.size() != newStates.size()) {
-			_log(String.format("Sizes were different: %s != %s", oldStates.size(), newStates.size()));
-			return;
-		}
+		// If this is the first time we've recorded values, log all the starting values
 		if (oldStates.size() == 0) {
-			_log("Old states was size 0");
+			for (String s : inputs.keySet())
+				return;
+		}
+		if (oldStates.size() != newStates.size()) {
 			return;
 		}
 		for (int i = 0; i < newStates.size(); i++) {
 			JoyState newState = newStates.get(i);
 			if (newState.isBool) {
-				_log("Checking bool");
 				if (newState.boolState != oldStates.get(i).boolState) {
-					_log(newState.name + " changed to " + newState.boolState);
 					InputLog input = new InputLog(newState.name, newState.boolState, time);
 					logs.add(input);
 				}
 			} else {
-				_log("Checking double");
 				if (newState.doubleState != oldStates.get(i).doubleState) {
-					_log(newState.name + " changed to " + newState.doubleState);
 					InputLog input = new InputLog(newState.name, newState.doubleState, time);
 					logs.add(input);
 				}
 			}
 		}
-		_log("===\\Read/===");
 	}
 
 	/**
@@ -110,9 +92,8 @@ public final class Recorder {
 	 * @param name
 	 *            The name of the autonomous you are saving
 	 * @throws IOException
-	 *             Throws when you don't have access, or another error occurs
-	 * @author Micah Neitz<br/>
-	 *         Team 498
+	 *             Throws when you don't have access, or another error out of my
+	 *             control occurs
 	 */
 	public void Save(String name) throws IOException {
 		String text = _compileString();
@@ -131,10 +112,8 @@ public final class Recorder {
 	 * @param name
 	 *            The name of the autonomous you are loading
 	 * @throws IOException
-	 *             Happens when you have no autonomous to load, or you typed in the
-	 *             name wrong
-	 * @author Micah Neitz<br/>
-	 *         Team 498
+	 *             Happens when you have no autonomous to load, or when you typed in
+	 *             the name wrong
 	 */
 	public void Load(String name) throws IOException {
 		File directoryFile = new File(DIRECTORY);
@@ -151,9 +130,6 @@ public final class Recorder {
 
 	/**
 	 * Clears current autonomous
-	 * 
-	 * @author Micah Neitz<br/>
-	 *         Team 498
 	 */
 	public void Clear() {
 		oldStates = newStates = new ArrayList<>();
@@ -162,59 +138,68 @@ public final class Recorder {
 	}
 
 	/**
-	 * 
-	 * Assigns a task to a button
+	 * Assigns a task to a button<br/>
+	 * <br/>
+	 * Does not accept {@link PassiveTask}, will effectively do nothing if you try
+	 * to add one this way. Use {@link #AddPassive()} for that
 	 * 
 	 * @param name
-	 *            The name of the task/button assignment. Could be anything, is just
-	 *            used for identification
+	 *            The name of the {@link JoystickInput}/{@link Task} assignment.
+	 *            Could be anything, is just used for identification
 	 * @param input
-	 *            The input button to assign to, can be an axis or a button.
+	 *            The {@link JoystickInput} to assign the {@link Task} to, can be an
+	 *            axis or a button.
 	 * @param task
-	 *            The {@link Task} to assign to the button
-	 * @author Micah Neitz<br/>
-	 *         Team 498
+	 *            The {@link Task} to assign to the {@link JoystickInput}
 	 */
 	public void Assign(String name, JoystickInput input, Task task) {
-		_log("===/Assign\\===");
-		_log("Assigning " + name);
+		if (task instanceof PassiveTask)
+			return;
 		tasks.put(name, task);
-		_log("...");
 		inputs.put(name, input);
-		_log("Assigned");
-		_log("===\\Assign/===");
 	}
 
 	/**
-	 * Adds a task that will always run in the background of the auto until
-	 * completion
+	 * Adds a {@link PassiveTask} that will always run in the background of the auto
+	 * until completion. <br/>
+	 * <br/>
+	 * Will accept {@link Task}, although will never change the value that it
+	 * defaults to.
 	 * 
 	 * @param task
-	 *            The task to be added
-	 * @author Micah Neitz<br/>
-	 *         Team 498
+	 *            The {@link PassiveTask} to be added
 	 */
 	public void AddPassive(PassiveTask task) {
-		_log("===/Passive\\===");
 		passives.add(task);
-		_log("===\\Passive/===");
 	}
 
 	/**
-	 * Builds a TaskGroup out of the current recording.
+	 * Builds a {@link TaskGroup} out of the current recording.
 	 * 
-	 * @return The TaskGroup to be executed
-	 * 
-	 * @author Micah Neitz<br/>
-	 *         Team 498
+	 * @return The {@link TaskGroup} to be executed
 	 */
 	public TaskGroup Build() {
-		_log("===/Build\\===");
-		_log((tasks == null) + " ; " + (passives == null) + " ; " + (logs == null));
 		TaskGroup tg = new TaskGroup(tasks, passives, logs);
-		_log("===\\Build/===");
 		return tg;
 	}
+
+	/**
+	 * Checks if an autonomous exists on file
+	 * 
+	 * @param name
+	 *            The name of the autonomous
+	 * @return <b>{@code true}</b> if the autonomous exists
+	 */
+	public static boolean Check(String name) {
+		File file = new File(DIRECTORY + name + ".txt");
+		return file.exists();
+	}
+
+	// I don't document the private methods, because I don't need to. No one is
+	// going to see this besides me, or the people trying to figure out how this
+	// works so they can make changes.
+	// If you would like to request a change or addition, please contact me at
+	// micah.team498@gmail.com
 
 	private ArrayList<JoyState> _grabValues() {
 		ArrayList<JoyState> states = new ArrayList<>();
@@ -247,12 +232,11 @@ public final class Recorder {
 		String[] logs = text.split(Pattern.quote(";"));
 		for (int i = 0; i < logs.length; i++) {
 			String[] elements = logs[i].split(Pattern.quote("_")); // seperate each element
-			//0 is the name you assigned to the task
-			//1 is the value of the change it is making
-			//2 is whether the input is a button or an axis
-			//3 is the time stamp the change was made
+			// 0 is the name you assigned to the task
+			// 1 is the value of the change it is making
+			// 2 is whether the input is a button or an axis
+			// 3 is the time stamp the change was made
 			this.logs.add(new InputLog(elements[0], elements[1], elements[2], elements[3]));
 		}
 	}
-
 }

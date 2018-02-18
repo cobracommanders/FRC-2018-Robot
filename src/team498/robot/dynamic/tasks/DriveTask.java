@@ -9,17 +9,13 @@ public class DriveTask extends PassiveTask {
 
 	@Override
 	public void Init() {
-		// TODO Auto-generated method stub
 		drivetrain = Drivetrain.getDrivetrain();
 	}
 
 	@Override
 	public void Run() {
-		// TODO Auto-generated method stub
 		double move = DriveForwardTask.move - DriveBackwardTask.move;
 		double rotate = RotateTask.rotate;
-
 		drivetrain.drive(move, rotate);
 	}
-
 }

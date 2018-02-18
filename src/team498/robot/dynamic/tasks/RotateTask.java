@@ -8,20 +8,19 @@ public class RotateTask extends Task {
 
 	@Override
 	public void Change(double value) {
-		System.out.println("Setting rotate value");
 		rotate = value;
 	}
 
 	@Override
-	public void Init() {
-		// TODO Auto-generated method stub
+	public void Change(boolean value) {
+	}
 
+	@Override
+	public void Init() {
 	}
 
 	@Override
 	public void Run() {
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override
@@ -29,8 +28,4 @@ public class RotateTask extends Task {
 		return false;
 	}
 
-	@Override
-	public void Change(boolean value) throws Exception {
-		throw new Exception("Boy this ain't a button");
-	}
 }

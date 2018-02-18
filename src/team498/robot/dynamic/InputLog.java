@@ -7,6 +7,8 @@ import java.text.DecimalFormat;
  * Logs input to prepare for string compile. Under the hood class, should never
  * be used
  * 
+ * @version 1.0
+ * 
  * @author Micah Neitz<br/>
  *         Team 498
  *

@@ -12,15 +12,15 @@ public class DriveBackwardTask extends Task {
 	}
 
 	@Override
-	public void Init() {
-		// TODO Auto-generated method stub
+	public void Change(boolean value) {
+	}
 
+	@Override
+	public void Init() {
 	}
 
 	@Override
 	public void Run() {
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override
@@ -28,8 +28,4 @@ public class DriveBackwardTask extends Task {
 		return false;
 	}
 
-	@Override
-	public void Change(boolean value) throws Exception {
-		throw new Exception("Boy this ain't a button");
-	}
 }
