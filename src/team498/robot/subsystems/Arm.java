@@ -15,6 +15,7 @@ import edu.wpi.first.wpilibj.command.PIDSubsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import team498.robot.Dashboard;
 import team498.robot.Mappings;
+import team498.robot.commands.ManualArm;
 
 public class Arm extends PIDSubsystem {
 
@@ -46,8 +47,7 @@ public class Arm extends PIDSubsystem {
 	private Timer timer = new Timer();
 
 	private DigitalInput cubeIn = new DigitalInput(Mappings.LimitSwitch);
-	private DoubleSolenoid lift = new DoubleSolenoid(Mappings.PCMModuleNumber, Mappings.LiftForward,
-			Mappings.LiftReverse);
+	private DoubleSolenoid lift = new DoubleSolenoid(Mappings.PCMModuleNumber, Mappings.LiftForward, Mappings.LiftReverse);
 	private Solenoid clampLeft = new Solenoid(Mappings.PCMModuleNumber, Mappings.ClampLeft);
 	private Solenoid clampRight = new Solenoid(Mappings.PCMModuleNumber, Mappings.ClampRight);
 	private WPI_TalonSRX armBottom = new WPI_TalonSRX(Mappings.ArmBottomDeviceNumber);
@@ -73,11 +73,11 @@ public class Arm extends PIDSubsystem {
 		setInputRange(armMinAngle, armMaxAngle);
 		setOutputRange(-.7, .7);
 		setSetpoint(armPositions[index]);
-		enable();
+		//enable();
 	}
 	
     public void initDefaultCommand() {
-    	// setDefaultCommand(new ManualArm(0));
+    	setDefaultCommand(new ManualArm(0));
     }
     
     public void setIntake(double leftPower, double rightPower) {
@@ -120,17 +120,6 @@ public class Arm extends PIDSubsystem {
     		lift.set(Value.kForward);
     	}
     }
-    
-    public double getPosition() {
-    	return pot.get();
-    }
-    
-    public void failSafe() {
-    	timer.reset();
-    	timer.start();
-    	isIntakeActive = false;
-    }
-    
     public void incrementArm(){
     	if(index < armPositions.length - 1){
     	    index++;
@@ -151,8 +140,7 @@ public class Arm extends PIDSubsystem {
     	this.setSetpoint(targetAngle);
     }
     
-    public void setArmPower(double armPower)
-    {
+    public void setArmPower(double armPower) {
     	armMotorGroup.set(armPower);
     	setLift(isLiftUp);
     }
@@ -162,49 +150,6 @@ public class Arm extends PIDSubsystem {
     	SmartDashboard.putNumber(Dashboard.ArmPosition, getPosition());
     	SmartDashboard.putBoolean(Dashboard.CubeIn, cubeIn.get());
     }
-
-	public void initDefaultCommand() {
-		// setDefaultCommand(new ManualArm(0));
-	}
-
-	public void setIntake(double leftPower, double rightPower) {
-		if (Math.abs(leftPower - getLastLeft()) > 1.01) {
-			failSafe();
-		}
-
-		if (timer.get() > Mappings.IntakeFailSafeDelay) {
-			isIntakeActive = true;
-			timer.stop();
-		}
-		if (isIntakeActive) {
-			intakeLeft.set(leftPower);
-			intakeRight.set(rightPower);
-			lastLeft = leftPower;
-			lastRight = rightPower;
-		} else {
-			intakeLeft.set(0);
-			intakeRight.set(0);
-			lastLeft = 0;
-			lastRight = 0;
-		}
-	}
-
-	public double getLastLeft() {
-		return lastLeft;
-	}
-
-	public double getLastRight() {
-		return lastRight;
-	}
-
-	public void setLift(boolean isUp) {
-		if (isUp) {
-			lift.set(Value.kForward);
-		} else {
-			lift.set(Value.kReverse);
-		}
-	}
-
 	public void setClamps(boolean isClamped) {
 		if (isClamped) {
 			clampLeft.set(true);
@@ -224,21 +169,7 @@ public class Arm extends PIDSubsystem {
 		timer.start();
 		isIntakeActive = false;
 	}
-
-	public void setArmAngle(double targetAngle) {
-		this.setSetpoint(targetAngle);
-	}
-
-	public void setArmPower(double armPower) {
-		armMotorGroup.set(armPower);
-	}
-
-	public void updateDashboard() {
-		// SmartDashboard.putString(Dashboard.LiftState, lift.get().toString());
-		SmartDashboard.putNumber(Dashboard.ArmPosition, getPosition());
-		SmartDashboard.putBoolean(Dashboard.CubeIn, cubeIn.get());
-	}
-
+	
 	@Override
 	protected double returnPIDInput() {
 		return pot.get();
