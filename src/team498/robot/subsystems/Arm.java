@@ -35,9 +35,10 @@ public class Arm extends PIDSubsystem {
 	
 	private double[] armPositions = {0, 90, 180, 360};
 	
-	private double shootScaleIndex = 2;
+	private int shootScaleIndex = 2;
 	
 	private boolean isIntakeActive = true;
+	private boolean isLiftUp = false;
 	
 	private Timer timer = new Timer();
 	
@@ -105,7 +106,9 @@ public class Arm extends PIDSubsystem {
     }
     
     public void setLift(boolean isUp) {
-    	if(isUp && index == shootScaleIndex) {
+    	this.isLiftUp = isUp;
+    	//Only allows the elevator to go up if you are in the stage shoot scale, or if in Manual control, within 10 degrees of shoot scale.
+    	if(isUp && index == shootScaleIndex || isUp && Math.abs(pot.get()) - armPositions[shootScaleIndex] < 10) {
     		lift.set(Value.kReverse);
     	}else {
     		lift.set(Value.kForward);
@@ -126,6 +129,7 @@ public class Arm extends PIDSubsystem {
     	if(index < armPositions.length - 1){
     	    index++;
     	    setArmAngle(index);
+    	    setLift(isLiftUp);
     	}
     	
     }
@@ -133,6 +137,7 @@ public class Arm extends PIDSubsystem {
     	if(index > 0){
     		index--;
     		setArmAngle(index);
+    		setLift(isLiftUp);
     	}
     }
     
@@ -143,6 +148,7 @@ public class Arm extends PIDSubsystem {
     public void setArmPower(double armPower)
     {
     	armMotorGroup.set(armPower);
+    	setLift(isLiftUp);
     }
     
     public void updateDashboard(){
