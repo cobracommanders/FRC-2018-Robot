@@ -61,10 +61,10 @@ public final class TaskGroup {
 		// "=" + (timer.get() > logs.get(index).GetTime()));
 		while (timer.get() > logs.get(index).GetTime()) {
 			InputLog log = logs.get(index);
-			if (tasks.get(log.name).IsButton()) {
-				tasks.get(log.name).Change(log.GetBoolean());
+			if (tasks.get(log.GetName()).IsButton()) {
+				tasks.get(log.GetName()).Change(log.GetBoolean());
 			} else {
-				tasks.get(log.name).Change(log.GetDouble());
+				tasks.get(log.GetName()).Change(log.GetDouble());
 			}
 			++index;
 		}

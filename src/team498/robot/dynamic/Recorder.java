@@ -144,7 +144,8 @@ public final class Recorder {
 		BufferedReader br = new BufferedReader(fr);
 		String text = br.readLine();
 		br.close();
-		if (text==null) throw new IOException("That file was empty");
+		if (text == null)
+			throw new IOException("That file was empty");
 		_parseString(text);
 	}
 
@@ -193,7 +194,7 @@ public final class Recorder {
 	 * @author Micah Neitz<br/>
 	 *         Team 498
 	 */
-	public void AddPassive(Task task) {
+	public void AddPassive(PassiveTask task) {
 		_log("===/Passive\\===");
 		passives.add(task);
 		_log("===\\Passive/===");
@@ -246,7 +247,11 @@ public final class Recorder {
 		String[] logs = text.split(Pattern.quote(";"));
 		for (int i = 0; i < logs.length; i++) {
 			String[] elements = logs[i].split(Pattern.quote("_")); // seperate each element
-			this.logs.add(new InputLog(elements[0], elements[1], elements[2]));
+			//0 is the name you assigned to the task
+			//1 is the value of the change it is making
+			//2 is whether the input is a button or an axis
+			//3 is the time stamp the change was made
+			this.logs.add(new InputLog(elements[0], elements[1], elements[2], elements[3]));
 		}
 	}
 

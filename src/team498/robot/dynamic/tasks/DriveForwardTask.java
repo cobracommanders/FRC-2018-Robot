@@ -12,6 +12,11 @@ public class DriveForwardTask extends Task {
 	}
 	
 	@Override
+	public void Change(boolean value) throws Exception {
+		throw new Exception("Boy this ain't a button");
+	}
+	
+	@Override
 	public void Init() {
 		// TODO Auto-generated method stub
 

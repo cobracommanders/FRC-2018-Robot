@@ -1,9 +1,9 @@
 package team498.robot.dynamic.tasks;
 
-import team498.robot.dynamic.Task;
+import team498.robot.dynamic.PassiveTask;
 import team498.robot.subsystems.Drivetrain;
 
-public class DriveTask extends Task {
+public class DriveTask extends PassiveTask {
 
 	Drivetrain drivetrain;
 

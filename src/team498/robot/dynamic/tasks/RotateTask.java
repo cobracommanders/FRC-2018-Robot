@@ -28,4 +28,9 @@ public class RotateTask extends Task {
 	public boolean IsButton() {
 		return false;
 	}
+
+	@Override
+	public void Change(boolean value) throws Exception {
+		throw new Exception("Boy this ain't a button");
+	}
 }
