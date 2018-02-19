@@ -413,5 +413,6 @@ public class Robot extends TimedRobot {
 		operator.updateDashboard();
 		drivetrain.updateDashboard();
 		accelerometer.updateDashboard();
+		arm.updateDashboard();
 	}
 }

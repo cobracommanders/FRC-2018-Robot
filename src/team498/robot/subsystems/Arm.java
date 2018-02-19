@@ -22,10 +22,10 @@ public class Arm extends PIDSubsystem {
 	private static final double potFullRange = 3600;
 	private static final double potOffset = 0;
 
-	private static final double armMinAngle = 20; // TODO: Make this a pref so
+	private static final double armMinAngle = 3472; // TODO: Make this a pref so
 													// we can change whenever
 													// arm is worked on
-	private static final double armMaxAngle = armMinAngle + 180; // TODO:
+	private static final double armMaxAngle = 2597; // TODO:
 																	// Calibrate
 																	// based on
 																	// arm swing
@@ -37,7 +37,7 @@ public class Arm extends PIDSubsystem {
 		return arm;
 	}
 
-	private double[] armPositions = { 3472, 3378, 3027, 2597 };
+	private double[] armPositions = { 3230, 3120, 2800, 2380 };
 
 	private int shootScaleIndex = 2;
 
@@ -62,21 +62,21 @@ public class Arm extends PIDSubsystem {
 	private int index = 2;
 
 	public Arm() {
-		super("Arm", 0, 0, 0);
+		super("Arm", 0.05, 0, 0.02);
 
 		// Hold starting position
 		setArmAngle(pot.get());
 
 		// Initialize PID
 		setAbsoluteTolerance(1);
-		setInputRange(armMinAngle, armMaxAngle);
-		setOutputRange(-.7, .7);
+		setInputRange(armPositions[armPositions.length - 1], armPositions[0]);
+		setOutputRange(-.6, .6);
 		setSetpoint(armPositions[index]);
-		// enable();
+		enable();
 	}
 
 	public void initDefaultCommand() {
-		setDefaultCommand(new ManualArm(0));
+		//setDefaultCommand(new ManualArm(0));
 	}
 
 	public void setIntake(double leftPower, double rightPower) {
@@ -180,6 +180,7 @@ public class Arm extends PIDSubsystem {
 
 	@Override
 	protected void usePIDOutput(double output) {
-		armMotorGroup.pidWrite(output);
+		armMotorGroup.pidWrite(-output);
+		System.out.println(-output);
 	}
 }
