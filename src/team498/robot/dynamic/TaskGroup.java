@@ -70,6 +70,7 @@ public final class TaskGroup {
 				tasks.get(log.GetName()).Change(log.GetBoolean());
 			} else {
 				tasks.get(log.GetName()).Change(log.GetDouble());
+				System.out.println(log.GetDouble());
 			}
 			++index;
 		}

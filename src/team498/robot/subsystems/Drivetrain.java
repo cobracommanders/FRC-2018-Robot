@@ -129,16 +129,16 @@ public class Drivetrain extends PIDSubsystem {
 				: rotate;
 		move *= (turbo ? 1 : turboCap);
 		rotate *= turnCap;
-		if (move > 0.05) {
-			if (driveTimer.get() == 0)
-				driveTimer.start();
-		} else {
-			if (driveTimer.get() != 0) {
-				System.out.println(driveTimer.get());
-				driveTimer.stop();
-				driveTimer.reset();
-			}
-		}
+//		if (move > 0.05) {
+//			if (driveTimer.get() == 0)
+//				driveTimer.start();
+//		} else {
+//			if (driveTimer.get() != 0) {
+//				System.out.println(driveTimer.get());
+//				driveTimer.stop();
+//				driveTimer.reset();
+//			}
+//		}
 		drive.arcadeDrive(move, rotate);
 	}
 

@@ -53,19 +53,26 @@ public final class Recorder {
 	 * Needs to be run on loop while recording inputs
 	 */
 	public void Read() {
-		// Start the timer if it hasnt been started yet
-		if (timer.get() == 0) {
-			timer.start();
-		}
 		// Gets the timestamp
 		double time = timer.get();
+		//Start the timer
+		if (time == 0) {
+			timer.start();
+		}
 		// Keeps old states and grabs the new ones so we can see if they've changed
 		oldStates = newStates;
 		newStates = _grabValues();
 		// If this is the first time we've recorded values, log all the starting values
 		if (oldStates.size() == 0) {
-			for (String s : inputs.keySet())
-				return;
+			for (JoyState newState : newStates) {
+
+				if (newState.isBool)
+					logs.add(new InputLog(newState.name, newState.boolState, time));
+				else
+					logs.add(new InputLog(newState.name, newState.doubleState, time));
+
+			}
+			return;
 		}
 		if (oldStates.size() != newStates.size()) {
 			return;

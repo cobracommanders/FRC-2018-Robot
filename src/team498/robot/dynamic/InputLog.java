@@ -70,6 +70,7 @@ final class InputLog {
 		}
 		if (!valid)
 			throw new IllegalArgumentException("Value or Time string was invalid!");
+		this._name = name;
 		this._boolValue = value == "1";
 		this._isButton = isButton == "1";
 		this._doubleValue = Double.parseDouble(value);
@@ -77,6 +78,7 @@ final class InputLog {
 	}
 
 	public InputLog(String name, boolean value, double time) {
+		this._name = name;
 		this._time = time;
 		this._boolValue = value;
 		this._doubleValue = 0.0;

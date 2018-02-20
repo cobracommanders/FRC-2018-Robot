@@ -16,6 +16,7 @@ public class DriveTask extends PassiveTask {
 	public void Run() {
 		double move = DriveForwardTask.move - DriveBackwardTask.move;
 		double rotate = RotateTask.rotate;
+		System.out.println("M" + move);
 		drivetrain.drive(move, rotate);
 	}
 }
