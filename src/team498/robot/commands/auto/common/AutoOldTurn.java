@@ -28,7 +28,13 @@ public class AutoOldTurn extends Command {
 	}
 
 	protected void execute() {
-		drivetrain.manualDrive(0, turnPower);
+		if(drivetrain.getAngleX() > gyroGoal * .8) { 
+			drivetrain.manualDrive(0, turnPower * .5);
+		} else if(drivetrain.getAngleX() > gyroGoal * .9) {
+			drivetrain.manualDrive(0, turnPower * .25);
+		} else {
+			drivetrain.manualDrive(0, turnPower);
+		}
 	}
 
 	protected boolean isFinished() {
