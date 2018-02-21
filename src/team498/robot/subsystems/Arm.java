@@ -37,9 +37,11 @@ public class Arm extends PIDSubsystem {
 		return arm;
 	}
 
-	private double[] armPositions = { 3230, 3120, 2800, 2380 };
+	private double[] armPositions = { 900, 803, 500, 88 };
 
 	private int shootScaleIndex = 2;
+	
+	double startingArm;
 
 	private boolean isIntakeActive = true;
 	private boolean isLiftUp = false;
@@ -58,19 +60,20 @@ public class Arm extends PIDSubsystem {
 
 	private double lastLeft = 0;
 	private double lastRight = 0;
+	private double stopThreshold = 50;
 
 	private int index = 2;
 
 	public Arm() {
-		super("Arm", 0.05, 0, 0.02);
+		super("Arm", 0.05, 0, 0.2);
 
 		// Hold starting position
 		setArmAngle(pot.get());
-
+		startingArm = pot.get();
 		// Initialize PID
-		setAbsoluteTolerance(1);
+		setAbsoluteTolerance(30);
 		setInputRange(armPositions[armPositions.length - 1], armPositions[0]);
-		setOutputRange(-.6, .6);
+		setOutputRange(-.4, .4);
 		setSetpoint(armPositions[index]);
 		enable();
 	}
@@ -143,7 +146,14 @@ public class Arm extends PIDSubsystem {
 	}
 
 	public void setArmPower(double armPower) {
-		armMotorGroup.set(armPower);
+		if(Math.abs(pot.get() - armPositions[0]) < stopThreshold && armPower < 0){
+			armMotorGroup.set(0);
+		}else if(Math.abs(pot.get() - armPositions[armPositions.length - 1]) < stopThreshold && armPower > 0){
+			armMotorGroup.set(0);
+		}else{
+			armMotorGroup.set(armPower);
+		}
+		
 		setLift(isLiftUp);
 	}
 
@@ -180,7 +190,25 @@ public class Arm extends PIDSubsystem {
 
 	@Override
 	protected void usePIDOutput(double output) {
-		armMotorGroup.pidWrite(-output);
-		System.out.println(-output);
+		/*if(Math.abs(pot.get() - armPositions[0]) < stopThreshold && -output < 0){
+			armMotorGroup.pidWrite(0);
+		}else if(Math.abs(pot.get() - armPositions[armPositions.length - 1]) < stopThreshold && -output > 0){
+			armMotorGroup.pidWrite(0);
+		}else{
+			armMotorGroup.pidWrite(-output);
+
+		}*/
+		if(pot.get() - startingArm < 0 && -output < 0){
+			armMotorGroup.pidWrite(-output);
+			System.out.println(-output);
+		}else if(pot.get() - startingArm > 0 && -output > 0){
+			armMotorGroup.pidWrite(-output);
+			System.out.println(-output);
+		}else{
+			armMotorGroup.pidWrite(0);
+			System.out.println(0);
+		}
+		
+
 	}
 }
