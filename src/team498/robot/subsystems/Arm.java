@@ -37,7 +37,7 @@ public class Arm extends PIDSubsystem {
 		return arm;
 	}
 
-	private double[] armPositions = { 900, 803, 500, 88 };
+	private double[] armPositions = { 1075, 924, 760, 325 };
 
 	private int shootScaleIndex = 2;
 	
@@ -60,7 +60,7 @@ public class Arm extends PIDSubsystem {
 
 	private double lastLeft = 0;
 	private double lastRight = 0;
-	private double stopThreshold = 50;
+	private double stopThreshold = 150;
 
 	private int index = 2;
 
@@ -75,15 +75,15 @@ public class Arm extends PIDSubsystem {
 		setInputRange(armPositions[armPositions.length - 1], armPositions[0]);
 		setOutputRange(-.4, .4);
 		setSetpoint(armPositions[index]);
-		enable();
+		//enable();
 	}
 
 	public void initDefaultCommand() {
-		//setDefaultCommand(new ManualArm(0));
+		setDefaultCommand(new ManualArm(0));
 	}
 
 	public void setIntake(double leftPower, double rightPower) {
-
+		
 		if (Math.abs(leftPower - getLastLeft()) > 1.01) {
 			failSafe();
 		}
@@ -92,12 +92,44 @@ public class Arm extends PIDSubsystem {
 			isIntakeActive = true;
 			timer.stop();
 		}
-		if (isIntakeActive) {
+		if (isIntakeActive && !cubeIn.get()) {
 			intakeLeft.set(leftPower);
 			intakeRight.set(rightPower);
 			lastLeft = leftPower;
 			lastRight = rightPower;
-		} else {
+		}else if(isIntakeActive && cubeIn.get() && leftPower < 0){
+			intakeLeft.set(leftPower);
+			intakeRight.set(rightPower);
+			lastLeft = leftPower;
+			lastRight = rightPower;
+		}else{
+			intakeLeft.set(0);
+			intakeRight.set(0);
+			lastLeft = 0;
+			lastRight = 0;
+		}
+	}
+	public void checkIntake() {
+		
+		if (Math.abs(lastLeft - getLastLeft()) > 1.01) {
+			failSafe();
+		}
+
+		if (timer.get() > Mappings.IntakeFailSafeDelay) {
+			isIntakeActive = true;
+			timer.stop();
+		}
+		if (isIntakeActive && !cubeIn.get()) {
+			intakeLeft.set(lastLeft);
+			intakeRight.set(lastLeft);
+			lastLeft = lastLeft;
+			lastRight = lastLeft;
+		}else if(isIntakeActive && cubeIn.get() && lastLeft < 0){
+			intakeLeft.set(lastLeft);
+			intakeRight.set(lastLeft);
+			lastLeft = lastLeft;
+			lastRight = lastLeft;
+		}else{
 			intakeLeft.set(0);
 			intakeRight.set(0);
 			lastLeft = 0;
@@ -198,6 +230,7 @@ public class Arm extends PIDSubsystem {
 			armMotorGroup.pidWrite(-output);
 
 		}*/
+		checkIntake();
 		if(pot.get() - startingArm < 0 && -output < 0){
 			armMotorGroup.pidWrite(-output);
 			System.out.println(-output);

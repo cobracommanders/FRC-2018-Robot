@@ -98,7 +98,8 @@ public class Robot extends TimedRobot {
 				if (autonomousPosition == RobotStartPosition.Left) {
 					autoCommand = new StartLeftPlaceLeftSwitchStrategy();
 					autoCommand.start();
-					// WHEN AUTO IS DONE, CANCEL
+					//TODO: un-comment this for two cube auto
+					/*// WHEN AUTO IS DONE, CANCEL
 					if (autoCommand.isCompleted()) {
 						autoCommand.cancel();
 					}
@@ -112,13 +113,13 @@ public class Robot extends TimedRobot {
 					} else {
 						System.out.println("Not moving to Scale from Left Switch");
 						System.out.println("Incorrect If/else logic?");
-					}
+					}*/
 					// ROBOT ON CENTER
 				} else if (autonomousPosition == RobotStartPosition.Center) {
-					autoCommand = new StartCenterPlaceLeftSwitchStrategy(); // ACTUAL
-																			// AUTO
+					autoCommand = new StartCenterPlaceLeftSwitchStrategy(); // ACTUAL														// AUTO
 					autoCommand.start();
-					// WHEN AUTO IS DONE, CANCEL
+					//TODO: un-comment this for two cube auto
+					/*// WHEN AUTO IS DONE, CANCEL
 					if (autoCommand.isCompleted()) {
 						autoCommand.cancel();
 					}
@@ -132,12 +133,13 @@ public class Robot extends TimedRobot {
 					} else {
 						System.out.println("Not moving to Scale from Left Switch");
 						System.out.println("Incorrect If/else logic?");
-					}
+					}*/
 					// ROBOT ON RIGHT
 				} else if (autonomousPosition == RobotStartPosition.Right) {
 					autoCommand = new StartRightPlaceLeftSwitchStrategy();
 					autoCommand.start();
-					// WHEN AUTO IS DONE, CANCEL
+					//TODO: un-comment this for two cube auto
+					/*// WHEN AUTO IS DONE, CANCEL
 					if (autoCommand.isCompleted()) {
 						autoCommand.cancel();
 					}
@@ -151,7 +153,7 @@ public class Robot extends TimedRobot {
 					} else {
 						System.out.println("Not moving to Scale from Left Switch");
 						System.out.println("Incorrect If/else logic?");
-					}
+					}*/
 					// NO ROBOT POSITION
 				} else {
 					System.out.println("Error: No Robot Position, for Left Switch"); // shouldn't
@@ -163,7 +165,8 @@ public class Robot extends TimedRobot {
 				if (autonomousPosition == RobotStartPosition.Left) {
 					autoCommand = new StartLeftPlaceRightSwitchStrategy();
 					autoCommand.start();
-					// WHEN AUTO IS DONE, CANCEL
+					//TODO: un-comment this for two cube auto
+					/*// WHEN AUTO IS DONE, CANCEL
 					if (autoCommand.isCompleted()) {
 						autoCommand.cancel();
 					}
@@ -177,13 +180,14 @@ public class Robot extends TimedRobot {
 					} else {
 						System.out.println("Not moving to Scale from Right Switch");
 						System.out.println("Incorrect If/else logic?");
-					}
+					}*/
 					// ROBOT ON CENTER
 				} else if (autonomousPosition == RobotStartPosition.Center) {
 					autoCommand = new StartCenterPlaceRightSwitchStrategy(); // ACTUAL
 																				// AUTO
 					autoCommand.start();
-					// WHEN AUTO IS DONE, CANCEL
+					//TODO: un-comment this for two cube auto
+					/*// WHEN AUTO IS DONE, CANCEL
 					if (autoCommand.isCompleted()) {
 						autoCommand.cancel();
 					}
@@ -197,12 +201,13 @@ public class Robot extends TimedRobot {
 					} else {
 						System.out.println("Not moving to Scale from Right Switch");
 						System.out.println("Incorrect If/else logic?");
-					}
+					}*/
 					// ROBOT ON RIGHT
 				} else if (autonomousPosition == RobotStartPosition.Right) {
 					autoCommand = new StartRightPlaceRightSwitchStrategy();
 					autoCommand.start();
-					// WHEN AUTO IS DONE, CANCEL
+					//TODO: un-comment this for two cube auto
+					/*// WHEN AUTO IS DONE, CANCEL
 					if (autoCommand.isCompleted()) {
 						autoCommand.cancel();
 					}
@@ -216,7 +221,7 @@ public class Robot extends TimedRobot {
 					} else {
 						System.out.println("Not moving to Scale from Right Switch");
 						System.out.println("Incorrect If/else logic?");
-					}
+					}*/
 					// NO ROBOT POSITION
 				} else {
 					System.out.println("Error: No Robot Position, for Right Switch"); // shouldn't
@@ -237,7 +242,8 @@ public class Robot extends TimedRobot {
 					autoCommand = new StartLeftPlaceLeftScaleStrategy(); // ACTUAL
 																			// AUTO
 					autoCommand.start();
-					// WHEN AUTO IS DONE, CANCEL
+					//TODO: un-comment this for two cube auto
+/*					// WHEN AUTO IS DONE, CANCEL
 					if (autoCommand.isCompleted()) {
 						autoCommand.cancel();
 					}
@@ -251,12 +257,13 @@ public class Robot extends TimedRobot {
 					} else {
 						System.out.println("Not moving to Switch from Left Scale");
 						System.out.println("Incorrect If/else logic?");
-					}
+					}*/
 					// ROBOT ON CENTER
 				} else if (autonomousPosition == RobotStartPosition.Center) {
 					autoCommand = new StartCenterPlaceLeftScaleStrategy();
 					autoCommand.start();
-					// WHEN AUTO IS DONE, CANCEL
+					//TODO: un-comment this for two cube auto
+					/*// WHEN AUTO IS DONE, CANCEL
 					if (autoCommand.isCompleted()) {
 						autoCommand.cancel();
 					}
@@ -270,12 +277,13 @@ public class Robot extends TimedRobot {
 					} else {
 						System.out.println("Not moving to Switch from Left Scale");
 						System.out.println("Incorrect If/else logic?");
-					}
+					}*/
 					// ROBOT ON RIGHT
 				} else if (autonomousPosition == RobotStartPosition.Right) {
 					autoCommand = new StartRightPlaceLeftScaleStrategy();
 					autoCommand.start();
-					// WHEN AUTO IS DONE, CANCEL
+					//TODO: un-comment this for two cube auto
+					/*// WHEN AUTO IS DONE, CANCEL
 					if (autoCommand.isCompleted()) {
 						autoCommand.cancel();
 					}
@@ -289,7 +297,7 @@ public class Robot extends TimedRobot {
 					} else {
 						System.out.println("Not moving to Switch from Left Scale");
 						System.out.println("Incorrect If/else logic?");
-					}
+					}*/
 					// NO ROBOT POSITION
 				} else {
 					System.out.println("Error: No Robot Position, for Left Scale"); // shouldn't
@@ -301,7 +309,8 @@ public class Robot extends TimedRobot {
 				if (autonomousPosition == RobotStartPosition.Left) {
 					autoCommand = new StartLeftPlaceRightScaleStrategy();
 					autoCommand.start();
-					// WHEN AUTO IS DONE, CANCEL
+					//TODO: un-comment this for two cube auto
+					/*// WHEN AUTO IS DONE, CANCEL
 					if (autoCommand.isCompleted()) {
 						autoCommand.cancel();
 					}
@@ -315,12 +324,13 @@ public class Robot extends TimedRobot {
 					} else {
 						System.out.println("Not moving to Switch from Right Scale");
 						System.out.println("Incorrect If/else logic?");
-					}
+					}*/
 					// ROBOT ON CENTER
 				} else if (autonomousPosition == RobotStartPosition.Center) {
 					autoCommand = new StartCenterPlaceRightScaleStrategy();
 					autoCommand.start();
-					// WHEN AUTO IS DONE, CANCEL
+					//TODO: un-comment this for two cube auto
+					/*// WHEN AUTO IS DONE, CANCEL
 					if (autoCommand.isCompleted()) {
 						autoCommand.cancel();
 					}
@@ -334,12 +344,13 @@ public class Robot extends TimedRobot {
 					} else {
 						System.out.println("Not moving to Switch from Right Scale");
 						System.out.println("Incorrect If/else logic?");
-					}
+					}*/
 					// ROBOT ON RIGHT
 				} else if (autonomousPosition == RobotStartPosition.Right) {
 					autoCommand = new StartRightPlaceRightScaleStrategy();
 					autoCommand.start();
-					// WHEN AUTO IS DONE, CANCEL
+					//TODO: un-comment this for two cube auto
+					/*// WHEN AUTO IS DONE, CANCEL
 					if (autoCommand.isCompleted()) {
 						autoCommand.cancel();
 					}
@@ -353,7 +364,7 @@ public class Robot extends TimedRobot {
 					} else {
 						System.out.println("Not moving to Switch from Right Scale");
 						System.out.println("Incorrect If/else logic?");
-					}
+					}*/
 					// NO ROBOT POSITION
 				} else {
 					System.out.println("Error: No Robot Position, for Right Scale");

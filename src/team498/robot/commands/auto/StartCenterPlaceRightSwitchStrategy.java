@@ -6,6 +6,7 @@ import team498.robot.commands.auto.common.AutoArmPosition;
 import team498.robot.commands.auto.common.AutoDrive;
 import team498.robot.commands.auto.common.AutoIntake;
 import team498.robot.commands.auto.common.AutoTurn;
+import team498.robot.commands.auto.common.AutoWait;
 
 /**
  *
@@ -29,5 +30,7 @@ public class StartCenterPlaceRightSwitchStrategy extends CommandGroup {
 		addSequential(new AutoArmPosition(45));
 		// reverses intake, releases cube into switch
 		addSequential(new AutoIntake(-.4, -.4));
+		//wait 2 seconds
+		addSequential(new AutoWait(2));
 	}
 }
