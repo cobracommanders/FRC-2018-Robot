@@ -15,6 +15,7 @@ import edu.wpi.first.wpilibj.command.PIDSubsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import team498.robot.Dashboard;
 import team498.robot.Mappings;
+import team498.robot.commands.CheckIntake;
 import team498.robot.commands.ManualArm;
 
 public class Arm extends PIDSubsystem {
@@ -79,7 +80,8 @@ public class Arm extends PIDSubsystem {
 	}
 
 	public void initDefaultCommand() {
-		setDefaultCommand(new ManualArm(0));
+		//setDefaultCommand(new ManualArm(0));
+		setDefaultCommand(new CheckIntake());
 	}
 
 	public void setIntake(double leftPower, double rightPower) {
