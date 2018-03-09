@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
+import edu.wpi.first.wpilibj.Relay;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.Timer;
@@ -58,10 +59,14 @@ public class Arm extends PIDSubsystem {
 	private Victor intakeLeft = new Victor(Mappings.IntakeLeftPort);
 	private Victor intakeRight = new Victor(Mappings.IntakeRightPort);
 	private AnalogPotentiometer pot = new AnalogPotentiometer(Mappings.ArmPotChannel, potFullRange, potOffset);
-
+	private Relay clampLight = new Relay(0);
+	
 	private double lastLeft = 0;
 	private double lastRight = 0;
 	private double stopThreshold = 150;
+	public boolean isClamped;
+	public boolean isIntakeIn1 = false;
+	public boolean isIntakeIn2 = false;
 
 	private int index = 2;
 
@@ -110,6 +115,18 @@ public class Arm extends PIDSubsystem {
 			lastLeft = 0;
 			lastRight = 0;
 		}
+		if(leftPower == 0.6){
+			isIntakeIn1 = true;
+			isIntakeIn2 = true;
+		}else if(leftPower == -1){
+			isIntakeIn1 = true;
+			isIntakeIn2 = false;
+		}else{
+			isIntakeIn1 = false;
+			isIntakeIn2 = false;
+		}
+		SmartDashboard.putBoolean(Dashboard.IsIntakeIn1, isIntakeIn1);
+		SmartDashboard.putBoolean(Dashboard.IsIntakeIn2, isIntakeIn2);
 	}
 	public void checkIntake() {
 		
@@ -137,6 +154,18 @@ public class Arm extends PIDSubsystem {
 			lastLeft = 0;
 			lastRight = 0;
 		}
+		if(lastLeft == 0.6){
+			isIntakeIn1 = true;
+			isIntakeIn2 = true;
+		}else if(lastLeft == -1){
+			isIntakeIn1 = true;
+			isIntakeIn2 = false;
+		}else{
+			isIntakeIn1 = false;
+			isIntakeIn2 = false;
+		}
+		SmartDashboard.putBoolean(Dashboard.IsIntakeIn1, isIntakeIn1);
+		SmartDashboard.putBoolean(Dashboard.IsIntakeIn2, isIntakeIn2);
 	}
 
 	public double getLastLeft() {
@@ -200,10 +229,17 @@ public class Arm extends PIDSubsystem {
 	public void setClamps(boolean isClamped) {
 		if (isClamped) {
 			clamp.set(Value.kForward);
-			
+			this.isClamped = isClamped;
 		} else {
 			clamp.set(Value.kReverse);
-		
+			this.isClamped = isClamped;
+		}
+	}
+	public void setClampLight(){
+		if(isClamped){
+			clampLight.set(Relay.Value.kForward);
+		}else{
+			clampLight.set(Relay.Value.kReverse);
 		}
 	}
 

@@ -48,4 +48,7 @@ public class Dashboard {
 	public static final String LiftState = "LiftState";
 	public static final String PIDP = "PIDP";
 	public static final String PIDRamp = "PIDRamp";
+	
+	public static final String IsIntakeIn1 = "IsIntakeIn1";
+	public static final String IsIntakeIn2 = "IsIntakeIn2";
 }
