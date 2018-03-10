@@ -39,7 +39,7 @@ public class Arm extends PIDSubsystem {
 		return arm;
 	}
 
-	private double[] armPositions = { 1075, 924, 760, 325 };
+	private double[] armPositions = {1600, 1450, 1205, 1034 };
 
 	private int shootScaleIndex = 2;
 	
@@ -47,7 +47,6 @@ public class Arm extends PIDSubsystem {
 
 	private boolean isIntakeActive = true;
 	private boolean isLiftUp = false;
-
 	private Timer timer = new Timer();
 
 	private DigitalInput cubeIn = new DigitalInput(Mappings.LimitSwitch);
@@ -67,7 +66,8 @@ public class Arm extends PIDSubsystem {
 	public boolean isClamped;
 	public boolean isIntakeIn1 = false;
 	public boolean isIntakeIn2 = false;
-
+	public boolean isArmRestricted = true;
+	
 	private int index = 2;
 
 	public Arm() {
@@ -79,7 +79,7 @@ public class Arm extends PIDSubsystem {
 		// Initialize PID
 		setAbsoluteTolerance(30);
 		setInputRange(armPositions[armPositions.length - 1], armPositions[0]);
-		setOutputRange(-.4, .4);
+		setOutputRange(-.5, .5);
 		setSetpoint(armPositions[index]);
 		//enable();
 	}
@@ -115,6 +115,8 @@ public class Arm extends PIDSubsystem {
 			lastLeft = 0;
 			lastRight = 0;
 		}
+		intakeLeft.set(leftPower);
+		intakeRight.set(rightPower);
 		if(leftPower == 0.6){
 			isIntakeIn1 = true;
 			isIntakeIn2 = true;
@@ -128,32 +130,14 @@ public class Arm extends PIDSubsystem {
 		SmartDashboard.putBoolean(Dashboard.IsIntakeIn1, isIntakeIn1);
 		SmartDashboard.putBoolean(Dashboard.IsIntakeIn2, isIntakeIn2);
 	}
+	public void ToggleArmRestrict(){
+		isArmRestricted = !isArmRestricted;
+	}
 	public void checkIntake() {
 		
-		if (Math.abs(lastLeft - getLastLeft()) > 1.01) {
-			failSafe();
-		}
-
-		if (timer.get() > Mappings.IntakeFailSafeDelay) {
-			isIntakeActive = true;
-			timer.stop();
-		}
-		if (isIntakeActive && !cubeIn.get()) {
-			intakeLeft.set(lastLeft);
-			intakeRight.set(lastLeft);
-			lastLeft = lastLeft;
-			lastRight = lastLeft;
-		}else if(isIntakeActive && cubeIn.get() && lastLeft < 0){
-			intakeLeft.set(lastLeft);
-			intakeRight.set(lastLeft);
-			lastLeft = lastLeft;
-			lastRight = lastLeft;
-		}else{
-			intakeLeft.set(0);
-			intakeRight.set(0);
-			lastLeft = 0;
-			lastRight = 0;
-		}
+		intakeLeft.set(lastLeft);
+		intakeRight.set(lastRight);
+		
 		if(lastLeft == 0.6){
 			isIntakeIn1 = true;
 			isIntakeIn2 = true;
@@ -209,13 +193,7 @@ public class Arm extends PIDSubsystem {
 	}
 
 	public void setArmPower(double armPower) {
-		if(Math.abs(pot.get() - armPositions[0]) < stopThreshold && armPower < 0){
-			armMotorGroup.set(0);
-		}else if(Math.abs(pot.get() - armPositions[armPositions.length - 1]) < stopThreshold && armPower > 0){
-			armMotorGroup.set(0);
-		}else{
 			armMotorGroup.set(armPower);
-		}
 		
 		setLift(isLiftUp);
 	}
@@ -228,10 +206,10 @@ public class Arm extends PIDSubsystem {
 
 	public void setClamps(boolean isClamped) {
 		if (isClamped) {
-			clamp.set(Value.kForward);
+			clamp.set(Value.kReverse);
 			this.isClamped = isClamped;
 		} else {
-			clamp.set(Value.kReverse);
+			clamp.set(Value.kForward);
 			this.isClamped = isClamped;
 		}
 	}
@@ -256,6 +234,9 @@ public class Arm extends PIDSubsystem {
 	@Override
 	protected double returnPIDInput() {
 		return pot.get();
+	}
+	public double getScalePot(){
+		return startingArm;
 	}
 
 	@Override

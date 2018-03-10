@@ -2,6 +2,7 @@ package team498.robot.commands.auto;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import team498.robot.commands.ToggleClamps;
+import team498.robot.commands.ToggleLift;
 import team498.robot.commands.auto.common.AutoArmPosition;
 import team498.robot.commands.auto.common.AutoArmTimed;
 import team498.robot.commands.auto.common.AutoDrive;
@@ -18,14 +19,15 @@ public class StartCenterPlaceRightSwitchStrategy extends CommandGroup {
 
 	public StartCenterPlaceRightSwitchStrategy() {
 		System.out.println("Start Center, Right Switch Strategy!");
-		addSequential(new ToggleClamps());
-		addSequential(new ToggleClamps());
-		addSequential(new AutoDrive(-.7,-12));
-		addSequential(new AutoOldTurn(-.6,90));
-		addSequential(new AutoDrive(-.7,-30));
-		addSequential(new AutoOldTurn(.6,90));
-		addSequential(new AutoDriveTimed(-.7,0,2));
-		addSequential(new AutoArmTimed(-.6, 3));
+		//addSequential(new ToggleClamps());
+		//addSequential(new ToggleClamps());
+		addSequential(new AutoDrive(-.9,-14));
+		addSequential(new AutoOldTurn(.8,88));
+		addSequential(new AutoDrive(-.9,-45));
+		addSequential(new AutoOldTurn(-.9,96));
+		addSequential(new AutoDriveTimed(-.9,0,2.5));
+		addSequential(new ToggleLift());
+		addSequential(new AutoArmTimed(.6, 3));
 		addSequential(new AutoIntake(-1,-1));
 		addSequential(new AutoArmTimed(-.5,3));
 		addSequential(new AutoIntake(0,0));

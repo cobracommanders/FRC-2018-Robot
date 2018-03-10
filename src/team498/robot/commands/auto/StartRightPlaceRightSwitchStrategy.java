@@ -16,8 +16,8 @@ public class StartRightPlaceRightSwitchStrategy extends CommandGroup {
 
 	public StartRightPlaceRightSwitchStrategy() {
 		System.out.println("Start Right, Right Switch Strategy!");
-		addSequential(new ToggleClamps());
-		addSequential(new ToggleClamps());
+		//addSequential(new ToggleClamps());
+		//addSequential(new ToggleClamps());
 		//addSequential(new AutoDrive(-.8, -136));
 		addSequential(new AutoDriveTimed(-.8,0,5));
 		addSequential(new AutoArmTimed(.5, 4));

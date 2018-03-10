@@ -9,22 +9,24 @@ import team498.robot.subsystems.Arm;
 public class ToggleIntake extends InstantCommand {
 
 	private Arm arm;
-	private double power;
+	private double leftPower;
+	private double rightPower;
 
-	public ToggleIntake(double power) {
+	public ToggleIntake(double leftPower, double rightPower) {
 		// Use requires() here to declare subsystem dependencies
 		// eg. requires(chassis);
 		super("ManualIntake");
-		this.power = power;
+		this.leftPower = leftPower;
+		this.rightPower = rightPower;
 		requires(this.arm = Arm.getArm());
 	}
 
 	// Called just before this Command runs the first time
 	protected void initialize() {
-		if (arm.getLastLeft() == power) {
+		if (arm.getLastLeft() == leftPower) {
 			arm.setIntake(0, 0);
 		} else {
-			arm.setIntake(power, power);
+			arm.setIntake(leftPower, rightPower);
 		}
 	}
 }

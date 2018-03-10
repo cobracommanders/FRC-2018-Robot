@@ -16,14 +16,15 @@ public class StartLeftPlaceLeftSwitchStrategy extends CommandGroup {
 
 	public StartLeftPlaceLeftSwitchStrategy() {
 		System.out.println("Start Left, Left Switch Strategy!");
-		addSequential(new ToggleClamps());
+		addSequential(new AutoDrive(-.8,-160));
+		/*addSequential(new ToggleClamps());
 		addSequential(new ToggleClamps());
 		//addSequential(new AutoDrive(-.8, -136));
 		addSequential(new AutoDriveTimed(-.8,0,5));
 		addSequential(new AutoArmTimed(.5, 4));
 		addSequential(new AutoIntake(-1,-1));
 		addSequential(new AutoArmTimed(-.5,4));
-		addSequential(new AutoIntake(0,0));
+		addSequential(new AutoIntake(0,0));*/
 	/*	// drive forward 10 units
 		addSequential(new AutoDrive(.7, 162));
 		// rotate 90 degrees clockwise

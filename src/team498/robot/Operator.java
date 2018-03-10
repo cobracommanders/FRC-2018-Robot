@@ -9,6 +9,7 @@ package team498.robot;
 
 import team498.robot.commands.ToggleLift;
 import team498.robot.commands.ManualArm;
+import team498.robot.commands.ToggleArmRestriction;
 import team498.robot.commands.ToggleClamps;
 import team498.robot.commands.ToggleIntake;
 import team498.robot.commands.ToggleTurbo;
@@ -31,8 +32,8 @@ public class Operator {
 
 	public Operator() {
 		// Intake in
-		controller.buttonX.whenPressed(new ToggleIntake(.6));
-		controller.buttonB.whenPressed(new ToggleIntake(-1));
+		controller.buttonX.whenPressed(new ToggleIntake(.6,.6));
+		controller.buttonB.whenPressed(new ToggleIntake(-1,-1));
 		controller.buttonA.whenPressed(new ToggleClamps());
 		controller.buttonY.whenPressed(new ToggleTurbo());
 
@@ -41,6 +42,10 @@ public class Operator {
 		controller.leftBumper.whileHeld(new ManualArm(0.6));
 		controller.rightBumper.whileHeld(new ManualArm(-0.6));
 		
+		controller.rightJoyPress.whileHeld(new ToggleArmRestriction());
+		
+		controller.start.whenPressed(new ToggleIntake(.24,-.18));
+		controller.select.whenPressed(new ToggleIntake(-.18,.24));
 		
 		//controller.leftBumper.whenPressed(new AutoArmPosition(0));
 		//controller.rightBumper.whenPressed(new AutoArmPosition(1));

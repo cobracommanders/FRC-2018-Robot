@@ -134,6 +134,9 @@ public class Drivetrain extends PIDSubsystem {
 			aracadeDrive(move, rotate);
 		}
 	}
+	public double getAngleX(){
+		return gyro.getAngleX();
+	}
 
 	private void aracadeDrive(double move, double rotate) {
 		SmartDashboard.putNumber(Dashboard.MoveValue, move);

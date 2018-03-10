@@ -12,7 +12,6 @@ public class AutoOldTurn extends Command {
 	public double gyroGoal;
 	public double turnPower;
 	private Drivetrain drivetrain;
-	private ADIS16448_IMU gyro = new ADIS16448_IMU();
 
 	private Timer timer = new Timer();
 
@@ -25,7 +24,7 @@ public class AutoOldTurn extends Command {
 	}
 
 	protected void initialize() {
-		gyro.reset();
+		drivetrain.resetGyro();
 	}
 
 	protected void execute() {
@@ -33,7 +32,7 @@ public class AutoOldTurn extends Command {
 	}
 
 	protected boolean isFinished() {
-		return Math.abs(gyro.getAngleX()) >= Math.abs(gyroGoal);
+		return Math.abs(drivetrain.getAngleX()) >= Math.abs(gyroGoal);
 	}
 
 	protected void end() {

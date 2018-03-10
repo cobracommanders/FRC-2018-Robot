@@ -19,11 +19,11 @@ public class StartCenterPlaceLeftSwitchStrategy extends CommandGroup {
 		System.out.println("Start Center, Left Switch Strategy!");
 		addSequential(new ToggleClamps());
 		addSequential(new ToggleClamps());
-		addSequential(new AutoDrive(-.7,-12));
-		addSequential(new AutoOldTurn(.6,90));
-		addSequential(new AutoDrive(-.7,-30));
-		addSequential(new AutoOldTurn(-.6,90));
-		addSequential(new AutoDriveTimed(-.7,0,2));
+		addSequential(new AutoDrive(-.7,-14));
+		addSequential(new AutoOldTurn(-.7,90));
+		addSequential(new AutoDrive(-.7,-35));
+		addSequential(new AutoOldTurn(.7,96));
+		addSequential(new AutoDriveTimed(-.9,0,3));
 		addSequential(new AutoArmTimed(.6, 3));
 		addSequential(new AutoIntake(-1,-1));
 		addSequential(new AutoArmTimed(-.5,3));
