@@ -24,7 +24,7 @@ public class StartCenterPlaceLeftSwitchStrategy extends CommandGroup {
 		addSequential(new AutoDrive(-.7,-50));
 		addSequential(new AutoOldTurn(.7,96));
 		addSequential(new AutoDriveTimed(-.9,0,3));
-		addSequential(new AutoArmTimed(.6, 3));
+		addSequential(new AutoArmTimed(.6, 2));
 		addSequential(new AutoIntake(-1,-1));
 		addSequential(new AutoArmTimed(-.5,3));
 		addSequential(new AutoIntake(0,0));

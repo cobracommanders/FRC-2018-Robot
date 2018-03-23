@@ -8,6 +8,6 @@ public class StartCenterPlaceRightScaleStrategy extends CommandGroup {
 	public StartCenterPlaceRightScaleStrategy() {
 		System.out.println("Start Center, Right Scale Strategy!");
 		
-		addSequential(new AutoDrive(-.8,-200));
+		addSequential(new AutoDrive(-.8,-115));
 	}
 }
