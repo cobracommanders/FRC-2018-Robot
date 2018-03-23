@@ -51,4 +51,5 @@ public class Dashboard {
 	
 	public static final String IsIntakeIn1 = "IsIntakeIn1";
 	public static final String IsIntakeIn2 = "IsIntakeIn2";
+	public static final String ClimbPower = "ClimbPower";
 }

@@ -7,8 +7,9 @@
 
 package team498.robot;
 
-import team498.robot.commands.ToggleLift;
+
 import team498.robot.commands.ManualArm;
+import team498.robot.commands.ManualClimb;
 import team498.robot.commands.ToggleArmRestriction;
 import team498.robot.commands.ToggleClamps;
 import team498.robot.commands.ToggleIntake;
@@ -37,7 +38,7 @@ public class Operator {
 		controller.buttonA.whenPressed(new ToggleClamps());
 		controller.buttonY.whenPressed(new ToggleTurbo());
 
-		controller.rightJoyPress.whenPressed(new ToggleLift());
+		controller.rightJoyPress.whenPressed(new ManualClimb(-1));
 
 		controller.leftBumper.whileHeld(new ManualArm(0.6));
 		controller.rightBumper.whileHeld(new ManualArm(-0.6));

@@ -3,6 +3,7 @@ package team498.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import team498.robot.Dashboard;
+import team498.robot.Operator;
 //import team498.robot.Operator;
 import team498.robot.subsystems.Arm;
 
@@ -12,7 +13,8 @@ public class CheckIntake extends Command {
 	private Arm arm;
 	private double cap = 1.0; // TODO: Change this
 	private double armPower = 0;
-
+	private Operator operator = Operator.getOperator();
+	
 	public CheckIntake() {
 		super("CheckIntake");
 		this.armPower = 0;
@@ -34,6 +36,8 @@ public class CheckIntake extends Command {
 		arm.updateDashboard();
 		arm.setClampLight();
 		arm.armBrakeIn();
+		arm.setClimbPower(0);
+		arm.setSliderPower(operator.controller.axisRightY.getAxisValue());
 	}
 	protected boolean isFinished(){
 		return false;

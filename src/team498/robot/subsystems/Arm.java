@@ -50,7 +50,6 @@ public class Arm extends PIDSubsystem {
 	private Timer timer = new Timer();
 
 	private DigitalInput cubeIn = new DigitalInput(Mappings.LimitSwitch);
-	private DoubleSolenoid lift = new DoubleSolenoid(Mappings.PCMModuleNumber, Mappings.LiftForward,Mappings.LiftReverse);
 	//The clamp is now the intake flip!!!!
 	private DoubleSolenoid clamp = new DoubleSolenoid(Mappings.PCMModuleNumber, Mappings.ClampReverse,Mappings.ClampForward);
 	private DoubleSolenoid armBrake = new DoubleSolenoid(Mappings.PCMModuleNumber, Mappings.ArmBrakeReverse, Mappings.ArmBrakeForward);
@@ -61,6 +60,10 @@ public class Arm extends PIDSubsystem {
 	private Victor intakeRight = new Victor(Mappings.IntakeRightPort);
 	private AnalogPotentiometer pot = new AnalogPotentiometer(Mappings.ArmPotChannel, potFullRange, potOffset);
 	private Relay clampLight = new Relay(0);
+	
+	private Victor slider = new Victor(Mappings.Slider);
+	private Victor climber = new Victor(Mappings.Climber);
+	
 	
 	private double lastLeft = 0;
 	private double lastRight = 0;
@@ -163,22 +166,10 @@ public class Arm extends PIDSubsystem {
 		return lastRight;
 	}
 
-	public void setLift(boolean isUp) {
-		this.isLiftUp = isUp;
-		// Only allows the elevator to go up if you are in the stage shoot
-		// scale, or if in Manual control, within 10 degrees of shoot scale.
-		if (isUp && index == shootScaleIndex || isUp && Math.abs(pot.get()) - armPositions[shootScaleIndex] < 10) {
-			lift.set(Value.kReverse);
-		} else {
-			lift.set(Value.kForward);
-		}
-	}
-
 	public void incrementArm() {
 		if (index < armPositions.length - 1) {
 			index++;
 			setArmAngle(index);
-			setLift(isLiftUp);
 		}
 
 	}
@@ -187,7 +178,6 @@ public class Arm extends PIDSubsystem {
 		if (index > 0) {
 			index--;
 			setArmAngle(index);
-			setLift(isLiftUp);
 		}
 	}
 	
@@ -208,8 +198,6 @@ public class Arm extends PIDSubsystem {
 
 	public void setArmPower(double armPower) {
 			armMotorGroup.set(armPower);
-		
-		setLift(isLiftUp);
 	}
 
 	public void updateDashboard() {
@@ -226,6 +214,13 @@ public class Arm extends PIDSubsystem {
 			clamp.set(Value.kForward);
 			this.isClamped = isClamped;
 		}
+	}
+	
+	public void setClimbPower(double climbPower){
+		climber.set(climbPower);
+	}
+	public void setSliderPower(double sliderPower){
+		slider.set(sliderPower);
 	}
 	
 	public void setClampLight(){

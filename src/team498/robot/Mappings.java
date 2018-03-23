@@ -49,7 +49,11 @@ public class Mappings {
 	public static final int PCMModuleNumber = 3;
 	public static final int ClampForward = 6;
 	
+	//New things must be changed
 	public static final int ArmBrakeReverse = 7;
 	public static final int ArmBrakeForward = 8;
+	public static final int Slider = 8;
+	public static final int Climber = 9;
+	
 	
 }
