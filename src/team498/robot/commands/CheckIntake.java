@@ -25,6 +25,7 @@ public class CheckIntake extends Command {
 		this.arm.checkIntake();
 		SmartDashboard.putNumber(Dashboard.ArmPower, armPower * cap);
 		arm.updateDashboard();
+		arm.armBrakeIn();
 	}
 	protected void execute(){
 		this.arm.setArmPower(0);
@@ -32,6 +33,7 @@ public class CheckIntake extends Command {
 		SmartDashboard.putNumber(Dashboard.ArmPower, armPower * cap);
 		arm.updateDashboard();
 		arm.setClampLight();
+		arm.armBrakeIn();
 	}
 	protected boolean isFinished(){
 		return false;

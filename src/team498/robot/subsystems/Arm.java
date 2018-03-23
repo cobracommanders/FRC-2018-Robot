@@ -52,6 +52,7 @@ public class Arm extends PIDSubsystem {
 	private DigitalInput cubeIn = new DigitalInput(Mappings.LimitSwitch);
 	private DoubleSolenoid lift = new DoubleSolenoid(Mappings.PCMModuleNumber, Mappings.LiftForward,Mappings.LiftReverse);
 	private DoubleSolenoid clamp = new DoubleSolenoid(Mappings.PCMModuleNumber, Mappings.ClampReverse,Mappings.ClampForward);
+	private DoubleSolenoid armBrake = new DoubleSolenoid(Mappings.PCMModuleNumber, Mappings.ArmBrakeReverse, Mappings.ArmBrakeForward);
 	private WPI_TalonSRX armBottom = new WPI_TalonSRX(Mappings.ArmBottomDeviceNumber);
 	private WPI_TalonSRX armTop = new WPI_TalonSRX(Mappings.ArmTopDeviceNumber);
 	private SpeedControllerGroup armMotorGroup = new SpeedControllerGroup(armBottom, armTop);
@@ -67,6 +68,7 @@ public class Arm extends PIDSubsystem {
 	public boolean isIntakeIn1 = false;
 	public boolean isIntakeIn2 = false;
 	public boolean isArmRestricted = true;
+	public boolean isArmBrake = true;
 	
 	private int index = 2;
 
@@ -186,6 +188,17 @@ public class Arm extends PIDSubsystem {
 			setArmAngle(index);
 			setLift(isLiftUp);
 		}
+	}
+	
+	public void armBrakeIn() {
+		armBrake.set(Value.kForward);
+		isArmBrake = true;
+		
+	}
+	public void armBrakeOut() {
+		armBrake.set(Value.kReverse);
+		isArmBrake = false;
+		
 	}
 
 	public void setArmAngle(double targetAngle) {

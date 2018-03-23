@@ -21,6 +21,7 @@ public class ManualArm extends InstantCommand {
 
 	// Called just before this Command runs the first time
 	protected void initialize() {
+		arm.armBrakeOut();
 		this.arm.setArmPower(armPower * cap);
 
 		SmartDashboard.putNumber(Dashboard.ArmPower, armPower * cap);
