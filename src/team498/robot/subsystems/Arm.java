@@ -51,6 +51,7 @@ public class Arm extends PIDSubsystem {
 
 	private DigitalInput cubeIn = new DigitalInput(Mappings.LimitSwitch);
 	private DoubleSolenoid lift = new DoubleSolenoid(Mappings.PCMModuleNumber, Mappings.LiftForward,Mappings.LiftReverse);
+	//The clamp is now the intake flip!!!!
 	private DoubleSolenoid clamp = new DoubleSolenoid(Mappings.PCMModuleNumber, Mappings.ClampReverse,Mappings.ClampForward);
 	private DoubleSolenoid armBrake = new DoubleSolenoid(Mappings.PCMModuleNumber, Mappings.ArmBrakeReverse, Mappings.ArmBrakeForward);
 	private WPI_TalonSRX armBottom = new WPI_TalonSRX(Mappings.ArmBottomDeviceNumber);
@@ -226,6 +227,7 @@ public class Arm extends PIDSubsystem {
 			this.isClamped = isClamped;
 		}
 	}
+	
 	public void setClampLight(){
 		if(isClamped){
 			clampLight.set(Relay.Value.kForward);
