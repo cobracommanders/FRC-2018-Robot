@@ -52,7 +52,7 @@ public class Arm extends PIDSubsystem {
 	private DigitalInput cubeIn = new DigitalInput(Mappings.LimitSwitch);
 	//The clamp is now the intake flip!!!!
 	private DoubleSolenoid clamp = new DoubleSolenoid(Mappings.PCMModuleNumber, Mappings.ClampReverse,Mappings.ClampForward);
-	private DoubleSolenoid armBrake = new DoubleSolenoid(Mappings.PCMModuleNumber, Mappings.ArmBrakeReverse, Mappings.ArmBrakeForward);
+	//private DoubleSolenoid armBrake = new DoubleSolenoid(Mappings.PCMModuleNumber, Mappings.ArmBrakeReverse, Mappings.ArmBrakeForward);
 	private WPI_TalonSRX armBottom = new WPI_TalonSRX(Mappings.ArmBottomDeviceNumber);
 	private WPI_TalonSRX armTop = new WPI_TalonSRX(Mappings.ArmTopDeviceNumber);
 	private SpeedControllerGroup armMotorGroup = new SpeedControllerGroup(armBottom, armTop);
@@ -96,7 +96,6 @@ public class Arm extends PIDSubsystem {
 	}
 
 	public void setIntake(double leftPower, double rightPower) {
-		
 		if (Math.abs(leftPower - getLastLeft()) > 1.01) {
 			failSafe();
 		}
@@ -182,12 +181,12 @@ public class Arm extends PIDSubsystem {
 	}
 	
 	public void armBrakeIn() {
-		armBrake.set(Value.kForward);
+		//armBrake.set(Value.kForward);
 		isArmBrake = true;
 		
 	}
 	public void armBrakeOut() {
-		armBrake.set(Value.kReverse);
+		//armBrake.set(Value.kReverse);
 		isArmBrake = false;
 		
 	}

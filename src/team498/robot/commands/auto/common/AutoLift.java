@@ -25,9 +25,9 @@ public class AutoLift extends Command {
 	protected void execute() {
 		// lift control
 		if (isLiftUp) {
-			arm.setLift(isLiftUp);
+			//arm.setLift(isLiftUp);
 		} else { // if isLiftUp = false
-			arm.setLift(isLiftUp);
+			//arm.setLift(isLiftUp);
 		}
 
 		done = true;
