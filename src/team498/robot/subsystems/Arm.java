@@ -96,7 +96,11 @@ public class Arm extends PIDSubsystem {
 	}
 
 	public void setIntake(double leftPower, double rightPower) {
-		if (Math.abs(leftPower - getLastLeft()) > 1.01) {
+		intakeLeft.set(leftPower);
+		intakeRight.set(rightPower);
+		lastLeft = leftPower;
+		lastRight = rightPower;
+		/*if (Math.abs(leftPower - getLastLeft()) > 1.01) {
 			failSafe();
 		}
 
@@ -131,7 +135,7 @@ public class Arm extends PIDSubsystem {
 		}else{
 			isIntakeIn1 = false;
 			isIntakeIn2 = false;
-		}
+		}*/
 		SmartDashboard.putBoolean(Dashboard.IsIntakeIn1, isIntakeIn1);
 		SmartDashboard.putBoolean(Dashboard.IsIntakeIn2, isIntakeIn2);
 	}
