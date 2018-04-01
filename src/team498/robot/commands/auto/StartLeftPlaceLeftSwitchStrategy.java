@@ -2,7 +2,6 @@ package team498.robot.commands.auto;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import team498.robot.commands.ToggleClamps;
-import team498.robot.commands.auto.common.AutoArmPosition;
 import team498.robot.commands.auto.common.AutoArmTimed;
 import team498.robot.commands.auto.common.AutoDrive;
 import team498.robot.commands.auto.common.AutoDriveTimed;

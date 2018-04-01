@@ -1,10 +1,8 @@
 package team498.robot.commands.auto;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
-import team498.robot.commands.auto.common.AutoArmPosition;
 import team498.robot.commands.auto.common.AutoDrive;
 import team498.robot.commands.auto.common.AutoIntake;
-import team498.robot.commands.auto.common.AutoLift;
 import team498.robot.commands.auto.common.AutoTurn;
 
 /**
@@ -16,8 +14,8 @@ public class FromRightSwitchToRightScaleStrategy extends CommandGroup {
 		System.out.println("Going to Right Scale from Right Switch!");
 
 		// reset arm positions
-		addSequential(new AutoLift(false));
-		addSequential(new AutoArmPosition(0));
+		//addSequential(new AutoLift(false));
+		//addSequential(new AutoArmPosition(0));
 		// reverse 1 units back
 		addSequential(new AutoDrive(-.7, -16.2));
 		// rotates right
@@ -41,9 +39,9 @@ public class FromRightSwitchToRightScaleStrategy extends CommandGroup {
 		// drive forward 1 unit
 		addSequential(new AutoDrive(.7, 16.2));
 		// raises tower
-		addSequential(new AutoLift(true));
+		//addSequential(new AutoLift(true));
 		// raises arm
-		addSequential(new AutoArmPosition(165));
+		//addSequential(new AutoArmPosition(165));
 		// releases cube
 		addSequential(new AutoIntake(-.8, -.8));
 
