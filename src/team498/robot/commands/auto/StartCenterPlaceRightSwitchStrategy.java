@@ -1,6 +1,7 @@
 package team498.robot.commands.auto;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
+import team498.robot.commands.IntakeCorrection;
 import team498.robot.commands.ToggleClamps;
 import team498.robot.commands.auto.common.AutoArmPosition;
 import team498.robot.commands.auto.common.AutoArmTimed;
@@ -18,9 +19,29 @@ public class StartCenterPlaceRightSwitchStrategy extends CommandGroup {
 
 	public StartCenterPlaceRightSwitchStrategy() {
 		System.out.println("Start Center, Right Switch Strategy!");
+		addSequential(new AutoDrive(.7, 12), 1);
+		addSequential(new AutoOldTurn(-.7, 90));
+		addSequential(new AutoDrive(.7, 30), 1.5);
+		addSequential(new AutoOldTurn(.7,90));
+		addSequential(new AutoDriveTimed(1, 0, 1));
+		addSequential(new AutoIntake(1, -1));
+		addSequential(new AutoWait(.5));
+		addSequential(new AutoDrive(-.7, 12));
+		addSequential(new AutoOldTurn(.7, 90));
+		addSequential(new ToggleClamps());
+		addSequential(new AutoIntake(-1,1));
+		addSequential(new AutoDriveTimed(.7,0,.8));
+		addSequential(new AutoDriveTimed(-.7,0,.7));
+		addSequential(new IntakeCorrection(.4));
+		addSequential(new AutoWait(.4));
+		addSequential(new AutoIntake(0,0));
+		addSequential(new AutoOldTurn(.7,90));
+		addSequential(new AutoDriveTimed(1,0,.6));
+		addSequential(new ToggleClamps());
+		addSequential(new AutoIntake(1,-1));
 		//addSequential(new ToggleClamps());
 		//addSequential(new ToggleClamps()); 
-	    addSequential(new AutoDrive(-.7,-12));
+	   /* addSequential(new AutoDrive(-.7,-12));
 	    addSequential(new AutoOldTurn(.7,87)); 
 	    addSequential(new AutoDrive(-.7,-30)); 
 	    addSequential(new AutoOldTurn(-.7,100)); 
@@ -28,7 +49,7 @@ public class StartCenterPlaceRightSwitchStrategy extends CommandGroup {
 	    addSequential(new AutoArmTimed(-.6, 2)); 
 		addSequential(new AutoIntake(-1,-1));
 		addSequential(new AutoArmTimed(-.5,3));
-		addSequential(new AutoIntake(0,0));
+		addSequential(new AutoIntake(0,0));*/
 /*		// drive forward 5 units on graph (81 inches)
 		addSequential(new AutoDrive(.7, 81));
 		// rotate to the right
