@@ -33,18 +33,26 @@ public class Operator {
 	public Operator() {
 		// Intake in
 		controller.buttonX.whenPressed(new ToggleIntake(-1, 1));
+		//Intake out
 		controller.buttonB.whenPressed(new ToggleIntake(1, -1));
+		//Intake flippage
 		controller.buttonA.whenPressed(new ToggleClamps());
+		//Turbo mode toggle
 		controller.buttonY.whenPressed(new ToggleTurbo());
 
 		//controller.rightJoyPress.whenPressed(new ManualClimb(-1));
 
+		//Arm Up
 		controller.leftBumper.whileHeld(new ManualArm(1));
+		//Arm Down
 		controller.rightBumper.whileHeld(new ManualArm(-.2));
 		
-		controller.rightJoyPress.whileHeld(new ToggleArmRestriction());
+		//Climb
+		controller.rightJoyPress.whileHeld(new ManualArm(-1));
 		
+		//Intake slow dispense
 		controller.start.whenPressed(new ToggleIntake(.2,-.2));
+		//Intake Automatic Correction
 		controller.select.whenPressed(new IntakeCorrection(.4));
 		
 		//controller.leftBumper.whenPressed(new AutoArmPosition(0));
