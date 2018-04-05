@@ -53,8 +53,8 @@ public class Arm extends PIDSubsystem {
 	//The clamp is now the intake flip!!!!
 	private DoubleSolenoid clamp = new DoubleSolenoid(Mappings.PCMModuleNumber, Mappings.ClampReverse,Mappings.ClampForward);
 	//private DoubleSolenoid armBrake = new DoubleSolenoid(Mappings.PCMModuleNumber, Mappings.ArmBrakeReverse, Mappings.ArmBrakeForward);
-	private WPI_TalonSRX armBottom = new WPI_TalonSRX(Mappings.ArmBottomDeviceNumber);
-	private WPI_TalonSRX armTop = new WPI_TalonSRX(Mappings.ArmTopDeviceNumber);
+	private Victor armBottom = new Victor(Mappings.ArmBottomDeviceNumber);
+	private Victor armTop = new Victor(Mappings.ArmTopDeviceNumber);
 	private SpeedControllerGroup armMotorGroup = new SpeedControllerGroup(armBottom, armTop);
 	private Victor intakeLeft = new Victor(Mappings.IntakeLeftPort);
 	private Victor intakeRight = new Victor(Mappings.IntakeRightPort);
