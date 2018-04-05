@@ -35,8 +35,8 @@ public class Mappings {
 	
 	public static final int IntakeLeftPort = 7;
 	public static final int IntakeRightPort = 6;
-	public static final int ArmBottomDeviceNumber = 5;
-	public static final int ArmTopDeviceNumber = 4;
+	public static final int ArmBottomDeviceNumber = 4;
+	public static final int ArmTopDeviceNumber = 5;
 	public static final int ArmPotChannel = 0;
 	
 	public static final int LiftForward = 5;
