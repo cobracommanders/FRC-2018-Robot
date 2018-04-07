@@ -9,6 +9,6 @@ public class StartCenterPlaceRightScaleStrategy extends CommandGroup {
 
 	public StartCenterPlaceRightScaleStrategy() {
 		System.out.println("Start Center, Right Scale Strategy!");
-		addSequential(new AutoDriveTimed(-.7, 0, 3));    
+		addSequential(new AutoDriveTimed(.9, 0, 3.5));    
 	}
 }

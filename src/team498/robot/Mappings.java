@@ -33,21 +33,21 @@ public class Mappings {
 	public static final int RightEncoderDigitalSource1 = 8;
 	public static final int RightEncoderDigitalSource2 = 9;
 	
-	public static final int IntakeLeftPort = 7;
-	public static final int IntakeRightPort = 6;
-	public static final int ArmBottomDeviceNumber = 4;
-	public static final int ArmTopDeviceNumber = 5;
+	public static final int IntakeLeftPort = 4;
+	public static final int IntakeRightPort = 5;
+	public static final int ArmBottomDeviceNumber = 0;
+	public static final int ArmTopDeviceNumber = 1;
 	public static final int ArmPotChannel = 0;
 	
-	public static final int LiftForward = 5;
-	public static final int LiftReverse = 4;
-	public static final int ClampReverse = 7;
+	public static final int LiftForward = 2;
+	public static final int LiftReverse = 1;
+	public static final int ClampReverse = 4;
 	
 	public static final int LimitSwitch = 0;
 	
 	public static final double IntakeFailSafeDelay = 0.5;
 	public static final int PCMModuleNumber = 3;
-	public static final int ClampForward = 6;
+	public static final int ClampForward = 5;
 	
 	//New things must be changed
 	public static final int ArmBrakeReverse = 7;

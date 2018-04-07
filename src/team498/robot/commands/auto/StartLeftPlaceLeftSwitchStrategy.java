@@ -1,12 +1,14 @@
 package team498.robot.commands.auto;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
+import team498.robot.commands.ManualIntake;
 import team498.robot.commands.ToggleClamps;
 import team498.robot.commands.auto.common.AutoArmTimed;
 import team498.robot.commands.auto.common.AutoDrive;
 import team498.robot.commands.auto.common.AutoDriveTimed;
 import team498.robot.commands.auto.common.AutoIntake;
 import team498.robot.commands.auto.common.AutoTurn;
+import team498.robot.commands.auto.common.AutoWait;
 
 /**
  *
@@ -15,7 +17,9 @@ public class StartLeftPlaceLeftSwitchStrategy extends CommandGroup {
 
 	public StartLeftPlaceLeftSwitchStrategy() {
 		System.out.println("Start Left, Left Switch Strategy!");
-		addSequential(new AutoDrive(-.8,-160));
+		addSequential(new AutoDriveTimed(1, 0, 3.5));   
+		addSequential(new AutoIntake(1,-1));
+		addSequential(new AutoWait(3));
 		/*addSequential(new ToggleClamps());
 		addSequential(new ToggleClamps());
 		//addSequential(new AutoDrive(-.8, -136));

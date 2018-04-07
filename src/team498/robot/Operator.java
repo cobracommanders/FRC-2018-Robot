@@ -36,7 +36,7 @@ public class Operator {
 		//Intake out
 		controller.buttonB.whenPressed(new ToggleIntake(1, -1));
 		//Intake flippage
-		controller.buttonA.whenPressed(new ToggleClamps());
+		//controller.buttonA.whenPressed(new ToggleClamps());
 		//Turbo mode toggle
 		controller.buttonY.whenPressed(new ToggleTurbo());
 
@@ -51,7 +51,7 @@ public class Operator {
 		controller.rightJoyPress.whileHeld(new ManualArm(-1));
 		
 		//Intake slow dispense
-		controller.start.whenPressed(new ToggleIntake(.2,-.2));
+		controller.buttonA.whenPressed(new ToggleIntake(.5,-.5));
 		//Intake Automatic Correction
 		controller.select.whenPressed(new IntakeCorrection(.4));
 		

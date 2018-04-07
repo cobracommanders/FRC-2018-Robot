@@ -18,26 +18,29 @@ public class StartCenterPlaceRightSwitchStrategy extends CommandGroup {
 
 	public StartCenterPlaceRightSwitchStrategy() {
 		System.out.println("Start Center, Right Switch Strategy!");
-		addSequential(new AutoDrive(.7, 12), 1);
-		addSequential(new AutoOldTurn(-.7, 90));
-		addSequential(new AutoDrive(.7, 30), 1.5);
-		addSequential(new AutoOldTurn(.7,90));
-		addSequential(new AutoDriveTimed(1, 0, 1));
-		addSequential(new AutoIntake(1, -1));
-		addSequential(new AutoWait(.5));
-		addSequential(new AutoDrive(-.7, 12));
-		addSequential(new AutoOldTurn(.7, 90));
+		addSequential(new AutoDrive(.9, 12), .8);
+		addSequential(new AutoOldTurn(-.9, 90));
+		addSequential(new AutoDrive(.9, 36), 1.5);
+		addSequential(new AutoOldTurn(.9,90));
+		//addSequential(new ToggleClamps());
+		//addSequential(new AutoArmTimed(1,1));
+		addSequential(new AutoDriveTimed(.9, 0, 1.5));
+		addSequential(new AutoIntake(.7, -.7));
+		addSequential(new AutoWait(1));
+		addSequential(new AutoDrive(-.9, 12),.8);
+		addSequential(new AutoOldTurn(.9, 90));
+		//addSequential(new AutoArmTimed(-.2,.8));
 		addSequential(new ToggleClamps());
 		addSequential(new AutoIntake(-1,1));
-		addSequential(new AutoDriveTimed(.7,0,.8));
-		addSequential(new AutoDriveTimed(-.7,0,.7));
-		addSequential(new IntakeCorrection(.4));
-		addSequential(new AutoWait(.4));
+		addSequential(new AutoDriveTimed(.9,0,1));
+		addSequential(new AutoDriveTimed(-.9,0,.9));
+		//addSequential(new IntakeCorrection(.4));
+		//addSequential(new AutoWait(.4));
 		addSequential(new AutoIntake(0,0));
-		addSequential(new AutoOldTurn(.7,90));
-		addSequential(new AutoDriveTimed(1,0,.6));
-		addSequential(new ToggleClamps());
-		addSequential(new AutoIntake(1,-1));
+		addSequential(new AutoOldTurn(-.9,90));
+		/*addSequential(new AutoArmTimed(1,1));
+		addSequential(new AutoDriveTimed(.7, 0, 1));
+		addSequential(new AutoIntake(-.3, .3));*/
 		//addSequential(new ToggleClamps());
 		//addSequential(new ToggleClamps()); 
 	   /* addSequential(new AutoDrive(-.7,-12));
