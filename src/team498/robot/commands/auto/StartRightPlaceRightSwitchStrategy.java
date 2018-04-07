@@ -20,7 +20,7 @@ public class StartRightPlaceRightSwitchStrategy extends CommandGroup {
 		//addSequential(new ToggleClamps());
 		//addSequential(new ToggleClamps());
 		//addSequential(new AutoDrive(-.8, -136));
-		addSequential(new AutoDriveTimed(1, 0, 3.5));    	
+		addSequential(new AutoDriveTimed(.9, 0, 3.5));    	
 		addSequential(new AutoIntake(1,-1));
 		addSequential(new AutoWait(3));
 /*		// drive forward 10 units

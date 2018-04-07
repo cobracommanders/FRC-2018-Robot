@@ -43,7 +43,7 @@ public class Operator {
 		//controller.rightJoyPress.whenPressed(new ManualClimb(-1));
 
 		//Arm Up
-		controller.leftBumper.whileHeld(new ManualArm(1));
+		controller.leftBumper.whileHeld(new ManualArm(.6));
 		//Arm Down
 		controller.rightBumper.whileHeld(new ManualArm(-.2));
 		

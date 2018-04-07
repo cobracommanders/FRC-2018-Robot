@@ -18,7 +18,7 @@ public class StartRightPlaceLeftSwitchStrategy extends CommandGroup {
 		//addSequential(new ToggleClamps());
 		// drive forward 15 units
 		//addSequential(new AutoDrive(-.8, -136));
-		addSequential(new AutoDriveTimed(.9, 0, 3.5));    	
+		addSequential(new AutoDriveTimed(.9, -0.1, 3.5));    	
 /*		// rotate 90 degrees counterclockwise
 		addSequential(new AutoTurn(-90));
 		// drive forward 14 units

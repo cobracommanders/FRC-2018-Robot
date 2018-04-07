@@ -14,7 +14,7 @@ public class StartLeftPlaceRightSwitchStrategy extends CommandGroup {
 
 	public StartLeftPlaceRightSwitchStrategy() {
 		System.out.println("Start Left, Right Switch Strategy!");
-		addSequential(new AutoDriveTimed(.9, 0, 3.5));    	
+		addSequential(new AutoDriveTimed(.9, 0, 3.5)); //changed turn power back to 0     	
 		//addSequential(new ToggleClamps());
 		//addSequential(new ToggleClamps());
 		// drive forward 15 units
