@@ -10,9 +10,7 @@ package team498.robot;
 
 import team498.robot.commands.IntakeCorrection;
 import team498.robot.commands.ManualArm;
-import team498.robot.commands.ToggleArmRestriction;
-import team498.robot.commands.ToggleClamps;
-import team498.robot.commands.ToggleIntake;
+import team498.robot.commands.ShootBall;
 import team498.robot.commands.ToggleTurbo;
 
 /**
@@ -31,16 +29,9 @@ public class Operator {
 	public Controller controller = new Controller(Mappings.ControllerPort);
 
 	public Operator() {
-		// Intake in
-		controller.buttonX.whenPressed(new ToggleIntake(-1, 1));
-		//Intake out
-		controller.buttonB.whenPressed(new ToggleIntake(1, -1));
-		//Intake flippage
-		controller.buttonA.whenPressed(new ToggleClamps());
 		//Turbo mode toggle
 		controller.buttonY.whenPressed(new ToggleTurbo());
 
-		//controller.rightJoyPress.whenPressed(new ManualClimb(-1));
 
 		//Arm Up
 		controller.leftBumper.whileHeld(new ManualArm(1));
@@ -49,15 +40,13 @@ public class Operator {
 		
 		//Climb
 		controller.rightJoyPress.whileHeld(new ManualArm(-1));
-		
-		//Intake slow dispense
-		controller.start.whenPressed(new ToggleIntake(.2,-.2));
+
 		//Intake Automatic Correction
 		controller.select.whenPressed(new IntakeCorrection(.4));
 		
-		//controller.leftBumper.whenPressed(new AutoArmPosition(0));
-		//controller.rightBumper.whenPressed(new AutoArmPosition(1));
-
+		//shoot baseball
+		controller.buttonA.whenPressed(new ShootBall());
+		
 	}
 
 	public void updateDashboard() {

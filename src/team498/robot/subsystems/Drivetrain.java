@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -43,10 +44,10 @@ public class Drivetrain extends PIDSubsystem {
 
 	static Prefs prefs = Prefs.getPrefs();
 
-	private Spark frontLeftDrive = new Spark(Mappings.FrontLeftMotorChannel);
-	private Spark frontRightDrive = new Spark(Mappings.FrontRightMotorChannel);
-	private Spark backLeftDrive = new Spark(Mappings.BackLeftMotorChannel);
-	private Spark backRightDrive = new Spark(Mappings.BackRightMotorChannel);
+	private Victor frontLeftDrive = new Victor(Mappings.FrontLeftMotorChannel);
+	private Victor frontRightDrive = new Victor(Mappings.FrontRightMotorChannel);
+	private Victor backLeftDrive = new Victor(Mappings.BackLeftMotorChannel);
+	private Victor backRightDrive = new Victor(Mappings.BackRightMotorChannel);
 
 	private SpeedControllerGroup leftGroup = new SpeedControllerGroup(frontLeftDrive, backLeftDrive);
 	private SpeedControllerGroup rightGroup = new SpeedControllerGroup(frontRightDrive, backRightDrive);

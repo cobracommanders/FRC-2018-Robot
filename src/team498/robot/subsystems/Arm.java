@@ -53,8 +53,8 @@ public class Arm extends PIDSubsystem {
 	//The clamp is now the intake flip!!!!
 	private DoubleSolenoid clamp = new DoubleSolenoid(Mappings.PCMModuleNumber, Mappings.ClampReverse,Mappings.ClampForward);
 	//private DoubleSolenoid armBrake = new DoubleSolenoid(Mappings.PCMModuleNumber, Mappings.ArmBrakeReverse, Mappings.ArmBrakeForward);
-	private WPI_TalonSRX armBottom = new WPI_TalonSRX(Mappings.ArmBottomDeviceNumber);
-	private WPI_TalonSRX armTop = new WPI_TalonSRX(Mappings.ArmTopDeviceNumber);
+	private Victor armBottom = new Victor(Mappings.ArmBottomDeviceNumber);
+	private Victor  armTop = new Victor(Mappings.ArmTopDeviceNumber);
 	private SpeedControllerGroup armMotorGroup = new SpeedControllerGroup(armBottom, armTop);
 	private Victor intakeLeft = new Victor(Mappings.IntakeLeftPort);
 	private Victor intakeRight = new Victor(Mappings.IntakeRightPort);
@@ -100,42 +100,7 @@ public class Arm extends PIDSubsystem {
 		intakeRight.set(rightPower);
 		lastLeft = leftPower;
 		lastRight = rightPower;
-		/*if (Math.abs(leftPower - getLastLeft()) > 1.01) {
-			failSafe();
-		}
-
-		if (timer.get() > Mappings.IntakeFailSafeDelay) {
-			isIntakeActive = true;
-			timer.stop();
-		}
-		if (isIntakeActive && !cubeIn.get()) {
-			intakeLeft.set(leftPower);
-			intakeRight.set(rightPower);
-			lastLeft = leftPower;
-			lastRight = rightPower;
-		}else if(isIntakeActive && cubeIn.get() && leftPower < 0){
-			intakeLeft.set(leftPower);
-			intakeRight.set(rightPower);
-			lastLeft = leftPower;
-			lastRight = rightPower;
-		}else{
-			intakeLeft.set(0);
-			intakeRight.set(0);
-			lastLeft = 0;
-			lastRight = 0;
-		}
-		intakeLeft.set(leftPower);
-		intakeRight.set(rightPower);
-		if(leftPower == 0.6){
-			isIntakeIn1 = true;
-			isIntakeIn2 = true;
-		}else if(leftPower == -1){
-			isIntakeIn1 = true;
-			isIntakeIn2 = false;
-		}else{
-			isIntakeIn1 = false;
-			isIntakeIn2 = false;
-		}*/
+	
 		SmartDashboard.putBoolean(Dashboard.IsIntakeIn1, isIntakeIn1);
 		SmartDashboard.putBoolean(Dashboard.IsIntakeIn2, isIntakeIn2);
 	}
@@ -226,12 +191,15 @@ public class Arm extends PIDSubsystem {
 		slider.set(sliderPower);
 	}
 	
-	public void setClampLight(){
+	public void setShooter(){
 		if(isClamped){
 			clampLight.set(Relay.Value.kForward);
 		}else{
 			clampLight.set(Relay.Value.kReverse);
 		}
+	}
+	public void shoot() {
+		isClamped = !isClamped;
 	}
 
 	public double getPosition() {
