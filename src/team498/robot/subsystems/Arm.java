@@ -184,14 +184,7 @@ public class Arm extends PIDSubsystem {
 		}
 	}
 	
-	public void setClimbPower(double climbPower){
-		climber.set(climbPower);
-	}
-	public void setSliderPower(double sliderPower){
-		slider.set(sliderPower);
-	}
-	
-	public void setShooter(){
+/*	public void setShooter(){
 		if(isClamped){
 			clampLight.set(Relay.Value.kForward);
 		}else{
@@ -200,16 +193,16 @@ public class Arm extends PIDSubsystem {
 	}
 	public void shoot() {
 		isClamped = !isClamped;
+	}*/
+	public void shoot(){
+		clampLight.set(Relay.Value.kOn);
+	}
+	public void stopShoot(){
+		clampLight.set(Relay.Value.kOff);
 	}
 
 	public double getPosition() {
 		return pot.get();
-	}
-
-	public void failSafe() {
-		timer.reset();
-		timer.start();
-		isIntakeActive = false;
 	}
 
 	@Override

@@ -34,9 +34,9 @@ public class Operator {
 
 
 		//Arm Up
-		controller.leftBumper.whileHeld(new ManualArm(1));
+		controller.leftBumper.whileHeld(new ManualArm(.6));
 		//Arm Down
-		controller.rightBumper.whileHeld(new ManualArm(-.2));
+		controller.rightBumper.whileHeld(new ManualArm(-.6));
 		
 		//Climb
 		controller.rightJoyPress.whileHeld(new ManualArm(-1));
@@ -45,7 +45,7 @@ public class Operator {
 		controller.select.whenPressed(new IntakeCorrection(.4));
 		
 		//shoot baseball
-		controller.buttonA.whenPressed(new ShootBall());
+		controller.buttonA.whenPressed(new ShootBall(.3));
 		
 	}
 

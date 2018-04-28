@@ -34,10 +34,8 @@ public class CheckIntake extends Command {
 		this.arm.checkIntake();
 		SmartDashboard.putNumber(Dashboard.ArmPower, armPower * cap);
 		arm.updateDashboard();
-		arm.setShooter();
+		//arm.setShooter();
 		arm.armBrakeIn();
-		arm.setClimbPower(0);
-		arm.setSliderPower(operator.controller.axisRightY.getAxisValue());
 	}
 	protected boolean isFinished(){
 		return false;
