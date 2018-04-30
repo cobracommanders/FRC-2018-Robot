@@ -53,9 +53,9 @@ public class Arm extends PIDSubsystem {
 	//The clamp is now the intake flip!!!!
 	private DoubleSolenoid clamp = new DoubleSolenoid(Mappings.PCMModuleNumber, Mappings.ClampReverse,Mappings.ClampForward);
 	//private DoubleSolenoid armBrake = new DoubleSolenoid(Mappings.PCMModuleNumber, Mappings.ArmBrakeReverse, Mappings.ArmBrakeForward);
-	private Victor armBottom = new Victor(Mappings.ArmBottomDeviceNumber);
-	private Victor  armTop = new Victor(Mappings.ArmTopDeviceNumber);
-	private SpeedControllerGroup armMotorGroup = new SpeedControllerGroup(armBottom, armTop);
+	//private Victor armBottom = new Victor(Mappings.ArmBottomDeviceNumber);
+	private Victor armTop = new Victor(Mappings.ArmTopDeviceNumber);
+	//private SpeedControllerGroup armMotorGroup = new SpeedControllerGroup(armBottom, armTop);
 	private Victor intakeLeft = new Victor(Mappings.IntakeLeftPort);
 	private Victor intakeRight = new Victor(Mappings.IntakeRightPort);
 	private AnalogPotentiometer pot = new AnalogPotentiometer(Mappings.ArmPotChannel, potFullRange, potOffset);
@@ -165,7 +165,7 @@ public class Arm extends PIDSubsystem {
 	}
 
 	public void setArmPower(double armPower) {
-			armMotorGroup.set(armPower);
+			armTop.set(armPower);
 	}
 
 	public void updateDashboard() {
@@ -225,13 +225,13 @@ public class Arm extends PIDSubsystem {
 		}*/
 		checkIntake();
 		if(pot.get() - startingArm < 0 && -output < 0){
-			armMotorGroup.pidWrite(-output);
+			armTop.pidWrite(-output);
 			System.out.println(-output);
 		}else if(pot.get() - startingArm > 0 && -output > 0){
-			armMotorGroup.pidWrite(-output);
+			armTop.pidWrite(-output);
 			System.out.println(-output);
 		}else{
-			armMotorGroup.pidWrite(0);
+			armTop.pidWrite(0);
 			System.out.println(0);
 		}
 		
