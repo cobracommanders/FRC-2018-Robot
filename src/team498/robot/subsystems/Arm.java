@@ -202,7 +202,7 @@ public class Arm extends PIDSubsystem {
 	public void setArmPower(double armPower) {
 		if(armPower > 0){
 			armMotorGroup.set(armPower);
-			setIntake(-.2,.2);
+			setIntake(.2,-.2);
 		}else{
 			armMotorGroup.set(armPower);
 		}
