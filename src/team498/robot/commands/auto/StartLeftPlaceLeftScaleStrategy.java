@@ -15,8 +15,17 @@ public class StartLeftPlaceLeftScaleStrategy extends CommandGroup {
 
 	public StartLeftPlaceLeftScaleStrategy() {
 		System.out.println("Start Left, Left Scale Strategy!");
+		
+		addSequential(new AutoDrive(.8, 36)); //test driving one foot
+		
+		
+		//addSequential(new AutoOldTurn(.7, 90)); //test driving right turn
+		
+		//addSequential(new AutoArmTimed(1, 2));
+		
+		
 		//addSequential(new ToggleClamps());
-		addSequential(new AutoDrive(-.8,-220));
+		/*addSequential(new AutoDrive(-.8,-220));
 		addSequential(new AutoDrive(-.6,-20));
 		addSequential(new AutoOldTurn(.7,25));
 		//addSequential(new AutoArmTemporaryPosition(0.7));
@@ -25,6 +34,7 @@ public class StartLeftPlaceLeftScaleStrategy extends CommandGroup {
 		addSequential(new AutoArmTimed(-.6,3));
 		addSequential(new AutoDrive(.6,24));
 		addSequential(new AutoIntake(0,0));
+		*/
 		// drive forward 324 inches
 /*		addSequential(new AutoDrive(.7, 324));
 		// rotate right

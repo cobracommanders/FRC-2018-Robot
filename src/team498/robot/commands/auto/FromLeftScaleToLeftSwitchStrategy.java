@@ -12,7 +12,7 @@ public class FromLeftScaleToLeftSwitchStrategy extends CommandGroup {
 
 	public FromLeftScaleToLeftSwitchStrategy() {
 		System.out.println("Going to Left Switch from Left Scale!");
-
+/*
 		// resets arm position
 		//addSequential(new AutoLift(false));
 		//addSequential(new AutoArmPosition(0));
@@ -36,6 +36,6 @@ public class FromLeftScaleToLeftSwitchStrategy extends CommandGroup {
 		addSequential(new AutoIntake(-.4, -.4));
 
 		// done for now :)
-
+*/
 	}
 }

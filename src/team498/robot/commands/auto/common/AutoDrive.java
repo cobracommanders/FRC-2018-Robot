@@ -9,6 +9,7 @@ public class AutoDrive extends Command {
 	private Drivetrain drivetrain;
 	private Timer clock = new Timer();
 	private double moveValue;
+	private double turnValue;
 	private double desiredDistance;
 	private double time;
 
@@ -16,7 +17,8 @@ public class AutoDrive extends Command {
 		super("AutoDrive");
 
 		requires(this.drivetrain = Drivetrain.getDrivetrain());
-
+		
+		this.turnValue = turnValue;
 		this.moveValue = moveValue;
 		this.desiredDistance = desiredDistance;
 		//this.time = time;
@@ -28,9 +30,9 @@ public class AutoDrive extends Command {
 	}
 
 	protected void execute() {
-		drivetrain.autoDrive(moveValue, 0);
+		drivetrain.autoDrive(moveValue, .15);
 	}
-
+		
 	protected boolean isFinished() {
 		return Math.abs(drivetrain.getDistance()) >= Math.abs(desiredDistance) /*|| clock.get() >= time*/;
 	}
