@@ -14,7 +14,9 @@ public class FromLeftScaleToLeftSwitchStrategy extends CommandGroup {
 
 	public FromLeftScaleToLeftSwitchStrategy() {
 		System.out.println("Going to Left Switch from Left Scale!");
-		//addSequential(new AutoArmTimed(.9, 1));
-		//addSequential(new AutoDriveTimed(.7,.15,1));
+		addSequential(new AutoDriveTimed(.8,0,-.5));
+		addSequential(new AutoArmTimed(.9, .8));
+		addSequential(new AutoDriveTimed(.9,.15,1));
+		addSequential(new AutoIntake(-.4, .4)); // releasing cube into the scale 
 	}
 }
