@@ -7,6 +7,7 @@ import team498.robot.commands.auto.common.AutoArmTimed;
 import team498.robot.commands.auto.common.AutoDrive;
 import team498.robot.commands.auto.common.AutoDriveTimed;
 import team498.robot.commands.auto.common.AutoIntake;
+import team498.robot.commands.auto.common.AutoOldTurn;
 import team498.robot.commands.auto.common.AutoTurn;
 import team498.robot.commands.auto.common.AutoWait;
 
@@ -17,27 +18,11 @@ public class StartLeftPlaceLeftSwitchStrategy extends CommandGroup {
 
 	public StartLeftPlaceLeftSwitchStrategy() {
 		System.out.println("Start Left, Left Switch Strategy!");
-		addSequential(new AutoDriveTimed(.9, 0, 3.5));   
-		addSequential(new AutoIntake(1,-1));
-		addSequential(new AutoWait(3));
-		/*addSequential(new ToggleClamps());
-		addSequential(new ToggleClamps());
-		//addSequential(new AutoDrive(-.8, -136));
-		addSequential(new AutoDriveTimed(-.8,0,5));
-		addSequential(new AutoArmTimed(.5, 4));
-		addSequential(new AutoIntake(-1,-1));
-		addSequential(new AutoArmTimed(-.5,4));
-		addSequential(new AutoIntake(0,0));*/
-	/*	// drive forward 10 units
-		addSequential(new AutoDrive(.7, 162));
-		// rotate 90 degrees clockwise
-		addSequential(new AutoTurn(90));
-		// drive foward 3 units
-		addSequential(new AutoDrive(.7, 48.6));
-		// raises arm
-		addSequential(new AutoArmPosition(45));
-		// place cube in switch
-		addSequential(new AutoIntake(-.4, -.4));
-		// ends in same place
-*/	}
+		/*addSequential(new AutoDrive(.8, 12)); //3 feet 
+		addSequential(new AutoOldTurn(.7, 25));
+		addSequential(new AutoDrive(.8, 42)); //this should be 8 in a half feet 
+		addSequential(new AutoIntake(-.6, -.6)); //releases cube into the switch
+
+		*/
+	}
 }

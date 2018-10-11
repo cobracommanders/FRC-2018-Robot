@@ -243,8 +243,10 @@ public class Robot extends TimedRobot {
 																			// AUTO
 					autoCommand.start();
 					//TODO: un-comment this for two cube auto
-/*					// WHEN AUTO IS DONE, CANCEL
+					// WHEN AUTO IS DONE, CANCEL
+					
 					if (autoCommand.isCompleted()) {
+						System.out.println("Phase 1 complete: Begin Docking");
 						autoCommand.cancel();
 					}
 					// START LEFT SCALE FROM LEFT SWTICH
@@ -257,7 +259,7 @@ public class Robot extends TimedRobot {
 					} else {
 						System.out.println("Not moving to Switch from Left Scale");
 						System.out.println("Incorrect If/else logic?");
-					}*/
+					}
 					// ROBOT ON CENTER
 				} else if (autonomousPosition == RobotStartPosition.Center) {
 					autoCommand = new StartCenterPlaceLeftScaleStrategy();
@@ -283,8 +285,9 @@ public class Robot extends TimedRobot {
 					autoCommand = new StartRightPlaceLeftScaleStrategy();
 					autoCommand.start();
 					//TODO: un-comment this for two cube auto
-					/*// WHEN AUTO IS DONE, CANCEL
+					/// WHEN AUTO IS DONE, CANCEL
 					if (autoCommand.isCompleted()) {
+						System.out.println("Phase 1 complete: Begin Docking");
 						autoCommand.cancel();
 					}
 					// START LEFT SCALE FROM LEFT SWTICH
@@ -297,7 +300,7 @@ public class Robot extends TimedRobot {
 					} else {
 						System.out.println("Not moving to Switch from Left Scale");
 						System.out.println("Incorrect If/else logic?");
-					}*/
+					}
 					// NO ROBOT POSITION
 				} else {
 					System.out.println("Error: No Robot Position, for Left Scale"); // shouldn't

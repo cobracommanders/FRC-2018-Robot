@@ -13,42 +13,6 @@ public class FromLeftSwitchToLeftScaleStrategy extends CommandGroup {
 	public FromLeftSwitchToLeftScaleStrategy() {
 		System.out.println("Going to Left Scale from Left Switch!");
 
-		// reset arm positions
-		//addSequential(new AutoLift(false));
-		//addSequential(new AutoArmPosition(0));
-		// reveres 1 unit
-		addSequential(new AutoDrive(-.7, -16.2));
-		// rotates left
-		addSequential(new AutoTurn(-90));
-		// drives forward 2.5 units
-		addSequential(new AutoDrive(.7, 40.5));
-		// rotates right
-		addSequential(new AutoTurn(90));
-		// drives forward 1 unit
-		addSequential(new AutoDrive(.7, 16.2));
-		// intakes cube
-		addSequential(new AutoIntake(.6, .6));
-		// rotates left
-		addSequential(new AutoTurn(-90));
-		// drives forward 2.5 units
-		addSequential(new AutoDrive(.7, 40.5));
-		// rotates left
-		addSequential(new AutoTurn(-90));
-		// drives forward 2 units
-		addSequential(new AutoDrive(.7, 32.4));
-		// rotates right
-		addSequential(new AutoTurn(90));
-		// drives forward 5 units
-		addSequential(new AutoDrive(.7, 81));
-		// rotates right
-		addSequential(new AutoTurn(90));
-		// raises tower
-		//addSequential(new AutoLift(true));
-		// raises arm
-		//addSequential(new AutoArmPosition(165));
-		// releases cube
-		addSequential(new AutoIntake(-.8, -.8));
-
-		// done for now :)
+		
 	}
 }

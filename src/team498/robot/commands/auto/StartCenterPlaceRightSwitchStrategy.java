@@ -18,7 +18,43 @@ public class StartCenterPlaceRightSwitchStrategy extends CommandGroup {
 
 	public StartCenterPlaceRightSwitchStrategy() {
 		System.out.println("Start Center, Right Switch Strategy!");
-		addSequential(new AutoDriveTimed(.9,.1, .4));
+		addSequential(new AutoDriveTimed(.7,.15, .8)); //get off playerstation wall
+		addSequential(new AutoOldTurn(.8, 12)); //Faces Switch
+		//addSequential(new AutoArmTimed(.8, 1)); //Lifts arm
+		addSequential(new AutoDriveTimed(.9,.15, 2.3));// drive into switch
+		addSequential(new AutoIntake(-.8, .8)); //releases cube into the switch
+		addSequential(new AutoWait(1));
+		addSequential(new AutoIntake(0,0));
+		
+		//TEST
+		addSequential(new AutoDriveTimed(-.8,-.15,1.2)); //reverse
+		addSequential(new AutoOldTurn(-.8, 50)); // Turn towards pyramid
+		addSequential(new AutoArmTimed(.8,.5));
+		addSequential(new AutoArmTimed(-.3, 1)); // Arm down
+		addSequential(new AutoIntake(.9,-.9)); // intake cube
+		addSequential(new AutoDriveTimed(.8, .15, 1.3));//drive into pyramid
+		addSequential(new AutoDriveTimed(.8,.8,1)); // V2
+		//addSequential(new AutoDriveTimed(-.8,-.15, .4));//Agitate pyramid
+		//addSequential(new AutoDriveTimed(.8,.15,.8));
+		addSequential(new AutoDriveTimed(-.8,-.15, 1.2));//Leave pyramid
+		//addSequential(new AutoOldTurn(.9,55)); // Turn Towards switch
+		addSequential(new AutoOldTurn(.9,60)); // Turn Towards switch V2
+		addSequential(new AutoArmTimed(.8,1)); // Lift Arm
+		addSequential(new AutoDriveTimed(.8,.15,1.7)); // Go into switch
+		addSequential(new AutoIntake(-.4,.4)); // Shoot Cube number 2
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+/*		addSequential(new AutoDriveTimed(.9,.1, .4));
 		addSequential(new AutoOldTurn(.9,45));
 		addSequential(new AutoDriveTimed(.9,.1,2));
 		addSequential(new AutoOldTurn(-.9,50));
@@ -26,7 +62,7 @@ public class StartCenterPlaceRightSwitchStrategy extends CommandGroup {
 		addSequential(new AutoDriveTimed(-.9,0,.35));
 		addSequential(new AutoArmTimed(.6,1.5));
 		addSequential(new AutoIntake(1,-1));
-		addSequential(new AutoWait(3));
+		addSequential(new AutoWait(3));*/
 /*		addSequential(new AutoDrive(.9, 12), .8);
 		addSequential(new AutoOldTurn(-.9, 90));
 		addSequential(new AutoDrive(.9, 36), 1.5);
