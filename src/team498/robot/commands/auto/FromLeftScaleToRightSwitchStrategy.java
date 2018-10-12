@@ -12,6 +12,6 @@ public class FromLeftScaleToRightSwitchStrategy extends CommandGroup {
 
 	public FromLeftScaleToRightSwitchStrategy() {
 		System.out.println("Going to Right Switch from Left Scale!");
-		
+		addSequential(new AutoIntake(0,0));
 	}
 }
