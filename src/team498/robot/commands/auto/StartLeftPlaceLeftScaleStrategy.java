@@ -25,7 +25,7 @@ public class StartLeftPlaceLeftScaleStrategy extends CommandGroup {
 		addSequential(new AutoDrive(-.6, 10)); //drive back
 		
 		addSequential(new AutoArmTimed(-.4, 1.6)); //bring arm down
-		addSequential(new AutoOldTurn(.9, 115)); //turn around to face switch
+		addSequential(new AutoOldTurn(.9, 118)); //turn around to face switch
 		addSequential(new AutoIntake(1, -1)); //turn intake wheels on
 		addSequential(new AutoDriveTimed(.9, .15, 1.7)); //drive up to cube
 		

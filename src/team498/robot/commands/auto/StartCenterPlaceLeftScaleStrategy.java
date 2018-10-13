@@ -14,7 +14,7 @@ public class StartCenterPlaceLeftScaleStrategy extends CommandGroup {
     	System.out.println("Start Center, Left Scale Strategy!");
     	
     	//Test auto for duel, does auto line then a quick tornado
-    	addSequential(new AutoDriveTimed(.9, 0, 3.5));    	
+    	addSequential(new AutoDriveTimed(.9,.15, 2.6)); 	
     	
         // Add Commands here:
         // e.g. addSequential(new Command1());

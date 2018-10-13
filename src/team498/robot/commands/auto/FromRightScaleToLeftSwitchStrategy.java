@@ -12,7 +12,7 @@ public class FromRightScaleToLeftSwitchStrategy extends CommandGroup {
 
 	public FromRightScaleToLeftSwitchStrategy() {
 		System.out.println("Going to Left Switch from Right Scale!");
-
+		addSequential(new AutoIntake(0,0));
 		
 
 	}
