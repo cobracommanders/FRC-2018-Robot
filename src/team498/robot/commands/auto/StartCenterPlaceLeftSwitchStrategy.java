@@ -39,8 +39,8 @@ public class StartCenterPlaceLeftSwitchStrategy extends CommandGroup {
 		//addSequential(new AutoDriveTimed(-.8,-.15, .4));//Agitate pyramid
 		//addSequential(new AutoDriveTimed(.8,.15,.8));
 		//addSequential(new AutoDriveTimed(-.8,-.15, .8));//Leave pyramid
-		addSequential(new AutoOldTurn(-1, 60)); // Turn Towards switch
-		addSequential(new AutoArmTimed(.8,.8)); // Lift Arm
+		addSequential(new AutoOldTurn(-1, 40)); // Turn Towards switch
+		addSequential(new AutoArmTimed(.8,1.1)); // Lift Arm
 		addSequential(new AutoDriveTimed(.8,.15,1.7)); // Go into switch
 		addSequential(new AutoIntake(-.4,.4)); // Shoot Cube number 2
 		addSequential(new AutoDriveTimed(-.8,-.15,1));

@@ -41,14 +41,14 @@ public class Operator {
 		controller.buttonY.whenPressed(new ToggleTurbo());
 
 		//controller.rightJoyPress.whenPressed(new ManualClimb(-1));
-		controller.leftJoyPress.whileHeld(new ManualArm(-1));
+		controller.leftJoyPress.whileHeld(new ManualArm(1));
 		//Arm Up
-		controller.leftBumper.whileHeld(new ManualArm(.75));
+		controller.leftBumper.whileHeld(new ManualArm(-.9));
 		//Arm Down
-		controller.rightBumper.whileHeld(new ManualArm(-.25));
+		controller.rightBumper.whileHeld(new ManualArm(.25));
 		
 		//Climb
-		controller.start.whileHeld(new ManualArm(-1));
+		//controller.start.whileHeld(new ManualArm(1));
 		
 		//Intake slow dispense
 		controller.buttonA.whenPressed(new ToggleIntake(-.3,.3));

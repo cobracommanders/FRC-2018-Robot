@@ -19,12 +19,13 @@ public class StartRightPlaceRightScaleStrategy extends CommandGroup {
 		addSequential(new AutoDrive(.8, 106)); //20 feet
 		addSequential(new AutoIntake(.4, -.4)); //keep cube in
 		addSequential(new AutoArmTimed(.9, 2)); // raising arm for scale 
+		addSequential(new AutoOldTurn(.9, 15));
 		addSequential(new AutoDrive(.6, 8)); //nudge the robot forward
 		addSequential(new AutoIntake(-.6, .6)); // releasing cube into the scale
 		addSequential(new AutoDrive(-.6, 10)); //drive back
 		
 		addSequential(new AutoArmTimed(-.4, 1.6)); //bring arm down
-		addSequential(new AutoOldTurn(-.9, 118)); //turn around to face switch MUST BE NEGATIVE FOR RIGHT SCALE, POSITIVE FOR LEFT
+		addSequential(new AutoOldTurn(-.9, 100)); //turn around to face switch MUST BE NEGATIVE FOR RIGHT SCALE, POSITIVE FOR LEFT
 		addSequential(new AutoIntake(1, -1)); //turn intake wheels on
 		addSequential(new AutoDriveTimed(.9, .15, 1.7)); //drive up to cube
 		

@@ -27,7 +27,7 @@ public class AutoArmTimed extends Command {
 	}
 
 	protected void execute() {
-		arm.setArmPower(armPower);
+		arm.setArmPower(-armPower);
 	}
 
 	protected boolean isFinished() {
