@@ -15,7 +15,7 @@ import edu.wpi.first.wpilibj.Timer;
  *         Team 498
  *
  */
-public final class TaskGroup {
+public final class TaskGroup extends PassiveTask {
 	private Map<String, Task> tasks;
 	private ArrayList<PassiveTask> passives;
 	private ArrayList<InputLog> logs;
@@ -45,8 +45,8 @@ public final class TaskGroup {
 	/**
 	 * Should be put in autoPeriodic, or ran on loop during autonomous
 	 */
-	public void Execute() {
-
+	@Override
+	protected void Run() {
 		// Checks if there is no logs. If so, don't continue
 		if (logs.size() == 0) {
 			return;
@@ -57,22 +57,19 @@ public final class TaskGroup {
 		if (timer.get() > 15)
 			return;
 
-		// Checks if the timer has been started, and start it if it hasn't
-		if (timer.get() == 0) {
-			timer.start();
-		}
-
-		// If the timer has passed your timestamp, change the value in your command
+		// If the timer has passed your timestamp, change the value in your task
 		// accordingly
 		while (timer.get() > logs.get(index).GetTime()) {
 			InputLog log = logs.get(index);
 			if (tasks.get(log.GetName()).IsButton()) {
 				tasks.get(log.GetName()).Change(log.GetBoolean());
+				System.out.println(log.GetBoolean());
 			} else {
 				tasks.get(log.GetName()).Change(log.GetDouble());
 				System.out.println(log.GetDouble());
 			}
 			++index;
+			System.out.println(index + "/" + logs.size());
 		}
 
 		// Execute all the active tasks
@@ -85,4 +82,10 @@ public final class TaskGroup {
 			passives.get(i).Execute();
 		}
 	}
+
+	@Override
+	protected void Init() {
+		timer.start();
+	}
+
 }

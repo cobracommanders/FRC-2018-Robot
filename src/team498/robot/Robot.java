@@ -249,6 +249,7 @@ public class Robot extends TimedRobot {
 		if (recorded == false && timer.get() > 15)
 			try {
 				recorder.Save("ThisIsATest");
+				recorded = true;
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
