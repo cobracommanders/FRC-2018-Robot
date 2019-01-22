@@ -6,8 +6,7 @@ import java.util.Map;
 import edu.wpi.first.wpilibj.Timer;
 
 /**
- * Behaves similar to the way CommandGroup does for Commands, except it's for
- * tasks and you don't make it yourself, it's built by Recorder
+ * Behaves similar to the way CommandGroup does for Commands, is built by {@link Recorder} when it builds a recorded autonomous file
  * 
  * @version 1.0
  * 
@@ -41,12 +40,12 @@ public final class TaskGroup extends PassiveTask {
 		this.keys = new ArrayList<>(this.tasks.keySet());
 		timer = new Timer();
 	}
-
+	
 	/**
 	 * Should be put in autoPeriodic, or ran on loop during autonomous
 	 */
 	@Override
-	protected void Run() {
+	protected void run() {
 		// Checks if there is no logs. If so, don't continue
 		if (logs.size() == 0) {
 			return;
@@ -59,14 +58,14 @@ public final class TaskGroup extends PassiveTask {
 
 		// If the timer has passed your timestamp, change the value in your task
 		// accordingly
-		while (timer.get() > logs.get(index).GetTime()) {
+		while (timer.get() > logs.get(index).getTime()) {
 			InputLog log = logs.get(index);
-			if (tasks.get(log.GetName()).IsButton()) {
-				tasks.get(log.GetName()).Change(log.GetBoolean());
-				System.out.println(log.GetBoolean());
+			if (tasks.get(log.getName()).isButton()) {
+				tasks.get(log.getName()).change(log.getBoolean());
+				System.out.println(log.getBoolean());
 			} else {
-				tasks.get(log.GetName()).Change(log.GetDouble());
-				System.out.println(log.GetDouble());
+				tasks.get(log.getName()).change(log.getDouble());
+				System.out.println(log.getDouble());
 			}
 			++index;
 			System.out.println(index + "/" + logs.size());
@@ -74,17 +73,17 @@ public final class TaskGroup extends PassiveTask {
 
 		// Execute all the active tasks
 		for (String s : keys) {
-			tasks.get(s).Execute();
+			tasks.get(s).execute();
 		}
 
 		// Execute all the passive tasks
 		for (int i = 0; i < passives.size(); ++i) {
-			passives.get(i).Execute();
+			passives.get(i).execute();
 		}
 	}
 
 	@Override
-	protected void Init() {
+	protected void init() {
 		timer.start();
 	}
 

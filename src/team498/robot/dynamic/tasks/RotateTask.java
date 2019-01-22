@@ -7,24 +7,24 @@ public class RotateTask extends Task {
 	public static double rotate;
 
 	@Override
-	public void Change(double value) {
+	public void change(double value) {
 		rotate = value;
 	}
 
 	@Override
-	public void Change(boolean value) {
+	public void change(boolean value) {
 	}
 
 	@Override
-	public void Init() {
+	public void init() {
 	}
 
 	@Override
-	public void Run() {
+	public void run() {
 	}
 
 	@Override
-	public boolean IsButton() {
+	public boolean isButton() {
 		return false;
 	}
 

@@ -41,7 +41,7 @@ public final class JoystickInput {
 	 * 
 	 * @return The axis value
 	 */
-	public double GetAxis() {
+	public double getAxis() {
 		return isButton ? 0.0 : stick.getRawAxis(port);
 	}
 
@@ -50,7 +50,7 @@ public final class JoystickInput {
 	 * 
 	 * @return The button value
 	 */
-	public boolean GetButton() {
+	public boolean getButton() {
 		return isButton ? stick.getRawButton(port) : false;
 	}
 }

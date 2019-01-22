@@ -2,7 +2,7 @@ package team498.robot.dynamic;
 
 /**
  * A task that doesn't have a value to be changed directly.<br/>
- * Inherit from this to add somehting as a passive in Recorder
+ * Inherit from this to add somehting as a {@link PassiveTask} in {@link Recorder}
  * 
  * @version 1.0
  * @author Micah Neitz<br/>
@@ -16,7 +16,7 @@ public abstract class PassiveTask extends Task {
 	 * have to worry about it
 	 */
 	@Override
-	public final void Change(boolean value) {
+	public final void change(boolean value) {
 	}
 
 	/**
@@ -24,7 +24,7 @@ public abstract class PassiveTask extends Task {
 	 * have to worry about it
 	 */
 	@Override
-	public final void Change(double value) {
+	public final void change(double value) {
 	}
 
 	/**
@@ -32,7 +32,7 @@ public abstract class PassiveTask extends Task {
 	 * have to worry about it
 	 */
 	@Override
-	public final boolean IsButton() {
+	public final boolean isButton() {
 		return false;
 	}
 }

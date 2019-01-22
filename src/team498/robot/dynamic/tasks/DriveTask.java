@@ -8,12 +8,12 @@ public class DriveTask extends PassiveTask {
 	Drivetrain drivetrain;
 
 	@Override
-	public void Init() {
+	public void init() {
 		drivetrain = Drivetrain.getDrivetrain();
 	}
 
 	@Override
-	public void Run() {
+	public void run() {
 		double move = DriveForwardTask.move - DriveBackwardTask.move;
 		double rotate = RotateTask.rotate;
 		System.out.println("M" + move);

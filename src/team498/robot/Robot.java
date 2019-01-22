@@ -208,7 +208,7 @@ public class Robot extends TimedRobot {
 //		}
 //		// END OF AUTO LOOP
 		updateDashboard();
-		dynamicAuto = recorder.Build();
+		dynamicAuto = recorder.build();
 		// this.auto.start();
 	}
 
@@ -216,7 +216,7 @@ public class Robot extends TimedRobot {
 	public void autonomousPeriodic() {
 		updateDashboard();
 		try {
-			dynamicAuto.Execute();
+			dynamicAuto.execute();
 		} catch (Exception e) {
 			// TODO Auto-generated catch blockz
 			e.printStackTrace();
@@ -235,20 +235,20 @@ public class Robot extends TimedRobot {
 		timer.start();
 		recorder = new Recorder();
 		Joystick joystick = operator.controller.joystick;
-		recorder.Assign("df", new JoystickInput(joystick, Mappings.RightTrigger, false), new DriveForwardTask());
-		recorder.Assign("db", new JoystickInput(joystick, Mappings.LeftTrigger, false), new DriveBackwardTask());
-		recorder.Assign("r", new JoystickInput(joystick, Mappings.LeftXAxis, false), new RotateTask());
-		recorder.AddPassive(new DriveTask());
+		recorder.assignTask("df", new JoystickInput(joystick, Mappings.RightTrigger, false), new DriveForwardTask());
+		recorder.assignTask("db", new JoystickInput(joystick, Mappings.LeftTrigger, false), new DriveBackwardTask());
+		recorder.assignTask("r", new JoystickInput(joystick, Mappings.LeftXAxis, false), new RotateTask());
+		recorder.assignPassiveTask(new DriveTask());
 	}
 
 	@Override
 	public void teleopPeriodic() {
 		updateDashboard();
 		if (timer.get() <= 15)
-			recorder.Read();
+			recorder.read();
 		if (recorded == false && timer.get() > 15)
 			try {
-				recorder.Save("ThisIsATest");
+				recorder.save("ThisIsATest");
 				recorded = true;
 			} catch (IOException e) {
 				// TODO Auto-generated catch block

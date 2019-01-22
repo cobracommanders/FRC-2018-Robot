@@ -52,10 +52,10 @@ public final class Recorder {
 	/**
 	 * Needs to be run on loop while recording inputs
 	 */
-	public void Read() {
+	public void read() {
 		// Gets the timestamp
 		double time = timer.get();
-		//Start the timer
+		// Start the timer
 		if (time == 0) {
 			timer.start();
 		}
@@ -102,7 +102,7 @@ public final class Recorder {
 	 *             Throws when you don't have access, or another error out of my
 	 *             control occurs
 	 */
-	public void Save(String name) throws IOException {
+	public void save(String name) throws IOException {
 		String text = _compileString();
 		File directoryFile = new File(DIRECTORY);
 		if (!directoryFile.exists())
@@ -122,7 +122,7 @@ public final class Recorder {
 	 *             Happens when you have no autonomous to load, or when you typed in
 	 *             the name wrong
 	 */
-	public void Load(String name) throws IOException {
+	public void load(String name) throws IOException {
 		File directoryFile = new File(DIRECTORY);
 		if (!directoryFile.exists())
 			throw new IOException("You haven't saved a single autonomous yet!");
@@ -138,7 +138,7 @@ public final class Recorder {
 	/**
 	 * Clears current autonomous
 	 */
-	public void Clear() {
+	public void clear() {
 		oldStates = newStates = new ArrayList<>();
 		timer.stop();
 		timer.reset();
@@ -159,7 +159,7 @@ public final class Recorder {
 	 * @param task
 	 *            The {@link Task} to assign to the {@link JoystickInput}
 	 */
-	public void Assign(String name, JoystickInput input, Task task) {
+	public void assignTask(String name, JoystickInput input, Task task) {
 		if (task instanceof PassiveTask)
 			return;
 		tasks.put(name, task);
@@ -176,16 +176,18 @@ public final class Recorder {
 	 * @param task
 	 *            The {@link PassiveTask} to be added
 	 */
-	public void AddPassive(PassiveTask task) {
+	public void assignPassiveTask(PassiveTask task) {
 		passives.add(task);
 	}
 
 	/**
 	 * Builds a {@link TaskGroup} out of the current recording.
 	 * 
+	 * Works similar to {@link edu.wpi.first.wpilibj.command.CommandGroup}
+	 * 
 	 * @return The {@link TaskGroup} to be executed
 	 */
-	public TaskGroup Build() {
+	public TaskGroup build() {
 		TaskGroup tg = new TaskGroup(tasks, passives, logs);
 		return tg;
 	}
@@ -197,7 +199,7 @@ public final class Recorder {
 	 *            The name of the autonomous
 	 * @return <b>{@code true}</b> if the autonomous exists
 	 */
-	public static boolean Check(String name) {
+	public static boolean check(String name) {
 		File file = new File(DIRECTORY + name + ".txt");
 		return file.exists();
 	}
@@ -215,10 +217,10 @@ public final class Recorder {
 			JoyState state = new JoyState();
 			if (inputs.get(s).isButton) {
 				state.isBool = true;
-				state.boolState = inputs.get(s).GetButton();
+				state.boolState = inputs.get(s).getButton();
 			} else {
 				state.isBool = false;
-				state.doubleState = inputs.get(s).GetAxis();
+				state.doubleState = inputs.get(s).getAxis();
 			}
 			state.name = s;
 			states.add(state);
@@ -229,7 +231,7 @@ public final class Recorder {
 	private String _compileString() {
 		StringBuilder builder = new StringBuilder();
 		for (InputLog log : logs) {
-			builder.append(log.Log());
+			builder.append(log.log());
 		}
 		return builder.toString().substring(1); // Substring removes first char
 	}
@@ -237,13 +239,7 @@ public final class Recorder {
 	private void _parseString(String text) throws IllegalArgumentException {
 		this.logs = new ArrayList<>();
 		String[] logs = text.split(Pattern.quote(";"));
-		for (int i = 0; i < logs.length; i++) {
-			String[] elements = logs[i].split(Pattern.quote("_")); // seperate each element
-			// 0 is the name you assigned to the task
-			// 1 is the value of the change it is making
-			// 2 is whether the input is a button or an axis
-			// 3 is the time stamp the change was made
-			this.logs.add(new InputLog(elements[0], elements[1], elements[2], elements[3]));
-		}
+		for (int i = 0; i < logs.length; i++)
+			this.logs.add(new InputLog(logs[i]));
 	}
 }
